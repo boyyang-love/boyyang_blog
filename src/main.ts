@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { router, setupRoutes } from '@/router'
-import { setupStore, store } from '@/store'
+import { setupStore } from '@/store'
 import { setupNaive } from '@/plugin/naive'
 import { setupGlobal } from '@/plugin/global'
 
@@ -19,8 +19,11 @@ const bootstrap = async () => {
     setupStore(app)
     // 路由加载完成后，挂载到 #app
     await router.isReady()
+    // app.use(store)
+    // setupStore(app)
     // 挂载
     app.mount('#app')
 }
 
 void bootstrap()
+

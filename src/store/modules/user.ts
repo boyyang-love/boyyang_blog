@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:23:14
- * @LastEditTime: 2022-05-15 13:08:13
+ * @LastEditTime: 2022-05-20 19:23:33
  * @LastEditors: boyyang
  * @Description: user store
  * @FilePath: \drawingBed\src\store\modules\user.ts
@@ -9,9 +9,9 @@
  */
 
 import { store } from '@/store'
+// import {store} from '../../main'
 import { defineStore } from 'pinia'
 import { createStorage } from '@/utils/storage'
-import piniaPersist from 'pinia-plugin-persist'
 
 const storage = createStorage('user', localStorage)
 
@@ -47,23 +47,7 @@ const useUserStore = defineStore({
         },
     },
     //开启持久化
-    persist: {
-        enabled: true,
-        // storage:sessionStorage/localStorage,还可以自定义如下
-        // https://seb-l.github.io/pinia-plugin-persist/
-        // import Cookies from 'js-cookie'
-        // const cookiesStorage: Storage = {
-        //   setItem (key, state) {
-        //     return Cookies.set('accessToken', state.accessToken, { expires: 3 })
-        //   },
-        //   getItem (key) {
-        //     return JSON.stringify({
-        //       accessToken: Cookies.getJSON('accessToken'),
-        //     })
-        //   },
-        // }
-        // strategies: [{ storage: localStorage, paths: ['token', 'userName'] }],
-    },
+    persist: true
 })
 
 const useUserStoreWithOut = () => {

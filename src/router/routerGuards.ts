@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:25:32
- * @LastEditTime: 2022-05-11 16:09:27
+ * @LastEditTime: 2022-05-20 19:37:05
  * @LastEditors: boyyang
  * @Description: 路由守卫
  * @FilePath: \drawingBed\src\router\routerGuards.ts
@@ -23,7 +23,7 @@ const createRouterGuards = (router: Router) => {
     const routesStore = usePermissionRotesStoreWithOut()
     // 路由前置守卫
     router.beforeEach(async (to, from, next) => {
-        console.log(userStore.getToken)
+        console.log(to.path, from.path)
         if (to.path === '/login') {
             next()
             return

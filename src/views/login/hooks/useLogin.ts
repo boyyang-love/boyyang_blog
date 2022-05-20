@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:23:37
- * @LastEditTime: 2022-05-14 17:07:14
+ * @LastEditTime: 2022-05-18 13:06:53
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\login\hooks\useLogin.ts
@@ -67,7 +67,7 @@ const useLogin = () => {
                 userStore.setToken(res.data.token)
                 userStore.setUserinfo(res.data.info)
 
-                console.log(userStore)
+                // console.log(userStore)
                 const timer = setInterval(() => {
                     loginData.progress += 5
                     if (loginData.progress === 100) {

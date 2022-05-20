@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:28:46
- * @LastEditTime: 2022-05-16 12:47:55
+ * @LastEditTime: 2022-05-20 19:31:50
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\login\index.vue
@@ -12,13 +12,14 @@
     import LoginBox from './components/loginBox.vue'
     import PixDialog from '@/components/pixDialog/index.vue'
     import { useLogin } from './hooks/useLogin'
+    import { useUserStore } from '@/store/modules/user'
     // hooks
     const { loginData, signIn, signUp } = useLogin()
 </script>
 
 <template>
     <back-ground width="100vw" height="100vh">
-        <div class="login-container m-20">
+        <div class="login-container">
             <login-box
                 v-model:username="loginData.username"
                 v-model:password="loginData.password"

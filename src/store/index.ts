@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:35:40
- * @LastEditTime: 2022-05-15 18:48:08
+ * @LastEditTime: 2022-05-20 19:30:15
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\store\index.ts
@@ -9,16 +9,19 @@
  */
 
 import type { App } from 'vue'
+import { createApp } from 'vue'
+import ap from '@/App.vue'
 import { createPinia } from 'pinia'
-import piniaPersist from 'pinia-plugin-persist'
-// import piniaPersist from 'pinia-persistedstate-plugin'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+const store = createPinia().use(piniaPluginPersistedstate)
 
-const store = createPinia()
+const app = createApp(ap)
+app.use(store)
+
 // pinia 数据持久化
-store.use(piniaPersist)
-
 const setupStore = (app: App) => {
+    const store = createPinia().use(piniaPluginPersistedstate)
     app.use(store)
 }
 
-export { store, setupStore }
+export { setupStore, store }

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-05-08 17:45:42
- * @LastEditTime: 2022-05-11 13:14:44
+ * @LastEditTime: 2022-05-20 19:42:39
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\cards.vue
@@ -115,9 +115,11 @@
     }
     @media screen and (max-width: 500px) {
         .nes-container {
-            width: 370px;
+            // width: 370px;
+            padding: 5px;
         }
         .card {
+            padding: 0;
             .text {
                 font-size: 13px;
             }
@@ -132,6 +134,7 @@
                 align-items: center;
             }
             .nes-charmander {
+                display: none;
                 width: 50px;
             }
         }

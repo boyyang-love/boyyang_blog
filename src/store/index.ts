@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:35:40
- * @LastEditTime: 2022-05-20 19:30:15
+ * @LastEditTime: 2022-05-20 19:54:01
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\store\index.ts
@@ -13,8 +13,9 @@ import { createApp } from 'vue'
 import ap from '@/App.vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-const store = createPinia().use(piniaPluginPersistedstate)
 
+// use store without setup
+const store = createPinia().use(piniaPluginPersistedstate)
 const app = createApp(ap)
 app.use(store)
 

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:23:14
- * @LastEditTime: 2022-05-20 19:23:33
+ * @LastEditTime: 2022-05-20 19:48:56
  * @LastEditors: boyyang
  * @Description: user store
  * @FilePath: \drawingBed\src\store\modules\user.ts
@@ -47,7 +47,11 @@ const useUserStore = defineStore({
         },
     },
     //开启持久化
-    persist: true
+    persist: {
+        key: 'app-user',
+        storage: window.sessionStorage,
+        paths: ['token']
+    },
 })
 
 const useUserStoreWithOut = () => {

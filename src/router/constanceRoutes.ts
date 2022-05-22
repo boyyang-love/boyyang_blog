@@ -1,14 +1,13 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 16:23:46
- * @LastEditTime: 2022-05-10 09:43:37
+ * @LastEditTime: 2022-05-21 17:44:18
  * @LastEditors: boyyang
  * @Description: 静态路由
  * @FilePath: \drawingBed\src\router\constanceRoutes.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { Layout } from '@/layout'
 import { RouteRecordRaw } from 'vue-router'
 const constantRoutes: RouteRecordRaw[] = [
     {
@@ -23,6 +22,4 @@ const constantRoutes: RouteRecordRaw[] = [
     },
 ]
 
-export {
-    constantRoutes
-}
+export { constantRoutes }

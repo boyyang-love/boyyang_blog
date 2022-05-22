@@ -1,23 +1,25 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-09 17:21:30
- * @LastEditTime: 2022-05-14 16:54:40
+ * @LastEditTime: 2022-05-21 19:05:14
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\home\hooks\useImages.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 import { reactive, watchEffect } from 'vue'
-import { getImgs, publishImage } from '@/api/banner'
+import { getImgs, publishImage, editImage } from '@/api/banner'
 import { env } from '@/utils/env'
 
 const imagesData = reactive({
     list: [] as any,
     page: 1,
-    limit: 12,
+    limit: 3,
     count: 0,
     showModal: false,
+    showEditModal: false,
     isloading: false,
+    edit: {} as any,
 })
 
 const useImages = () => {
@@ -46,7 +48,7 @@ const useImages = () => {
             window.$message.warning('没有更多了')
             return
         }
-        getImgList()
+        // getImgList()
     }
     // 获取上一页数据
     const prevPage = () => {
@@ -56,7 +58,6 @@ const useImages = () => {
             window.$message.warning('已经是第一页了')
             return
         }
-        getImgList()
     }
     // 发布图片
     const submit = (e: any) => {
@@ -71,16 +72,34 @@ const useImages = () => {
             getImgList()
         })
     }
+    // 编辑图片
+    const edit = (e: any) => {
+        imagesData.edit = e
+        imagesData.showEditModal = true
+    }
+    // 编辑图片 submit
+    const editSubmit = () => {
+        let params = {
+            ID: imagesData.edit.id,
+            name: imagesData.edit.title,
+            des: imagesData.edit.des,
+        }
+        editImage(params).then(res => {
+            imagesData.showEditModal = false
+            getImgList()
+        })
+    }
     watchEffect(() => {
         getImgList()
     })
 
-    setTimeout(() => {
-        imagesData.page + 1
-    }, 5000);
     return {
         imagesData,
         submit,
+        nextPage,
+        prevPage,
+        edit,
+        editSubmit,
     }
 }
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-05-08 14:22:16
- * @LastEditTime: 2022-05-08 19:11:18
+ * @LastEditTime: 2022-05-20 23:14:26
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\upload.vue
@@ -55,15 +55,20 @@
             <label for="name_field">
                 <span class="text">图片名称</span>
             </label>
-            <input type="text" id="name_field" class="nes-input is-success" v-model="uploadData.name" />
+            <input type="text" id="name_field" class="nes-input is-success is-dark" v-model="uploadData.name" />
         </div>
         <div class="nes-field">
             <label for="name_field">
                 <span class="text">图片描述</span>
             </label>
-            <textarea id="textarea_field" class="nes-textarea is-warning" v-model="uploadData.des"></textarea>
+            <textarea
+                maxlength="100"
+                id="textarea_field"
+                class="nes-textarea is-error is-dark"
+                v-model="uploadData.des"
+            ></textarea>
         </div>
-        <div class="upload-btn-container">
+        <n-space vertical >
             <n-upload
                 show-download-button
                 :action="env.VITE_APP_API_URL + '/api/upload'"
@@ -71,39 +76,29 @@
                 :max="1"
                 accept="image/*"
                 @finish="finish"
+                class="mt-5"
             >
-                <n-space justify="center">
+                <div>
                     <button type="button" class="upload-btn nes-btn is-error">
                         <span class="text">上传图片</span>
                     </button>
-                </n-space>
+                </div>
             </n-upload>
-        </div>
-        <n-space justify="center">
-            <button type="button" class="upload-btn nes-btn is-success" @click="submit">
-                <span class="text">确定</span>
-            </button>
+            <div>
+                <button type="button" class="upload-btn nes-btn is-success" @click="submit">
+                    <span class="text">确定</span>
+                </button>
+            </div>
         </n-space>
     </div>
     <pix-dialog v-model:is-show="uploadData.showModal" :content="uploadData.modalText"></pix-dialog>
 </template>
 
 <style scoped lang="less">
-    .upload-container {
-        width: 500px;
+    .upload-btn{
+        width: 510px;
     }
     .text {
         font-family: zpix;
-    }
-    .upload-btn {
-        width: 420px;
-    }
-    .up-btn {
-        width: 120px;
-    }
-    .upload-btn-container {
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
     }
 </style>

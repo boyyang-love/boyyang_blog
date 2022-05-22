@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:23:37
- * @LastEditTime: 2022-05-18 13:06:53
+ * @LastEditTime: 2022-05-21 13:59:30
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\login\hooks\useLogin.ts
@@ -11,7 +11,6 @@
 import { reactive } from 'vue'
 import { login, register } from '@/api/login'
 import { useUserStoreWithOut } from '@/store/modules/user'
-import { createStorage } from '@/utils/storage'
 import { router } from '@/router'
 
 const loginData = reactive({
@@ -26,7 +25,6 @@ const loginData = reactive({
 
 const useLogin = () => {
     const userStore = useUserStoreWithOut()
-    const storage = createStorage('user', localStorage)
     // 注册
     const signIn = () => {
         if (loginData.username.trim() === '' || loginData.password.trim() === '') {
@@ -62,28 +60,18 @@ const useLogin = () => {
         }
         login(params)
             .then(res => {
-                // storage.set('token', res.data.token)
-                // storage.set('userInfo', res.data.info)
                 userStore.setToken(res.data.token)
                 userStore.setUserinfo(res.data.info)
-
-                // console.log(userStore)
                 const timer = setInterval(() => {
-                    loginData.progress += 5
+                    loginData.progress += 10
                     if (loginData.progress === 100) {
                         clearInterval(timer)
-                        let params = {
-                            id: 111,
-                            age: 222
-                        }
                         router.replace({
-                            name: 'Home',
-                            params: params
-                            // path: `/:${JSON.stringify(params)}`,
-                            // params
+                            path: '/',
                         })
                     }
                 }, 100)
+                console.log(userStore.$state)
             })
             .catch(err => {
                 loginData.dialogContent = err.response.data.msg

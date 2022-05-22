@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-20 13:03:04
- * @LastEditTime: 2022-05-08 13:36:13
+ * @LastEditTime: 2022-05-22 10:23:05
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\components\Background\index.vue
@@ -50,7 +50,8 @@
         box-sizing: border-box;
         width: v-bind('props.width');
         height: v-bind('props.height');
-        background-image: v-bind('background_img');
+        // background-image: v-bind('background_img');
+        background-image: url("@/assets/女孩子少女宇宙航天服8k动漫壁纸彼岸图网.jpg");
         background-position: center;
         background-size: cover;
         background-color: v-bind('props.color');

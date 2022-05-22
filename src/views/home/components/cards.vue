@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-05-08 17:45:42
- * @LastEditTime: 2022-05-20 19:42:39
+ * @LastEditTime: 2022-05-21 17:43:40
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\cards.vue
@@ -12,12 +12,17 @@
     import moment from 'moment'
     import { ref } from 'vue'
     interface CardProps {
+        id: number
         title?: string
         url?: string
         des?: string
         avater?: string
         userName?: string
         time?: string
+        status?: number
+    }
+    interface CardEmits {
+        (e: 'edit', val: CardProps): void
     }
     interface Download {
         url: string
@@ -30,13 +35,19 @@
         avater: '',
         userName: 'boyyang',
         time: '0520-13-14',
+        status: 0,
     })
+    const emits = defineEmits<CardEmits>()
     const isloading = ref<boolean>(false)
     const download = (url: string, name: string) => {
         isloading.value = true
         imageDownload(url, name).then(() => {
             isloading.value = false
         })
+    }
+    const edit = () => {
+        const editData = {...props}
+        emits('edit', editData)
     }
 </script>
 
@@ -51,11 +62,10 @@
                     {{ props.title }}
                 </span>
             </p>
-            <img :src="props.url" alt="" />
+            <n-image :src="props.url"></n-image>
             <div class="img-des">
                 <section class="nes-container">
                     <section class="message-list">
-                        <!-- Balloon -->
                         <n-space justify="space-between" align="center" :wrap="false">
                             <div class="nes-balloon from-right">
                                 <div class="text-des">{{ props.des }}</div>
@@ -68,6 +78,11 @@
             <div class="user-content">
                 <n-space justify="space-around" align="center" :wrap="false">
                     <a href="#" class="nes-badge">
+                        <span class="is-error">
+                            <span class="text">{{ props.status == 0 ? '图片审核中' : '' }}</span>
+                        </span>
+                    </a>
+                    <a href="#" class="nes-badge">
                         <span class="is-primary">
                             <span class="text">{{ props.userName }}</span>
                         </span>
@@ -78,7 +93,13 @@
                         </span>
                     </a>
                     <a href="#" class="nes-badge is-icon">
-                        <span class="is-dark down-text">down</span>
+                        <span class="is-dark down-text">exit</span>
+                        <span class="is-warning">
+                            <span class="text" @click="edit">修改</span>
+                        </span>
+                    </a>
+                    <a href="#" class="nes-badge is-icon">
+                        <span class="is-dark down-text">download</span>
                         <span class="is-warning">
                             <span class="text" @click="download(props.url, props.title)">下载</span>
                         </span>
@@ -91,7 +112,7 @@
 
 <style scoped lang="less">
     .card {
-        // width: 500px;
+        // max-width: 750px;
         img {
             width: 100%;
             margin: 10px 0;

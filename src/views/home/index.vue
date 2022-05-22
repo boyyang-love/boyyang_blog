@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-05-10 15:41:44
+ * @LastEditTime: 2022-05-21 19:15:52
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\index.vue
@@ -10,33 +10,55 @@
 <script lang="ts" setup>
     import Background from '@/components/Background/index.vue'
     import Upload from './components/upload.vue'
+    import Edit from './components/edit.vue'
     import Cards from './components/cards.vue'
+    import TopMenu from './components/topMenu.vue'
     import { useImages } from './hooks/useImages'
+    import { useHome } from './hooks/useHome'
 
     // hooks
-    const { imagesData, submit } = useImages()
+    const { imagesData, submit, prevPage, nextPage, edit } = useImages()
+
+    const menuClick = (e: number) => {
+        switch (e) {
+            case 0:
+                imagesData.showModal = true
+                break
+            case 1:
+                nextPage()
+                break
+            case 2:
+                prevPage()
+                break
+            default:
+                return
+        }
+    }
 </script>
 
 <template>
     <background width="100vw" height="100vh">
-        <span class="upload-btn">
-            <a href="#" class="nes-badge" @click="imagesData.showModal = true">
-                <span class="is-error">Upload</span>
-            </a>
-        </span>
-        <div class="cards-content">
-            <div class="card-wrapper" v-for="item in imagesData.list">
-                <cards
-                    :key="item.ID"
-                    :title="item.name"
-                    :url="item.url"
-                    :des="item.des"
-                    :user-name="item.author.username"
-                    :avater="item.author.avaterUrl"
-                    :time="item.CreatedAt"
-                    :isloading="imagesData.isloading"
-                ></cards>
+        <top-menu @menu-click="menuClick"></top-menu>
+        <div class="card-wrapper">
+            <div class="container mx-auto px-4">
+                <n-space>
+                    <template v-for="item in imagesData.list" :key="item.ID">
+                        <cards
+                            :id="item.ID"
+                            :title="item.name"
+                            :url="item.url"
+                            :des="item.des"
+                            :user-name="item.author.username"
+                            :avater="item.author.avaterUrl"
+                            :time="item.CreatedAt"
+                            :isloading="imagesData.isloading"
+                            :status="item.status"
+                            @edit="edit"
+                        ></cards>
+                    </template>
+                </n-space>
             </div>
+            <n-back-top :right="40" />
         </div>
     </background>
 
@@ -45,29 +67,19 @@
             <Upload @submit="submit"></Upload>
         </div>
     </n-modal>
+    <n-modal v-model:show="imagesData.showEditModal">
+        <div class="upload-container">
+            <Edit></Edit>
+        </div>
+    </n-modal>
 </template>
 
 <style scoped lang="less">
-    .cards-content {
+    .card-wrapper {
         box-sizing: border-box;
         width: 100%;
         height: 100%;
+        padding: 10px 100px 200px;
         overflow-y: auto;
-        padding: 0 100px 200px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .card-wrapper {
-        max-width: 1300px;
-        margin: 20px 0;
-    }
-    .upload-btn {
-        position: sticky;
-        z-index: 9;
-        top: 10px;
-    }
-    .upload-container {
-        width: 600px;
     }
 </style>

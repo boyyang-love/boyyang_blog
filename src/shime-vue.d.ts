@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:54:24
- * @LastEditTime: 2022-05-01 16:16:58
+ * @LastEditTime: 2022-05-21 10:46:02
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\shime-vue.d.ts
@@ -12,7 +12,6 @@ import { MessageApi } from 'naive-ui'
 
 declare module 'qs'
 // declare module 'vue-picture-cropper/dist/esm'
-
 declare global {
     interface Window {
         $message: MessageApi

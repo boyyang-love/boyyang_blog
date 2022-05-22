@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:25:32
- * @LastEditTime: 2022-05-20 19:37:05
+ * @LastEditTime: 2022-05-21 17:44:44
  * @LastEditors: boyyang
  * @Description: 路由守卫
  * @FilePath: \drawingBed\src\router\routerGuards.ts
@@ -11,7 +11,6 @@
 import { Router, RouteRecordRaw } from 'vue-router'
 import { useUserStoreWithOut } from '@/store/modules/user'
 import { usePermissionRotesStoreWithOut } from '@/store/modules/permissionRoutes'
-import { asyncRoutes } from '@/router/asyncRoutes'
 import { errRoutes } from '@/router/404'
 
 // 路由白名单
@@ -23,7 +22,13 @@ const createRouterGuards = (router: Router) => {
     const routesStore = usePermissionRotesStoreWithOut()
     // 路由前置守卫
     router.beforeEach(async (to, from, next) => {
-        console.log(to.path, from.path)
+        console.log(
+            `%c 路由 %c from：${from.path} %c to: ${to.path} %c`,
+            'background:#00e079; border-radius: 3px 0 0 3px;  color: #fff;line-height: 30px;',
+            'background:#ff4e20; color: #fff;line-height: 30px;',
+            'background:#3d3b4f; border-radius: 0 3px 3px 0;  color: #fff;line-height: 30px;',
+            'background:transparent'
+        )
         if (to.path === '/login') {
             next()
             return
@@ -43,7 +48,7 @@ const createRouterGuards = (router: Router) => {
                 // 添加404路由
                 router.addRoute(errRoutes)
                 if (to.matched.length === 0) {
-                    next({ path: to.path })
+                    next(to.path)
                 } else {
                     next()
                 }

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-05-21 19:15:52
+ * @LastEditTime: 2022-06-04 20:56:58
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\index.vue
@@ -13,11 +13,14 @@
     import Edit from './components/edit.vue'
     import Cards from './components/cards.vue'
     import TopMenu from './components/topMenu.vue'
+    import Banner from './components/banner.vue'
     import { useImages } from './hooks/useImages'
+    import { useBanner } from './hooks/useBanner'
     import { useHome } from './hooks/useHome'
 
     // hooks
-    const { imagesData, submit, prevPage, nextPage, edit } = useImages()
+    const { imagesData, submit, prevPage, nextPage, edit, del } = useImages()
+    const { bannerData } = useBanner()
 
     const menuClick = (e: number) => {
         switch (e) {
@@ -37,10 +40,11 @@
 </script>
 
 <template>
-    <background width="100vw" height="100vh">
+    <background width="100vw" height="100vh" :url="imagesData.bg">
         <top-menu @menu-click="menuClick"></top-menu>
         <div class="card-wrapper">
             <div class="container mx-auto px-4">
+                <!-- <banner :list="bannerData.list"></banner> -->
                 <n-space>
                     <template v-for="item in imagesData.list" :key="item.ID">
                         <cards
@@ -51,9 +55,9 @@
                             :user-name="item.author.username"
                             :avater="item.author.avaterUrl"
                             :time="item.CreatedAt"
-                            :isloading="imagesData.isloading"
                             :status="item.status"
                             @edit="edit"
+                            @del="del"
                         ></cards>
                     </template>
                 </n-space>
@@ -79,7 +83,7 @@
         box-sizing: border-box;
         width: 100%;
         height: 100%;
-        padding: 10px 100px 200px;
+        padding: 10px 200px 200px;
         overflow-y: auto;
     }
 </style>

@@ -1,9 +1,9 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:53:40
- * @LastEditTime: 2022-05-07 17:01:43
+ * @LastEditTime: 2022-06-04 13:41:03
  * @LastEditors: boyyang
- * @Description: 
+ * @Description:
  * @FilePath: \drawingBed\src\plugin\naive.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
@@ -76,7 +76,9 @@ import {
     NTimePicker,
     NBackTop,
     NSkeleton,
-    NImage
+    NImage,
+    NCarousel,
+    NCarouselItem,
 } from 'naive-ui'
 
 const naive = create({
@@ -146,14 +148,18 @@ const naive = create({
         NTimePicker,
         NBackTop,
         NSkeleton,
-        NImage
+        NImage,
+        NCarousel,
+        NCarouselItem,
     ],
 })
 
 const setupNaive = (app: App<Element>) => {
     app.use(naive)
+    // 禁止taiwind css 样式按钮覆盖naive ui 样式
+    const meta = document.createElement('meta')
+    meta.name = 'naive-ui-style'
+    document.head.appendChild(meta)
 }
 
-export {
-    setupNaive
-}
+export { setupNaive }

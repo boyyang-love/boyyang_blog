@@ -1,14 +1,15 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-09 17:21:30
- * @LastEditTime: 2022-05-21 19:05:14
+ * @LastEditTime: 2022-06-04 20:46:23
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\home\hooks\useImages.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
-import { reactive, watchEffect } from 'vue'
-import { getImgs, publishImage, editImage } from '@/api/banner'
+import { h, reactive, watchEffect } from 'vue'
+import { NImage } from 'naive-ui'
+import { getImgs, publishImage, editImage, deleteImage } from '@/api/banner'
 import { env } from '@/utils/env'
 
 const imagesData = reactive({
@@ -20,6 +21,7 @@ const imagesData = reactive({
     showEditModal: false,
     isloading: false,
     edit: {} as any,
+    bg: ''
 })
 
 const useImages = () => {
@@ -28,6 +30,7 @@ const useImages = () => {
         let params = {
             page: imagesData.page,
             limit: imagesData.limit,
+            // status: 1
         }
         const res = (await getImgs(params)) as any
         let list =
@@ -39,6 +42,7 @@ const useImages = () => {
             })
         imagesData.list = list
         imagesData.count = res.count
+        imagesData.bg = list[0].url
     }
     // 获取下一页数据
     const nextPage = () => {
@@ -89,6 +93,33 @@ const useImages = () => {
             getImgList()
         })
     }
+    // 删除图片
+    const del = (e: any) => {
+        window.$dialog.error({
+            title: '是否删除当前图片？',
+            content: () => {
+                return h(NImage, {
+                    src: `${e.url}`,
+                    style: {
+                        // width:'450px',
+                        // height:'200px',
+                        objfit:'cover',
+                    },
+                })
+            },
+            positiveText: '删除',
+            negativeText: '取消',
+            onPositiveClick: () => {
+                let params = {
+                    id: e.id,
+                }
+                deleteImage(params).then(res => {
+                    window.$message.success('删除成功')
+                    getImgList()
+                })
+            },
+        })
+    }
     watchEffect(() => {
         getImgList()
     })
@@ -100,6 +131,7 @@ const useImages = () => {
         prevPage,
         edit,
         editSubmit,
+        del,
     }
 }
 

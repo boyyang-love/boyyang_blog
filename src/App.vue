@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-    import { NConfigProvider, darkTheme, NThemeEditor } from 'naive-ui'
+    import { NConfigProvider, darkTheme, NThemeEditor, lightTheme } from 'naive-ui'
     import { AppProvider } from '@/components/Application'
 </script>
 

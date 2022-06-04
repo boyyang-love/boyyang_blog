@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-20 13:03:04
- * @LastEditTime: 2022-05-22 10:23:05
+ * @LastEditTime: 2022-06-04 20:55:50
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\components\Background\index.vue
@@ -23,16 +23,17 @@
     }
     const props = withDefaults(defineProps<Background>(), {
         type: 'image',
-        url: `${new URL('../../assets/女孩子少女宇宙航天服8k动漫壁纸彼岸图网.jpg', import.meta.url).href}`,
         color: 'white',
         width: '100%',
         height: '100%',
     })
+
     const background_img = computed(() => {
         if (props.type == Type.color) {
             return 'none'
         }
-        return `url(${props.url})`
+        return `url(${new URL(props.url as any, import.meta.url).href})`
+        // return ` url(${props.url})`
     })
 </script>
 
@@ -50,8 +51,8 @@
         box-sizing: border-box;
         width: v-bind('props.width');
         height: v-bind('props.height');
-        // background-image: v-bind('background_img');
-        background-image: url("@/assets/女孩子少女宇宙航天服8k动漫壁纸彼岸图网.jpg");
+        background-image: v-bind('background_img');
+        // background-image: url("@/assets/赛博朋克风格奇幻少女_集原美电脑4k壁纸3840x2160_彼岸图网.jpg");
         background-position: center;
         background-size: cover;
         background-color: v-bind('props.color');

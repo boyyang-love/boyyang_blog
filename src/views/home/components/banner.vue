@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-09 16:17:05
- * @LastEditTime: 2022-04-18 16:07:22
+ * @LastEditTime: 2022-06-04 14:10:07
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\banner.vue
@@ -9,24 +9,22 @@
 -->
 <script lang="ts" setup>
     import { NCarousel, NCarouselItem } from 'naive-ui'
-
     export interface BannerInfoItem {
         url: string
         ID: number
     }
-
     export interface BannerInfo {
         list: BannerInfoItem[]
     }
-
     const props = withDefaults(defineProps<BannerInfo>(), {
         list: () => [],
     })
 </script>
 
 <template>
-    <n-carousel effect="card" style="height: 360px" :show-dots="true" autoplay dot-type="line">
-        <n-carousel-item :style="{ width: '60%' }" v-for="item in props.list" :key="item.ID">
+    <!-- style="height: 360px" :style="{ width: '60%' }"-->
+    <n-carousel effect="card" :show-dots="true" autoplay dot-type="line" :style="{ height: '360px' }">
+        <n-carousel-item v-for="item in props.list" :key="item.ID" :style="{ width: '60%' }">
             <img class="carousel-img" :src="item.url" />
         </n-carousel-item>
     </n-carousel>

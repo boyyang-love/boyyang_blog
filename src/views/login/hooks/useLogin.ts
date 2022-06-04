@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:23:37
- * @LastEditTime: 2022-05-21 13:59:30
+ * @LastEditTime: 2022-06-05 00:26:48
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\login\hooks\useLogin.ts
@@ -12,71 +12,61 @@ import { reactive } from 'vue'
 import { login, register } from '@/api/login'
 import { useUserStoreWithOut } from '@/store/modules/user'
 import { router } from '@/router'
+import { FormInst } from 'naive-ui'
 
 const loginData = reactive({
     username: '',
     password: '',
     repassword: '',
-    isRember: true,
-    isShowDialog: false,
-    dialogContent: '',
-    progress: 0,
+    loading: false,
+    rules: {
+        username: {
+            required: true,
+            message: '请输入账号',
+            trigger: 'blur',
+        },
+        password: {
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur',
+        },
+    },
 })
 
 const useLogin = () => {
     const userStore = useUserStoreWithOut()
     // 注册
     const signIn = () => {
-        if (loginData.username.trim() === '' || loginData.password.trim() === '') {
-            loginData.dialogContent = '请输入用户名和密码'
-            loginData.isShowDialog = true
-            return
-        }
         let params = {
             username: loginData.username,
             password: loginData.password,
         }
-        register(params).then(res => {
-            const timer = setInterval(() => {
-                loginData.progress += 5
-                if (loginData.progress === 100) {
-                    clearInterval(timer)
-                    loginData.progress = 0
-                    signUp()
-                }
-            }, 100)
-        })
+        register(params).then(res => {})
     }
     // 登录
-    const signUp = () => {
-        if (loginData.username.trim() === '' || loginData.password.trim() === '') {
-            loginData.dialogContent = '请输入用户名和密码'
-            loginData.isShowDialog = true
-            return
-        }
+    const signUp = (domRef: FormInst | null) => {
         let params = {
             username: loginData.username,
             password: loginData.password,
         }
-        login(params)
-            .then(res => {
-                userStore.setToken(res.data.token)
-                userStore.setUserinfo(res.data.info)
-                const timer = setInterval(() => {
-                    loginData.progress += 10
-                    if (loginData.progress === 100) {
-                        clearInterval(timer)
+        domRef?.validate(errors => {
+            if (!errors) {
+                loginData.loading = true
+                login(params).then(res => {
+                    userStore.setToken(res.data.token)
+                    userStore.setUserinfo(res.data.info)
+                    let timer = setTimeout(() => {
                         router.replace({
                             path: '/',
                         })
-                    }
-                }, 100)
-                console.log(userStore.$state)
-            })
-            .catch(err => {
-                loginData.dialogContent = err.response.data.msg
-                loginData.isShowDialog = true
-            })
+                        loginData.loading = false
+                        clearTimeout(timer)
+                    }, 1500)
+                })
+            } else {
+                window.$message.error('请输入用户名和密码~~')
+            }
+        })
     }
     return {
         loginData,

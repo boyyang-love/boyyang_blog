@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-05-08 17:45:42
- * @LastEditTime: 2022-05-21 17:43:40
+ * @LastEditTime: 2022-06-04 14:21:48
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\cards.vue
@@ -23,6 +23,7 @@
     }
     interface CardEmits {
         (e: 'edit', val: CardProps): void
+        (e: 'del', val: CardProps): void
     }
     interface Download {
         url: string
@@ -46,8 +47,12 @@
         })
     }
     const edit = () => {
-        const editData = {...props}
+        const editData = { ...props }
         emits('edit', editData)
+    }
+    const del = () => {
+        const delData = { ...props }
+        emits('del', delData)
     }
 </script>
 
@@ -62,7 +67,10 @@
                     {{ props.title }}
                 </span>
             </p>
-            <n-image :src="props.url"></n-image>
+            <div class="w-auto">
+                <n-image :src="props.url" object-fit="cover"></n-image>
+                <!-- <img :src="props.url" class="w-auto"> -->
+            </div>
             <div class="img-des">
                 <section class="nes-container">
                     <section class="message-list">
@@ -104,6 +112,12 @@
                             <span class="text" @click="download(props.url, props.title)">下载</span>
                         </span>
                     </a>
+                    <a href="#" class="nes-badge is-icon">
+                        <span class="is-dark down-text">delete</span>
+                        <span class="is-error">
+                            <span class="text" @click="del">删除</span>
+                        </span>
+                    </a>
                 </n-space>
             </div>
         </div>
@@ -112,12 +126,6 @@
 
 <style scoped lang="less">
     .card {
-        // max-width: 750px;
-        img {
-            width: 100%;
-            margin: 10px 0;
-            border: 2px solid whitesmoke;
-        }
         .user-content {
             margin-top: 20px;
         }
@@ -130,7 +138,7 @@
         .text {
             font-family: zpix;
             color: rgb(240, 240, 240);
-            font-size: 18px;
+            font-size: 13px;
             font-weight: bolder;
         }
     }
@@ -142,7 +150,7 @@
         .card {
             padding: 0;
             .text {
-                font-size: 13px;
+                font-size: 13px !important;
             }
             .text-des {
                 font-size: 10px;

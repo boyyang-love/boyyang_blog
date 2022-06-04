@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-05-07 23:18:28
- * @LastEditTime: 2022-05-15 13:10:57
+ * @LastEditTime: 2022-06-05 00:01:46
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\login\components\loginBox.vue
@@ -101,12 +101,24 @@
                         </label>
                     </n-space>
                 </n-form-item>
-                <progress class="nes-progress is-pattern progress-content" :value="props.progress" max="100"></progress>
+                <progress
+                    class="nes-progress is-pattern progress-content"
+                    :value="props.progress"
+                    max="100"
+                ></progress>
                 <n-space justify="space-between">
-                    <button type="button" class="btn nes-btn is-primary" @click="$emit('signIn', props)">
+                    <button
+                        type="button"
+                        class="btn nes-btn is-primary"
+                        @click="$emit('signIn', props)"
+                    >
                         <span class="text nes-text is-error">注册</span>
                     </button>
-                    <button type="button" class="btn nes-btn is-success" @click="$emit('signUp', props)">
+                    <button
+                        type="button"
+                        class="btn nes-btn is-success"
+                        @click="$emit('signUp', props)"
+                    >
                         <span class="text">登录</span>
                     </button>
                 </n-space>

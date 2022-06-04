@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:42:39
- * @LastEditTime: 2022-05-21 18:29:19
+ * @LastEditTime: 2022-06-04 10:59:27
  * @LastEditors: boyyang
  * @Description: banner
  * @FilePath: \drawingBed\src\api\banner.ts
@@ -50,5 +50,13 @@ export const editImage = (data: any) => {
         url: '/api/updatePicture',
         method: 'post',
         data,
+    })
+}
+
+export const deleteImage = (params: any) => {
+    return http.request({
+        url: '/api/deletePicture',
+        method: 'get',
+        params,
     })
 }

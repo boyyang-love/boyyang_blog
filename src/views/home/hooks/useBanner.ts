@@ -1,22 +1,24 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-06-05 18:47:40
+ * @LastEditTime: 2022-06-05 19:35:45
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\home\hooks\useBanner.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { h, reactive, watchEffect } from 'vue'
+import { h, onMounted, reactive, watchEffect } from 'vue'
 import { banner, deleteImage } from '@/api/banner'
 import { imageDownload } from '@/utils/fileDownload'
 import { env } from '@/utils/env'
 import { NImage } from 'naive-ui'
+import moment from 'moment'
 
 const bannerData = reactive({
     list: [] as any,
     isShowAll: false,
+    isLoading: false,
 })
 
 const useBanner = () => {
@@ -61,10 +63,13 @@ const useBanner = () => {
     }
     // 查看所有图片
     const showAll = () => {
+        bannerData.isLoading = true
         if (!bannerData.isShowAll) {
             bannerData.list.forEach((item: any) => {
                 window.$notification.create({
                     title: item.name,
+                    description: item.des,
+                    meta: moment(item.CreatedAt).format('YYYY-MM-DD'),
                     content: () => {
                         return h(NImage, {
                             src: `${item.url}`,
@@ -106,15 +111,16 @@ const useBanner = () => {
                     },
                 })
             })
-            bannerData.isShowAll = true
+            setTimeout(() => {
+                bannerData.isLoading = false
+                bannerData.isShowAll = true
+            }, 1000)
         } else {
             window.$notification.destroyAll()
+            bannerData.isLoading = false
             bannerData.isShowAll = false
         }
     }
-    watchEffect(() => {
-        getBannerList()
-    })
     return { bannerData, download, showAll, getBannerList }
 }
 

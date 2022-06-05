@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-09 17:21:30
- * @LastEditTime: 2022-06-05 18:48:19
+ * @LastEditTime: 2022-06-05 19:13:02
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\home\hooks\useImages.ts
@@ -164,9 +164,6 @@ const useImages = () => {
         imagesData.uploadData.url = res.data.url
         imagesData.uploadData.file_name = res.data.fileName
     }
-    watchEffect(() => {
-        getImgList()
-    })
 
     return {
         imagesData,

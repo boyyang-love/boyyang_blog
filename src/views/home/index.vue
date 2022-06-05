@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-06-05 15:17:36
+ * @LastEditTime: 2022-06-05 19:16:21
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\index.vue
@@ -15,7 +15,9 @@
     import bg from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
 
     // hooks
-    const { bannerData, download } = useBanner()
+    const { bannerData, download, getBannerList } = useBanner()
+    // 加载图片列表
+    getBannerList()
 </script>
 
 <template>

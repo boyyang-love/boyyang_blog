@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-06-05 18:30:41
+ * @LastEditTime: 2022-06-05 19:37:54
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\bottomMenu.vue
@@ -9,7 +9,7 @@
 -->
 
 <script lang="ts" setup>
-    import { ref } from 'vue'
+    import { CSSProperties, ref } from 'vue'
     import { FormInst } from 'naive-ui'
     import { CloudUploadOutlined, CodeSandboxOutlined } from '@vicons/antd'
     import { env } from '@/utils/env'
@@ -19,13 +19,29 @@
 
     // hooks
     const { imagesData, submit, finish } = useImages()
-    const { showAll } = useBanner()
+    const { showAll, bannerData } = useBanner()
 
     const formDomRef = ref<FormInst | null>(null)
 
     const userStore = useUserStore()
     const headers = {
         token: userStore.getToken,
+    }
+
+    const railStyle = ({ focused, checked }: { focused: boolean; checked: boolean }) => {
+        const style: CSSProperties = {}
+        if (checked) {
+            style.background = '#d03050'
+            if (focused) {
+                style.boxShadow = '0 0 0 2px #d0305040'
+            }
+        } else {
+            style.background = '#2080f0'
+            if (focused) {
+                style.boxShadow = '0 0 0 2px #2080f040'
+            }
+        }
+        return style
     }
 </script>
 
@@ -37,12 +53,15 @@
             class="cursor-pointer"
             @click="imagesData.showModal = true"
         ></n-icon>
-        <n-icon
-            :component="CodeSandboxOutlined"
-            :size="25"
-            class="cursor-pointer"
+        <n-switch
+            :value="bannerData.isShowAll"
+            :loading="bannerData.isLoading"
+            :rail-style="railStyle"
             @click="showAll"
-        ></n-icon>
+        >
+            <template #unchecked>第一行没有你，第二行没有你</template>
+            <template #checked>第三行没有也罢。</template>
+        </n-switch>
     </n-space>
     <n-modal
         v-model:show="imagesData.showModal"

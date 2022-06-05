@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:42:39
- * @LastEditTime: 2022-06-04 10:59:27
+ * @LastEditTime: 2022-06-05 14:36:14
  * @LastEditors: boyyang
  * @Description: banner
  * @FilePath: \drawingBed\src\api\banner.ts
@@ -10,7 +10,7 @@
 
 import { http } from '@/utils/http'
 
-export const banner = (params: { page: number; limit: number }) => {
+export const banner = (params?: { page: number; limit: number }) => {
     // /api/getAllImgs
     return http.request(
         {

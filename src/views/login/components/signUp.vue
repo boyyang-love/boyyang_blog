@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:38:03
- * @LastEditTime: 2022-06-05 00:34:25
+ * @LastEditTime: 2022-06-05 10:16:18
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\login\components\signUp.vue
@@ -44,21 +44,22 @@
                     </n-form-item>
                     <n-form-item>
                         <n-button @click="signUp(loginDomRef)" :loading="loginData.loading">
-                            <!-- <template #icon>
-                                <n-icon>
-                                    <cash-icon />
-                                </n-icon>
-                            </template> -->
                             登录
                         </n-button>
                     </n-form-item>
                     <n-form-item>
-                        <n-icon
-                            :component="HeartFilled"
-                            :size="25"
-                            color="#EC4899"
-                            class="circle"
-                        ></n-icon>
+                        <n-tooltip trigger="hover">
+                            <template #trigger>
+                                <n-icon
+                                    :component="HeartFilled"
+                                    :size="25"
+                                    color="#EC4899"
+                                    class="circle"
+                                    @click="loginData.isShowRegister = true"
+                                ></n-icon>
+                            </template>
+                            没有账号?点击注册
+                        </n-tooltip>
                     </n-form-item>
                 </n-space>
             </div>

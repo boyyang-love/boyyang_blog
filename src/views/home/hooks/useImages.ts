@@ -1,16 +1,19 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-09 17:21:30
- * @LastEditTime: 2022-06-04 20:46:23
+ * @LastEditTime: 2022-06-05 18:48:19
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\home\hooks\useImages.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 import { h, reactive, watchEffect } from 'vue'
-import { NImage } from 'naive-ui'
+import { NImage, UploadFileInfo, FormInst } from 'naive-ui'
 import { getImgs, publishImage, editImage, deleteImage } from '@/api/banner'
 import { env } from '@/utils/env'
+import { useBanner } from './useBanner'
+
+const { getBannerList } = useBanner()
 
 const imagesData = reactive({
     list: [] as any,
@@ -21,7 +24,30 @@ const imagesData = reactive({
     showEditModal: false,
     isloading: false,
     edit: {} as any,
-    bg: ''
+    bg: '',
+    uploadData: {
+        file_name: '',
+        name: '',
+        des: '',
+        url: '',
+    },
+    uploadRules: {
+        name: {
+            required: true,
+            message: '请输入图片名称',
+            trigger: 'blur',
+        },
+        des: {
+            required: true,
+            message: '请输入图片描述',
+            trigger: 'blur',
+        },
+        url: {
+            required: true,
+            message: '请输入图片名称',
+            trigger: 'blur',
+        },
+    },
 })
 
 const useImages = () => {
@@ -64,17 +90,29 @@ const useImages = () => {
         }
     }
     // 发布图片
-    const submit = (e: any) => {
+    const submit = async (domRef: FormInst | null) => {
         let params = {
-            url: e.url,
-            file_name: e.file_name,
-            name: e.name,
-            des: e.des,
+            url: imagesData.uploadData.url,
+            file_name: imagesData.uploadData.file_name,
+            name: imagesData.uploadData.name,
+            des: imagesData.uploadData.des,
         }
-        publishImage(params).then(res => {
-            imagesData.showModal = false
-            getImgList()
+        let p = new Promise((resolve, reject) => {
+            domRef?.validate(errors => {
+                if (!errors) {
+                    publishImage(params)
+                        .then(res => {
+                            imagesData.showModal = false
+                            getBannerList()
+                            resolve(true)
+                        })
+                        .catch(() => {
+                            reject(false)
+                        })
+                }
+            })
         })
+        return await p
     }
     // 编辑图片
     const edit = (e: any) => {
@@ -103,7 +141,7 @@ const useImages = () => {
                     style: {
                         // width:'450px',
                         // height:'200px',
-                        objfit:'cover',
+                        objfit: 'cover',
                     },
                 })
             },
@@ -120,6 +158,12 @@ const useImages = () => {
             },
         })
     }
+    // finsih
+    const finish = (options: { file: UploadFileInfo; event?: ProgressEvent }) => {
+        let res = JSON.parse((event?.target as any).response as any)
+        imagesData.uploadData.url = res.data.url
+        imagesData.uploadData.file_name = res.data.fileName
+    }
     watchEffect(() => {
         getImgList()
     })
@@ -132,6 +176,7 @@ const useImages = () => {
         edit,
         editSubmit,
         del,
+        finish,
     }
 }
 

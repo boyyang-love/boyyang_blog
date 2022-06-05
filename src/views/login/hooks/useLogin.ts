@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:23:37
- * @LastEditTime: 2022-06-05 00:26:48
+ * @LastEditTime: 2022-06-05 10:35:50
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\login\hooks\useLogin.ts
@@ -19,6 +19,7 @@ const loginData = reactive({
     password: '',
     repassword: '',
     loading: false,
+    isShowRegister: false,
     rules: {
         username: {
             required: true,
@@ -30,18 +31,41 @@ const loginData = reactive({
             message: '请输入密码',
             trigger: 'blur',
         },
+        repassword: {
+            required: true,
+            message: '请输入确认密码',
+            trigger: 'blur',
+        },
     },
 })
 
 const useLogin = () => {
     const userStore = useUserStoreWithOut()
     // 注册
-    const signIn = () => {
+    const signIn = async (domRef: FormInst | null) => {
         let params = {
             username: loginData.username,
             password: loginData.password,
         }
-        register(params).then(res => {})
+        let p = new Promise((resolve, reject) => {
+            domRef?.validate(errors => {
+                if (!errors) {
+                    if (loginData.password.trim() !== loginData.repassword.trim()) {
+                        window.$message.error('两次密码不一致')
+                        return
+                    }
+                    register(params)
+                        .then(res => {
+                            resolve(true)
+                            window.$message.success('注册成功,请点击登录')
+                        })
+                        .catch(() => {
+                            reject(false)
+                        })
+                }
+            })
+        })
+        return await p
     }
     // 登录
     const signUp = (domRef: FormInst | null) => {
@@ -52,17 +76,21 @@ const useLogin = () => {
         domRef?.validate(errors => {
             if (!errors) {
                 loginData.loading = true
-                login(params).then(res => {
-                    userStore.setToken(res.data.token)
-                    userStore.setUserinfo(res.data.info)
-                    let timer = setTimeout(() => {
-                        router.replace({
-                            path: '/',
-                        })
+                login(params)
+                    .then(res => {
+                        userStore.setToken(res.data.token)
+                        userStore.setUserinfo(res.data.info)
+                        let timer = setTimeout(() => {
+                            router.replace({
+                                path: '/',
+                            })
+                            loginData.loading = false
+                            clearTimeout(timer)
+                        }, 1500)
+                    })
+                    .catch(() => {
                         loginData.loading = false
-                        clearTimeout(timer)
-                    }, 1500)
-                })
+                    })
             } else {
                 window.$message.error('请输入用户名和密码~~')
             }

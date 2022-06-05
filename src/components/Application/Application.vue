@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-06 11:57:35
- * @LastEditTime: 2022-05-07 11:29:32
+ * @LastEditTime: 2022-06-05 18:11:55
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\components\Application\Application.vue
@@ -17,6 +17,7 @@
     } from 'naive-ui'
     import { MessageContent } from '@/components/MessageContent'
     import { DialogContent } from '@/components/DialogContent'
+    import { NotificationContent } from '@/components/Notification'
 </script>
 
 <template>
@@ -24,6 +25,7 @@
         <n-dialog-provider>
             <DialogContent />
             <n-notification-provider>
+                <NotificationContent />
                 <n-message-provider>
                     <MessageContent />
                     <slot slot="default"></slot>

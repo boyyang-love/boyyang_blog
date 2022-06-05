@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-06-04 20:56:58
+ * @LastEditTime: 2022-06-05 15:17:36
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\index.vue
@@ -9,81 +9,46 @@
 -->
 <script lang="ts" setup>
     import Background from '@/components/Background/index.vue'
-    import Upload from './components/upload.vue'
-    import Edit from './components/edit.vue'
-    import Cards from './components/cards.vue'
-    import TopMenu from './components/topMenu.vue'
-    import Banner from './components/banner.vue'
-    import { useImages } from './hooks/useImages'
+    import BottomMenu from './components/bottomMenu.vue'
     import { useBanner } from './hooks/useBanner'
-    import { useHome } from './hooks/useHome'
+    // 背景图片
+    import bg from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
 
     // hooks
-    const { imagesData, submit, prevPage, nextPage, edit, del } = useImages()
-    const { bannerData } = useBanner()
-
-    const menuClick = (e: number) => {
-        switch (e) {
-            case 0:
-                imagesData.showModal = true
-                break
-            case 1:
-                nextPage()
-                break
-            case 2:
-                prevPage()
-                break
-            default:
-                return
-        }
-    }
+    const { bannerData, download } = useBanner()
 </script>
 
 <template>
-    <background width="100vw" height="100vh" :url="imagesData.bg">
-        <top-menu @menu-click="menuClick"></top-menu>
-        <div class="card-wrapper">
-            <div class="container mx-auto px-4">
-                <!-- <banner :list="bannerData.list"></banner> -->
-                <n-space>
-                    <template v-for="item in imagesData.list" :key="item.ID">
-                        <cards
-                            :id="item.ID"
-                            :title="item.name"
-                            :url="item.url"
-                            :des="item.des"
-                            :user-name="item.author.username"
-                            :avater="item.author.avaterUrl"
-                            :time="item.CreatedAt"
-                            :status="item.status"
-                            @edit="edit"
-                            @del="del"
-                        ></cards>
-                    </template>
-                </n-space>
+    <background width="100vw" height="100vh" :url="bg">
+        <div class="w-full h-full flex justify-center items-center">
+            <div
+                class="container h-4/5 bg-black bg-opacity-50 rounded-md ring-8 ring-yellow-500 ring-opacity-50 shadow-lg"
+            >
+                <n-carousel show-arrow :show-dots="false">
+                    <div v-for="item in bannerData.list" :key="item.ID" class="h-full relative">
+                        <img
+                            :src="item.url"
+                            class="carousel-img"
+                            @click="download(item.url, item.name)"
+                        />
+                    </div>
+                </n-carousel>
             </div>
-            <n-back-top :right="40" />
+        </div>
+        <div class="bottom-menu w-full bg-white absolute bottom-0 flex justify-center py-2">
+            <bottom-menu></bottom-menu>
         </div>
     </background>
-
-    <n-modal v-model:show="imagesData.showModal">
-        <div class="upload-container">
-            <Upload @submit="submit"></Upload>
-        </div>
-    </n-modal>
-    <n-modal v-model:show="imagesData.showEditModal">
-        <div class="upload-container">
-            <Edit></Edit>
-        </div>
-    </n-modal>
 </template>
 
 <style scoped lang="less">
-    .card-wrapper {
-        box-sizing: border-box;
+    .container {
+        overflow-y: auto;
+    }
+
+    .carousel-img {
         width: 100%;
         height: 100%;
-        padding: 10px 200px 200px;
-        overflow-y: auto;
+        object-fit: cover;
     }
 </style>

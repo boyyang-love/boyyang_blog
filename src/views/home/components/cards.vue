@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-05-08 17:45:42
- * @LastEditTime: 2022-06-04 14:21:48
+ * @LastEditTime: 2022-06-05 10:33:16
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\cards.vue
@@ -101,7 +101,7 @@
                         </span>
                     </a>
                     <a href="#" class="nes-badge is-icon">
-                        <span class="is-dark down-text">exit</span>
+                        <span class="is-dark down-text">edit</span>
                         <span class="is-warning">
                             <span class="text" @click="edit">修改</span>
                         </span>

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:23:14
- * @LastEditTime: 2022-05-20 19:48:56
+ * @LastEditTime: 2022-06-05 11:45:50
  * @LastEditors: boyyang
  * @Description: user store
  * @FilePath: \drawingBed\src\store\modules\user.ts
@@ -41,7 +41,6 @@ const useUserStore = defineStore({
         },
         getInfo() {
             return new Promise(resolve => {
-                console.log(this.userInfo)
                 resolve(this.userInfo)
             })
         },
@@ -50,7 +49,7 @@ const useUserStore = defineStore({
     persist: {
         key: 'app-user',
         storage: window.sessionStorage,
-        paths: ['token']
+        paths: ['token', 'userInfo']
     },
 })
 

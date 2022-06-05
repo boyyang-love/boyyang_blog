@@ -1,14 +1,13 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-05-21 15:33:46
- * @LastEditTime: 2022-05-21 19:14:27
+ * @LastEditTime: 2022-06-05 12:52:06
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\topMenu.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 <script lang="ts" setup>
-    import { HomeFilled } from '@vicons/antd'
     interface MenuEmits {
         (e: 'menuClick', val: number): void
     }
@@ -16,7 +15,7 @@
 </script>
 
 <template>
-    <div class="p-2 mt-2">
+    <div class="p-3 bg-black bg-opacity-50 relative">
         <n-space justify="center" align="center">
             <a href="#" class="nes-badge" @click="emits('menuClick', 0)">
                 <span class="is-primary">上传</span>

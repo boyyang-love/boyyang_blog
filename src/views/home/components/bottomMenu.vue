@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-06-11 19:40:35
+ * @LastEditTime: 2022-06-12 01:49:39
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\bottomMenu.vue
@@ -87,7 +87,7 @@
                 </n-tooltip>
             </n-spin>
         </div>
-        <div class="absolute right-4 top-2 h-full">
+        <div class="absolute right-12 top-3 h-full">
             <n-pagination
                 :item-count="bannerData.count"
                 :page-size="bannerData.limit"

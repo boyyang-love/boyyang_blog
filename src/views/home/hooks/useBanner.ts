@@ -1,17 +1,16 @@
-import { FormInst } from 'naive-ui'
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-06-11 19:50:38
+ * @LastEditTime: 2022-06-12 02:42:03
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\home\hooks\useBanner.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { h, onMounted, reactive, watchEffect } from 'vue'
-import { NImage, NIcon } from 'naive-ui'
-import { EditFilled } from '@vicons/antd'
+import { h, reactive } from 'vue'
+import { NImage, NIcon, type FormInst, NSpace } from 'naive-ui'
+import { DeleteFilled, EditFilled } from '@vicons/antd'
 import { banner, deleteImage, editImage } from '@/api/banner'
 import { imageDownload } from '@/utils/fileDownload'
 import { env } from '@/utils/env'
@@ -50,6 +49,7 @@ const bannerData = reactive({
 })
 
 const useBanner = () => {
+    // 获取轮播列表
     const getBannerList = async () => {
         let params = {
             page: bannerData.page,
@@ -65,6 +65,7 @@ const useBanner = () => {
             })
         bannerData.count = res.count
     }
+    // 下载图片文件
     const download = (url: string, name: string) => {
         const d = window.$dialog.info({
             title: `是否下载当前图片？`,
@@ -72,8 +73,6 @@ const useBanner = () => {
                 return h(NImage, {
                     src: `${url}`,
                     style: {
-                        // width:'450px',
-                        // height:'200px',
                         objfit: 'cover',
                     },
                 })
@@ -82,7 +81,7 @@ const useBanner = () => {
             negativeText: '取消',
             onPositiveClick: () => {
                 d.loading = true
-                return new Promise((resolve, reject) => {
+                return new Promise(resolve => {
                     imageDownload(url, name).then(() => {
                         d.loading = false
                         resolve(true)
@@ -94,6 +93,7 @@ const useBanner = () => {
     // 查看所有图片
     const showAll = () => {
         bannerData.isLoading = true
+        let num = 0
         if (!bannerData.isShowAll) {
             bannerData.list.forEach((item: any) => {
                 window.$notification.create({
@@ -101,13 +101,10 @@ const useBanner = () => {
                     description: item.des,
                     meta: () => {
                         return h(
-                            'div',
+                            NSpace,
                             {
-                                style: {
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    aliginItems: 'center',
-                                },
+                                justify: 'space-between',
+                                class: 'w-full',
                             },
                             [
                                 h(
@@ -125,6 +122,38 @@ const useBanner = () => {
                                         bannerData.isShowEdit = true
                                     },
                                 }),
+                                h(NIcon, {
+                                    component: DeleteFilled,
+                                    size: 20,
+                                    style: { cursor: 'pointer' },
+                                    onClick: async () => {
+                                        let p = new Promise(resolve => {
+                                            window.$dialog.warning({
+                                                title: '是否删除当前图片？',
+                                                positiveText: '删除',
+                                                negativeText: '取消',
+                                                content: () => {
+                                                    return h(NImage, {
+                                                        src: `${item.url}`,
+                                                        style: {
+                                                            objfit: 'cover',
+                                                        },
+                                                    })
+                                                },
+                                                onPositiveClick: () => {
+                                                    let params = {
+                                                        id: item.ID,
+                                                    }
+                                                    deleteImage(params).then(res => {
+                                                        getBannerList()
+                                                        resolve(true)
+                                                    })
+                                                },
+                                            })
+                                        })
+                                        return await p
+                                    },
+                                }),
                             ]
                         )
                     },
@@ -132,47 +161,20 @@ const useBanner = () => {
                         return h('img', {
                             src: `${item.url}`,
                             style: {
-                                // width:'450px',
-                                // height:'200px',
                                 objfit: 'cover',
                             },
                         })
                     },
                     onClose: async () => {
-                        let p = new Promise((resolve, reject) => {
-                            window.$dialog.warning({
-                                title: '是否删除当前图片？',
-                                positiveText: '删除',
-                                negativeText: '取消',
-                                content: () => {
-                                    return h(NImage, {
-                                        src: `${item.url}`,
-                                        style: {
-                                            // width:'450px',
-                                            // height:'200px',
-                                            objfit: 'cover',
-                                        },
-                                    })
-                                },
-                                onPositiveClick: () => {
-                                    let params = {
-                                        id: item.ID,
-                                    }
-                                    deleteImage(params).then(res => {
-                                        getBannerList()
-                                        resolve(true)
-                                    })
-                                },
-                            })
-                        })
-                        return await p
+                        num++
+                        if (num >= bannerData.list.length) {
+                            bannerData.isShowAll = false
+                        }
                     },
                 })
             })
-            setTimeout(() => {
-                bannerData.isLoading = false
-                bannerData.isShowAll = true
-            }, 1000)
+            bannerData.isLoading = false
+            bannerData.isShowAll = true
         } else {
             window.$notification.destroyAll()
             bannerData.isLoading = false
@@ -200,7 +202,7 @@ const useBanner = () => {
             domRef?.validate(error => {
                 if (!error) {
                     editImage(params)
-                        .then(res => {
+                        .then(() => {
                             getBannerList()
                             bannerData.isEditLoading = false
                             resolve(true)
@@ -217,7 +219,14 @@ const useBanner = () => {
         })
         return await p
     }
-    return { bannerData, download, showAll, getBannerList, edit }
+    // 返回数据以及方法
+    return {
+        bannerData,
+        download,
+        showAll,
+        getBannerList,
+        edit,
+    }
 }
 
 export { useBanner }

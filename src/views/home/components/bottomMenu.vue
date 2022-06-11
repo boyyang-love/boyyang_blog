@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-06-12 01:49:39
+ * @LastEditTime: 2022-06-12 02:12:31
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\components\bottomMenu.vue
@@ -20,29 +20,13 @@
     // hooks
     const { imagesData, submit, finish, remove } = useImages()
     const { showAll, bannerData, getBannerList, edit } = useBanner()
-
+    // domRef
     const formDomRefUpload = ref<FormInst | null>(null)
     const formDomRefEdit = ref<FormInst | null>(null)
-
+    // userStore
     const userStore = useUserStore()
     const headers = {
         token: userStore.getToken,
-    }
-
-    const railStyle = ({ focused, checked }: { focused: boolean; checked: boolean }) => {
-        const style: CSSProperties = {}
-        if (checked) {
-            style.background = '#d03050'
-            if (focused) {
-                style.boxShadow = '0 0 0 2px #d0305040'
-            }
-        } else {
-            style.background = '#2080f0'
-            if (focused) {
-                style.boxShadow = '0 0 0 2px #2080f040'
-            }
-        }
-        return style
     }
 </script>
 
@@ -160,7 +144,7 @@
         negative-text="取消"
         @positive-click="edit(formDomRefEdit)"
     >
-        <n-form ref="formDomRefEdit" :model="bannerData.editData" :rules="imagesData.uploadRules">
+        <n-form ref="formDomRefEdit" :model="bannerData.editData" :rules="bannerData.editDataRules">
             <n-form-item path="url">
                 <n-image :src="bannerData.editData.url"></n-image>
             </n-form-item>

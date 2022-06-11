@@ -1,7 +1,8 @@
+import { FormInst } from 'naive-ui'
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-06-05 19:35:45
+ * @LastEditTime: 2022-06-11 19:50:38
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\home\hooks\useBanner.ts
@@ -9,31 +10,60 @@
  */
 
 import { h, onMounted, reactive, watchEffect } from 'vue'
-import { banner, deleteImage } from '@/api/banner'
+import { NImage, NIcon } from 'naive-ui'
+import { EditFilled } from '@vicons/antd'
+import { banner, deleteImage, editImage } from '@/api/banner'
 import { imageDownload } from '@/utils/fileDownload'
 import { env } from '@/utils/env'
-import { NImage } from 'naive-ui'
+
 import moment from 'moment'
 
 const bannerData = reactive({
     list: [] as any,
+    count: 0,
+    page: 1,
+    limit: 10,
     isShowAll: false,
     isLoading: false,
+    isShowEdit: false,
+    isEditLoading: false,
+    editData: {
+        file_name: '',
+        name: '',
+        des: '',
+        url: '',
+        ID: 0,
+        tags: [],
+    },
+    editDataRules: {
+        name: {
+            required: true,
+            message: '请输入图片名称',
+            trigger: 'blur',
+        },
+        des: {
+            required: true,
+            message: '请输入图片描述',
+            trigger: 'blur',
+        },
+    },
 })
 
 const useBanner = () => {
     const getBannerList = async () => {
         let params = {
-            // page: 1,
-            // limit: 10,
+            page: bannerData.page,
+            limit: bannerData.limit,
         }
-        const res = await banner()
+        const res = await banner(params)
         bannerData.list =
             res.data &&
             res.data.map((item: any) => {
                 item.url = `${env.VITE_APP_IMG_URL}${item.url}`
+                item.tags = item.tags.map((tag: any) => tag.tag_name)
                 return item
             })
+        bannerData.count = res.count
     }
     const download = (url: string, name: string) => {
         const d = window.$dialog.info({
@@ -69,9 +99,37 @@ const useBanner = () => {
                 window.$notification.create({
                     title: item.name,
                     description: item.des,
-                    meta: moment(item.CreatedAt).format('YYYY-MM-DD'),
+                    meta: () => {
+                        return h(
+                            'div',
+                            {
+                                style: {
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    aliginItems: 'center',
+                                },
+                            },
+                            [
+                                h(
+                                    'span',
+                                    { style: { marginRight: '15px' } },
+                                    moment(item.CreatedAt).format('YYYY-MM-DD')
+                                ),
+                                h(NIcon, {
+                                    component: EditFilled,
+                                    size: 20,
+                                    style: { cursor: 'pointer' },
+                                    onClick: () => {
+                                        bannerData.editData = item
+                                        bannerData.editData.tags = item.tags
+                                        bannerData.isShowEdit = true
+                                    },
+                                }),
+                            ]
+                        )
+                    },
                     content: () => {
-                        return h(NImage, {
+                        return h('img', {
                             src: `${item.url}`,
                             style: {
                                 // width:'450px',
@@ -121,7 +179,45 @@ const useBanner = () => {
             bannerData.isShowAll = false
         }
     }
-    return { bannerData, download, showAll, getBannerList }
+    // 修改图片
+    const edit = async (domRef: FormInst | null) => {
+        bannerData.isEditLoading = true
+        let params = {
+            ID: bannerData.editData.ID,
+            name: bannerData.editData.name,
+            des: bannerData.editData.des,
+            tags: (bannerData.editData.tags as any[])
+                .map(tag => {
+                    if (tag.label || tag.value) {
+                        return tag.label || tag.value
+                    } else {
+                        return tag
+                    }
+                })
+                .join(','),
+        }
+        let p = new Promise((resolve, reject) => {
+            domRef?.validate(error => {
+                if (!error) {
+                    editImage(params)
+                        .then(res => {
+                            getBannerList()
+                            bannerData.isEditLoading = false
+                            resolve(true)
+                        })
+                        .catch(() => {
+                            bannerData.isEditLoading = false
+                            reject(false)
+                        })
+                } else {
+                    bannerData.isEditLoading = false
+                    reject(false)
+                }
+            })
+        })
+        return await p
+    }
+    return { bannerData, download, showAll, getBannerList, edit }
 }
 
 export { useBanner }

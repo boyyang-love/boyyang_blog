@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:42:39
- * @LastEditTime: 2022-06-05 14:36:14
+ * @LastEditTime: 2022-06-11 13:33:34
  * @LastEditors: boyyang
  * @Description: banner
  * @FilePath: \drawingBed\src\api\banner.ts
@@ -53,9 +53,19 @@ export const editImage = (data: any) => {
     })
 }
 
+// 删除图片墙
 export const deleteImage = (params: any) => {
     return http.request({
         url: '/api/deletePicture',
+        method: 'get',
+        params,
+    })
+}
+
+// 删除上传的图片
+export const deleteUpload = (params: { id: number }) => {
+    return http.request({
+        url: '/api/deleteUpload',
         method: 'get',
         params,
     })

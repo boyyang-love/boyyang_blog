@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:53:40
- * @LastEditTime: 2022-06-04 13:41:03
+ * @LastEditTime: 2022-06-11 13:54:17
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\plugin\naive.ts
@@ -79,6 +79,8 @@ import {
     NImage,
     NCarousel,
     NCarouselItem,
+    NAutoComplete,
+    NDynamicTags,
 } from 'naive-ui'
 
 const naive = create({
@@ -151,6 +153,8 @@ const naive = create({
         NImage,
         NCarousel,
         NCarouselItem,
+        NAutoComplete,
+        NDynamicTags,
     ],
 })
 

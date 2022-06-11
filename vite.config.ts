@@ -26,6 +26,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         },
         build: {
             assetsDir: 'assets',
+            target: 'es2020',
         },
     }
 })

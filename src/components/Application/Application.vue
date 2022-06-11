@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-06 11:57:35
- * @LastEditTime: 2022-06-05 18:11:55
+ * @LastEditTime: 2022-06-11 16:48:52
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\components\Application\Application.vue
@@ -24,7 +24,7 @@
     <n-loading-bar-provider>
         <n-dialog-provider>
             <DialogContent />
-            <n-notification-provider>
+            <n-notification-provider placement="bottom-left">
                 <NotificationContent />
                 <n-message-provider>
                     <MessageContent />

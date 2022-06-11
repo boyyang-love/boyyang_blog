@@ -1,14 +1,14 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:23:37
- * @LastEditTime: 2022-06-05 10:35:50
+ * @LastEditTime: 2022-06-11 12:06:58
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\login\hooks\useLogin.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import { login, register } from '@/api/login'
 import { useUserStoreWithOut } from '@/store/modules/user'
 import { router } from '@/router'
@@ -16,6 +16,7 @@ import { FormInst } from 'naive-ui'
 
 const loginData = reactive({
     username: '',
+    email: '',
     password: '',
     repassword: '',
     loading: false,
@@ -24,6 +25,11 @@ const loginData = reactive({
         username: {
             required: true,
             message: '请输入账号',
+            trigger: 'blur',
+        },
+        email: {
+            required: true,
+            message: '请输入注册邮箱',
             trigger: 'blur',
         },
         password: {
@@ -39,6 +45,17 @@ const loginData = reactive({
     },
 })
 
+// emailOptions
+const emailOptions = computed(() => {
+    return ['@gmail.com', '@163.com', '@qq.com', '@outlook.com'].map(suffix => {
+        const prefix = loginData.email.split('@')[0]
+        return {
+            label: prefix + suffix,
+            value: prefix + suffix,
+        }
+    })
+})
+
 const useLogin = () => {
     const userStore = useUserStoreWithOut()
     // 注册
@@ -46,6 +63,7 @@ const useLogin = () => {
         let params = {
             username: loginData.username,
             password: loginData.password,
+            email: loginData.email,
         }
         let p = new Promise((resolve, reject) => {
             domRef?.validate(errors => {
@@ -100,6 +118,7 @@ const useLogin = () => {
         loginData,
         signIn,
         signUp,
+        emailOptions,
     }
 }
 

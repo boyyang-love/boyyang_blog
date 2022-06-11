@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-09 17:21:30
- * @LastEditTime: 2022-06-05 19:13:02
+ * @LastEditTime: 2022-06-11 14:53:54
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \drawingBed\src\views\home\hooks\useImages.ts
@@ -9,7 +9,7 @@
  */
 import { h, reactive, watchEffect } from 'vue'
 import { NImage, UploadFileInfo, FormInst } from 'naive-ui'
-import { getImgs, publishImage, editImage, deleteImage } from '@/api/banner'
+import { getImgs, publishImage, editImage, deleteImage, deleteUpload } from '@/api/banner'
 import { env } from '@/utils/env'
 import { useBanner } from './useBanner'
 
@@ -30,6 +30,16 @@ const imagesData = reactive({
         name: '',
         des: '',
         url: '',
+        id: 0,
+        tags: [],
+    },
+    defaultuploadData: {
+        file_name: '',
+        name: '',
+        des: '',
+        url: '',
+        id: 0,
+        tags: [],
     },
     uploadRules: {
         name: {
@@ -96,6 +106,7 @@ const useImages = () => {
             file_name: imagesData.uploadData.file_name,
             name: imagesData.uploadData.name,
             des: imagesData.uploadData.des,
+            tags: imagesData.uploadData.tags.join(','),
         }
         let p = new Promise((resolve, reject) => {
             domRef?.validate(errors => {
@@ -103,6 +114,7 @@ const useImages = () => {
                     publishImage(params)
                         .then(res => {
                             imagesData.showModal = false
+                            imagesData.uploadData = { ...imagesData.defaultuploadData }
                             getBannerList()
                             resolve(true)
                         })
@@ -161,8 +173,18 @@ const useImages = () => {
     // finsih
     const finish = (options: { file: UploadFileInfo; event?: ProgressEvent }) => {
         let res = JSON.parse((event?.target as any).response as any)
+        imagesData.uploadData.id = res.data.id
         imagesData.uploadData.url = res.data.url
         imagesData.uploadData.file_name = res.data.fileName
+    }
+    // remove
+    const remove = () => {
+        let params = {
+            id: imagesData.uploadData.id,
+        }
+        deleteUpload(params).then(res => {
+            window.$message.success('删除成功')
+        })
     }
 
     return {
@@ -174,6 +196,7 @@ const useImages = () => {
         editSubmit,
         del,
         finish,
+        remove,
     }
 }
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-06-05 19:16:21
+ * @LastEditTime: 2022-06-11 19:57:10
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\home\index.vue
@@ -24,20 +24,49 @@
     <background width="100vw" height="100vh" :url="bg">
         <div class="w-full h-full flex justify-center items-center">
             <div
-                class="container h-4/5 bg-black bg-opacity-50 rounded-md ring-8 ring-yellow-500 ring-opacity-50 shadow-lg"
+                class="container h-4/5 bg-black bg-opacity-10 rounded-md ring-8 ring-yellow-500 ring-opacity-50 shadow-lg"
             >
-                <n-carousel show-arrow :show-dots="false">
+                <n-carousel
+                    :show-dots="true"
+                    show-arrow
+                    dot-placement="right"
+                    direction="vertical"
+                    autoplay
+                >
                     <div v-for="item in bannerData.list" :key="item.ID" class="h-full relative">
                         <img
                             :src="item.url"
                             class="carousel-img"
                             @click="download(item.url, item.name)"
                         />
+                        <div class="absolute bottom-2 left-2">
+                            <n-space>
+                                <n-tag
+                                    strong
+                                    v-for="tag in item.tags"
+                                    :key="tag.ID"
+                                    :type="
+                                        [
+                                            'default',
+                                            'primary',
+                                            'info',
+                                            'success',
+                                            'warning',
+                                            'error',
+                                        ][Math.floor(Math.random() * 6)]
+                                    "
+                                >
+                                    {{ tag }}
+                                </n-tag>
+                            </n-space>
+                        </div>
                     </div>
                 </n-carousel>
             </div>
         </div>
-        <div class="bottom-menu w-full bg-white absolute bottom-0 flex justify-center py-2">
+        <div
+            class="bottom-menu w-full bg-black bg-opacity-30 absolute bottom-0 flex justify-center py-2"
+        >
             <bottom-menu></bottom-menu>
         </div>
     </background>

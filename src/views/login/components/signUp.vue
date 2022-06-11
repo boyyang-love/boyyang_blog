@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:38:03
- * @LastEditTime: 2022-06-05 10:16:18
+ * @LastEditTime: 2022-06-11 12:10:29
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\login\components\signUp.vue
@@ -48,18 +48,20 @@
                         </n-button>
                     </n-form-item>
                     <n-form-item>
-                        <n-tooltip trigger="hover">
-                            <template #trigger>
-                                <n-icon
-                                    :component="HeartFilled"
-                                    :size="25"
-                                    color="#EC4899"
-                                    class="circle"
-                                    @click="loginData.isShowRegister = true"
-                                ></n-icon>
-                            </template>
-                            没有账号?点击注册
-                        </n-tooltip>
+                        <n-space align="center">
+                            <n-button  @click="loginData.isShowRegister = true">注册</n-button>
+                            <n-tooltip trigger="hover">
+                                <template #trigger>
+                                    <n-icon
+                                        :component="HeartFilled"
+                                        :size="25"
+                                        color="#EC4899"
+                                        class="circle"
+                                    ></n-icon>
+                                </template>
+                                没有账号?点击注册
+                            </n-tooltip>
+                        </n-space>
                     </n-form-item>
                 </n-space>
             </div>

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:54:25
- * @LastEditTime: 2022-06-05 10:14:27
+ * @LastEditTime: 2022-06-11 12:05:34
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \drawingBed\src\views\login\components\signIn.vue
@@ -13,7 +13,7 @@
     import { useLogin } from '../hooks/useLogin'
 
     // hooks
-    const { loginData, signIn } = useLogin()
+    const { loginData, signIn, emailOptions } = useLogin()
 
     const loginDomRef = ref<FormInst | null>(null)
 </script>
@@ -33,12 +33,20 @@
         @positive-click="signIn(loginDomRef)"
     >
         <n-form :model="loginData" :rules="loginData.rules" ref="loginDomRef">
-            <n-form-item label="账号：" path="username">
+            <n-form-item label="用户名：" path="username">
                 <n-input
                     v-model:value="loginData.username"
                     placeholder="请输入账号"
                     type="text"
                 ></n-input>
+            </n-form-item>
+            <n-form-item label="邮箱：" path="email">
+                <n-auto-complete
+                    v-model:value="loginData.email"
+                    :input-props="{autocomplete: 'disabled'}"
+                    :options="emailOptions"
+                    placeholder="邮箱"
+                />
             </n-form-item>
             <n-form-item label="密码：" path="password">
                 <n-input

@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:53:40
- * @LastEditTime: 2022-06-11 13:54:17
+ * @LastEditTime: 2022-06-12 13:25:55
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \drawingBed\src\plugin\naive.ts
+ * @FilePath: \blog\web\src\plugin\naive.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -81,6 +81,7 @@ import {
     NCarouselItem,
     NAutoComplete,
     NDynamicTags,
+    NGradientText,
 } from 'naive-ui'
 
 const naive = create({
@@ -155,6 +156,7 @@ const naive = create({
         NCarouselItem,
         NAutoComplete,
         NDynamicTags,
+        NGradientText,
     ],
 })
 

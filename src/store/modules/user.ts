@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:23:14
- * @LastEditTime: 2022-06-05 11:45:50
+ * @LastEditTime: 2022-06-12 18:19:01
  * @LastEditors: boyyang
  * @Description: user store
- * @FilePath: \drawingBed\src\store\modules\user.ts
+ * @FilePath: \blog\web\src\store\modules\user.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -15,9 +15,16 @@ import { createStorage } from '@/utils/storage'
 
 const storage = createStorage('user', localStorage)
 
+interface info {
+    username: string
+    email: string
+    birthday: number
+    qq: number
+}
+
 interface UserState {
     token: string
-    userInfo: object
+    userInfo: info
 }
 
 const useUserStore = defineStore({
@@ -25,7 +32,12 @@ const useUserStore = defineStore({
     state: (): UserState => {
         return {
             token: '',
-            userInfo: {},
+            userInfo: {
+                username: '',
+                email: '',
+                birthday: 0,
+                qq: 0,
+            },
         }
     },
     getters: {
@@ -36,8 +48,11 @@ const useUserStore = defineStore({
         setToken(token: string) {
             this.token = token
         },
-        setUserinfo(userInfo: object) {
-            this.userInfo = userInfo
+        setUserinfo(userInfo: info) {
+            let info = { ...userInfo }
+            info.birthday = Number(info.birthday)
+            info.qq = Number(info.qq)
+            this.userInfo = info
         },
         getInfo() {
             return new Promise(resolve => {
@@ -49,7 +64,7 @@ const useUserStore = defineStore({
     persist: {
         key: 'app-user',
         storage: window.sessionStorage,
-        paths: ['token', 'userInfo']
+        paths: ['token', 'userInfo'],
     },
 })
 

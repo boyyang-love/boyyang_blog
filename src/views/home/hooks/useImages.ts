@@ -1,10 +1,12 @@
+import { useUserStoreWithOut } from '@/store/modules/user'
+import { watchEffect } from 'vue'
 /**
  * @Author: boyyang
  * @Date: 2022-04-09 17:21:30
- * @LastEditTime: 2022-06-12 02:20:55
+ * @LastEditTime: 2022-06-12 18:33:10
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \drawingBed\src\views\home\hooks\useImages.ts
+ * @FilePath: \blog\web\src\views\home\hooks\useImages.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 import { h, reactive } from 'vue'
@@ -17,6 +19,10 @@ const { getBannerList } = useBanner()
 const imagesData = reactive({
     showModal: false,
     isloading: false,
+    userInfo: {} as any,
+    headers: {
+        token: '',
+    },
     uploadData: {
         file_name: '',
         name: '',
@@ -120,6 +126,11 @@ const useImages = () => {
             window.$message.success('删除成功')
         })
     }
+    watchEffect(() => {
+        const userStore = useUserStoreWithOut()
+        imagesData.headers.token = userStore.getToken
+        imagesData.userInfo = userStore.getUserInfo
+    })
     // 返回方法和数据
     return {
         imagesData,

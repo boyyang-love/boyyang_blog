@@ -1,21 +1,23 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-06-12 02:42:03
+ * @LastEditTime: 2022-06-12 20:28:51
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \drawingBed\src\views\home\hooks\useBanner.ts
+ * @FilePath: \blog\web\src\views\home\hooks\useBanner.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
 import { h, reactive } from 'vue'
-import { NImage, NIcon, type FormInst, NSpace } from 'naive-ui'
-import { DeleteFilled, EditFilled } from '@vicons/antd'
+import { NImage, NIcon, type FormInst, NSpace, NAvatar } from 'naive-ui'
+import { EditFilled } from '@vicons/antd'
 import { banner, deleteImage, editImage } from '@/api/banner'
 import { imageDownload } from '@/utils/fileDownload'
 import { env } from '@/utils/env'
+import { useUserStoreWithOut } from '@/store/modules/user'
 
 import moment from 'moment'
+const userStore = useUserStoreWithOut()
 
 const bannerData = reactive({
     list: [] as any,
@@ -46,6 +48,9 @@ const bannerData = reactive({
             trigger: 'blur',
         },
     },
+    userInfo: {
+        ...userStore.getUserInfo,
+    } as any,
 })
 
 const useBanner = () => {
@@ -93,12 +98,21 @@ const useBanner = () => {
     // 查看所有图片
     const showAll = () => {
         bannerData.isLoading = true
-        let num = 0
         if (!bannerData.isShowAll) {
             bannerData.list.forEach((item: any) => {
                 window.$notification.create({
                     title: item.name,
                     description: item.des,
+                    closable: bannerData.userInfo.ID == item.author.ID,
+                    avatar: () => {
+                        return [
+                            h(NAvatar, {
+                                src: item.author.avater_url ? item.author.avater_url : item.url,
+                                round: true,
+                                size: 'small',
+                            }),
+                        ]
+                    },
                     meta: () => {
                         return h(
                             NSpace,
@@ -106,55 +120,85 @@ const useBanner = () => {
                                 justify: 'space-between',
                                 class: 'w-full',
                             },
-                            [
-                                h(
-                                    'span',
-                                    { style: { marginRight: '15px' } },
-                                    moment(item.CreatedAt).format('YYYY-MM-DD')
-                                ),
-                                h(NIcon, {
-                                    component: EditFilled,
-                                    size: 20,
-                                    style: { cursor: 'pointer' },
-                                    onClick: () => {
-                                        bannerData.editData = item
-                                        bannerData.editData.tags = item.tags
-                                        bannerData.isShowEdit = true
-                                    },
-                                }),
-                                h(NIcon, {
-                                    component: DeleteFilled,
-                                    size: 20,
-                                    style: { cursor: 'pointer' },
-                                    onClick: async () => {
-                                        let p = new Promise(resolve => {
-                                            window.$dialog.warning({
-                                                title: '是否删除当前图片？',
-                                                positiveText: '删除',
-                                                negativeText: '取消',
-                                                content: () => {
-                                                    return h(NImage, {
-                                                        src: `${item.url}`,
+                            () => {
+                                if (bannerData.userInfo.ID == item.author.ID) {
+                                    return [
+                                        h(
+                                            'div',
+                                            {
+                                                style: {
+                                                    display: 'flex',
+                                                },
+                                            },
+                                            [
+                                                h(
+                                                    'span',
+                                                    {
                                                         style: {
-                                                            objfit: 'cover',
+                                                            display: 'flex',
+                                                            flexDirection: 'column',
+                                                            alignItems: 'flex-start',
                                                         },
-                                                    })
+                                                    },
+                                                    [
+                                                        h(
+                                                            'span',
+                                                            { style: { marginRight: '15px' } },
+                                                            item.author.username
+                                                        ),
+                                                        h(
+                                                            'span',
+                                                            { style: { marginRight: '15px' } },
+                                                            moment(item.CreatedAt).format(
+                                                                'YYYY-MM-DD'
+                                                            )
+                                                        ),
+                                                    ]
+                                                ),
+                                                h(NIcon, {
+                                                    component: EditFilled,
+                                                    size: 20,
+                                                    style: { cursor: 'pointer' },
+                                                    onClick: () => {
+                                                        bannerData.editData = item
+                                                        bannerData.editData.tags = item.tags
+                                                        bannerData.isShowEdit = true
+                                                    },
+                                                }),
+                                            ]
+                                        ),
+                                    ]
+                                } else {
+                                    return [
+                                        h(
+                                            'div',
+                                            {
+                                                style: {
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    alignItems: 'flex-start',
                                                 },
-                                                onPositiveClick: () => {
-                                                    let params = {
-                                                        id: item.ID,
-                                                    }
-                                                    deleteImage(params).then(res => {
-                                                        getBannerList()
-                                                        resolve(true)
-                                                    })
-                                                },
-                                            })
-                                        })
-                                        return await p
-                                    },
-                                }),
-                            ]
+                                            },
+                                            [
+                                                h(
+                                                    'span',
+                                                    {
+                                                        style: {
+                                                            aliginItem: 'center',
+                                                        },
+                                                    },
+                                                    item.author.username
+                                                ),
+                                                h(
+                                                    'span',
+                                                    { style: { marginRight: '15px' } },
+                                                    moment(item.CreatedAt).format('YYYY-MM-DD')
+                                                ),
+                                            ]
+                                        ),
+                                    ]
+                                }
+                            }
                         )
                     },
                     content: () => {
@@ -166,10 +210,31 @@ const useBanner = () => {
                         })
                     },
                     onClose: async () => {
-                        num++
-                        if (num >= bannerData.list.length) {
-                            bannerData.isShowAll = false
-                        }
+                        let p = new Promise(resolve => {
+                            window.$dialog.warning({
+                                title: '是否删除当前图片？',
+                                positiveText: '删除',
+                                negativeText: '取消',
+                                content: () => {
+                                    return h(NImage, {
+                                        src: `${item.url}`,
+                                        style: {
+                                            objfit: 'cover',
+                                        },
+                                    })
+                                },
+                                onPositiveClick: () => {
+                                    let params = {
+                                        id: item.ID,
+                                    }
+                                    deleteImage(params).then(res => {
+                                        getBannerList()
+                                        resolve(true)
+                                    })
+                                },
+                            })
+                        })
+                        return await p
                     },
                 })
             })

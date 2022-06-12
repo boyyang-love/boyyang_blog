@@ -1,37 +1,52 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-06-12 02:12:31
+ * @LastEditTime: 2022-06-12 18:34:13
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \drawingBed\src\views\home\components\bottomMenu.vue
+ * @FilePath: \blog\web\src\views\home\components\bottomMenu.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 
 <script lang="ts" setup>
-    import { CSSProperties, ref } from 'vue'
+    import { ref } from 'vue'
     import { FormInst } from 'naive-ui'
+    import { storeToRefs } from 'pinia'
     import { CloudUploadOutlined, SyncOutlined } from '@vicons/antd'
     import { env } from '@/utils/env'
     import { useUserStore } from '@/store/modules/user'
     import { useImages } from '../hooks/useImages'
     import { useBanner } from '../hooks/useBanner'
-
+    import { useUser } from '../hooks/useUser'
     // hooks
     const { imagesData, submit, finish, remove } = useImages()
     const { showAll, bannerData, getBannerList, edit } = useBanner()
+    const { userData, editUser } = useUser()
     // domRef
     const formDomRefUpload = ref<FormInst | null>(null)
     const formDomRefEdit = ref<FormInst | null>(null)
-    // userStore
-    const userStore = useUserStore()
-    const headers = {
-        token: userStore.getToken,
-    }
 </script>
 
 <template>
     <n-space justify="center" align="center" class="relative w-full">
+        <div class="h-full absolute left-5 top-1">
+            <n-space>
+                <n-avatar
+                    :size="40"
+                    round
+                    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                    @click="userData.isShowEdit = true"
+                />
+                <div class="flex flex-col">
+                    <n-gradient-text :size="13" type="warning">
+                        {{ imagesData.userInfo.username }}
+                    </n-gradient-text>
+                    <n-gradient-text :size="10" type="success">
+                        {{ imagesData.userInfo.email }}
+                    </n-gradient-text>
+                </div>
+            </n-space>
+        </div>
         <div class="h-full flex justify-content-center">
             <n-tooltip trigger="hover">
                 <template #trigger>
@@ -81,7 +96,6 @@
             />
         </div>
     </n-space>
-
     <!-- 上传 -->
     <n-modal
         v-model:show="imagesData.showModal"
@@ -101,7 +115,7 @@
             <n-form-item path="url">
                 <n-upload
                     :action="env.VITE_APP_API_URL + '/api/upload'"
-                    :headers="headers"
+                    :headers="imagesData.headers"
                     :max="1"
                     list-type="image-card"
                     accept="image/*"
@@ -168,6 +182,52 @@
             </n-form-item>
             <n-form-item label="标签：">
                 <n-dynamic-tags v-model:value="bannerData.editData.tags"></n-dynamic-tags>
+            </n-form-item>
+        </n-form>
+    </n-modal>
+    <!-- 修改用户信息 -->
+    <n-modal
+        v-model:show="userData.isShowEdit"
+        :style="{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }"
+        :show-icon="false"
+        :loading="userData.isEditLoading"
+        preset="dialog"
+        title="用户信息编辑"
+        positive-text="确认"
+        negative-text="取消"
+        @positive-click="editUser"
+    >
+        <n-form label-placement="left" label-width="80">
+            <n-form-item label="用户名：">
+                <n-input v-model:value="userData.user.username"></n-input>
+            </n-form-item>
+            <n-form-item label="邮箱：">
+                <n-input :disabled="true" v-model:value="userData.user.email"></n-input>
+            </n-form-item>
+            <n-form-item label="QQ：">
+                <n-input-number
+                    :show-button="false"
+                    class="w-full"
+                    v-model:value="userData.user.qq"
+                ></n-input-number>
+            </n-form-item>
+            <n-form-item label="生日：">
+                <n-date-picker
+                    v-model:value="userData.user.birthday"
+                    type="date"
+                    clearable
+                    class="w-full"
+                />
+            </n-form-item>
+            <n-form-item label="性别：">
+                <n-select
+                    v-model:value="userData.user.sex"
+                    :options="userData.sexOptions"
+                    class="w-full"
+                />
+            </n-form-item>
+            <n-form-item label="博客地址：">
+                <n-input v-model:value="userData.user.blog_url"></n-input>
             </n-form-item>
         </n-form>
     </n-modal>

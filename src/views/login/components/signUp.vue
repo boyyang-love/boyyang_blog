@@ -1,10 +1,10 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:38:03
- * @LastEditTime: 2022-06-11 12:10:29
+ * @LastEditTime: 2022-06-12 13:13:45
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \drawingBed\src\views\login\components\signUp.vue
+ * @FilePath: \blog\web\src\views\login\components\signUp.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 <script lang="ts" setup>
@@ -43,20 +43,18 @@
                         ></n-input>
                     </n-form-item>
                     <n-form-item>
-                        <n-button @click="signUp(loginDomRef)" :loading="loginData.loading">
-                            登录
-                        </n-button>
-                    </n-form-item>
-                    <n-form-item>
                         <n-space align="center">
-                            <n-button  @click="loginData.isShowRegister = true">注册</n-button>
+                            <n-button @click="signUp(loginDomRef)" :loading="loginData.loading">
+                                登录
+                            </n-button>
+                            <n-button @click="loginData.isShowRegister = true">注册</n-button>
                             <n-tooltip trigger="hover">
                                 <template #trigger>
                                     <n-icon
                                         :component="HeartFilled"
                                         :size="25"
                                         color="#EC4899"
-                                        class="circle"
+                                        class="circle mt-1 ml-2"
                                     ></n-icon>
                                 </template>
                                 没有账号?点击注册

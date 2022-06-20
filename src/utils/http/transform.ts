@@ -1,16 +1,16 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-17 11:51:40
- * @LastEditTime: 2022-05-12 13:44:25
+ * @LastEditTime: 2022-06-20 17:20:38
  * @LastEditors: boyyang
- * @Description: 
- * @FilePath: \drawingBed\src\utils\http\transform.ts
+ * @Description:
+ * @FilePath: \blog\web\src\utils\http\transform.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
+import qs from 'qs'
 import { TransForm, RequestOptions, Result, AxiosOptions } from './types'
 import { AxiosResponse, AxiosRequestConfig } from 'axios'
-import qs from 'qs'
 import { useUserStoreWithOut } from '@/store/modules/user'
 
 const userStore = useUserStoreWithOut()
@@ -19,22 +19,25 @@ const transForm: TransForm = {
     // 请求前hook
     beforeRequestHook: (config: AxiosRequestConfig, options: RequestOptions) => {
         const { serializeParams, joinTime, withToken } = options
-        if (serializeParams) { // 序列化参数
+        if (serializeParams) {
+            // 序列化参数
             if (config.method?.toUpperCase() === 'GET') {
-                if (joinTime) { // 是否拼接时间戳
+                if (joinTime) {
+                    // 是否拼接时间戳
                     config.params = {
                         ...config.params,
-                        _t: Date.now()
+                        _t: Date.now(),
                     }
                 }
             } else {
                 config.data = qs.stringify(config.data)
             }
         }
-        if (withToken) {    // 如果需要带上token
+        if (withToken) {
+            // 如果需要带上token
             config.headers = {
                 ...config.headers,
-                token: userStore.getToken
+                token: userStore.getToken,
             }
         }
         return config
@@ -46,7 +49,7 @@ const transForm: TransForm = {
             isShowSuccessMessage,
             isShowErrorMessage,
             isReturnNativeResponse,
-            isTransformResponse
+            isTransformResponse,
         } = options
         const { data, config } = res
         const { code, msg } = data
@@ -75,7 +78,10 @@ const transForm: TransForm = {
         }
     },
     // 请求拦截器
-    requestInterceptors: (config: AxiosRequestConfig, options: AxiosOptions): AxiosRequestConfig => {
+    requestInterceptors: (
+        config: AxiosRequestConfig,
+        options: AxiosOptions
+    ): AxiosRequestConfig => {
         return config
     },
     // 响应拦截器
@@ -89,9 +95,7 @@ const transForm: TransForm = {
         const { msg } = error.response.data || {}
         window.$message.error(msg)
         return error
-    }
+    },
 }
 
-export {
-    transForm
-}
+export { transForm }

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-12 15:52:50
- * @LastEditTime: 2022-06-12 20:00:16
+ * @LastEditTime: 2022-06-20 17:10:48
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useUser.ts
@@ -17,12 +17,6 @@ const userData = reactive({
     isShowEdit: false,
     isEditLoading: false,
     user: {
-        // username: '',
-        // email: '',
-        // qq: 1234567890,
-        // sex: 0,
-        // blog_url: '',
-        // birthday: 0,
         ...(userStore.getUserInfo as any),
     },
     sexOptions: [

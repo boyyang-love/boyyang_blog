@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-06-12 18:34:13
+ * @LastEditTime: 2022-06-13 16:30:23
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\home\components\bottomMenu.vue
@@ -11,10 +11,8 @@
 <script lang="ts" setup>
     import { ref } from 'vue'
     import { FormInst } from 'naive-ui'
-    import { storeToRefs } from 'pinia'
     import { CloudUploadOutlined, SyncOutlined } from '@vicons/antd'
     import { env } from '@/utils/env'
-    import { useUserStore } from '@/store/modules/user'
     import { useImages } from '../hooks/useImages'
     import { useBanner } from '../hooks/useBanner'
     import { useUser } from '../hooks/useUser'

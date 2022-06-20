@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-06-12 20:28:51
+ * @LastEditTime: 2022-06-20 17:13:46
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useBanner.ts
@@ -20,7 +20,7 @@ import moment from 'moment'
 const userStore = useUserStoreWithOut()
 
 const bannerData = reactive({
-    list: [] as any,
+    list: [] as any[],
     count: 0,
     page: 1,
     limit: 10,
@@ -121,83 +121,50 @@ const useBanner = () => {
                                 class: 'w-full',
                             },
                             () => {
-                                if (bannerData.userInfo.ID == item.author.ID) {
-                                    return [
-                                        h(
-                                            'div',
-                                            {
-                                                style: {
-                                                    display: 'flex',
-                                                },
+                                return [
+                                    h(
+                                        'div',
+                                        {
+                                            style: {
+                                                display: 'flex',
                                             },
-                                            [
-                                                h(
-                                                    'span',
-                                                    {
-                                                        style: {
-                                                            display: 'flex',
-                                                            flexDirection: 'column',
-                                                            alignItems: 'flex-start',
-                                                        },
+                                        },
+                                        [
+                                            h(
+                                                'span',
+                                                {
+                                                    style: {
+                                                        display: 'flex',
+                                                        flexDirection: 'column',
+                                                        alignItems: 'flex-start',
                                                     },
-                                                    [
-                                                        h(
-                                                            'span',
-                                                            { style: { marginRight: '15px' } },
-                                                            item.author.username
-                                                        ),
-                                                        h(
-                                                            'span',
-                                                            { style: { marginRight: '15px' } },
-                                                            moment(item.CreatedAt).format(
-                                                                'YYYY-MM-DD'
-                                                            )
-                                                        ),
-                                                    ]
-                                                ),
-                                                h(NIcon, {
-                                                    component: EditFilled,
-                                                    size: 20,
-                                                    style: { cursor: 'pointer' },
-                                                    onClick: () => {
-                                                        bannerData.editData = item
-                                                        bannerData.editData.tags = item.tags
-                                                        bannerData.isShowEdit = true
-                                                    },
-                                                }),
-                                            ]
-                                        ),
-                                    ]
-                                } else {
-                                    return [
-                                        h(
-                                            'div',
-                                            {
-                                                style: {
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    alignItems: 'flex-start',
                                                 },
-                                            },
-                                            [
-                                                h(
-                                                    'span',
-                                                    {
-                                                        style: {
-                                                            aliginItem: 'center',
-                                                        },
-                                                    },
-                                                    item.author.username
-                                                ),
-                                                h(
-                                                    'span',
-                                                    { style: { marginRight: '15px' } },
-                                                    moment(item.CreatedAt).format('YYYY-MM-DD')
-                                                ),
-                                            ]
-                                        ),
-                                    ]
-                                }
+                                                [
+                                                    h(
+                                                        'span',
+                                                        { style: { marginRight: '15px' } },
+                                                        item.author.username
+                                                    ),
+                                                    h(
+                                                        'span',
+                                                        { style: { marginRight: '15px' } },
+                                                        moment(item.CreatedAt).format('YYYY-MM-DD')
+                                                    ),
+                                                ]
+                                            ),
+                                            h(NIcon, {
+                                                component: EditFilled,
+                                                size: 20,
+                                                style: { cursor: 'pointer' },
+                                                onClick: () => {
+                                                    bannerData.editData = item
+                                                    bannerData.editData.tags = item.tags
+                                                    bannerData.isShowEdit = true
+                                                },
+                                            }),
+                                        ]
+                                    ),
+                                ]
                             }
                         )
                     },

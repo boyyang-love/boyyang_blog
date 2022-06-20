@@ -1,15 +1,15 @@
 /**
  * @Author: boyyang
  * @Date: 2022-05-10 13:42:59
- * @LastEditTime: 2022-05-10 14:14:48
+ * @LastEditTime: 2022-06-20 17:22:16
  * @LastEditors: boyyang
  * @Description: 文件下载
- * @FilePath: \drawingBed\src\utils\fileDownload.ts
+ * @FilePath: \blog\web\src\utils\fileDownload.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
 const imageDownload = (url: string, name: string) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         const link = document.createElement('a')
         link.setAttribute('download', name)
         const image = new Image()

@@ -33,7 +33,7 @@
                     direction="vertical"
                     autoplay
                 >
-                    <div v-for="item in bannerData.list" :key="item.ID" class="h-full relative">
+                    <div v-for="item in bannerData.list" :key="item.id" class="h-full relative">
                         <img
                             :src="item.url"
                             class="carousel-img"
@@ -44,7 +44,7 @@
                                 <n-tag
                                     strong
                                     v-for="tag in item.tags"
-                                    :key="tag.ID"
+                                    :key="tag.id"
                                     :type="
                                         [
                                             'default',

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-06-20 17:13:46
+ * @LastEditTime: 2022-06-28 14:02:32
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useBanner.ts
@@ -33,7 +33,7 @@ const bannerData = reactive({
         name: '',
         des: '',
         url: '',
-        ID: 0,
+        id: 0,
         tags: [],
     },
     editDataRules: {
@@ -103,7 +103,7 @@ const useBanner = () => {
                 window.$notification.create({
                     title: item.name,
                     description: item.des,
-                    closable: bannerData.userInfo.ID == item.author.ID,
+                    closable: bannerData.userInfo.id == item.author.id,
                     avatar: () => {
                         return [
                             h(NAvatar, {
@@ -192,7 +192,7 @@ const useBanner = () => {
                                 },
                                 onPositiveClick: () => {
                                     let params = {
-                                        id: item.ID,
+                                        id: item.id,
                                     }
                                     deleteImage(params).then(res => {
                                         getBannerList()
@@ -217,7 +217,7 @@ const useBanner = () => {
     const edit = async (domRef: FormInst | null) => {
         bannerData.isEditLoading = true
         let params = {
-            ID: bannerData.editData.ID,
+            id: bannerData.editData.id,
             name: bannerData.editData.name,
             des: bannerData.editData.des,
             tags: (bannerData.editData.tags as any[])

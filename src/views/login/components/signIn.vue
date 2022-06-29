@@ -1,10 +1,10 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:54:25
- * @LastEditTime: 2022-06-11 12:05:34
+ * @LastEditTime: 2022-06-29 16:50:10
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \drawingBed\src\views\login\components\signIn.vue
+ * @FilePath: \blog\web\src\views\login\components\signIn.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 <script lang="ts" setup>
@@ -43,7 +43,7 @@
             <n-form-item label="邮箱：" path="email">
                 <n-auto-complete
                     v-model:value="loginData.email"
-                    :input-props="{autocomplete: 'disabled'}"
+                    :input-props="{ autocomplete: 'disabled' }"
                     :options="emailOptions"
                     placeholder="邮箱"
                 />

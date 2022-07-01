@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:38:03
- * @LastEditTime: 2022-06-12 13:13:45
+ * @LastEditTime: 2022-07-01 13:24:29
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\login\components\signUp.vue
@@ -26,7 +26,7 @@
             ref="loginDomRef"
             class="absolute bottom-0 w-full"
         >
-            <div class="bg-black bg-opacity-30">
+            <div class="bg-black-300">
                 <n-space justify="center" align="center">
                     <n-form-item label="账号：" path="username">
                         <n-input

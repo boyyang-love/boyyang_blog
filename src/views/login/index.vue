@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:28:46
- * @LastEditTime: 2022-06-29 17:42:40
+ * @LastEditTime: 2022-07-01 13:20:26
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\login\index.vue
@@ -21,10 +21,11 @@
             mouseControls: true,
             touchControls: true,
             gyroControls: false,
-            // minHeight: 200.0,
+            minHeight: 200.0,
             minWidth: 200.0,
-            scale: 0.5,
+            scale: 1.0,
             scaleMobile: 1.0,
+            backgroundColor: 0x110c18,
         })
     })
 </script>

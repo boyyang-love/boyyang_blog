@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-06-12 15:52:50
- * @LastEditTime: 2022-06-20 17:10:48
+ * @LastEditTime: 2022-07-03 16:51:48
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useUser.ts
@@ -17,7 +17,7 @@ const userData = reactive({
     isShowEdit: false,
     isEditLoading: false,
     user: {
-        ...(userStore.getUserInfo as any),
+        ...userStore.getUserInfo,
     },
     sexOptions: [
         { label: '男', value: 1 },
@@ -26,6 +26,7 @@ const userData = reactive({
 })
 
 const useUser = () => {
+    // 编辑用户信息
     const editUser = async () => {
         let params = {
             ...userData.user,

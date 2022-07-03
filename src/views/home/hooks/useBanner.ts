@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-06-28 14:02:32
+ * @LastEditTime: 2022-07-03 16:56:02
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useBanner.ts
@@ -125,9 +125,7 @@ const useBanner = () => {
                                     h(
                                         'div',
                                         {
-                                            style: {
-                                                display: 'flex',
-                                            },
+                                            style: { display: 'flex' },
                                         },
                                         [
                                             h(

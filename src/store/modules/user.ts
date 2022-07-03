@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:23:14
- * @LastEditTime: 2022-06-12 18:19:01
+ * @LastEditTime: 2022-07-03 16:59:26
  * @LastEditors: boyyang
  * @Description: user store
  * @FilePath: \blog\web\src\store\modules\user.ts
@@ -13,13 +13,13 @@ import { store } from '@/store'
 import { defineStore } from 'pinia'
 import { createStorage } from '@/utils/storage'
 
-const storage = createStorage('user', localStorage)
-
 interface info {
     username: string
     email: string
     birthday: number
     qq: number
+    sex: number
+    blog_url: string
 }
 
 interface UserState {
@@ -37,12 +37,14 @@ const useUserStore = defineStore({
                 email: '',
                 birthday: 0,
                 qq: 0,
+                sex: 1,
+                blog_url: '',
             },
         }
     },
     getters: {
-        getToken: (state: UserState) => state.token,
-        getUserInfo: (state: UserState) => state.userInfo,
+        getToken: (state: UserState): string => state.token,
+        getUserInfo: (state: UserState): info => state.userInfo,
     },
     actions: {
         setToken(token: string) {
@@ -54,7 +56,7 @@ const useUserStore = defineStore({
             info.qq = Number(info.qq)
             this.userInfo = info
         },
-        getInfo() {
+        getInfo(): Promise<info> {
             return new Promise(resolve => {
                 resolve(this.userInfo)
             })

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-06-13 16:30:23
+ * @LastEditTime: 2022-07-04 13:52:19
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\home\components\bottomMenu.vue
@@ -45,7 +45,7 @@
                 </div>
             </n-space>
         </div>
-        <div class="h-full flex justify-content-center">
+        <!-- <div class="h-full flex justify-content-center">
             <n-tooltip trigger="hover">
                 <template #trigger>
                     <n-icon
@@ -58,7 +58,7 @@
                 </template>
                 上传作品
             </n-tooltip>
-        </div>
+        </div> -->
         <div class="h-full flex justify-content-center">
             <n-spin
                 :show="bannerData.isLoading"

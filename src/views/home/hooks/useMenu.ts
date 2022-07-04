@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-03 15:51:11
- * @LastEditTime: 2022-07-03 15:53:47
+ * @LastEditTime: 2022-07-04 13:47:06
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useMenu.ts
@@ -9,18 +9,56 @@
  */
 
 import { reactive } from 'vue'
+import { CloudUploadOutlined, UserOutlined, FileImageFilled } from '@vicons/antd'
+import { renderIcon } from '@/utils/renderIcon'
+// hooks
+import { useImages } from './useImages'
+import { useUser } from './useUser'
+import { useBanner } from './useBanner'
 
-const menuData = reactive({
-    isShow: false,
-})
+const { imagesData } = useImages()
+const { userData } = useUser()
+const { showAll } = useBanner()
+
+const menuData = reactive({})
+
+const menuOptions = [
+    {
+        label: '上传作品',
+        key: 'upload',
+        icon: renderIcon(CloudUploadOutlined),
+    },
+    {
+        label: '修改资料',
+        key: 'edit',
+        icon: renderIcon(UserOutlined),
+    },
+    {
+        label: '列表展示',
+        key: 'list',
+        icon: renderIcon(FileImageFilled),
+    }
+]
 
 const useMenu = () => {
-    const openDrawer = () => {
-        menuData.isShow = true
+    const menuClick = (key: string) => {
+        switch (key) {
+            case 'upload':
+                imagesData.showModal = true
+                break
+            case 'edit':
+                userData.isShowEdit = true
+                break
+            case 'list':
+                showAll()
+            default:
+                break
+        }
     }
     return {
         menuData,
-        openDrawer,
+        menuOptions,
+        menuClick,
     }
 }
 

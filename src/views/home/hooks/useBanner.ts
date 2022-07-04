@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-07-03 16:56:02
+ * @LastEditTime: 2022-07-04 13:56:18
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useBanner.ts
@@ -104,6 +104,7 @@ const useBanner = () => {
                     title: item.name,
                     description: item.des,
                     closable: bannerData.userInfo.id == item.author.id,
+                    duration: 60 * 3 * 1000,
                     avatar: () => {
                         return [
                             h(NAvatar, {

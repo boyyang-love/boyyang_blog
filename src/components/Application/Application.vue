@@ -1,10 +1,10 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-06 11:57:35
- * @LastEditTime: 2022-06-11 16:48:52
+ * @LastEditTime: 2022-07-04 13:55:10
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \drawingBed\src\components\Application\Application.vue
+ * @FilePath: \blog\web\src\components\Application\Application.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 
@@ -24,7 +24,7 @@
     <n-loading-bar-provider>
         <n-dialog-provider>
             <DialogContent />
-            <n-notification-provider placement="bottom-left">
+            <n-notification-provider placement="bottom-right">
                 <NotificationContent />
                 <n-message-provider>
                     <MessageContent />

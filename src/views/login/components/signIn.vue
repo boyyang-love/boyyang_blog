@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:54:25
- * @LastEditTime: 2022-06-29 16:50:10
+ * @LastEditTime: 2022-07-04 16:52:45
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\login\components\signIn.vue
@@ -13,7 +13,7 @@
     import { useLogin } from '../hooks/useLogin'
 
     // hooks
-    const { loginData, signIn, emailOptions } = useLogin()
+    const { loginData, signIn, emailOptions, rules } = useLogin()
 
     const loginDomRef = ref<FormInst | null>(null)
 </script>
@@ -32,7 +32,7 @@
         class="bg-opacity-30"
         @positive-click="signIn(loginDomRef)"
     >
-        <n-form :model="loginData" :rules="loginData.rules" ref="loginDomRef">
+        <n-form :model="loginData" :rules="rules" ref="loginDomRef">
             <n-form-item label="用户名：" path="username">
                 <n-input
                     v-model:value="loginData.username"

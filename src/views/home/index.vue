@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-07-04 13:43:55
+ * @LastEditTime: 2022-07-04 19:03:48
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\home\index.vue
@@ -46,7 +46,7 @@
         <div class="w-full h-full flex items-center flex-col overflow-y-auto">
             <!-- 首屏 -->
             <div class="w-full h-1/2 relative">
-                <div class="top-menu flex items-center px-5 py-2">
+                <div class="top-menu flex items-center px-5 py-2 fixed top-0">
                     <n-dropdown
                         trigger="click"
                         :options="menuOptions"
@@ -120,58 +120,7 @@
         >
             <bottom-menu></bottom-menu>
         </div>
-    </background>
-
-    <!-- 上传 -->
-    <!-- <n-modal
-        v-model:show="imagesData.showModal"
-        :style="{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }"
-        :show-icon="false"
-        preset="dialog"
-        title="作品上传"
-        positive-text="确认"
-        negative-text="取消"
-        @positive-click="submit(formDomRefUpload)"
-    >
-        <n-form
-            ref="formDomRefUpload"
-            :model="imagesData.uploadData"
-            :rules="imagesData.uploadRules"
-        >
-            <n-form-item path="url">
-                <n-upload
-                    :action="env.VITE_APP_API_URL + '/api/upload'"
-                    :headers="imagesData.headers"
-                    :max="1"
-                    list-type="image-card"
-                    accept="image/*"
-                    @finish="finish"
-                    @remove="remove"
-                />
-            </n-form-item>
-            <n-form-item label="图片名称：" path="name">
-                <n-input
-                    v-model:value="imagesData.uploadData.name"
-                    maxlength="30"
-                    show-count
-                    type="textarea"
-                    placeholder="请输入图片名称"
-                ></n-input>
-            </n-form-item>
-            <n-form-item label="图片描述：" path="des">
-                <n-input
-                    v-model:value="imagesData.uploadData.des"
-                    maxlength="50"
-                    show-count
-                    type="textarea"
-                    placeholder="请输入图片描述"
-                ></n-input>
-            </n-form-item>
-            <n-form-item label="标签：">
-                <n-dynamic-tags v-model:value="imagesData.uploadData.tags" />
-            </n-form-item>
-        </n-form>
-    </n-modal> -->
+    </background>        
 </template>
 
 <style scoped lang="less">

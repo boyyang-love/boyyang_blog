@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:38:03
- * @LastEditTime: 2022-07-01 13:24:29
+ * @LastEditTime: 2022-07-04 16:53:13
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\login\components\signUp.vue
@@ -13,7 +13,7 @@
     import { HeartFilled } from '@vicons/antd'
     import { useLogin } from '../hooks/useLogin'
     // hooks
-    const { signUp, loginData } = useLogin()
+    const { signUp, loginData, rules } = useLogin()
     const loginDomRef = ref<FormInst | null>(null)
 </script>
 
@@ -21,7 +21,7 @@
     <div class="w-full h-full" id="login-container">
         <n-form
             :model="loginData"
-            :rules="loginData.rules"
+            :rules="rules"
             :show-require-mark="false"
             ref="loginDomRef"
             class="absolute bottom-0 w-full"

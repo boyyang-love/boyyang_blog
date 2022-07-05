@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:54:24
- * @LastEditTime: 2022-06-29 17:26:51
+ * @LastEditTime: 2022-07-04 17:32:18
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\shime-vue.d.ts

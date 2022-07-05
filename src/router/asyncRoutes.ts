@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:25:00
- * @LastEditTime: 2022-06-12 15:40:00
+ * @LastEditTime: 2022-07-04 17:01:40
  * @LastEditors: boyyang
  * @Description: 异步路由
  * @FilePath: \blog\web\src\router\asyncRoutes.ts
@@ -20,6 +20,14 @@ const asyncRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/admin/index.vue'),
     },
+    {
+        path: '/blog',
+        name: 'Blog',
+        meta: {
+            title: '个人博客'
+        },
+        component: () => import('@/views/blog/index.vue')
+    }
 ]
 
 export { asyncRoutes }

@@ -4,6 +4,7 @@ import { router, setupRoutes } from '@/router'
 import { setupStore } from '@/store'
 import { setupNaive } from '@/plugin/naive'
 import { setupGlobal } from '@/plugin/global'
+import { setupMarkDown } from '@/plugin/markDown'
 
 // tailwindcss
 import '@/tailwind/index.css'
@@ -20,6 +21,8 @@ const bootstrap = async () => {
     await router.isReady()
     // 加载插件
     setupNaive(app)
+    // 加载markdown编辑器
+    setupMarkDown(app)
     // 挂载
     app.mount('#app')
 }

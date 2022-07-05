@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-03 15:51:11
- * @LastEditTime: 2022-07-04 13:47:06
+ * @LastEditTime: 2022-07-04 17:03:44
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useMenu.ts
@@ -9,7 +9,8 @@
  */
 
 import { reactive } from 'vue'
-import { CloudUploadOutlined, UserOutlined, FileImageFilled } from '@vicons/antd'
+import { router } from '@/router'
+import { CloudUploadOutlined, UserOutlined, FileImageFilled, EditTwotone } from '@vicons/antd'
 import { renderIcon } from '@/utils/renderIcon'
 // hooks
 import { useImages } from './useImages'
@@ -37,10 +38,16 @@ const menuOptions = [
         label: '列表展示',
         key: 'list',
         icon: renderIcon(FileImageFilled),
-    }
+    },
+    {
+        label: '发布博客',
+        key: 'blog',
+        icon: renderIcon(EditTwotone),
+    },
 ]
 
 const useMenu = () => {
+    // 菜单
     const menuClick = (key: string) => {
         switch (key) {
             case 'upload':
@@ -51,6 +58,12 @@ const useMenu = () => {
                 break
             case 'list':
                 showAll()
+                break
+            case 'blog':
+                router.push({
+                    name: 'Blog',
+                })
+                break
             default:
                 break
         }

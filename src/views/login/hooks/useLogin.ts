@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:23:37
- * @LastEditTime: 2022-07-03 17:00:36
+ * @LastEditTime: 2022-07-04 16:51:41
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\login\hooks\useLogin.ts
@@ -21,29 +21,30 @@ const loginData = reactive({
     repassword: '',
     loading: false,
     isShowRegister: false,
-    rules: {
-        username: {
-            required: true,
-            message: '请输入账号',
-            trigger: 'blur',
-        },
-        email: {
-            required: true,
-            message: '请输入注册邮箱',
-            trigger: 'blur',
-        },
-        password: {
-            required: true,
-            message: '请输入密码',
-            trigger: 'blur',
-        },
-        repassword: {
-            required: true,
-            message: '请输入确认密码',
-            trigger: 'blur',
-        },
-    },
 })
+
+const rules = {
+    username: {
+        required: true,
+        message: '请输入账号',
+        trigger: 'blur',
+    },
+    email: {
+        required: true,
+        message: '请输入注册邮箱',
+        trigger: 'blur',
+    },
+    password: {
+        required: true,
+        message: '请输入密码',
+        trigger: 'blur',
+    },
+    repassword: {
+        required: true,
+        message: '请输入确认密码',
+        trigger: 'blur',
+    },
+}
 
 // emailOptions
 const emailOptions = computed(() => {
@@ -119,6 +120,7 @@ const useLogin = () => {
         signIn,
         signUp,
         emailOptions,
+        rules
     }
 }
 

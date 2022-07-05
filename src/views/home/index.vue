@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-07-04 19:03:48
+ * @LastEditTime: 2022-07-05 18:32:09
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\home\index.vue
@@ -13,8 +13,6 @@
     import Background from '@/components/Background/index.vue'
     import BottomMenu from './components/bottomMenu.vue'
     import { useBanner } from './hooks/useBanner'
-    // 背景图片
-    import bg from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
     import { useHooks } from '@/hooks'
     import { useMenu } from './hooks/useMenu'
     // hooks
@@ -67,7 +65,7 @@
                         :size="35"
                         color="white"
                         class="cursor-pointer"
-                        @click="scrollToBottom"
+                        @click="scrollToBottom(15)"
                     ></n-icon>
                 </div>
             </div>
@@ -120,27 +118,10 @@
         >
             <bottom-menu></bottom-menu>
         </div>
-    </background>        
+    </background>
 </template>
 
 <style scoped lang="less">
-    .banner {
-        height: 100vh;
-        // margin-bottom: 50px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        .banner-text {
-            position: absolute;
-            bottom: 15px;
-            right: 0;
-            font-size: 19px;
-            font-weight: bolder;
-            color: whitesmoke;
-        }
-    }
     .container {
         overflow-y: auto;
     }

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:28:46
- * @LastEditTime: 2022-07-01 13:20:26
+ * @LastEditTime: 2022-07-05 14:48:09
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\login\index.vue
@@ -12,8 +12,6 @@
     import BackGround from '@/components/Background/index.vue'
     import SignUp from './components/signUp.vue'
     import SignIn from './components/signIn.vue'
-    // 背景图片
-    import bg_url from '@/assets/赛博朋克风格奇幻少女_集原美电脑4k壁纸3840x2160_彼岸图网.jpg'
     // 渲染背景
     nextTick(() => {
         window.VANTA.GLOBE({
@@ -39,13 +37,4 @@
     </back-ground>
 </template>
 
-<style scoped lang="less">
-    .login-container {
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
+<style scoped lang="less"></style>

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-03 15:51:11
- * @LastEditTime: 2022-07-04 17:03:44
+ * @LastEditTime: 2022-07-05 18:24:02
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useMenu.ts
@@ -10,7 +10,13 @@
 
 import { reactive } from 'vue'
 import { router } from '@/router'
-import { CloudUploadOutlined, UserOutlined, FileImageFilled, EditTwotone } from '@vicons/antd'
+import {
+    CloudUploadOutlined,
+    UserOutlined,
+    FileImageFilled,
+    EditTwotone,
+    CodeSandboxOutlined,
+} from '@vicons/antd'
 import { renderIcon } from '@/utils/renderIcon'
 // hooks
 import { useImages } from './useImages'
@@ -25,14 +31,14 @@ const menuData = reactive({})
 
 const menuOptions = [
     {
-        label: '上传作品',
-        key: 'upload',
-        icon: renderIcon(CloudUploadOutlined),
-    },
-    {
         label: '修改资料',
         key: 'edit',
         icon: renderIcon(UserOutlined),
+    },
+    {
+        label: '上传作品',
+        key: 'upload',
+        icon: renderIcon(CloudUploadOutlined),
     },
     {
         label: '列表展示',
@@ -43,6 +49,11 @@ const menuOptions = [
         label: '发布博客',
         key: 'blog',
         icon: renderIcon(EditTwotone),
+    },
+    {
+        label: '查看博客',
+        key: 'blogList',
+        icon: renderIcon(CodeSandboxOutlined),
     },
 ]
 
@@ -62,6 +73,11 @@ const useMenu = () => {
             case 'blog':
                 router.push({
                     name: 'Blog',
+                })
+                break
+            case 'blogList':
+                router.push({
+                    name: 'BlogList',
                 })
                 break
             default:

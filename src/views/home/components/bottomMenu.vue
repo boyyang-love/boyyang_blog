@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-07-04 13:52:19
+ * @LastEditTime: 2022-07-05 14:47:19
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\home\components\bottomMenu.vue
@@ -11,7 +11,7 @@
 <script lang="ts" setup>
     import { ref } from 'vue'
     import { FormInst } from 'naive-ui'
-    import { CloudUploadOutlined, SyncOutlined } from '@vicons/antd'
+    import { SyncOutlined } from '@vicons/antd'
     import { env } from '@/utils/env'
     import { useImages } from '../hooks/useImages'
     import { useBanner } from '../hooks/useBanner'
@@ -45,20 +45,6 @@
                 </div>
             </n-space>
         </div>
-        <!-- <div class="h-full flex justify-content-center">
-            <n-tooltip trigger="hover">
-                <template #trigger>
-                    <n-icon
-                        :component="CloudUploadOutlined"
-                        :size="25"
-                        class="cursor-pointer"
-                        color="white"
-                        @click="imagesData.showModal = true"
-                    ></n-icon>
-                </template>
-                上传作品
-            </n-tooltip>
-        </div> -->
         <div class="h-full flex justify-content-center">
             <n-spin
                 :show="bannerData.isLoading"

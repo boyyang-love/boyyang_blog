@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-04 17:32:09
- * @LastEditTime: 2022-07-05 08:57:23
+ * @LastEditTime: 2022-07-07 08:28:18
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\shims.d.ts
@@ -10,4 +10,5 @@
 
 declare module 'qs'
 declare module '@kangc/v-md-editor'
+declare module '@kangc/v-md-editor/lib/preview'
 declare module '@kangc/v-md-editor/lib/theme/vuepress.js'

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:53:40
- * @LastEditTime: 2022-06-12 13:25:55
+ * @LastEditTime: 2022-07-06 09:20:55
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\plugin\naive.ts
@@ -82,6 +82,9 @@ import {
     NAutoComplete,
     NDynamicTags,
     NGradientText,
+    NText,
+    NP,
+    NUploadDragger,
 } from 'naive-ui'
 
 const naive = create({
@@ -157,6 +160,9 @@ const naive = create({
         NAutoComplete,
         NDynamicTags,
         NGradientText,
+        NText,
+        NP,
+        NUploadDragger,
     ],
 })
 

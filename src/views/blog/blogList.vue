@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:22:06
- * @LastEditTime: 2022-07-05 18:44:37
+ * @LastEditTime: 2022-07-06 13:56:46
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\blog\blogList.vue
@@ -14,7 +14,7 @@
     import { useBlog } from './hooks/useBlog'
 
     // hooks
-    const { getBlogList } = useBlog()
+    const { getBlogList, blogData, toBlogDetail } = useBlog()
     nextTick(() => {
         window.VANTA.CELLS({
             el: '#CELLS',
@@ -32,7 +32,21 @@
 
 <template>
     <background width="100vw" height="100vh" id="CELLS">
-        <div class="container mx-auto w-full h-full"></div>
+        <div class="container mx-auto w-full h-full">
+            <n-space>
+                <div class="w-80" v-for="item in blogData.blogList" :key="item.id">
+                    <n-card>
+                        <template #header>
+                            {{ item.title }}
+                        </template>
+                        <div class="" @click="toBlogDetail(item.id)">
+                            <n-image :src="item.image" :preview-disabled="true"></n-image>
+                        </div>
+                        {{ item.subtitle }}
+                    </n-card>
+                </div>
+            </n-space>
+        </div>
     </background>
 </template>
 

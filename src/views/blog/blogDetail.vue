@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:00:44
- * @LastEditTime: 2022-07-07 08:31:31
+ * @LastEditTime: 2022-07-07 09:04:38
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\blog\blogDetail.vue
@@ -30,7 +30,7 @@
 
 <template>
     <background width="100vw" height="100vh" id="FOG">
-        <div class="container mx-auto w-full h-full overflow-y-auto">
+        <div class="container mx-auto w-full h-full overflow-y-auto py-28 px-10">
             <v-md-preview
                 :text="blogData.blogDetail.content"
                 height="60vh"

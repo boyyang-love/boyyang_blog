@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-04 18:46:27
- * @LastEditTime: 2022-07-07 08:49:54
+ * @LastEditTime: 2022-07-07 13:52:37
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\blog\hooks\useBlog.ts
@@ -79,7 +79,7 @@ const useBlog = () => {
     const getBlogDetail = () => {
         const route = useRoute()
         let params = {
-            id: route.params.id as string
+            id: route.params.id as string,
         }
         getBlogDetailById(params).then(res => {
             blogData.blogDetail = res.data
@@ -122,10 +122,16 @@ const useBlog = () => {
         }
         let p = new Promise((resolve, reject) => {
             if (params.image != '') {
-                submit(params).then(() => {
+                submit(params).then((res: any) => {
                     blogData.title = ''
                     blogData.des = ''
                     blogData.content = ''
+                    router.push({
+                        name: 'BlogDetail',
+                        params: {
+                            id: res.data,
+                        },
+                    })
                     resolve(true)
                 })
             } else {

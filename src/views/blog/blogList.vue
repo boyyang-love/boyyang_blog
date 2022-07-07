@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:22:06
- * @LastEditTime: 2022-07-06 13:56:46
+ * @LastEditTime: 2022-07-07 13:31:43
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\blog\blogList.vue
@@ -10,6 +10,7 @@
 
 <script lang="ts" setup>
     import { nextTick } from 'vue'
+    import { LeftOutlined } from '@vicons/antd'
     import Background from '@/components/Background/index.vue'
     import { useBlog } from './hooks/useBlog'
 
@@ -46,6 +47,16 @@
                     </n-card>
                 </div>
             </n-space>
+        </div>
+        <div class="back fixed bottom-3 w-full flex justify-center">
+            <n-button @click="$router.back()" type="info" width="200" dashed>
+                <template #icon>
+                    <n-icon>
+                        <LeftOutlined />
+                    </n-icon>
+                </template>
+                返回
+            </n-button>
         </div>
     </background>
 </template>

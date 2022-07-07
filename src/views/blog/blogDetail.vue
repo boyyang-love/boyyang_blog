@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:00:44
- * @LastEditTime: 2022-07-07 09:04:38
+ * @LastEditTime: 2022-07-07 13:21:40
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\blog\blogDetail.vue
@@ -10,6 +10,7 @@
 
 <script lang="ts" setup>
     import { nextTick } from 'vue'
+    import { ArrowLeftOutlined } from '@vicons/antd'
     import Background from '@/components/Background/index.vue'
     import { useBlog } from './hooks/useBlog'
     // hooks
@@ -30,11 +31,24 @@
 
 <template>
     <background width="100vw" height="100vh" id="FOG">
-        <div class="container mx-auto w-full h-full overflow-y-auto py-28 px-10">
-            <v-md-preview
-                :text="blogData.blogDetail.content"
-                height="60vh"
-            ></v-md-preview>
+        <div class="container mx-auto w-full h-full overflow-y-auto py-28">
+            <v-md-preview :text="blogData.blogDetail.content" height="60vh"></v-md-preview>
+        </div>
+        <div
+            class="back fixed bottom-0 flex justify-center items-center w-full bg-black bg-opacity-50 py-3 z-10"
+        >
+            <div
+                class="title h-full absolute left-0 px-3 flex justify-center items-center bg-gray-900 text-white text-xs"
+            >
+                {{ blogData.blogDetail.title }}
+            </div>
+            <n-icon
+                class="cursor-pointer"
+                :component="ArrowLeftOutlined"
+                size="26"
+                color="white"
+                @click="$router.back()"
+            ></n-icon>
         </div>
     </background>
 </template>

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-07-05 14:47:19
+ * @LastEditTime: 2022-07-07 13:37:37
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\home\components\bottomMenu.vue
@@ -11,7 +11,7 @@
 <script lang="ts" setup>
     import { ref } from 'vue'
     import { FormInst } from 'naive-ui'
-    import { SyncOutlined } from '@vicons/antd'
+    import { SyncOutlined, TagsFilled } from '@vicons/antd'
     import { env } from '@/utils/env'
     import { useImages } from '../hooks/useImages'
     import { useBanner } from '../hooks/useBanner'
@@ -126,6 +126,9 @@
                 ></n-input>
             </n-form-item>
             <n-form-item label="标签：">
+                <template #label>
+                    <n-icon :component="TagsFilled" :size="25"></n-icon>
+                </template>
                 <n-dynamic-tags v-model:value="imagesData.uploadData.tags" />
             </n-form-item>
         </n-form>
@@ -165,6 +168,9 @@
                 ></n-input>
             </n-form-item>
             <n-form-item label="标签：">
+                <template #label>
+                    <n-icon :component="TagsFilled" :size="25"></n-icon>
+                </template>
                 <n-dynamic-tags v-model:value="bannerData.editData.tags"></n-dynamic-tags>
             </n-form-item>
         </n-form>
@@ -182,7 +188,7 @@
         @positive-click="editUser"
     >
         <n-form label-placement="left" label-width="80">
-            <n-form-item label="用户名：">
+            <n-form-item label="昵称：">
                 <n-input v-model:value="userData.user.username"></n-input>
             </n-form-item>
             <n-form-item label="邮箱：">
@@ -210,7 +216,7 @@
                     class="w-full"
                 />
             </n-form-item>
-            <n-form-item label="博客地址：">
+            <n-form-item label="博客：">
                 <n-input v-model:value="userData.user.blog_url"></n-input>
             </n-form-item>
         </n-form>

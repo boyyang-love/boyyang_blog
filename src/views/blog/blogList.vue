@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:22:06
- * @LastEditTime: 2022-07-07 13:31:43
+ * @LastEditTime: 2022-07-08 13:25:08
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\blog\blogList.vue
@@ -34,7 +34,7 @@
 <template>
     <background width="100vw" height="100vh" id="CELLS">
         <div class="container mx-auto w-full h-full">
-            <n-space>
+            <n-space justify="space-around">
                 <div class="w-80" v-for="item in blogData.blogList" :key="item.id">
                     <n-card>
                         <template #header>

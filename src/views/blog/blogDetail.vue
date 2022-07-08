@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:00:44
- * @LastEditTime: 2022-07-07 13:21:40
+ * @LastEditTime: 2022-07-08 13:21:30
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\blog\blogDetail.vue
@@ -53,4 +53,8 @@
     </background>
 </template>
 
-<style scoped></style>
+<style scoped lang="less">
+.container {
+    scroll-behavior: smooth;
+}
+</style>

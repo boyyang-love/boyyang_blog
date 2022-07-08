@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-07-07 13:37:37
+ * @LastEditTime: 2022-07-08 14:16:28
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\home\components\bottomMenu.vue
@@ -187,7 +187,7 @@
         negative-text="取消"
         @positive-click="editUser"
     >
-        <n-form label-placement="left" label-width="80">
+        <n-form label-placement="left" label-width="50">
             <n-form-item label="昵称：">
                 <n-input v-model:value="userData.user.username"></n-input>
             </n-form-item>

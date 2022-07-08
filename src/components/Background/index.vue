@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-20 13:03:04
- * @LastEditTime: 2022-07-07 12:50:23
+ * @LastEditTime: 2022-07-08 13:28:36
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\components\Background\index.vue
@@ -60,6 +60,7 @@
         overflow: hidden;
         scroll-behavior: smooth;
         .background-content {
+            scroll-behavior: smooth;
             box-sizing: border-box;
             width: 100%;
             height: 100%;

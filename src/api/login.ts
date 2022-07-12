@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:30:36
- * @LastEditTime: 2022-07-05 14:39:25
+ * @LastEditTime: 2022-07-12 09:53:32
  * @LastEditors: boyyang
  * @Description: 登录
  * @FilePath: \blog\web\src\api\login.ts
@@ -10,6 +10,7 @@
 
 import { http } from '@/utils/http'
 
+// 登录
 export const login = (data: { username: string; password: string }) => {
     return http.request(
         {
@@ -19,11 +20,11 @@ export const login = (data: { username: string; password: string }) => {
         },
         {
             withToken: false,
-            isShowMessage: false,
         }
     )
 }
 
+// 注册
 export const register = (data: { username: string; password: string }) => {
     return http.request(
         {

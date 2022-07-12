@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-17 11:51:40
- * @LastEditTime: 2022-06-20 17:20:38
+ * @LastEditTime: 2022-07-12 09:51:29
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\utils\http\transform.ts
@@ -56,7 +56,7 @@ const transForm: TransForm = {
         // 是否显示请求成功信息
         if (isShowMessage) {
             if (isShowSuccessMessage) {
-                if (code === 1 && msg && config.method?.toUpperCase() === 'POST') {
+                if (code === 1 && msg) {
                     // 成功
                     window.$message.success(msg)
                 }

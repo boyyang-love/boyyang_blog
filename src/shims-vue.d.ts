@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:54:24
- * @LastEditTime: 2022-07-05 08:57:04
+ * @LastEditTime: 2022-07-12 12:38:31
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\shims-vue.d.ts
@@ -15,6 +15,16 @@ declare global {
         $message: MessageApi
         $dialog: DialogApi
         $notification: NotificationApi
-        VANTA: any
+        THREE: any
+        VANTA: {
+            RINGS: any
+            WAVES: any
+            NET: any
+            FOG: any
+            CELLS: any
+            BIRDS: any
+            TRUNK: any
+            GLOBE: any
+        }
     }
 }

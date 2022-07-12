@@ -6,14 +6,14 @@ import { setupNaive } from '@/plugin/naive'
 import { setupGlobal } from '@/plugin/global'
 import { setupVanta } from '@/plugin/vanta'
 import { setupMarkDown } from '@/plugin/markDown'
-
-// tailwindcss
-import '@/tailwind/index.css'
+import { setupTailwind } from '@/plugin/tailwind'
 
 const bootstrap = async () => {
     const app = createApp(App)
     // 初始化全局组件
     setupGlobal(app)
+    // 初始化tailwind
+    setupTailwind(app)
     // 初始化路由
     setupRoutes(app)
     // 初始化 store

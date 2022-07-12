@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-04 17:32:09
- * @LastEditTime: 2022-07-12 12:39:04
+ * @LastEditTime: 2022-07-12 13:05:58
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\shims.d.ts
@@ -13,6 +13,7 @@ declare module '@kangc/v-md-editor'
 declare module '@kangc/v-md-editor/lib/preview'
 declare module '@kangc/v-md-editor/lib/theme/vuepress.js'
 declare module 'three'
+declare module '@/three/three.min.js'
 declare module 'vanta/dist/vanta.rings.min.js'
 declare module 'vanta/dist/vanta.waves.min.js'
 declare module 'vanta/dist/vanta.net.min.js'

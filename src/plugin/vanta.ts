@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-12 10:03:24
- * @LastEditTime: 2022-07-12 12:39:40
+ * @LastEditTime: 2022-07-12 13:06:05
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\plugin\vanta.ts
@@ -9,7 +9,7 @@
  */
 
 import { App } from 'vue'
-import * as THREE from 'three'
+import * as THREE from '@/three/three.min.js'
 import RINGS from 'vanta/dist/vanta.rings.min.js'
 import WAVES from 'vanta/dist/vanta.waves.min.js'
 import NET from 'vanta/dist/vanta.net.min.js'

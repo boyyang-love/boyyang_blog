@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-07-08 13:27:59
+ * @LastEditTime: 2022-07-12 18:49:46
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\home\index.vue
@@ -125,7 +125,6 @@
     .container {
         overflow-y: auto;
     }
-
     .carousel-img {
         width: 100%;
         height: 100%;

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:23:14
- * @LastEditTime: 2022-07-03 16:59:26
+ * @LastEditTime: 2022-07-12 19:16:10
  * @LastEditors: boyyang
  * @Description: user store
  * @FilePath: \blog\web\src\store\modules\user.ts
@@ -35,7 +35,7 @@ const useUserStore = defineStore({
             userInfo: {
                 username: '',
                 email: '',
-                birthday: 0,
+                birthday: new Date().getTime(),
                 qq: 0,
                 sex: 1,
                 blog_url: '',

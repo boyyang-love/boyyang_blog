@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:23:37
- * @LastEditTime: 2022-07-04 16:51:41
+ * @LastEditTime: 2022-07-12 18:48:22
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\login\hooks\useLogin.ts
@@ -74,9 +74,8 @@ const useLogin = () => {
                         return
                     }
                     register(params)
-                        .then(res => {
+                        .then(() => {
                             resolve(true)
-                            window.$message.success('注册成功,请点击登录')
                         })
                         .catch(() => {
                             reject(false)
@@ -120,7 +119,7 @@ const useLogin = () => {
         signIn,
         signUp,
         emailOptions,
-        rules
+        rules,
     }
 }
 

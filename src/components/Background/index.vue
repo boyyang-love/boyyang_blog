@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-20 13:03:04
- * @LastEditTime: 2022-07-08 13:28:36
+ * @LastEditTime: 2022-07-15 17:32:29
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\components\Background\index.vue
@@ -52,7 +52,6 @@
         width: v-bind('props.width');
         height: v-bind('props.height');
         background-image: v-bind('background_img');
-        // background-image: url("@/assets/赛博朋克风格奇幻少女_集原美电脑4k壁纸3840x2160_彼岸图网.jpg");
         background-position: center;
         background-size: cover;
         background-color: v-bind('props.color');

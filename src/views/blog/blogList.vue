@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:22:06
- * @LastEditTime: 2022-07-08 13:25:08
+ * @LastEditTime: 2022-07-18 09:21:03
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\blog\blogList.vue
@@ -11,6 +11,7 @@
 <script lang="ts" setup>
     import { nextTick } from 'vue'
     import { LeftOutlined } from '@vicons/antd'
+    import moment from 'moment'
     import Background from '@/components/Background/index.vue'
     import { useBlog } from './hooks/useBlog'
 
@@ -33,20 +34,46 @@
 
 <template>
     <background width="100vw" height="100vh" id="CELLS">
-        <div class="container mx-auto w-full h-full">
-            <n-space justify="space-around">
-                <div class="w-80" v-for="item in blogData.blogList" :key="item.id">
-                    <n-card>
+        <div class="md:container mx-auto w-full h-full px-10 overflow-y-auto">
+            <div class="w-80">
+                <n-timeline>
+                    <n-timeline-item
+                        v-for="item in blogData.blogList"
+                        :key="item.id"
+                        :type="
+                            ['default', 'info', 'success', 'warning', 'error'][
+                                Math.floor(Math.random() * 5)
+                            ]
+                        "
+                    >
                         <template #header>
-                            {{ item.title }}
+                            <n-space vertical>
+                                <n-gradient-text type="warning" :size="17">
+                                    {{ item.title }}
+                                </n-gradient-text>
+                                <n-gradient-text type="success">
+                                    {{ item.subtitle }}
+                                </n-gradient-text>
+                            </n-space>
                         </template>
-                        <div class="" @click="toBlogDetail(item.id)">
-                            <n-image :src="item.image" :preview-disabled="true"></n-image>
+                        <div class="content-image">
+                            <img :src="item.image" @click="toBlogDetail(item.id)" />
                         </div>
-                        {{ item.subtitle }}
-                    </n-card>
-                </div>
-            </n-space>
+                        <template #footer>
+                            <div class="time">
+                                <n-space justify="space-between">
+                                    <span>
+                                        {{ item.author.username }}
+                                    </span>
+                                    <span>
+                                        {{ moment(item.created_at).format('YYYY-MM-DD') }}
+                                    </span>
+                                </n-space>
+                            </div>
+                        </template>
+                    </n-timeline-item>
+                </n-timeline>
+            </div>
         </div>
         <div class="back fixed bottom-3 w-full flex justify-center">
             <n-button @click="$router.back()" type="info" width="200" dashed>
@@ -61,4 +88,12 @@
     </background>
 </template>
 
-<style scoped></style>
+<style scoped lang="less">
+    .content-image {
+        img {
+            border-radius: 5px;
+            box-shadow: 5px 5px 2px 3px rgba(2, 2, 2, 0.3);
+            margin: 5px 0;
+        }
+    }
+</style>

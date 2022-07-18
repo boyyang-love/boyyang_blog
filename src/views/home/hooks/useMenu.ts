@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-03 15:51:11
- * @LastEditTime: 2022-07-05 18:24:02
+ * @LastEditTime: 2022-07-18 17:54:53
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useMenu.ts
@@ -16,12 +16,14 @@ import {
     FileImageFilled,
     EditTwotone,
     CodeSandboxOutlined,
+    LoginOutlined,
 } from '@vicons/antd'
 import { renderIcon } from '@/utils/renderIcon'
 // hooks
 import { useImages } from './useImages'
 import { useUser } from './useUser'
 import { useBanner } from './useBanner'
+import { createStorage } from '@/utils/storage'
 
 const { imagesData } = useImages()
 const { userData } = useUser()
@@ -55,6 +57,11 @@ const menuOptions = [
         key: 'blogList',
         icon: renderIcon(CodeSandboxOutlined),
     },
+    {
+        label: '退出登录',
+        key: 'logout',
+        icon: renderIcon(LoginOutlined),
+    },
 ]
 
 const useMenu = () => {
@@ -78,6 +85,13 @@ const useMenu = () => {
             case 'blogList':
                 router.push({
                     name: 'BlogList',
+                })
+                break
+            case 'logout':
+                const storage = createStorage('', sessionStorage)
+                storage.clear()
+                router.replace({
+                    name: 'Login',
                 })
                 break
             default:

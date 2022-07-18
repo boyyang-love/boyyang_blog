@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:00:44
- * @LastEditTime: 2022-07-08 13:21:30
+ * @LastEditTime: 2022-07-18 16:28:37
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\blog\blogDetail.vue
@@ -32,7 +32,9 @@
 <template>
     <background width="100vw" height="100vh" id="FOG">
         <div class="container mx-auto w-full h-full overflow-y-auto py-28">
-            <v-md-preview :text="blogData.blogDetail.content" height="60vh"></v-md-preview>
+            <div class="rounded-md overflow-hidden shadow-xl">
+                <v-md-preview :text="blogData.blogDetail.content" height="60vh"></v-md-preview>
+            </div>
         </div>
         <div
             class="back fixed bottom-0 flex justify-center items-center w-full bg-black bg-opacity-50 py-3 z-10"
@@ -54,7 +56,7 @@
 </template>
 
 <style scoped lang="less">
-.container {
-    scroll-behavior: smooth;
-}
+    .container {
+        scroll-behavior: smooth;
+    }
 </style>

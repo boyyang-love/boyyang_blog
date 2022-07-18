@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:22:06
- * @LastEditTime: 2022-07-18 09:21:03
+ * @LastEditTime: 2022-07-18 16:37:57
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog\web\src\views\blog\blogList.vue
@@ -48,7 +48,7 @@
                     >
                         <template #header>
                             <n-space vertical>
-                                <n-gradient-text type="warning" :size="17">
+                                <n-gradient-text type="error" :size="17">
                                     {{ item.title }}
                                 </n-gradient-text>
                                 <n-gradient-text type="success">
@@ -57,7 +57,11 @@
                             </n-space>
                         </template>
                         <div class="content-image">
-                            <img :src="item.image" @click="toBlogDetail(item.id)" />
+                            <img
+                                class="cursor-pointer shadow-2xl rounded-md"
+                                :src="item.image"
+                                @click="toBlogDetail(item.id)"
+                            />
                         </div>
                         <template #footer>
                             <div class="time">
@@ -88,12 +92,4 @@
     </background>
 </template>
 
-<style scoped lang="less">
-    .content-image {
-        img {
-            border-radius: 5px;
-            box-shadow: 5px 5px 2px 3px rgba(2, 2, 2, 0.3);
-            margin: 5px 0;
-        }
-    }
-</style>
+<style scoped lang="less"></style>

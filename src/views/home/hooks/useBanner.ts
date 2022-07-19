@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-07-04 13:56:18
+ * @LastEditTime: 2022-07-19 13:41:35
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\views\home\hooks\useBanner.ts
@@ -105,15 +105,15 @@ const useBanner = () => {
                     description: item.des,
                     closable: bannerData.userInfo.id == item.author.id,
                     duration: 60 * 3 * 1000,
-                    avatar: () => {
-                        return [
-                            h(NAvatar, {
-                                src: item.author.avater_url ? item.author.avater_url : item.url,
-                                round: true,
-                                size: 'small',
-                            }),
-                        ]
-                    },
+                    // avatar: () => {
+                    //     return [
+                    //         h(NAvatar, {
+                    //             src: item.author.avater_url ? item.author.avater_url : item.url,
+                    //             round: true,
+                    //             size: 'small',
+                    //         }),
+                    //     ]
+                    // },
                     meta: () => {
                         return h(
                             NSpace,
@@ -126,7 +126,11 @@ const useBanner = () => {
                                     h(
                                         'div',
                                         {
-                                            style: { display: 'flex' },
+                                            style: {
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                                width: '325px',
+                                            },
                                         },
                                         [
                                             h(
@@ -193,7 +197,7 @@ const useBanner = () => {
                                     let params = {
                                         id: item.id,
                                     }
-                                    deleteImage(params).then(res => {
+                                    deleteImage(params).then(() => {
                                         getBannerList()
                                         resolve(true)
                                     })

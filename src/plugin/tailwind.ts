@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-12 18:24:45
- * @LastEditTime: 2022-07-12 18:28:49
+ * @LastEditTime: 2022-08-08 16:46:50
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog\web\src\plugin\tailwind.ts
@@ -9,7 +9,7 @@
  */
 
 import { App } from 'vue'
-import '@/tailwind/index.css'
+import '@/tailwind/tailwind.css'
 
 const setupTailwind = (app: App) => {
     

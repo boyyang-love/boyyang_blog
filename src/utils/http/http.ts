@@ -1,15 +1,15 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-16 11:29:46
- * @LastEditTime: 2022-05-10 09:31:02
+ * @LastEditTime: 2022-08-08 17:07:55
  * @LastEditors: boyyang
- * @Description: 
- * @FilePath: \drawingBed\src\utils\http\http.ts
+ * @Description:
+ * @FilePath: \blog\web\src\utils\http\http.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { AxiosOptions, RequestOptions, Result } from './types'
 
 class Axios {
@@ -24,32 +24,37 @@ class Axios {
     private setupInterceptors() {
         const { requestInterceptorsCatch } = this.getTransForm() || {}
         // 请求之前的拦截器
-        this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-            const { requestInterceptors } = this.getTransForm() || {}
-            if (requestInterceptors) {
-                config = requestInterceptors(config, this.options)
-            }
-            return config
-        },
+        this.axiosInstance.interceptors.request.use(
+            (config: AxiosRequestConfig) => {
+                const { requestInterceptors } = this.getTransForm() || {}
+                if (requestInterceptors) {
+                    config = requestInterceptors(config, this.options)
+                }
+                return config
+            },
             (error: any) => {
                 return Promise.reject(error)
             }
         )
         // 请求之后的拦截器
-        this.axiosInstance.interceptors.response.use((response: AxiosResponse<any>) => {
-            const { responseInterceptors } = this.getTransForm() || {}
-            if (responseInterceptors) {
-                response = responseInterceptors(response)
-            }
-            return response
-        },
+        this.axiosInstance.interceptors.response.use(
+            (response: AxiosResponse<any>) => {
+                const { responseInterceptors } = this.getTransForm() || {}
+                if (responseInterceptors) {
+                    response = responseInterceptors(response)
+                }
+                return response
+            },
             (error: any) => {
                 return Promise.reject(error)
             }
         )
     }
     // 请求
-    public request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<Result | T> {
+    public request<T = any>(
+        config: AxiosRequestConfig,
+        options?: RequestOptions
+    ): Promise<Result | T> {
         const transForm = this.getTransForm()
         const { beforeRequestHook } = transForm || {}
         const { requestOptions } = this.options || {}
@@ -89,6 +94,4 @@ class Axios {
     }
 }
 
-export {
-    Axios
-}
+export { Axios }

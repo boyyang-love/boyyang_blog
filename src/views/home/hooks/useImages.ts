@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-09 17:21:30
- * @LastEditTime: 2022-06-20 17:10:16
+ * @LastEditTime: 2022-09-02 09:50:21
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\web\src\views\home\hooks\useImages.ts
+ * @FilePath: \blog_web\src\views\home\hooks\useImages.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -122,9 +122,7 @@ const useImages = () => {
         let params = {
             id: imagesData.uploadData.id,
         }
-        deleteUpload(params).then(res => {
-            window.$message.success('删除成功')
-        })
+        deleteUpload(params)
     }
     watchEffect(() => {
         const userStore = useUserStoreWithOut()

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-09 17:21:30
- * @LastEditTime: 2022-09-02 09:50:21
+ * @LastEditTime: 2022-09-02 17:36:25
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\views\home\hooks\useImages.ts
@@ -104,8 +104,8 @@ const useImages = () => {
                 let params = {
                     id: e.id,
                 }
-                deleteImage(params).then(res => {
-                    window.$message.success('删除成功')
+                deleteImage(params).then(() => {
+                    getBannerList()
                 })
             },
         })

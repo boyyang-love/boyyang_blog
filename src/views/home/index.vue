@@ -1,17 +1,20 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-07-12 18:49:46
+ * @LastEditTime: 2022-09-02 17:17:26
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \blog\web\src\views\home\index.vue
+ * @FilePath: \blog_web\src\views\home\index.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 <script lang="ts" setup>
     import { nextTick } from 'vue'
     import { MenuOutlined, CaretDownFilled } from '@vicons/antd'
+    // 组件
     import Background from '@/components/Background/index.vue'
     import BottomMenu from './components/bottomMenu.vue'
+    import imagesList from './components/imagesList.vue'
+    // hooks
     import { useBanner } from './hooks/useBanner'
     import { useHooks } from '@/hooks'
     import { useMenu } from './hooks/useMenu'
@@ -119,6 +122,7 @@
             <bottom-menu></bottom-menu>
         </div>
     </background>
+    <images-list></images-list>
 </template>
 
 <style scoped lang="less">

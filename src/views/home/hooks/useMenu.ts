@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-03 15:51:11
- * @LastEditTime: 2022-07-18 17:54:53
+ * @LastEditTime: 2022-09-02 17:12:27
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\web\src\views\home\hooks\useMenu.ts
+ * @FilePath: \blog_web\src\views\home\hooks\useMenu.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -27,7 +27,7 @@ import { createStorage } from '@/utils/storage'
 
 const { imagesData } = useImages()
 const { userData } = useUser()
-const { showAll } = useBanner()
+const { bannerData } = useBanner()
 
 const menuData = reactive({})
 
@@ -75,7 +75,7 @@ const useMenu = () => {
                 userData.isShowEdit = true
                 break
             case 'list':
-                showAll()
+                bannerData.isShowAll = true
                 break
             case 'blog':
                 router.push({

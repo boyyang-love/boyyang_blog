@@ -1,10 +1,10 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-07-08 14:16:28
+ * @LastEditTime: 2022-09-03 17:14:32
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \blog\web\src\views\home\components\bottomMenu.vue
+ * @FilePath: \blog_web\src\views\home\components\bottomMenu.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 
@@ -18,7 +18,7 @@
     import { useUser } from '../hooks/useUser'
     // hooks
     const { imagesData, submit, finish, remove } = useImages()
-    const { showAll, bannerData, getBannerList, edit } = useBanner()
+    const { bannerData, getBannerList, edit } = useBanner()
     const { userData, editUser } = useUser()
     // domRef
     const formDomRefUpload = ref<FormInst | null>(null)
@@ -61,7 +61,7 @@
                         <n-icon
                             :component="SyncOutlined"
                             :size="25"
-                            @click="showAll"
+                            @click="bannerData.isShowAll = true"
                             class="cursor-pointer mt-2"
                             color="white"
                         ></n-icon>
@@ -86,7 +86,7 @@
         :style="{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }"
         :show-icon="false"
         preset="dialog"
-        title="作品上传"
+        title="上传作品"
         positive-text="确认"
         negative-text="取消"
         @positive-click="submit(formDomRefUpload)"

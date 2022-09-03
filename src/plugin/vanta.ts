@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-12 10:03:24
- * @LastEditTime: 2022-07-12 13:06:05
+ * @LastEditTime: 2022-09-03 16:40:12
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\web\src\plugin\vanta.ts
+ * @FilePath: \blog_web\src\plugin\vanta.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -18,6 +18,7 @@ import CELLS from 'vanta/dist/vanta.cells.min.js'
 import BIRDS from 'vanta/dist/vanta.birds.min.js'
 import TRUNK from 'vanta/dist/vanta.trunk.min.js'
 import GLOBE from 'vanta/dist/vanta.globe.min.js'
+import HALO from 'vanta/dist/vanta.halo.min.js'
 
 const setupVanta = (app: App) => {
     window.THREE = THREE
@@ -29,6 +30,7 @@ const setupVanta = (app: App) => {
     window.VANTA.BIRDS = BIRDS
     window.VANTA.TRUNK = TRUNK
     window.VANTA.GLOBE = GLOBE
+    window.VANTA.HALO = HALO
 }
 
 export { setupVanta }

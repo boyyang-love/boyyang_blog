@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-05 14:46:46
- * @LastEditTime: 2022-07-19 13:41:35
+ * @LastEditTime: 2022-09-03 14:46:35
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\web\src\views\home\hooks\useBanner.ts
+ * @FilePath: \blog_web\src\views\home\hooks\useBanner.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -95,128 +95,13 @@ const useBanner = () => {
             },
         })
     }
-    // 查看所有图片
-    const showAll = () => {
-        bannerData.isLoading = true
-        if (!bannerData.isShowAll) {
-            bannerData.list.forEach((item: any) => {
-                window.$notification.create({
-                    title: item.name,
-                    description: item.des,
-                    closable: bannerData.userInfo.id == item.author.id,
-                    duration: 60 * 3 * 1000,
-                    // avatar: () => {
-                    //     return [
-                    //         h(NAvatar, {
-                    //             src: item.author.avater_url ? item.author.avater_url : item.url,
-                    //             round: true,
-                    //             size: 'small',
-                    //         }),
-                    //     ]
-                    // },
-                    meta: () => {
-                        return h(
-                            NSpace,
-                            {
-                                justify: 'space-between',
-                                class: 'w-full',
-                            },
-                            () => {
-                                return [
-                                    h(
-                                        'div',
-                                        {
-                                            style: {
-                                                display: 'flex',
-                                                justifyContent: 'space-between',
-                                                width: '325px',
-                                            },
-                                        },
-                                        [
-                                            h(
-                                                'span',
-                                                {
-                                                    style: {
-                                                        display: 'flex',
-                                                        flexDirection: 'column',
-                                                        alignItems: 'flex-start',
-                                                    },
-                                                },
-                                                [
-                                                    h(
-                                                        'span',
-                                                        { style: { marginRight: '15px' } },
-                                                        item.author.username
-                                                    ),
-                                                    h(
-                                                        'span',
-                                                        { style: { marginRight: '15px' } },
-                                                        moment(item.CreatedAt).format('YYYY-MM-DD')
-                                                    ),
-                                                ]
-                                            ),
-                                            h(NIcon, {
-                                                component: EditFilled,
-                                                size: 20,
-                                                style: { cursor: 'pointer' },
-                                                onClick: () => {
-                                                    bannerData.editData = item
-                                                    bannerData.editData.tags = item.tags
-                                                    bannerData.isShowEdit = true
-                                                },
-                                            }),
-                                        ]
-                                    ),
-                                ]
-                            }
-                        )
-                    },
-                    content: () => {
-                        return h('img', {
-                            src: `${item.url}`,
-                            style: {
-                                objfit: 'cover',
-                            },
-                        })
-                    },
-                    onClose: async () => {
-                        let p = new Promise(resolve => {
-                            window.$dialog.warning({
-                                title: '是否删除当前图片？',
-                                positiveText: '删除',
-                                negativeText: '取消',
-                                content: () => {
-                                    return h(NImage, {
-                                        src: `${item.url}`,
-                                        style: {
-                                            objfit: 'cover',
-                                        },
-                                    })
-                                },
-                                onPositiveClick: () => {
-                                    let params = {
-                                        id: item.id,
-                                    }
-                                    deleteImage(params).then(() => {
-                                        getBannerList()
-                                        resolve(true)
-                                    })
-                                },
-                            })
-                        })
-                        return await p
-                    },
-                })
-            })
-            bannerData.isLoading = false
-            bannerData.isShowAll = true
-        } else {
-            window.$notification.destroyAll()
-            bannerData.isLoading = false
-            bannerData.isShowAll = false
-        }
+    // 打开图片修改弹框
+    const openEdit = (item: any) => {
+        bannerData.isEditLoading = false
+        bannerData.isShowEdit = true
+        bannerData.editData = { ...item }
     }
-    // 修改图片
+    // 修改图片 submit
     const edit = async (domRef: FormInst | null) => {
         bannerData.isEditLoading = true
         let params = {
@@ -258,8 +143,8 @@ const useBanner = () => {
     return {
         bannerData,
         download,
-        showAll,
         getBannerList,
+        openEdit,
         edit,
     }
 }

@@ -1,10 +1,10 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-07-05 18:22:06
- * @LastEditTime: 2022-07-18 16:37:57
+ * @LastEditTime: 2022-09-03 17:09:52
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \blog\web\src\views\blog\blogList.vue
+ * @FilePath: \blog_web\src\views\blog\blogList.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 
@@ -18,8 +18,8 @@
     // hooks
     const { getBlogList, blogData, toBlogDetail } = useBlog()
     nextTick(() => {
-        window.VANTA.CELLS({
-            el: '#CELLS',
+        window.VANTA.HALO({
+            el: '#HALO',
             mouseControls: true,
             touchControls: true,
             gyroControls: false,
@@ -33,11 +33,12 @@
 </script>
 
 <template>
-    <background width="100vw" height="100vh" id="CELLS">
-        <div class="md:container mx-auto w-full h-full px-10 overflow-y-auto">
+    <background width="100vw" height="100vh" id="HALO">
+        <div class="md:container mx-auto w-full h-full px-10 py-20 overflow-y-auto">
             <div class="w-80">
-                <n-timeline>
+                <n-timeline size="large">
                     <n-timeline-item
+                        class="w-full"
                         v-for="item in blogData.blogList"
                         :key="item.id"
                         :type="

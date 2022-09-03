@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:23:14
- * @LastEditTime: 2022-07-12 19:16:10
+ * @LastEditTime: 2022-09-03 13:43:42
  * @LastEditors: boyyang
  * @Description: user store
- * @FilePath: \blog\web\src\store\modules\user.ts
+ * @FilePath: \blog_web\src\store\modules\user.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -14,6 +14,7 @@ import { defineStore } from 'pinia'
 import { createStorage } from '@/utils/storage'
 
 interface info {
+    id: string | number
     username: string
     email: string
     birthday: number
@@ -33,6 +34,7 @@ const useUserStore = defineStore({
         return {
             token: '',
             userInfo: {
+                id: '',
                 username: '',
                 email: '',
                 birthday: new Date().getTime(),

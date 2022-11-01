@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 22:44:53
- * @LastEditTime: 2022-09-02 10:35:26
+ * @LastEditTime: 2022-09-15 16:32:17
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\404\index.vue
@@ -10,7 +10,7 @@
 <script lang="ts" setup>
     import { useRouter } from 'vue-router'
     import { BackGround } from '@/components/Background'
-    import bgImage from '@/assets/森林冒险的少女 画画 5k壁纸_彼岸图网.jpg'
+    import bgImage from '@/assets/森林冒险的少女画画5k壁纸_彼岸图网.jpg'
     import img404 from '@/assets/404.png'
 
     const router = useRouter()

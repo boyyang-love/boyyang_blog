@@ -1,10 +1,10 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:28:46
- * @LastEditTime: 2022-07-05 14:48:09
+ * @LastEditTime: 2022-09-15 17:42:43
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \blog\web\src\views\login\index.vue
+ * @FilePath: \blog_web\src\views\login\index.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 <script lang="ts" setup>
@@ -12,6 +12,8 @@
     import BackGround from '@/components/Background/index.vue'
     import SignUp from './components/signUp.vue'
     import SignIn from './components/signIn.vue'
+    // 图片
+    import bgurl from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
     // 渲染背景
     nextTick(() => {
         window.VANTA.GLOBE({
@@ -29,7 +31,7 @@
 </script>
 
 <template>
-    <back-ground width="100vw" height="100vh" id="GLOBE">
+    <back-ground width="100vw" height="100vh" :url="bgurl">
         <n-space>
             <sign-up></sign-up>
             <sign-in></sign-in>
@@ -37,4 +39,8 @@
     </back-ground>
 </template>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+    b {
+        background-image: url('@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg');
+    }
+</style>

@@ -1,16 +1,15 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:38:03
- * @LastEditTime: 2022-07-04 16:53:13
+ * @LastEditTime: 2022-09-15 17:43:57
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \blog\web\src\views\login\components\signUp.vue
+ * @FilePath: \blog_web\src\views\login\components\signUp.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 <script lang="ts" setup>
     import { ref } from 'vue'
     import { FormInst } from 'naive-ui'
-    import { HeartFilled } from '@vicons/antd'
     import { useLogin } from '../hooks/useLogin'
     // hooks
     const { signUp, loginData, rules } = useLogin()
@@ -26,7 +25,7 @@
             ref="loginDomRef"
             class="absolute bottom-0 w-full"
         >
-            <div class="bg-black-300">
+            <div class="login-box">
                 <n-space justify="center" align="center">
                     <n-form-item label="账号：" path="username">
                         <n-input
@@ -48,7 +47,7 @@
                                 登录
                             </n-button>
                             <n-button @click="loginData.isShowRegister = true">注册</n-button>
-                            <n-tooltip trigger="hover">
+                            <!-- <n-tooltip trigger="hover">
                                 <template #trigger>
                                     <n-icon
                                         :component="HeartFilled"
@@ -58,7 +57,7 @@
                                     ></n-icon>
                                 </template>
                                 没有账号?点击注册
-                            </n-tooltip>
+                            </n-tooltip> -->
                         </n-space>
                     </n-form-item>
                 </n-space>
@@ -68,23 +67,6 @@
 </template>
 
 <style scoped lang="less">
-    .circle {
-        animation: circle 2.5s cubic-bezier(0.23, 1, 0.32, 1) infinite;
-        @keyframes circle {
-            0% {
-                transform: scale(0.5);
-                opacity: 0.1;
-            }
-            50% {
-                transform: scale(1.4);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-        }
-    }
 </style>
 
 <style lang="less">

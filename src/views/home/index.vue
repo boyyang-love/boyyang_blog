@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-09-02 17:17:26
+ * @LastEditTime: 2022-09-15 18:11:22
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\home\index.vue
@@ -79,6 +79,7 @@
                 >
                     <n-carousel
                         :show-dots="true"
+                        :interval="6000"
                         show-arrow
                         dot-placement="right"
                         direction="vertical"
@@ -116,9 +117,7 @@
                 </div>
             </div>
         </div>
-        <div
-            class="bottom-menu w-full bg-black bg-opacity-30 sticky bottom-0 flex justify-center py-2"
-        >
+        <div class="bottom-menu w-full sticky bottom-0 flex justify-center py-2">
             <bottom-menu></bottom-menu>
         </div>
     </background>

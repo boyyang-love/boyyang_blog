@@ -1,5 +1,5 @@
 <template>
-    <n-config-provider :theme="darkTheme">
+    <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides">
         <!-- <n-theme-editor> -->
         <AppProvider>
             <router-view></router-view>
@@ -9,8 +9,36 @@
 </template>
 
 <script lang="ts" setup>
-    import { NConfigProvider, darkTheme, NThemeEditor, lightTheme } from 'naive-ui'
+    import {
+        NConfigProvider,
+        darkTheme,
+        NThemeEditor,
+        lightTheme,
+        GlobalThemeOverrides,
+    } from 'naive-ui'
     import { AppProvider } from '@/components/Application'
+
+    const themeOverrides: GlobalThemeOverrides = {
+        common: {},
+        // 弹出框
+        Dialog: {
+            color: '#3d3b4f',
+            borderRadius: '12px',
+        },
+        Tooltip: {
+            color: '#3d3b4f',
+        },
+        Dropdown: {
+            color: '#3d3b4f',
+        },
+        Drawer: {
+            color: '#3d3b4f',
+            titleFontSize: '16px',
+        },
+        Card: {
+            colorModal: '#3d3b4f',
+        },
+    }
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-09-03 17:14:32
+ * @LastEditTime: 2022-09-15 17:28:30
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\home\components\bottomMenu.vue
@@ -11,7 +11,7 @@
 <script lang="ts" setup>
     import { ref } from 'vue'
     import { FormInst } from 'naive-ui'
-    import { SyncOutlined, TagsFilled } from '@vicons/antd'
+    import { SyncOutlined, TagsFilled, CloudUploadOutlined } from '@vicons/antd'
     import { env } from '@/utils/env'
     import { useImages } from '../hooks/useImages'
     import { useBanner } from '../hooks/useBanner'
@@ -46,16 +46,19 @@
             </n-space>
         </div>
         <div class="h-full flex justify-content-center">
-            <n-spin
-                :show="bannerData.isLoading"
-                size="small"
-                class="h-full flex justify-content-center"
-            >
-                <template #icon>
-                    <n-icon>
-                        <SyncOutlined />
-                    </n-icon>
-                </template>
+            <n-space>
+                <n-tooltip trigger="hover">
+                    <template #trigger>
+                        <n-icon
+                            :component="CloudUploadOutlined"
+                            :size="25"
+                            @click="imagesData.showModal = true"
+                            class="cursor-pointer mt-2"
+                            color="white"
+                        ></n-icon>
+                    </template>
+                    上传作品
+                </n-tooltip>
                 <n-tooltip trigger="hover">
                     <template #trigger>
                         <n-icon
@@ -66,9 +69,9 @@
                             color="white"
                         ></n-icon>
                     </template>
-                    切换
+                    列表展示
                 </n-tooltip>
-            </n-spin>
+            </n-space>
         </div>
         <div class="absolute right-12 top-3 h-full">
             <n-pagination
@@ -83,7 +86,6 @@
     <!-- 上传 -->
     <n-modal
         v-model:show="imagesData.showModal"
-        :style="{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }"
         :show-icon="false"
         preset="dialog"
         title="上传作品"
@@ -110,7 +112,7 @@
             <n-form-item label="图片名称：" path="name">
                 <n-input
                     v-model:value="imagesData.uploadData.name"
-                    maxlength="30"
+                    maxlength="50"
                     show-count
                     type="textarea"
                     placeholder="请输入图片名称"
@@ -119,7 +121,7 @@
             <n-form-item label="图片描述：" path="des">
                 <n-input
                     v-model:value="imagesData.uploadData.des"
-                    maxlength="50"
+                    maxlength="150"
                     show-count
                     type="textarea"
                     placeholder="请输入图片描述"
@@ -136,7 +138,6 @@
     <!-- 修改 -->
     <n-modal
         v-model:show="bannerData.isShowEdit"
-        :style="{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }"
         :show-icon="false"
         :loading="bannerData.isEditLoading"
         preset="dialog"
@@ -178,7 +179,6 @@
     <!-- 修改用户信息 -->
     <n-modal
         v-model:show="userData.isShowEdit"
-        :style="{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }"
         :show-icon="false"
         :loading="userData.isEditLoading"
         preset="dialog"

@@ -1,10 +1,10 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-04 23:54:25
- * @LastEditTime: 2022-07-04 16:52:45
+ * @LastEditTime: 2022-09-15 17:25:24
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \blog\web\src\views\login\components\signIn.vue
+ * @FilePath: \blog_web\src\views\login\components\signIn.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 <script lang="ts" setup>
@@ -22,7 +22,6 @@
     <n-modal
         v-model:show="loginData.isShowRegister"
         :show-icon="false"
-        :style="{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }"
         id="register-container"
         preset="dialog"
         title="注册"

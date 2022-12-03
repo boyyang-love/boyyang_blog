@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-06-05 13:38:29
- * @LastEditTime: 2022-09-15 17:28:30
+ * @LastEditTime: 2022-12-03 14:47:46
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\home\components\bottomMenu.vue
@@ -9,32 +9,32 @@
 -->
 
 <script lang="ts" setup>
-    import { ref } from 'vue'
-    import { FormInst } from 'naive-ui'
-    import { SyncOutlined, TagsFilled, CloudUploadOutlined } from '@vicons/antd'
-    import { env } from '@/utils/env'
-    import { useImages } from '../hooks/useImages'
-    import { useBanner } from '../hooks/useBanner'
-    import { useUser } from '../hooks/useUser'
-    // hooks
-    const { imagesData, submit, finish, remove } = useImages()
-    const { bannerData, getBannerList, edit } = useBanner()
-    const { userData, editUser } = useUser()
-    // domRef
-    const formDomRefUpload = ref<FormInst | null>(null)
-    const formDomRefEdit = ref<FormInst | null>(null)
+import { ref } from 'vue'
+import { FormInst } from 'naive-ui'
+import { SyncOutlined, TagsFilled, CloudUploadOutlined } from '@vicons/antd'
+import { env } from '@/utils/env'
+import { useImages } from '../hooks/useImages'
+import { useBanner } from '../hooks/useBanner'
+import { useUser } from '../hooks/useUser'
+// hooks
+const { imagesData, submit, finish, remove } = useImages()
+const { bannerData, getBannerList, edit } = useBanner()
+const { userData, editUser } = useUser()
+// domRef
+const formDomRefUpload = ref<FormInst | null>(null)
+const formDomRefEdit = ref<FormInst | null>(null)
 </script>
 
 <template>
     <n-space justify="center" align="center" class="relative w-full">
         <div class="h-full absolute left-5 top-1">
             <n-space>
-                <n-avatar
+                <!-- <n-avatar
                     :size="40"
                     round
                     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
                     @click="userData.isShowEdit = true"
-                />
+                /> -->
                 <div class="flex flex-col">
                     <n-gradient-text :size="13" type="warning">
                         {{ imagesData.userInfo.username }}
@@ -49,83 +49,40 @@
             <n-space>
                 <n-tooltip trigger="hover">
                     <template #trigger>
-                        <n-icon
-                            :component="CloudUploadOutlined"
-                            :size="25"
-                            @click="imagesData.showModal = true"
-                            class="cursor-pointer mt-2"
-                            color="white"
-                        ></n-icon>
+                        <n-icon :component="CloudUploadOutlined" :size="25" @click="imagesData.showModal = true"
+                            class="cursor-pointer mt-2" color="white"></n-icon>
                     </template>
                     上传作品
                 </n-tooltip>
                 <n-tooltip trigger="hover">
                     <template #trigger>
-                        <n-icon
-                            :component="SyncOutlined"
-                            :size="25"
-                            @click="bannerData.isShowAll = true"
-                            class="cursor-pointer mt-2"
-                            color="white"
-                        ></n-icon>
+                        <n-icon :component="SyncOutlined" :size="25" @click="bannerData.isShowAll = true"
+                            class="cursor-pointer mt-2" color="white"></n-icon>
                     </template>
                     列表展示
                 </n-tooltip>
             </n-space>
         </div>
         <div class="absolute right-12 top-3 h-full">
-            <n-pagination
-                :item-count="bannerData.count"
-                :page-size="bannerData.limit"
-                size="small"
-                v-model:page="bannerData.page"
-                @update:page="getBannerList"
-            />
+            <n-pagination :item-count="bannerData.count" :page-size="bannerData.limit" size="small"
+                v-model:page="bannerData.page" @update:page="getBannerList" />
         </div>
     </n-space>
     <!-- 上传 -->
-    <n-modal
-        v-model:show="imagesData.showModal"
-        :show-icon="false"
-        preset="dialog"
-        title="上传作品"
-        positive-text="确认"
-        negative-text="取消"
-        @positive-click="submit(formDomRefUpload)"
-    >
-        <n-form
-            ref="formDomRefUpload"
-            :model="imagesData.uploadData"
-            :rules="imagesData.uploadRules"
-        >
+    <n-modal v-model:show="imagesData.showModal" :show-icon="false" preset="dialog" title="上传作品" positive-text="确认"
+        negative-text="取消" @positive-click="submit(formDomRefUpload)">
+        <n-form ref="formDomRefUpload" :model="imagesData.uploadData" :rules="imagesData.uploadRules">
             <n-form-item path="url">
-                <n-upload
-                    :action="env.VITE_APP_API_URL + '/api/upload'"
-                    :headers="imagesData.headers"
-                    :max="1"
-                    list-type="image-card"
-                    accept="image/*"
-                    @finish="finish"
-                    @remove="remove"
-                />
+                <n-upload :action="env.VITE_APP_API_URL + '/api/upload'" :headers="imagesData.headers" :max="1"
+                    list-type="image-card" accept="image/*" @finish="finish" @remove="remove" />
             </n-form-item>
             <n-form-item label="图片名称：" path="name">
-                <n-input
-                    v-model:value="imagesData.uploadData.name"
-                    maxlength="50"
-                    show-count
-                    type="textarea"
-                    placeholder="请输入图片名称"
-                ></n-input>
+                <n-input v-model:value="imagesData.uploadData.name" maxlength="50" show-count type="textarea"
+                    placeholder="请输入图片名称"></n-input>
             </n-form-item>
             <n-form-item label="图片描述：" path="des">
-                <n-input
-                    v-model:value="imagesData.uploadData.des"
-                    maxlength="150"
-                    show-count
-                    type="textarea"
-                    placeholder="请输入图片描述"
-                ></n-input>
+                <n-input v-model:value="imagesData.uploadData.des" maxlength="150" show-count type="textarea"
+                    placeholder="请输入图片描述"></n-input>
             </n-form-item>
             <n-form-item label="标签：">
                 <template #label>
@@ -136,37 +93,19 @@
         </n-form>
     </n-modal>
     <!-- 修改 -->
-    <n-modal
-        v-model:show="bannerData.isShowEdit"
-        :show-icon="false"
-        :loading="bannerData.isEditLoading"
-        preset="dialog"
-        title="作品编辑"
-        positive-text="确认"
-        negative-text="取消"
-        @positive-click="edit(formDomRefEdit)"
-    >
+    <n-modal v-model:show="bannerData.isShowEdit" :show-icon="false" :loading="bannerData.isEditLoading" preset="dialog"
+        title="作品编辑" positive-text="确认" negative-text="取消" @positive-click="edit(formDomRefEdit)">
         <n-form ref="formDomRefEdit" :model="bannerData.editData" :rules="bannerData.editDataRules">
             <n-form-item path="url">
                 <n-image :src="bannerData.editData.url"></n-image>
             </n-form-item>
             <n-form-item label="图片名称：" path="name">
-                <n-input
-                    v-model:value="bannerData.editData.name"
-                    maxlength="30"
-                    show-count
-                    type="textarea"
-                    placeholder="请输入图片名称"
-                ></n-input>
+                <n-input v-model:value="bannerData.editData.name" maxlength="30" show-count type="textarea"
+                    placeholder="请输入图片名称"></n-input>
             </n-form-item>
             <n-form-item label="图片描述：" path="des">
-                <n-input
-                    v-model:value="bannerData.editData.des"
-                    maxlength="50"
-                    show-count
-                    type="textarea"
-                    placeholder="请输入图片描述"
-                ></n-input>
+                <n-input v-model:value="bannerData.editData.des" maxlength="50" show-count type="textarea"
+                    placeholder="请输入图片描述"></n-input>
             </n-form-item>
             <n-form-item label="标签：">
                 <template #label>
@@ -177,16 +116,8 @@
         </n-form>
     </n-modal>
     <!-- 修改用户信息 -->
-    <n-modal
-        v-model:show="userData.isShowEdit"
-        :show-icon="false"
-        :loading="userData.isEditLoading"
-        preset="dialog"
-        title="用户信息编辑"
-        positive-text="确认"
-        negative-text="取消"
-        @positive-click="editUser"
-    >
+    <n-modal v-model:show="userData.isShowEdit" :show-icon="false" :loading="userData.isEditLoading" preset="dialog"
+        title="用户信息编辑" positive-text="确认" negative-text="取消" @positive-click="editUser">
         <n-form label-placement="left" label-width="50">
             <n-form-item label="昵称：">
                 <n-input v-model:value="userData.user.username"></n-input>
@@ -195,26 +126,13 @@
                 <n-input :disabled="true" v-model:value="userData.user.email"></n-input>
             </n-form-item>
             <n-form-item label="QQ：">
-                <n-input-number
-                    :show-button="false"
-                    class="w-full"
-                    v-model:value="userData.user.qq"
-                ></n-input-number>
+                <n-input-number :show-button="false" class="w-full" v-model:value="userData.user.qq"></n-input-number>
             </n-form-item>
             <n-form-item label="生日：">
-                <n-date-picker
-                    v-model:value="userData.user.birthday"
-                    type="date"
-                    clearable
-                    class="w-full"
-                />
+                <n-date-picker v-model:value="userData.user.birthday" type="date" clearable class="w-full" />
             </n-form-item>
             <n-form-item label="性别：">
-                <n-select
-                    v-model:value="userData.user.sex"
-                    :options="userData.sexOptions"
-                    class="w-full"
-                />
+                <n-select v-model:value="userData.user.sex" :options="userData.sexOptions" class="w-full" />
             </n-form-item>
             <n-form-item label="博客：">
                 <n-input v-model:value="userData.user.blog_url"></n-input>
@@ -223,4 +141,6 @@
     </n-modal>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

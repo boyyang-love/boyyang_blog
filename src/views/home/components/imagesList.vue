@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-09-02 16:17:48
- * @LastEditTime: 2022-09-03 15:55:19
+ * @LastEditTime: 2022-12-03 14:47:28
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\home\components\imagesList.vue
@@ -9,15 +9,15 @@
 -->
 
 <script lang="ts" setup>
-    import { EditFilled, DeleteFilled } from '@vicons/antd'
-    // hooks
-    import { useBanner } from '../hooks/useBanner'
-    import { useImages } from '../hooks/useImages'
-    import { useUser } from '../hooks/useUser'
-    // hooks
-    const { bannerData, openEdit } = useBanner()
-    const { del } = useImages()
-    const { userData } = useUser()
+import { EditFilled, DeleteFilled } from '@vicons/antd'
+// hooks
+import { useBanner } from '../hooks/useBanner'
+import { useImages } from '../hooks/useImages'
+import { useUser } from '../hooks/useUser'
+// hooks
+const { bannerData, openEdit } = useBanner()
+const { del } = useImages()
+const { userData } = useUser()
 </script>
 
 <template>
@@ -32,21 +32,16 @@
                         <div class="content">
                             <div class="mb-2">{{ item.des }}</div>
                             <n-space>
-                                <n-tag
-                                    strong
-                                    v-for="tag in item.tags"
-                                    :key="tag.id"
-                                    :type="
-                                        [
-                                            'default',
-                                            'primary',
-                                            'info',
-                                            'success',
-                                            'warning',
-                                            'error',
-                                        ][Math.floor(Math.random() * 6)]
-                                    "
-                                >
+                                <n-tag strong v-for="tag in item.tags" :key="tag.id" :type="
+                                    [
+                                        'default',
+                                        'primary',
+                                        'info',
+                                        'success',
+                                        'warning',
+                                        'error',
+                                    ][Math.floor(Math.random() * 6)]
+                                ">
                                     {{ tag }}
                                 </n-tag>
                             </n-space>
@@ -54,20 +49,12 @@
                         <template #footer>
                             <n-space></n-space>
                             <n-space justify="end">
-                                <n-icon
-                                    v-if="userData.user.id == item.author.id"
-                                    class="cursor-pointer hover:bg-purple-700"
-                                    :component="EditFilled"
-                                    size="18"
-                                    @click="openEdit(item)"
-                                ></n-icon>
-                                <n-icon
-                                    v-if="userData.user.id == item.author.id"
-                                    class="cursor-pointer hover:bg-purple-700"
-                                    :component="DeleteFilled"
-                                    size="18"
-                                    @click="del(item)"
-                                ></n-icon>
+                                <n-icon v-if="userData.user.id == item.author.id"
+                                    class="cursor-pointer hover:bg-purple-700" :component="EditFilled" size="18"
+                                    @click="openEdit(item)"></n-icon>
+                                <n-icon v-if="userData.user.id == item.author.id"
+                                    class="cursor-pointer hover:bg-purple-700" :component="DeleteFilled" size="18"
+                                    @click="del(item)"></n-icon>
                             </n-space>
                         </template>
                     </n-card>
@@ -77,5 +64,7 @@
     </n-drawer>
 </template>
 
-<style scoped></style>
-F
+<style scoped>
+
+</style>
+

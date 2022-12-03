@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-04 16:29:18
- * @LastEditTime: 2022-09-15 18:11:22
+ * @LastEditTime: 2022-12-03 14:25:30
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\home\index.vue
@@ -73,7 +73,10 @@
                 </div>
             </div>
             <!-- 底部图片墙 -->
-            <div class="container h-1/2 flex justify-center items-center">
+            <div
+                class="container h-1/2 flex justify-center items-center"
+                v-show="bannerData.list.length"
+            >
                 <div
                     class="h-4/5 mx-5 bg-black bg-opacity-10 rounded-md ring-8 ring-yellow-500 ring-opacity-50 shadow-lg"
                 >

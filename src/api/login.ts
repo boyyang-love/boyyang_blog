@@ -1,20 +1,22 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:30:36
- * @LastEditTime: 2022-07-12 09:53:32
+ * @LastEditTime: 2022-12-30 13:06:52
  * @LastEditors: boyyang
  * @Description: 登录
- * @FilePath: \blog\web\src\api\login.ts
+ * @FilePath: \blog_web\src\api\login.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
 import { http } from '@/utils/http'
+import { Result } from './../utils/http/types';
+
 
 // 登录
 export const login = (data: { username: string; password: string }) => {
     return http.request(
         {
-            url: '/api/login ',
+            url: '/login ',
             method: 'post',
             data
         },
@@ -28,7 +30,7 @@ export const login = (data: { username: string; password: string }) => {
 export const register = (data: { username: string; password: string }) => {
     return http.request(
         {
-            url: '/api/register',
+            url: '/register',
             method: 'post',
             data
         },

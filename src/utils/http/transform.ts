@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-17 11:51:40
- * @LastEditTime: 2022-07-12 09:51:29
+ * @LastEditTime: 2022-12-30 14:14:20
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\web\src\utils\http\transform.ts
+ * @FilePath: \blog_web\src\utils\http\transform.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -37,7 +37,7 @@ const transForm: TransForm = {
             // 如果需要带上token
             config.headers = {
                 ...config.headers,
-                token: userStore.getToken,
+                Authorization: userStore.getToken,
             }
         }
         return config

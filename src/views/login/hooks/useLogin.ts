@@ -1,125 +1,79 @@
 /**
  * @Author: boyyang
- * @Date: 2022-04-04 23:23:37
- * @LastEditTime: 2022-07-12 18:48:22
+ * @Date: 2022-12-28 17:14:40
+ * @LastEditTime: 2022-12-30 14:14:43
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\web\src\views\login\hooks\useLogin.ts
+ * @FilePath: \blog_web\src\views\login\hooks\useLogin.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { computed, reactive } from 'vue'
+import { reactive } from 'vue'
 import { login, register } from '@/api/login'
-import { useUserStoreWithOut } from '@/store/modules/user'
 import { router } from '@/router'
-import { FormInst } from 'naive-ui'
+import { useUserStoreWithOut } from '@/store/modules/user'
+import { Result } from '@/utils/http/types'
 
+// 登录 注册 data
 const loginData = reactive({
+    isSignIn: true, // 是否登录状态
+    // 账号 密码
     username: '',
-    email: '',
+    tel: '',
     password: '',
     repassword: '',
-    loading: false,
-    isShowRegister: false,
 })
 
-const rules = {
-    username: {
-        required: true,
-        message: '请输入账号',
-        trigger: 'blur',
-    },
-    email: {
-        required: true,
-        message: '请输入注册邮箱',
-        trigger: 'blur',
-    },
-    password: {
-        required: true,
-        message: '请输入密码',
-        trigger: 'blur',
-    },
-    repassword: {
-        required: true,
-        message: '请输入确认密码',
-        trigger: 'blur',
-    },
+// 登录 注册 提交
+const submit = (type: boolean) => {
+    let params = {
+        username: loginData.username,
+        tel: loginData.tel,
+        password: loginData.password,
+        repassword: loginData.repassword,
+    }
+    if (type) {
+        // 登录
+        if (params.username.trim() == '' || params.password.trim() == '') {
+            window.$message.error('账号或密码不能为空')
+            return
+        }
+        login(params).then(res => {
+            loginSuccess(res)
+        })
+    } else {
+        // 注册
+        if (params.username.trim() == '' || params.password.trim() == '' || params.tel == '') {
+            window.$message.error('用户名,手机号,密码不能为空')
+            return
+        }
+        if (params.password.trim() != params.repassword.trim()) {
+            window.$message.error('密码不一致')
+            return
+        }
+        register(params).then(res => {
+            const t = setTimeout(() => {
+                submit(true)
+                clearTimeout(t)
+            }, 2000)
+        })
+    }
 }
 
-// emailOptions
-const emailOptions = computed(() => {
-    return ['@gmail.com', '@163.com', '@qq.com', '@outlook.com'].map(suffix => {
-        const prefix = loginData.email.split('@')[0]
-        return {
-            label: prefix + suffix,
-            value: prefix + suffix,
-        }
-    })
-})
+// 登录成功
+const loginSuccess = (res: Result<any>) => {
+    const userStore = useUserStoreWithOut()
+
+    userStore.setToken(res.data.token)
+    userStore.setUserinfo(res.data.info)
+
+    router.replace({ name: 'Home' })
+}
 
 const useLogin = () => {
-    const userStore = useUserStoreWithOut()
-    // 注册
-    const signIn = async (domRef: FormInst | null) => {
-        let params = {
-            username: loginData.username,
-            password: loginData.password,
-            email: loginData.email,
-        }
-        let p = new Promise((resolve, reject) => {
-            domRef?.validate(errors => {
-                if (!errors) {
-                    if (loginData.password.trim() !== loginData.repassword.trim()) {
-                        window.$message.error('两次密码不一致')
-                        return
-                    }
-                    register(params)
-                        .then(() => {
-                            resolve(true)
-                        })
-                        .catch(() => {
-                            reject(false)
-                        })
-                }
-            })
-        })
-        return await p
-    }
-    // 登录
-    const signUp = (domRef: FormInst | null) => {
-        let params = {
-            username: loginData.username,
-            password: loginData.password,
-        }
-        domRef?.validate(errors => {
-            if (!errors) {
-                loginData.loading = true
-                login(params)
-                    .then(res => {
-                        userStore.setToken(res.data.token)
-                        userStore.setUserinfo(res.data.info)
-                        let timer = setTimeout(() => {
-                            router.replace({
-                                path: '/',
-                            })
-                            loginData.loading = false
-                            clearTimeout(timer)
-                        }, 1500)
-                    })
-                    .catch(() => {
-                        loginData.loading = false
-                    })
-            } else {
-                window.$message.error('请输入用户名和密码~~')
-            }
-        })
-    }
     return {
         loginData,
-        signIn,
-        signUp,
-        emailOptions,
-        rules,
+        submit,
     }
 }
 

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:23:14
- * @LastEditTime: 2022-09-03 13:43:42
+ * @LastEditTime: 2022-12-30 11:13:20
  * @LastEditors: boyyang
  * @Description: user store
  * @FilePath: \blog_web\src\store\modules\user.ts
@@ -9,18 +9,13 @@
  */
 
 import { store } from '@/store'
-// import {store} from '../../main'
 import { defineStore } from 'pinia'
-import { createStorage } from '@/utils/storage'
-
 interface info {
-    id: string | number
+    id: number
     username: string
-    email: string
-    birthday: number
-    qq: number
-    sex: number
-    blog_url: string
+    tel: number | string
+    avatarUrl: string
+    gender: number | string
 }
 
 interface UserState {
@@ -34,13 +29,11 @@ const useUserStore = defineStore({
         return {
             token: '',
             userInfo: {
-                id: '',
+                id: 0,
                 username: '',
-                email: '',
-                birthday: new Date().getTime(),
-                qq: 0,
-                sex: 1,
-                blog_url: '',
+                tel: '',
+                avatarUrl: '',
+                gender: '',
             },
         }
     },
@@ -54,14 +47,7 @@ const useUserStore = defineStore({
         },
         setUserinfo(userInfo: info) {
             let info = { ...userInfo }
-            info.birthday = Number(info.birthday)
-            info.qq = Number(info.qq)
             this.userInfo = info
-        },
-        getInfo(): Promise<info> {
-            return new Promise(resolve => {
-                resolve(this.userInfo)
-            })
         },
     },
     //开启持久化

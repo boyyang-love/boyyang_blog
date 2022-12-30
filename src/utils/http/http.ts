@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-16 11:29:46
- * @LastEditTime: 2022-08-08 17:07:55
+ * @LastEditTime: 2022-12-30 14:14:17
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\web\src\utils\http\http.ts
+ * @FilePath: \blog_web\src\utils\http\http.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -66,6 +66,7 @@ class Axios {
             this.axiosInstance
                 .request<any, AxiosResponse<Result>>(config)
                 .then((response: AxiosResponse<Result>) => {
+                    
                     const { transformRequestData } = this.getTransForm() || {}
                     if (transformRequestData) {
                         try {

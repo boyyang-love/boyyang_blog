@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 23:30:36
- * @LastEditTime: 2022-12-30 13:06:52
+ * @LastEditTime: 2022-12-30 15:29:30
  * @LastEditors: boyyang
  * @Description: 登录
  * @FilePath: \blog_web\src\api\login.ts
@@ -9,16 +9,15 @@
  */
 
 import { http } from '@/utils/http'
-import { Result } from './../utils/http/types';
-
+import { Result } from '@/utils/http/types'
 
 // 登录
-export const login = (data: { username: string; password: string }) => {
+export const login = (data: { username: string; password: string }): Promise<Result<loginRes>> => {
     return http.request(
         {
             url: '/login ',
             method: 'post',
-            data
+            data,
         },
         {
             withToken: false,
@@ -27,15 +26,19 @@ export const login = (data: { username: string; password: string }) => {
 }
 
 // 注册
-export const register = (data: { username: string; password: string }) => {
+export const register = (data: {
+    username: string
+    tel: string | number
+    password: string
+}): Promise<Result> => {
     return http.request(
         {
             url: '/register',
             method: 'post',
-            data
+            data,
         },
         {
-            withToken: false
+            withToken: false,
         }
     )
 }

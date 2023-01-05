@@ -24,7 +24,7 @@
     "tailwindcss": "^3.0.24",
     "three": "^0.140.2",
     "vanta": "^0.5.22",
-    "vue": "^3.2.37",
+    "vue": "^3.2.45",
     "vue-picture-cropper": "^0.5.1",
     "vue-router": "4"
   },

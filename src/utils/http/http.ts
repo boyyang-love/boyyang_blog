@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-16 11:29:46
- * @LastEditTime: 2022-12-30 14:14:17
+ * @LastEditTime: 2022-12-30 15:15:43
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\utils\http\http.ts
@@ -66,7 +66,6 @@ class Axios {
             this.axiosInstance
                 .request<any, AxiosResponse<Result>>(config)
                 .then((response: AxiosResponse<Result>) => {
-                    
                     const { transformRequestData } = this.getTransForm() || {}
                     if (transformRequestData) {
                         try {

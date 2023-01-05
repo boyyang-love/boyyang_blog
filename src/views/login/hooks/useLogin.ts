@@ -1,7 +1,8 @@
+import { Result } from './../../../utils/http/types';
 /**
  * @Author: boyyang
  * @Date: 2022-12-28 17:14:40
- * @LastEditTime: 2022-12-30 14:14:43
+ * @LastEditTime: 2022-12-30 15:26:13
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\views\login\hooks\useLogin.ts
@@ -12,7 +13,6 @@ import { reactive } from 'vue'
 import { login, register } from '@/api/login'
 import { router } from '@/router'
 import { useUserStoreWithOut } from '@/store/modules/user'
-import { Result } from '@/utils/http/types'
 
 // 登录 注册 data
 const loginData = reactive({
@@ -39,7 +39,7 @@ const submit = (type: boolean) => {
             return
         }
         login(params).then(res => {
-            loginSuccess(res)
+            loginSuccess(res.data)
         })
     } else {
         // 注册
@@ -61,11 +61,10 @@ const submit = (type: boolean) => {
 }
 
 // 登录成功
-const loginSuccess = (res: Result<any>) => {
+const loginSuccess = (data: loginRes) => {
     const userStore = useUserStoreWithOut()
-
-    userStore.setToken(res.data.token)
-    userStore.setUserinfo(res.data.info)
+    userStore.setToken(data.token)
+    userStore.setUserinfo(data.info)
 
     router.replace({ name: 'Home' })
 }

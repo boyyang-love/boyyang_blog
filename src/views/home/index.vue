@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-12-28 14:31:01
- * @LastEditTime: 2022-12-30 14:23:05
+ * @LastEditTime: 2022-12-30 16:51:32
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\home\index.vue
@@ -11,6 +11,7 @@
 <script lang="ts" setup>
     import { nextTick } from 'vue'
     import { BackGround } from '@/components/Background'
+    import ExhibitionList from './components/exhibitionList.vue'
 
     nextTick(() => {
         window.VANTA.NET({
@@ -20,7 +21,11 @@
 </script>
 
 <template>
-    <BackGround width="100vw" height="100vh" id="NET"></BackGround>
+    <!-- <ExhibitionList></ExhibitionList> -->
+
+    <BackGround width="100vw" height="100vh" id="NET">
+        <ExhibitionList></ExhibitionList>
+    </BackGround>
 </template>
 
 <style scoped></style>

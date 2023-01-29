@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-12-28 14:39:54
- * @LastEditTime: 2023-01-05 12:23:51
+ * @LastEditTime: 2023-01-09 09:46:17
  * @LastEditors: boyyang
  * @Description: 登录
  * @FilePath: \blog_web\src\views\login\components\signInAndUp.vue
@@ -9,21 +9,8 @@
 -->
 
 <script lang="ts" setup>
-    import { ref } from 'vue'
     import { UserOutlined, KeyOutlined, PhoneOutlined } from '@vicons/antd'
-    import { Clock } from '@/components/Clock'
     import { useLogin } from '../hooks/useLogin'
-
-    const hour = ref<number>(0)
-    const min = ref<number>(0)
-    const secend = ref<number>(0)
-
-    setInterval(() => {
-        const time = new Date()
-        hour.value = time.getHours()
-        min.value = time.getMinutes()
-        secend.value = time.getSeconds()
-    }, 1000)
 
     const { loginData, submit } = useLogin()
 </script>
@@ -99,11 +86,6 @@
                 <div class="btn btn-right" @click="submit(loginData.isSignIn)">Submit</div>
             </div>
         </div>
-        <Clock :num="hour"></Clock>
-
-        <Clock :num="min"></Clock>
-
-        <Clock :num="secend"></Clock>
     </div>
 </template>
 

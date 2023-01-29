@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:25:32
- * @LastEditTime: 2022-06-12 01:46:36
+ * @LastEditTime: 2023-01-18 11:16:40
  * @LastEditors: boyyang
  * @Description: 路由守卫
- * @FilePath: \drawingBed\src\router\routerGuards.ts
+ * @FilePath: \blog_web\src\router\routerGuards.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -48,6 +48,7 @@ const createRouterGuards = (router: Router) => {
                 })
                 // 添加404路由
                 router.addRoute(errRoutes)
+                console.log(router.getRoutes())
                 if (to.matched.length === 0) {
                     next(to.path)
                 } else {

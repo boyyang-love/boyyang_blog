@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-12-28 14:30:33
- * @LastEditTime: 2022-12-30 10:56:48
+ * @LastEditTime: 2023-01-09 10:07:51
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\login\index.vue
@@ -15,7 +15,7 @@ import signInAndUp from "./components/signInAndUp.vue"
 </script>
 
 <template>
-    <BackGround width="100vw" height="100vh" :url="bgImg">
+    <BackGround width="100vw" height="100vh" :url="bgImg" type="image">
         <signInAndUp></signInAndUp>
     </BackGround>
 </template>

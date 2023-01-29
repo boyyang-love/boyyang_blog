@@ -59,7 +59,7 @@
     }
     /*修改滚动条样式*/
     ::-webkit-scrollbar {
-        width: 0px;
+        width: 0;
         height: 6px;
     }
     ::-webkit-scrollbar-track {

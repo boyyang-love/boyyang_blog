@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-12-30 15:34:26
- * @LastEditTime: 2023-01-03 12:50:20
+ * @LastEditTime: 2023-01-10 13:45:02
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\api\exhibition.ts
@@ -16,9 +16,14 @@ export const exhibitionList = (params: {
     page?: number
     limit?: number
 }): Promise<Result<exhibitionListRes>> => {
-    return http.request({
-        url: '/exhibition/info',
-        method: 'get',
-        params,
-    })
+    return http.request(
+        {
+            url: '/exhibition/info',
+            method: 'get',
+            params,
+        },
+        {
+            isShowSuccessMessage: false,
+        }
+    )
 }

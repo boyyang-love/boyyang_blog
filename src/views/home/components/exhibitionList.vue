@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-12-30 15:41:58
- * @LastEditTime: 2023-01-03 14:38:23
+ * @LastEditTime: 2023-01-29 15:56:45
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\home\components\exhibitionList.vue
@@ -11,18 +11,26 @@
 <script lang="ts" setup>
     import { onMounted, ref } from 'vue'
     import { useExhibition } from '../hooks/useExhibition'
+    // hooks
+    const { exhibitionData, pageSizes, getExhibitionList, pageChange, pageSizeChange } =
+        useExhibition()
 
-    const { exhibitionData, getExhibitionList } = useExhibition()
-    let ism = ref<boolean>(false)
+    const ism = ref<boolean>(false) // 是否开始动画
+    let t: NodeJS.Timeout | null = null // 定时器
+
     onMounted(() => {
         getExhibitionList()
     })
 
-    const leave = () => {
-        const t = setTimeout(() => {
-            ism.value = false
-            clearTimeout(t)
-        }, 3000)
+    const intoAndLeave = () => {
+        t && clearTimeout(t)
+        if (!ism.value) {
+            ism.value = true
+        } else {
+            setTimeout(() => {
+                ism.value = false
+            }, 500)
+        }
     }
 </script>
 
@@ -30,11 +38,12 @@
     <div class="ex-wrapper">
         <div class="images-box">
             <TransitionGroup name="list" tag="ul">
-                <div @mouseover="ism = true" @mouseleave="leave" key="t-0">
+                <div @dblclick="intoAndLeave" key="t-0">
                     <n-carousel
                         :current-index="exhibitionData.currentIndex"
                         keyboard
                         autoplay
+                        show-arrow
                         dot-placement="right"
                     >
                         <div class="carousel-img" v-for="item in exhibitionData.exhibitionList">
@@ -56,6 +65,17 @@
                 </div>
             </TransitionGroup>
         </div>
+
+        <n-pagination
+            class="pagination"
+            show-size-picker
+            @update:page="pageChange"
+            @update:page-size="pageSizeChange"
+            v-model:page="exhibitionData.page"
+            :page-sizes="pageSizes"
+            v-model:item-count="exhibitionData.count"
+            v-model:default-page-size="exhibitionData.limit"
+        />
     </div>
 </template>
 
@@ -67,11 +87,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
 
         .images-box {
             box-sizing: border-box;
             width: 70%;
-            height: 65%;
+            height: 600px;
             position: relative;
             overflow: hidden;
             border: 15px solid #3d3b4f;
@@ -79,10 +100,14 @@
             -webkit-box-reflect: below 10px linear-gradient(transparent 60%, rgba(0, 0, 0, 0.5));
 
             .carousel-img {
+                box-sizing: border-box;
+
+                height: calc(600px - 30px);
                 .img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+                    border: 3px solid whitesmoke;
                 }
             }
 
@@ -121,6 +146,11 @@
                     }
                 }
             }
+        }
+
+        .pagination {
+            position: absolute;
+            bottom: 20px;
         }
     }
 

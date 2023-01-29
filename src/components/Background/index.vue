@@ -1,10 +1,10 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-20 13:03:04
- * @LastEditTime: 2022-07-15 17:32:29
+ * @LastEditTime: 2023-01-09 10:07:46
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \blog\web\src\components\Background\index.vue
+ * @FilePath: \blog_web\src\components\Background\index.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 <script lang="ts" setup>

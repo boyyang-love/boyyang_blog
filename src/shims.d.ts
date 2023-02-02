@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-07-04 17:32:09
- * @LastEditTime: 2022-09-03 18:17:43
+ * @LastEditTime: 2023-01-30 17:12:44
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\shims.d.ts
@@ -23,3 +23,4 @@ declare module 'vanta/dist/vanta.birds.min.js'
 declare module 'vanta/dist/vanta.trunk.min.js'
 declare module 'vanta/dist/vanta.globe.min.js'
 declare module 'vanta/dist/vanta.halo.min.js'
+declare module '@qiun/vue-ucharts'

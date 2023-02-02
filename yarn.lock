@@ -320,6 +320,11 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz#db5a11bf66bdab39569719555b0f76e138d7bd64"
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
+"@qiun/vue-ucharts@^2.5.0-20230101":
+  version "2.5.0-20230101"
+  resolved "https://registry.yarnpkg.com/@qiun/vue-ucharts/-/vue-ucharts-2.5.0-20230101.tgz#1da4b857873aa6dd0ab05ae4bef198f3324d5de5"
+  integrity sha512-HZ4q6CBjzheAmocr//jY2nV3wO2Xu+2CX6NjwUD+uM1Jo/ewlnNIL2TiRRqtwMBhyaIoJh4nCzmnoeT7kUvlxA==
+
 "@types/glob@^7.1.1":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.2.0.tgz#bc1b5bf3aa92f25bd5dd39f35c57361bdce5b2eb"

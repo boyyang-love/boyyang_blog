@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 16:23:46
- * @LastEditTime: 2023-01-18 13:31:57
+ * @LastEditTime: 2023-01-30 16:11:18
  * @LastEditors: boyyang
  * @Description: 静态路由
  * @FilePath: \blog_web\src\router\constanceRoutes.ts
@@ -13,21 +13,11 @@ const constantRoutes: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'Home',
+        redirect: '/dashboard',
         meta: {
             title: '首页',
         },
         component: () => import('@/views/home/index.vue'),
-        // children: [
-        //     {
-        //         path: 'admin',
-        //         name: 'Admin',
-        //         meta: {
-        //             title: '管理后台',
-        //             // roles: ['admin'],
-        //         },
-        //         component: () => import('@/views/admin/index.vue'),
-        //     },
-        // ],
     },
     {
         path: '/login',

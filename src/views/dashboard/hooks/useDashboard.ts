@@ -25,14 +25,15 @@ const getDashboard = () => {
         dashboardData.dashboard = res.data.dashboard
         dashboardData.user_info = res.data.user_info
         dashboardData.rouseData = [
-            { name: '点赞', value: res.data.user_info.thumbs_up },
-            { name: '发布', value: res.data.user_info.publish },
-            { name: '收藏', value: res.data.user_info.like },
+            { name: '获赞数', value: res.data.user_info.thumbs_up },
+            { name: '发布数', value: res.data.user_info.publish },
+            { name: '收藏数', value: res.data.user_info.like },
+            { name: '粉丝数', value: res.data.user_info.following },
         ]
-        dashboardData.exhibitions = res.data.exhibitions.map((item) => {
+        dashboardData.exhibitions = res.data.exhibitions.map(item => {
             return {
                 name: item.title,
-                url:`${env.VITE_APP_IMG_URL}${item.cover}`,
+                url: `${env.VITE_APP_IMG_URL}${item.cover}`,
             }
         })
     })

@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2023-01-30 17:22:12
- * @LastEditTime: 2023-02-02 15:33:14
+ * @LastEditTime: 2023-02-02 17:26:12
  * @LastEditors: boyyang
  * @Description: 轮播图
  * @FilePath: \blog_web\src\views\dashboard\components\carousel.vue
@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<carouselProps>(), {
         prev-slide-style="transform: translateX(-150%) translateZ(-800px);"
         next-slide-style="transform: translateX(50%) translateZ(-800px);"
         style="height: 240px"
-        auto
+        autoplay
     >
         <n-carousel-item :style="{ width: '60%' }" v-for="item in props.list" :key="item.name">
             <img

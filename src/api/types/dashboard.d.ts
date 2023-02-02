@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2023-02-02 09:22:37
- * @LastEditTime: 2023-02-02 15:27:18
+ * @LastEditTime: 2023-02-02 17:18:13
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\api\types\dashboard.d.ts
@@ -23,6 +23,7 @@ interface dashboard_user_info {
     thumbs_up: number
     like: number
     publish: number
+    following: number
 }
 
 interface dashboard_dashboard {

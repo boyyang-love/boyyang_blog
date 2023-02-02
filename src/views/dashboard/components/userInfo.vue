@@ -5,6 +5,7 @@
         LikeOutlined,
         HeartOutlined,
         SendOutlined,
+        StarOutlined,
     } from '@vicons/antd'
 
     interface userInfoProps {
@@ -18,21 +19,24 @@
     <div class="info-wrapper">
         <div class="info-top">
             <n-space>
-                <n-badge :dot="false" color="none" :offset="[-15, 15]">
-                    <template #value>
-                        <n-icon
-                            :component="props.userInfo.gender == 1 ? ManOutlined : WomanOutlined"
-                            :size="25"
-                        />
-                    </template>
-                    <n-avatar
-                        round
-                        :size="58"
-                        src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
-                    />
-                </n-badge>
+                <n-avatar
+                    round
+                    :size="58"
+                    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                />
+
                 <div class="name-email">
-                    <span class="name">{{ props.userInfo.username }}</span>
+                    <n-badge :dot="false" color="none">
+                        <template #value>
+                            <n-icon
+                                :component="
+                                    props.userInfo.gender == 1 ? ManOutlined : WomanOutlined
+                                "
+                                :size="25"
+                            />
+                        </template>
+                        <span class="name">{{ props.userInfo.username }}</span>
+                    </n-badge>
                     <span class="email">{{ props.userInfo.tel }}</span>
                 </div>
             </n-space>
@@ -56,6 +60,12 @@
                         <n-icon :component="HeartOutlined" :size="28" color="whitesmoke"></n-icon>
                     </n-badge>
                     <span>收藏</span>
+                </div>
+                <div class="icon-item">
+                    <n-badge :value="props.userInfo.following" :dot="false">
+                        <n-icon :component="StarOutlined" :size="28" color="whitesmoke"></n-icon>
+                    </n-badge>
+                    <span>粉丝</span>
                 </div>
             </n-space>
         </div>
@@ -97,6 +107,7 @@
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
+                cursor: pointer;
 
                 span {
                     color: whitesmoke;

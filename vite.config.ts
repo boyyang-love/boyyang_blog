@@ -17,8 +17,8 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
             port: Number(env.VITE_APP_PORT) || 3000,
             host: '0.0.0.0',
             // proxy: {
-            //     '/api': {
-            //         target: 'localhost:3001',
+            //     '/api': {  
+            //         target: 'https://golang-ynhc-26761-6-1301921121.sh.run.tcloudbase.com',
             //         changeOrigin: true,
             //         rewrite: (path) => path.replace(/^\/api/, '/api/')
             //     }

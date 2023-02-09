@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:25:00
- * @LastEditTime: 2023-01-30 17:21:06
+ * @LastEditTime: 2023-02-09 09:51:15
  * @LastEditors: boyyang
  * @Description: 异步路由
  * @FilePath: \blog_web\src\router\asyncRoutes.ts
@@ -17,24 +17,19 @@ const asyncRoutes: RouteRecordRaw[] = [
         meta: {
             title: '首页',
         },
-        redirect: '/dashboard',
+        redirect: '/homePage',
         component: () => import('@/views/home/index.vue'),
         children: [
+            {
+                path: 'homePage',
+                name: 'HomePage',
+                component: () => import('@/views/home/components/home.vue')
+            },
             // 仪表盘
             {
                 path: 'dashboard',
                 name: 'Dashboard',
                 component: () => import('@/views/dashboard/index.vue'),
-            },
-            // 首页轮播
-            {
-                path: 'home',
-                name: 'HomePage',
-                meta: {
-                    title: '首页',
-                    // roles: ['admin'],
-                },
-                component: () => import('@/views/home/components/exhibitionList.vue'),
             },
             // 图片展示
             {

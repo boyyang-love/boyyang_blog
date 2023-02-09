@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 16:23:46
- * @LastEditTime: 2023-01-30 16:11:18
+ * @LastEditTime: 2023-02-09 09:49:19
  * @LastEditors: boyyang
  * @Description: 静态路由
  * @FilePath: \blog_web\src\router\constanceRoutes.ts
@@ -13,7 +13,7 @@ const constantRoutes: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'Home',
-        redirect: '/dashboard',
+        redirect: '/homePage',
         meta: {
             title: '首页',
         },

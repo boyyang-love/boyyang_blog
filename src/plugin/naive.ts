@@ -1,10 +1,10 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:53:40
- * @LastEditTime: 2022-07-17 16:56:43
+ * @LastEditTime: 2023-02-09 13:13:58
  * @LastEditors: boyyang
  * @Description:
- * @FilePath: \blog\web\src\plugin\naive.ts
+ * @FilePath: \blog_web\src\plugin\naive.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
@@ -87,6 +87,7 @@ import {
     NUploadDragger,
     NTimeline,
     NTimelineItem,
+    NEllipsis
 } from 'naive-ui'
 
 const naive = create({
@@ -167,6 +168,7 @@ const naive = create({
         NUploadDragger,
         NTimeline,
         NTimelineItem,
+        NEllipsis
     ],
 })
 

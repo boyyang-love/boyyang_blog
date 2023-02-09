@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-17 11:51:40
- * @LastEditTime: 2022-12-30 14:14:20
+ * @LastEditTime: 2023-02-07 11:14:06
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\utils\http\transform.ts
@@ -12,6 +12,7 @@ import qs from 'qs'
 import { TransForm, RequestOptions, Result, AxiosOptions } from './types'
 import { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { useUserStoreWithOut } from '@/store/modules/user'
+import { router } from '@/router'
 
 const userStore = useUserStoreWithOut()
 
@@ -92,7 +93,17 @@ const transForm: TransForm = {
         console.log(error)
     },
     requestCatch: (error: any) => {
-        const { msg } = error.response.data || {}
+        const { data, status } = error.response || {}
+        const { msg } = data
+        // token 过期
+        if (status === 401) {
+            window.$message.error('token过期！')
+            router.push({
+                name: 'Login',
+            })
+
+            return
+        }
         window.$message.error(msg)
         return error
     },

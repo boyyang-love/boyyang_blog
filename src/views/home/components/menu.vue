@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2023-01-10 15:43:29
- * @LastEditTime: 2023-01-30 16:05:28
+ * @LastEditTime: 2023-02-07 11:06:51
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\home\components\menu.vue
@@ -108,14 +108,16 @@ const menuClick = (item: menuList, index: number) => {
         z-index: 9;
 
         .left {
-            width: 15px;
+            box-sizing: border-box;
+            width: 5px;
             height: 100%;
             background-color: #1bd1a5;
             box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
         }
 
         .right {
-            width: 100%;
+            box-sizing: border-box;
+            width: calc(100% - 5px);
             height: 100%;
             display: flex;
             justify-content: space-evenly;

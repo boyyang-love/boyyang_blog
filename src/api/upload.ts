@@ -1,7 +1,39 @@
+import { Result } from './../utils/http/types'
 import { http } from '@/utils/http'
-export const upload = () => {
-    return http.request({
-        url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx20773192bbf7b3b8&secret=309f0b28ace40739a7f15d4772537774',
+
+interface beforeUploadRes {
+    url: string
+    token: string
+    authorization: string
+    file_id: string
+    cos_file_id: string
+}
+
+export const upload = async (params: { file_name: string; file: File }) => {
+    let res = (await http.request({
+        url: '/cos/upload',
         method: 'get',
-    })
+        params: {
+            file_name: params.file_name,
+        },
+    })) as beforeUploadRes
+
+    const data = new FormData()
+    data.append('key', `images/${params.file_name}`)
+    data.append('Signature', res.authorization)
+    data.append('x-cos-security-token', res.token)
+    data.append('x-cos-meta-fileid', res.cos_file_id)
+    data.append('file', params.file)
+
+    return http.request(
+        {
+            url: res.url,
+            method: 'post',
+            data: data,
+        },
+        {
+            serializeParams: false,
+            isShowMessage: false,
+        }
+    )
 }

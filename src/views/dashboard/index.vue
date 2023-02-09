@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2023-01-30 17:19:54
- * @LastEditTime: 2023-02-03 17:33:55
+ * @LastEditTime: 2023-02-06 10:52:49
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\dashboard\index.vue
@@ -13,8 +13,9 @@
     import BottomChart from './components/bottomChart.vue'
     import RightChart from './components/rightChart.vue'
     import UserInfo from './components/userInfo.vue'
-    // api
-    import { upload } from '@/api/upload'
+
+    import '@/utils/cloudbase'
+
     // hooks
     import { useDashboard } from './hooks/useDashboard'
 
@@ -22,9 +23,6 @@
 
     onMounted(() => {
         getDashboard()
-        upload().then((res) => {
-            console.log(res)
-        })
     })
 </script>
 

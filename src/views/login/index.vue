@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-12-28 14:30:33
- * @LastEditTime: 2023-01-09 10:07:51
+ * @LastEditTime: 2023-02-07 17:03:02
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\login\index.vue
@@ -9,17 +9,37 @@
 -->
 
 <script lang="ts" setup>
-import bgImg from "@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg"
-import { BackGround } from '@/components/Background'
-import signInAndUp from "./components/signInAndUp.vue"
+    import { onMounted, nextTick, ref } from 'vue'
+    // import bgImg from "@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg"
+    import { BackGround } from '@/components/Background'
+    import signInAndUp from './components/signInAndUp.vue'
+    // bg
+    import { bgInit } from './hooks/bg'
+
+    const bgWrapper = ref<Element | null>(null)
+
+    onMounted(() => {
+        nextTick(() => {
+            bgInit(bgWrapper.value)
+        })
+    })
 </script>
 
 <template>
-    <BackGround width="100vw" height="100vh" :url="bgImg" type="image">
-        <signInAndUp></signInAndUp>
+    <BackGround width="100vw" height="100vh">
+        <div class="bg" ref="bgWrapper">
+            <signInAndUp style="position: absolute;"></signInAndUp>
+        </div>
     </BackGround>
 </template>
 
-<style scoped>
-
+<style scoped lang="less">
+    .bg {
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 </style>

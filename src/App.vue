@@ -42,17 +42,17 @@
 </script>
 
 <style>
-    /* @font-face {
+    @font-face {
         font-family: 'zpix';
-        src: url('./font/zpix.ttf');
+        src: url('./assets/fonts/zpix.ttf');
     }
     @font-face {
         font-family: 'Press Start 2P';
-        src: url('./font/PressStart2P-1.ttf');
-    } */
+        src: url('./assets/fonts/PressStart2P-1.ttf');
+    }
     #app {
         /* Avenir, Helvetica, Arial, sans-serif, */
-        /* font-family: zpix, Press Start 2P, Avenir, Helvetica, Arial, sans-serif; */
+        font-family: zpix;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;

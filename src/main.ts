@@ -8,6 +8,9 @@ import { setupVanta } from '@/plugin/vanta'
 import { setupMarkDown } from '@/plugin/markDown'
 import { setupTailwind } from '@/plugin/tailwind'
 
+import 'wow.js/css/libs/animate.css'
+
+
 const bootstrap = async () => {
     const app = createApp(App)
     // 初始化全局组件

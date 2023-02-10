@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 22:53:40
- * @LastEditTime: 2023-02-09 13:13:58
+ * @LastEditTime: 2023-02-10 14:14:23
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\plugin\naive.ts
@@ -87,7 +87,8 @@ import {
     NUploadDragger,
     NTimeline,
     NTimelineItem,
-    NEllipsis
+    NEllipsis,
+    NCalendar,
 } from 'naive-ui'
 
 const naive = create({
@@ -168,7 +169,8 @@ const naive = create({
         NUploadDragger,
         NTimeline,
         NTimelineItem,
-        NEllipsis
+        NEllipsis,
+        NCalendar,
     ],
 })
 

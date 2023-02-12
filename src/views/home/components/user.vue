@@ -91,11 +91,13 @@
                 font-weight: bold;
                 margin-top: 10px;
                 color: whitesmoke;
+                text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
             }
 
             .user-signature {
                 font-size: 14px;
                 color: whitesmoke;
+                text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
             }
 
             .info {
@@ -116,6 +118,7 @@
                         font-size: 15px;
                         color: whitesmoke;
                         font-weight: bold;
+                        text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
                     }
 
                     .num {

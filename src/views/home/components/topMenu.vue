@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2023-02-09 09:51:58
- * @LastEditTime: 2023-02-10 13:16:28
+ * @LastEditTime: 2023-02-12 14:02:08
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\home\components\topMenu.vue
@@ -10,6 +10,8 @@
 
 <script lang="ts" setup>
     import { Component, markRaw, onMounted, ref } from 'vue'
+    import { useRoute, useRouter } from 'vue-router'
+
     import Wow from 'wow.js'
     import {
         HomeOutlined,
@@ -17,7 +19,9 @@
         SendOutlined,
         UserOutlined,
         SettingOutlined,
+        CloudUploadOutlined
     } from '@vicons/antd'
+    import { userInfo } from 'os'
 
     interface menuProps {
         menuList?: menuList[]
@@ -33,12 +37,18 @@
     const props = withDefaults(defineProps<menuProps>(), {
         menuList: () => [
             { name: 'Home', com: markRaw(HomeOutlined), path: '/home', text: '首页' },
-            { name: 'Images', com: markRaw(FileImageOutlined), path: '/images', text: '图库' },
-            { name: 'Publish', com: markRaw(SendOutlined), path: '/publish', text: '上传' },
+            { name: 'Images', com: markRaw(FileImageOutlined), path: '/images', text: '壁纸' },
+            { name: 'Publish', com: markRaw(SendOutlined), path: '/publish', text: '上传博客' },
+            { name: 'Upload', com: markRaw(CloudUploadOutlined), path: '/upload', text: '上传壁纸' },
             { name: 'User', com: markRaw(UserOutlined), path: '/user', text: '我的' },
             { name: 'Admin', com: markRaw(SettingOutlined), path: '/admin', text: '设置' },
         ],
     })
+
+    const active = ref<number>(0)
+
+    const route = useRoute()
+    const router = useRouter()
 
     onMounted(() => {
         const wow = new Wow({
@@ -47,7 +57,7 @@
             offset: 0, // distance to the element when triggering the animation (default is 0)
             mobile: true, // trigger animations on mobile devices (default is true)
             live: true, // act on asynchronously loaded content (default is true)
-            callback: function (box) {
+            callback: function () {
                 // the callback is fired every time an animation is started
                 // the argument that is passed in is the DOM node being animated
             },
@@ -55,7 +65,20 @@
         })
 
         wow.init()
+
+        props.menuList.forEach((item, i) => {
+            if (item.name == route.name) {
+                active.value = i
+            }
+        })
     })
+
+    const menuClick = (item: menuList, index: number) => {
+        active.value = index
+        router.push({
+            name: item.name,
+        })
+    }
 </script>
 
 <template>
@@ -64,12 +87,13 @@
             <n-tooltip trigger="hover" v-for="(item, i) in props.menuList">
                 <template #trigger>
                     <n-icon
-                        class="wow bounceInUp"
+                        class="wow bounceInLeft"
                         :key="item.path"
                         :component="item.com"
                         :size="25"
                         :data-wow-delay="i * 0.3 + 's'"
-                        color="whitesmoke"
+                        :color="active == i ? '#00adb5' : 'whitesmoke'"
+                        @click="menuClick(item, i)"
                     ></n-icon>
                 </template>
                 {{ item.text }}

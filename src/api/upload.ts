@@ -25,15 +25,22 @@ export const upload = async (params: { file_name: string; file: File }) => {
     data.append('x-cos-meta-fileid', res.cos_file_id)
     data.append('file', params.file)
 
-    return http.request(
-        {
-            url: res.url,
-            method: 'post',
-            data: data,
-        },
-        {
-            serializeParams: false,
-            isShowMessage: false,
-        }
-    )
+    return new Promise(async (resolve, reject) => {
+        let r = await http.request(
+            {
+                url: res.url,
+                method: 'post',
+                data: data,
+            },
+            {
+                serializeParams: false,
+                isShowMessage: false,
+                isReturnNativeResponse: true,
+                isTransformResponse: false
+            }
+        )
+
+        resolve(res)
+    })
+
 }

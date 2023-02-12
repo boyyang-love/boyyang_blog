@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-20 13:03:04
- * @LastEditTime: 2023-01-09 10:07:46
+ * @LastEditTime: 2023-02-11 12:00:55
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\components\Background\index.vue
@@ -57,7 +57,7 @@
         background-color: v-bind('props.color');
         position: relative;
         overflow: hidden;
-        scroll-behavior: smooth;
+        // scroll-behavior: smooth;
         .background-content {
             scroll-behavior: smooth;
             box-sizing: border-box;

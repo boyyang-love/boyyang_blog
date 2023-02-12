@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:25:00
- * @LastEditTime: 2023-02-09 09:51:15
+ * @LastEditTime: 2023-02-11 21:17:47
  * @LastEditors: boyyang
  * @Description: 异步路由
  * @FilePath: \blog_web\src\router\asyncRoutes.ts
@@ -23,7 +23,7 @@ const asyncRoutes: RouteRecordRaw[] = [
             {
                 path: 'homePage',
                 name: 'HomePage',
-                component: () => import('@/views/home/components/home.vue')
+                component: () => import('@/views/home/components/home.vue'),
             },
             // 仪表盘
             {
@@ -69,6 +69,24 @@ const asyncRoutes: RouteRecordRaw[] = [
                     // roles: ['admin'],
                 },
                 component: () => import('@/views/admin/index.vue'),
+            },
+            {
+                path: 'blog',
+                name: 'Blog',
+                meta: {
+                    title: '博客',
+                    // roles: ['admin'],
+                },
+                component: () => import('@/views/blog/index.vue'),
+            },
+            {
+                path: 'upload',
+                name: 'Upload',
+                meta: {
+                    title: '图片上传',
+                    // roles: ['admin'],
+                },
+                component: () => import('@/views/upload/index.vue'),
             },
         ],
     },

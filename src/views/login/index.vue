@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-12-28 14:30:33
- * @LastEditTime: 2023-02-10 13:25:13
+ * @LastEditTime: 2023-02-10 17:37:10
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\login\index.vue
@@ -35,7 +35,7 @@
 
 <template>
     <div class="bg-wrapper">
-        <BackGround width="100vw" height="100vh" :url="bgImg" class="wow flipInY">
+        <BackGround width="100vw" height="100vh" :url="bgImg" class="wow pulse">
             <div class="bg" ref="bgWrapper">
                 <signInAndUp style="position: absolute"></signInAndUp>
             </div>
@@ -46,6 +46,7 @@
 <style scoped lang="less">
     .bg-wrapper {
         background-color: #3d3b4f;
+        overflow: hidden;
     }
     .bg {
         box-sizing: border-box;

@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-12-30 15:34:26
- * @LastEditTime: 2023-01-10 13:45:02
+ * @LastEditTime: 2023-02-12 11:25:27
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\api\exhibition.ts
@@ -10,6 +10,14 @@
 
 import { http } from '@/utils/http'
 import { Result } from '@/utils/http/types'
+
+export const createExhibition = (data: { title: string; des: string; cover: string }) => {
+    return http.request({
+        url: '/exhibition/create',
+        method: 'post',
+        data,
+    })
+}
 
 export const exhibitionList = (params: {
     ids?: string

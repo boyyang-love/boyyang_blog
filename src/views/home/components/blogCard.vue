@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import { useRouter } from 'vue-router'
     import {
         EyeOutlined,
         HeartOutlined,
@@ -11,15 +12,23 @@
         isReverse: boolean
     }
 
+    const router = useRouter()
+
     const props = withDefaults(defineProps<blogCardProps>(), {
         isReverse: false,
     })
+
+    const toBlogDetail = () => {
+        router.push({
+            name: 'Blog',
+        })
+    }
 </script>
 
 <template>
     <div :class="['card-wrapper', { 'is-reverse': props.isReverse }]">
         <div class="left">
-            <div class="mask">
+            <div class="mask" @click="toBlogDetail">
                 <n-icon
                     :component="SendOutlined"
                     class="send-icon"
@@ -55,7 +64,7 @@
             </div> -->
             <div class="bottom">
                 <div class="bottom-left">
-                    <n-space>
+                    <n-space vertical>
                         <div>作者：yang</div>
                         <div>时间：2022-01-01</div>
                     </n-space>
@@ -65,7 +74,7 @@
                         :value="10"
                         :max="999"
                         :dot="false"
-                        color="#393e46"
+                        color="none"
                         :offset="[70, -50]"
                         type="error"
                     >
@@ -75,7 +84,7 @@
                         :value="10"
                         :max="999"
                         :dot="false"
-                        color="#393e46"
+                        color="none"
                         :offset="[70, -50]"
                         type="error"
                     >
@@ -85,7 +94,7 @@
                         :value="10"
                         :max="999"
                         :dot="false"
-                        color="#393e46"
+                        color="none"
                         :offset="[70, -50]"
                         type="error"
                     >
@@ -95,7 +104,7 @@
                         :value="10"
                         :max="999"
                         :dot="false"
-                        color="#393e46"
+                        color="none"
                         :offset="[70, -50]"
                         type="error"
                     >
@@ -113,19 +122,17 @@
     }
     .card-wrapper {
         box-sizing: border-box;
-        height: 200px;
-        background-color: rgba(57, 62, 70, 0.5);
-        // border-radius: 5px;
-        box-shadow: 3px 5px 5px rgba(22, 24, 35, 0.6);
-        // padding: 0 10px;
+        height: 220px;
+        background-color: rgba(57, 62, 70, 0.9);
         display: flex;
         justify-content: space-between;
+        box-shadow: 5px 1px 3px rgba(0, 0, 0, 0.5);
         .left {
             box-sizing: border-box;
-            width: 420px;
+            width: 400px;
             height: 100%;
             // border-radius: 5px;
-            overflow: hidden;
+            // overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -136,6 +143,10 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                transition: all 0.5s linear;
+                box-shadow: 5px 5px 4px rgba(57, 62, 70, 0.9);
+                border-radius: 4px;
+                border: 5px solid #00adb5;
             }
 
             .mask {
@@ -145,8 +156,8 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-                background-color: rgba(61, 59, 79, 0.5);
-                box-shadow: inset 3px 3px rgba(61, 59, 79, 0.5);
+                // background-color: rgba(61, 59, 79, 0.5);
+                // box-shadow: inset 3px 3px rgba(61, 59, 79, 0.5);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -155,19 +166,24 @@
             }
 
             &:hover {
+                img {
+                    transform: scale(1.2);
+                    // transform: translateY(-50px);
+                }
                 .mask {
                     opacity: 1;
+                    z-index: 9;
                 }
             }
         }
         .right {
             box-sizing: border-box;
             padding-left: 10px;
-            width: calc(100% - 350px);
+            width: calc(100% - 420px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 10px 20px;
+            padding: 20px 15px;
             .title {
                 font-size: 15px;
                 font-weight: bold;

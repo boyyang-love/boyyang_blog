@@ -12,57 +12,62 @@
             '#9A60B4',
             '#ea7ccc',
         ],
-        padding: [15, 15, 0, 5],
+        padding: [15, 10, 0, 15],
+        dataLabel: false,
+        dataPointShape: false,
         enableScroll: false,
         legend: {
-            show: false,
             fontColor: '#fff',
         },
-        dataLabel: false,
         xAxis: {
             disableGrid: true,
-            axisLine: false,
             fontColor: '#fff',
-            scrollShow: true,
         },
         yAxis: {
             disabled: true,
-            disableGrid: true,
-            axisLine: false,
-            fontColor: '#fff',
+            gridType: 'dash',
+            dashLength: 2,
             data: [
-                {
-                    min: 0,
-                },
+                // {
+                //     min: 0,
+                //     max: 150,
+                // },
             ],
         },
         extra: {
-            mount: {
-                type: 'sharp',
-                widthRatio: 1.5,
+            line: {
+                type: 'curve',
+                width: 2,
+                activeType: 'hollow',
+                linearType: 'custom',
+                onShadow: true,
+                animation: 'horizontal',
             },
         },
     }
 
     const chartData = {
+        categories: ['2018', '2019', '2020', '2021', '2022', '2023', '111', '2222'],
         series: [
             {
-                data: [
-                    { name: '周一', value: 82 },
-                    { name: '周二', value: 63 },
-                    { name: '周三', value: 86 },
-                    { name: '周四', value: 65 },
-                    { name: '周五', value: 79 },
-                    { name: '', value: 79 },
-                    { name: '五班', value: 79 },
+                name: '发布数',
+                linearColor: [
+                    [0, '#1890FF'],
+                    [0.25, '#00B5FF'],
+                    [0.5, '#00D1ED'],
+                    [0.75, '#00E6BB'],
+                    [1, '#90F489'],
                 ],
+                color: '#fff',
+                setShadow: [3, 8, 10, '#1890FF'],
+                data: [15, 45, 15, 45, 15, 45, 11, 22],
             },
         ],
     }
 </script>
 
 <template>
-    <qiun-vue-ucharts type="mount" :opts="opts" :chartData="chartData" />
+    <qiun-vue-ucharts type="line" :opts="opts" :chartData="chartData" />
 </template>
 
 <style scoped></style>

@@ -13,3 +13,32 @@ export const createBlog = (data: {
         data,
     })
 }
+
+export const blogList = (params: {
+    page: number
+    limit: number
+}): Promise<Result<blog_blogList>> => {
+    return http.request(
+        {
+            url: '/blog/info',
+            method: 'get',
+            params,
+        },
+        {
+            isShowSuccessMessage: false,
+        }
+    )
+}
+
+export const blogDetail = (params: { ids: string }): Promise<Result<blog_blogList>> => {
+    return http.request(
+        {
+            url: '/blog/info',
+            method: 'get',
+            params,
+        },
+        {
+            isShowSuccessMessage: false,
+        }
+    )
+}

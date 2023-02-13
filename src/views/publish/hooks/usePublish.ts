@@ -26,7 +26,8 @@ const publishData = reactive({
         count: 0,
         page: 1,
         limit: 10,
-        bottomText: '滚动加载更多图片',
+        isMore: true,
+        isMoreLoading: false,
     },
 })
 
@@ -45,18 +46,6 @@ const paginationOpt = {
             value: 30,
         },
     ],
-}
-
-const usePublish = () => {
-    return {
-        publishData,
-        submit,
-        getList,
-        renderLabel,
-        renderSingleSelectTag,
-        paginationOpt,
-        handleScroll,
-    }
 }
 
 const submit = (type?: boolean) => {
@@ -108,6 +97,7 @@ const getList = () => {
         page: publishData.modal.page,
         limit: publishData.modal.limit,
     }
+    publishData.modal.isMoreLoading = true
     exhibitionList(imgParams).then(res => {
         publishData.modal.count = res.data.count
         publishData.modal.options = publishData.modal.options.concat(
@@ -120,10 +110,19 @@ const getList = () => {
             })
         )
 
-        if (publishData.modal.options.length >= publishData.modal.count){
-            publishData.modal.bottomText = "没有更多数据了"
+        if (publishData.modal.options.length >= publishData.modal.count) {
+            publishData.modal.isMore = false
         }
+        
+        publishData.modal.isMoreLoading = false
     })
+}
+
+const more = () => {
+    if (publishData.modal.isMore) {
+        publishData.modal.page++
+        getList()
+    }
 }
 
 // watchEffect(() => {
@@ -191,6 +190,19 @@ const handleScroll = (e: Event) => {
             publishData.modal.page++
             getList()
         }
+    }
+}
+
+const usePublish = () => {
+    return {
+        publishData,
+        submit,
+        getList,
+        renderLabel,
+        renderSingleSelectTag,
+        paginationOpt,
+        handleScroll,
+        more,
     }
 }
 

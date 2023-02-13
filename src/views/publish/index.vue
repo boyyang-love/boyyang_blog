@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2023-01-30 15:03:27
- * @LastEditTime: 2023-02-12 17:24:03
+ * @LastEditTime: 2023-02-13 16:54:31
  * @LastEditors: boyyang
  * @Description: 图片发布
  * @FilePath: \blog_web\src\views\publish\index.vue
@@ -12,7 +12,7 @@
     import { onMounted } from 'vue'
     import { UploadFileInfo } from 'naive-ui'
     import Wow from 'wow.js'
-    import { AccountBookFilled, SendOutlined } from '@vicons/antd'
+    import { AccountBookFilled, SendOutlined, SyncOutlined } from '@vicons/antd'
     import { upload } from '@/api/upload'
     import { PrintText } from '@/components/PrintText'
 
@@ -27,6 +27,7 @@
         renderSingleSelectTag,
         paginationOpt,
         handleScroll,
+        more,
     } = usePublish()
 
     onMounted(() => {
@@ -124,11 +125,20 @@
                 :render-label="renderLabel"
                 :render-tag="renderSingleSelectTag"
                 :reset-menu-on-options-change="false"
-                @scroll="handleScroll"
             >
                 <template #action>
                     <div class="bottom-text">
-                        {{ publishData.modal.bottomText }}
+                        <n-icon
+                            :component="SyncOutlined"
+                            v-if="publishData.modal.isMore"
+                            @click="more"
+                            :class="{ 'circle-ani': publishData.modal.isMoreLoading }"
+                            size="20"
+                        ></n-icon>
+                        <span v-if="publishData.modal.isMoreLoading">图片获取中·····</span>
+                        <span v-else>
+                            {{ publishData.modal.isMore ? '点击加载更多图片' : '没有更多图片了' }}
+                        </span>
                     </div>
                 </template>
             </n-select>
@@ -203,11 +213,25 @@
         justify-content: center;
         align-items: center;
         // height: 500px;
-        .bottom-text {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    }
+
+    .bottom-text {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .circle-ani {
+        animation: ani 2s ease-in-out infinite;
+
+        @keyframes ani {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            100% {
+                transform: rotateZ(360deg);
+            }
         }
     }
 </style>

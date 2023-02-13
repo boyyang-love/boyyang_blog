@@ -2,10 +2,13 @@
     import { onMounted } from 'vue'
     import Wow from 'wow.js'
     import { PrintText } from '@/components/PrintText'
+    import { BackGround } from '@/components/Background'
 
-    const text = `
-    jjjjjjjf
-    `
+    import { useRoute } from 'vue-router'
+    import { useBlog } from './hooks/useBlog'
+
+    const route = useRoute()
+    const { blogData, getBlogDetail } = useBlog()
 
     onMounted(() => {
         const wow = new Wow({
@@ -22,18 +25,25 @@
         })
 
         wow.init()
+
+        getBlogDetail(route.query)
     })
 </script>
 
 <template>
-    <div class="blog-wrapper container m-auto" id="blog-container">
-        <div class="top-banner">
-            <PrintText title="vue3.0" subtitle="vue3.0搭建"></PrintText>
+    <BackGround width="100vw" height="100vh" :url="blogData.blogInfo.cover" class="wow slideInDown">
+        <div class="blog-wrapper container m-auto" id="blog-container">
+            <div class="top-banner">
+                <PrintText
+                    :title="blogData.blogInfo.title"
+                    :subtitle="blogData.blogInfo.sub_title"
+                ></PrintText>
+            </div>
+            <div class="blog-content wow fadeInUpBig" data-wow-delay="1s">
+                <v-md-preview :text="blogData.blogInfo.content"></v-md-preview>
+            </div>
         </div>
-        <div class="blog-content wow fadeInUpBig" data-wow-delay="1s">
-            <v-md-preview :text="text"></v-md-preview>
-        </div>
-    </div>
+    </BackGround>
 </template>
 
 <style scoped lang="less">
@@ -41,6 +51,7 @@
         box-sizing: border-box;
         width: 100%;
         height: 100%;
+        overflow: auto;
         .top-banner {
             box-sizing: border-box;
             height: 650px;

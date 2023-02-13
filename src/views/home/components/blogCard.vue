@@ -10,6 +10,10 @@
 
     interface blogCardProps {
         isReverse: boolean
+        title: string
+        subtitle: string
+        cover: string
+        author: string
     }
 
     const router = useRouter()
@@ -18,10 +22,12 @@
         isReverse: false,
     })
 
+    const emits = defineEmits<{
+        (e: 'cardClick'): void
+    }>()
+
     const toBlogDetail = () => {
-        router.push({
-            name: 'Blog',
-        })
+        emits("cardClick")
     }
 </script>
 
@@ -37,40 +43,28 @@
                 ></n-icon>
             </div>
 
-            <img src="@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg" alt="" />
+            <img :src="props.cover" :alt="props.cover" />
         </div>
         <div class="right">
             <div class="title">
                 <n-ellipsis :line-clamp="1" style="max-width: 520px" width="trigger">
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
+                    {{ props.title }}
                 </n-ellipsis>
             </div>
             <div class="sub-title">
                 <n-ellipsis :line-clamp="3" style="max-width: 520px" :tooltip="false">
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
+                    {{ props.subtitle }}
                 </n-ellipsis>
             </div>
-            <!-- <div class="content">
-                <n-ellipsis :line-clamp="3" style="max-width: 520px" :tooltip="false">
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
-                    住在我心里孤独的 孤独的海怪 痛苦之王 开始厌倦 深海的光 停滞的海浪
-                </n-ellipsis>
-            </div> -->
             <div class="bottom">
                 <div class="bottom-left">
                     <n-space vertical>
-                        <div>作者：yang</div>
+                        <div>作者：{{ props.author }}</div>
                         <div>时间：2022-01-01</div>
                     </n-space>
                 </div>
                 <div class="bottom-right">
-                    <n-badge
+                    <!-- <n-badge
                         :value="10"
                         :max="999"
                         :dot="false"
@@ -79,7 +73,7 @@
                         type="error"
                     >
                         <n-icon :component="EyeOutlined" size="27" color="#eeeeee"></n-icon>
-                    </n-badge>
+                    </n-badge> -->
                     <n-badge
                         :value="10"
                         :max="999"

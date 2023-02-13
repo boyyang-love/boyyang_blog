@@ -13,6 +13,11 @@
     import Carousel from './carousel.vue'
     import banner from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
 
+    // hooks
+    import { useHome } from '../hooks/useHome'
+
+    const { homeData, getBlogList, cardClick } = useHome()
+
     onMounted(() => {
         const wow = new Wow({
             boxClass: 'wow', // animated element css class (default is wow)
@@ -28,6 +33,8 @@
         })
 
         wow.init()
+
+        getBlogList()
     })
 </script>
 
@@ -54,14 +61,21 @@
                     <n-space vertical size="large">
                         <div class="title wow slideInDown">我的博客</div>
                         <BlogCard
-                            v-for="(item, i) in 10"
-                            :key="item"
+                            v-for="(item, i) in homeData.blog.list"
+                            :key="item.id"
                             :class="['wow', (i + 1) % 2 == 0 ? 'bounceInLeft' : 'bounceInRight']"
                             :is-reverse="(i + 1) % 2 == 0"
+                            :title="item.title"
+                            :subtitle="item.sub_title"
+                            :cover="item.cover"
+                            :author="item.user_info.username"
+                            @cardClick="cardClick(item.id)"
                         ></BlogCard>
                         <div class="pagination wow bounceInUp">
                             <n-pagination
-                                :page-count="100"
+                                v-model:page="homeData.blog.page"
+                                v-model:page-size="homeData.blog.limit"
+                                :item-count="homeData.blog.count"
                                 show-size-picker
                                 :page-sizes="[10, 20, 30, 40]"
                             />

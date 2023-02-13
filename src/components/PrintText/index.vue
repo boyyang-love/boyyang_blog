@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { computed, onMounted, ref } from 'vue'
+    import { computed, onMounted, ref, watch } from 'vue'
     interface PrintTextProps {
         title?: string
         subtitle?: string
@@ -10,18 +10,26 @@
     })
 
     const subTitleText = ref<string[]>([])
+    const t = ref<NodeJS.Timer | null>(null)
 
     onMounted(() => {
         beginAni()
     })
 
+    watch(
+        () => props.subtitle,
+        () => {
+            beginAni()
+        }
+    )
+
     const beginAni = () => {
+        subTitleText.value = []
         const titleArr = props.subtitle.split('')
         const len = titleArr.length
         let index = 0
-        let t: NodeJS.Timer | null = null
-        t && clearInterval(t)
-        t = setInterval(() => {
+        t.value && clearInterval(t.value)
+        t.value = setInterval(() => {
             if (index <= len) {
                 subTitleText.value.push(titleArr[index])
                 index++

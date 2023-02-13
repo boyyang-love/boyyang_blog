@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:25:32
- * @LastEditTime: 2023-02-12 18:04:15
+ * @LastEditTime: 2023-02-13 16:01:02
  * @LastEditors: boyyang
  * @Description: 路由守卫
  * @FilePath: \blog_web\src\router\routerGuards.ts
@@ -49,7 +49,7 @@ const createRouterGuards = (router: Router) => {
                 // 添加404路由
                 router.addRoute(errRoutes)
                 if (to.matched.length === 0) {
-                    next(to.path)
+                    next(to.fullPath)
                 } else {
                     next()
                 }

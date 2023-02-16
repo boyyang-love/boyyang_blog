@@ -15,8 +15,18 @@
 
     // hooks
     import { useHome } from '../hooks/useHome'
+    import { useExhibition } from '../hooks/useExhibition'
 
-    const { homeData, getBlogList, cardClick } = useHome()
+    const {
+        homeData,
+        getBlogList,
+        getDashboard,
+        cardClick,
+        pageChange,
+        pageSizeChange,
+        paginationOpt,
+    } = useHome()
+    const { exhibitionData, getExhibitionList } = useExhibition()
 
     onMounted(() => {
         const wow = new Wow({
@@ -35,6 +45,8 @@
         wow.init()
 
         getBlogList()
+        getExhibitionList()
+        getDashboard()
     })
 </script>
 
@@ -47,14 +59,18 @@
             <div class="content">
                 <!-- <div class="title wow slideInDown">热门博客</div> -->
                 <div class="publish-charts wow bounceInDown">
-                    <PublishChart></PublishChart>
+                    <PublishChart
+                        :categories="homeData.chart.categories"
+                        :series-data-blog="homeData.chart.blogChartData"
+                        :series-data-exhibition="homeData.chart.exhibitionChartData"
+                    ></PublishChart>
                 </div>
                 <div class="tile wow bounceInUp">
                     <div class="tile-left wow bounceInLeft">
                         <Tile></Tile>
                     </div>
                     <div class="tile-right wow bounceInRight">
-                        <Carousel></Carousel>
+                        <Carousel :list="exhibitionData.exhibitionList"></Carousel>
                     </div>
                 </div>
                 <div class="blog">
@@ -77,7 +93,9 @@
                                 v-model:page-size="homeData.blog.limit"
                                 :item-count="homeData.blog.count"
                                 show-size-picker
-                                :page-sizes="[10, 20, 30, 40]"
+                                :page-sizes="paginationOpt.pageSizes"
+                                @update:page-size="pageSizeChange"
+                                @update:page="pageChange"
                             />
                         </div>
                     </n-space>
@@ -85,7 +103,7 @@
             </div>
             <div class="right">
                 <div class="user wow slideInDown">
-                    <User></User>
+                    <User :user-info="homeData.userInfo"></User>
                 </div>
                 <div class="tags wow slideInDown">
                     <Tags></Tags>

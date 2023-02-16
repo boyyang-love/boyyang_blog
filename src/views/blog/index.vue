@@ -54,7 +54,7 @@
         overflow: auto;
         .top-banner {
             box-sizing: border-box;
-            height: 650px;
+            height: 450px;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -64,7 +64,7 @@
         .blog-content {
             box-sizing: border-box;
             width: 100%;
-            padding: 0 200px;
+            padding: 0 200px 300px;
         }
     }
 </style>

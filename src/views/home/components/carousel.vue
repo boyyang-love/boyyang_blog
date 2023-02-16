@@ -1,4 +1,13 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+    interface carouselProps {
+        list: listItem[]
+    }
+
+    interface listItem {
+        cover: string
+    }
+    const props = withDefaults(defineProps<carouselProps>(), {})
+</script>
 
 <template>
     <n-carousel
@@ -6,23 +15,11 @@
         dot-placement="right"
         show-arrow
         style="width: 100%; height: 250px"
+        autoplay
+        effect="card"
+        :show-dots="false"
     >
-        <img
-            class="carousel-img"
-            src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
-        />
-        <img
-            class="carousel-img"
-            src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
-        />
-        <img
-            class="carousel-img"
-            src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
-        />
-        <img
-            class="carousel-img"
-            src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
-        />
+        <img v-for="(item, i) in props.list" :key="i" class="carousel-img" :src="item.cover" />
     </n-carousel>
 </template>
 
@@ -32,5 +29,11 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: left top;
+        transition: all 1s ease-in-out;
+
+        &:hover {
+            object-position: right bottom;
+        }
     }
 </style>

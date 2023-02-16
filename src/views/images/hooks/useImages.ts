@@ -28,15 +28,15 @@ const imagesData = reactive({
 const paginationOpt = {
     pageSizes: [
         {
-            label: '12 每页',
+            label: '12/页',
             value: 12,
         },
         {
-            label: '24 每页',
+            label: '24/页',
             value: 24,
         },
         {
-            label: '36 每页',
+            label: '36/页',
             value: 36,
         },
     ],

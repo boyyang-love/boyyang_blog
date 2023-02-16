@@ -45,6 +45,7 @@
     .imgcard-wrapper {
         box-sizing: border-box;
         width: 100%;
+        max-height: 250px;
         background-color: #fff;
         border: 4px solid whitesmoke;
         border-radius: 2px;
@@ -56,6 +57,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: left top;
+            transition: all 1s linear;
+
+            &:hover {
+                object-position: right bottom;
+            }
         }
 
         &:hover {

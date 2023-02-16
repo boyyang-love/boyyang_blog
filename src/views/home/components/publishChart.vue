@@ -1,5 +1,14 @@
 <script lang="ts" setup>
+    import { computed } from 'vue'
     import qiunVueUcharts from '@qiun/vue-ucharts'
+
+    interface publisChartProps {
+        categories: string[]
+        seriesDataBlog: string[]
+        seriesDataExhibition: string[]
+    }
+
+    const props = withDefaults(defineProps<publisChartProps>(), {})
     const opts = {
         color: [
             '#1890FF',
@@ -46,24 +55,39 @@
         },
     }
 
-    const chartData = {
-        categories: ['2018', '2019', '2020', '2021', '2022', '2023', '111', '2222'],
-        series: [
-            {
-                name: '发布数',
-                linearColor: [
-                    [0, '#1890FF'],
-                    [0.25, '#00B5FF'],
-                    [0.5, '#00D1ED'],
-                    [0.75, '#00E6BB'],
-                    [1, '#90F489'],
-                ],
-                color: '#fff',
-                setShadow: [3, 8, 10, '#1890FF'],
-                data: [15, 45, 15, 45, 15, 45, 11, 22],
-            },
-        ],
-    }
+    const chartData = computed(() => {
+        return {
+            categories: props.categories,
+            series: [
+                {
+                    name: '图片发布数',
+                    linearColor: [
+                        [0, '#1890FF'],
+                        [0.25, '#00B5FF'],
+                        [0.5, '#00D1ED'],
+                        [0.75, '#00E6BB'],
+                        [1, '#90F489'],
+                    ],
+                    color: '#fff',
+                    setShadow: [3, 8, 10, '#1890FF'],
+                    data: props.seriesDataBlog,
+                },
+                {
+                    name: '博客发布数',
+                    linearColor: [
+                        [0, '#1890FF'],
+                        [0.25, '#00B5FF'],
+                        [0.5, '#00D1ED'],
+                        [0.75, '#00E6BB'],
+                        [1, '#90F489'],
+                    ],
+                    color: '#fff',
+                    setShadow: [3, 8, 10, '#1890FF'],
+                    data: props.seriesDataExhibition,
+                },
+            ],
+        }
+    })
 </script>
 
 <template>

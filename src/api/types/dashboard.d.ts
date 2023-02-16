@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2023-02-02 09:22:37
- * @LastEditTime: 2023-02-02 17:18:13
+ * @LastEditTime: 2023-02-16 14:54:20
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\api\types\dashboard.d.ts
@@ -15,20 +15,25 @@ interface dashboardRes {
 }
 
 interface dashboard_user_info {
-    id: number
-    username: string
-    gender: number
-    avatarUrl: string
-    tel: number
-    thumbs_up: number
-    like: number
-    publish: number
+    age: number
+    avatar_url: string
+    email: string
     following: number
+    gender: number
+    gitHub: string
+    like: number
+    motto: string
+    publish: number
+    qq: number
+    thumbs_up: number
+    username: string
+    wechat: string
 }
 
 interface dashboard_dashboard {
+    blog_publish_value: string
+    exhibitions_publish_value: string
     name: string
-    value: string
 }
 
 interface dashboard_exhibitions {

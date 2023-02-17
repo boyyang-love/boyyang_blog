@@ -5,7 +5,6 @@
         userInfo: dashboard_user_info
     }
     const props = withDefaults(defineProps<userProps>(), {})
-
 </script>
 
 <template>
@@ -22,7 +21,7 @@
                 {{ props.userInfo.username }}
             </div>
             <div class="user-signature wow slideInDown" data-wow-delay="1s">
-                hgghklsjslfhshajflajfhie
+                {{ props.userInfo.motto }}
             </div>
             <div class="info">
                 <div class="icon-item wow pulse" data-wow-delay="3s">

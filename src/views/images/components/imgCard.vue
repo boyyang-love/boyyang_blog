@@ -24,7 +24,7 @@
 
 <template>
     <div class="imgcard-wrapper">
-        <img :src="props.url" :alt="props.name" />
+        <img :src="props.url" :alt="props.name" :key="props.url"/>
 
         <div class="imgcard-bottom">
             <div class="left-text">

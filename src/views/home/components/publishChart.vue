@@ -70,7 +70,7 @@
                     ],
                     color: '#fff',
                     setShadow: [3, 8, 10, '#1890FF'],
-                    data: props.seriesDataBlog,
+                    data: props.seriesDataExhibition,
                 },
                 {
                     name: '博客发布数',
@@ -83,7 +83,7 @@
                     ],
                     color: '#fff',
                     setShadow: [3, 8, 10, '#1890FF'],
-                    data: props.seriesDataExhibition,
+                    data: props.seriesDataBlog,
                 },
             ],
         }

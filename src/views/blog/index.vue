@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { onMounted } from 'vue'
+    import { nextTick, onMounted, ref } from 'vue'
     import Wow from 'wow.js'
     import { PrintText } from '@/components/PrintText'
     import { BackGround } from '@/components/Background'
@@ -9,6 +9,8 @@
 
     const route = useRoute()
     const { blogData, getBlogDetail } = useBlog()
+
+    const mdPreview = ref<any | null>(null)
 
     onMounted(() => {
         const wow = new Wow({
@@ -26,7 +28,14 @@
 
         wow.init()
 
-        getBlogDetail(route.query)
+        getBlogDetail(route.query).then((res) => {
+            if(res){
+                nextTick(() => {
+                    console.log( mdPreview.value.$el.querySelectorAll("h1,h2,h3,h4,h5"))
+                })
+            }
+        })
+        
     })
 </script>
 
@@ -40,7 +49,11 @@
                 ></PrintText>
             </div>
             <div class="blog-content wow fadeInUpBig" data-wow-delay="1s">
-                <v-md-preview :text="blogData.blogInfo.content"></v-md-preview>
+                <v-md-preview
+                    :text="blogData.blogInfo.content"
+                    :include-level="[3, 4]"
+                    ref="mdPreview"
+                ></v-md-preview>
             </div>
         </div>
     </BackGround>

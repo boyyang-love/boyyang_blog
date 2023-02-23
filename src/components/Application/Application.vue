@@ -1,10 +1,10 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-04-06 11:57:35
- * @LastEditTime: 2022-07-04 13:55:10
+ * @LastEditTime: 2023-02-23 14:30:06
  * @LastEditors: boyyang
  * @Description: 
- * @FilePath: \blog\web\src\components\Application\Application.vue
+ * @FilePath: \blog_web\src\components\Application\Application.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
 
@@ -18,6 +18,7 @@
     import { MessageContent } from '@/components/MessageContent'
     import { DialogContent } from '@/components/DialogContent'
     import { NotificationContent } from '@/components/Notification'
+    import { Loading } from '@/components/Loading'
 </script>
 
 <template>
@@ -28,7 +29,9 @@
                 <NotificationContent />
                 <n-message-provider>
                     <MessageContent />
-                    <slot slot="default"></slot>
+                    <Loading>
+                        <slot slot="default"></slot>
+                    </Loading>
                 </n-message-provider>
             </n-notification-provider>
         </n-dialog-provider>

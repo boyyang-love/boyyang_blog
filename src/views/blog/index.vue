@@ -28,14 +28,7 @@
 
         wow.init()
 
-        getBlogDetail(route.query).then((res) => {
-            if(res){
-                nextTick(() => {
-                    console.log( mdPreview.value.$el.querySelectorAll("h1,h2,h3,h4,h5"))
-                })
-            }
-        })
-        
+        getBlogDetail(route.query)
     })
 </script>
 

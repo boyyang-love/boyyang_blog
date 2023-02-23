@@ -1,13 +1,12 @@
 /**
  * @Author: boyyang
  * @Date: 2022-12-28 17:14:40
- * @LastEditTime: 2022-12-30 15:26:13
+ * @LastEditTime: 2023-02-23 15:04:49
  * @LastEditors: boyyang
  * @Description:
  * @FilePath: \blog_web\src\views\login\hooks\useLogin.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
-
 
 import { reactive } from 'vue'
 import { login, register } from '@/api/login'
@@ -38,6 +37,7 @@ const submit = (type: boolean) => {
             window.$message.error('账号或密码不能为空')
             return
         }
+        window.$loading.loadingStart()
         login(params).then(res => {
             loginSuccess(res.data)
         })
@@ -65,6 +65,7 @@ const loginSuccess = (data: loginRes) => {
     const userStore = useUserStoreWithOut()
     userStore.setToken(data.token)
     userStore.setUserinfo(data.info)
+    window.$loading.loadingEnd()
 
     router.replace({ name: 'Home' })
 }

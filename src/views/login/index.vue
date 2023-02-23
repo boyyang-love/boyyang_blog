@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2022-12-28 14:30:33
- * @LastEditTime: 2023-02-10 17:37:10
+ * @LastEditTime: 2023-02-23 14:41:53
  * @LastEditors: boyyang
  * @Description: 
  * @FilePath: \blog_web\src\views\login\index.vue
@@ -14,6 +14,7 @@
     import bgImg from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
     import { BackGround } from '@/components/Background'
     import signInAndUp from './components/signInAndUp.vue'
+    import Loading from '@/components/Loading/index.vue'
 
     onMounted(() => {
         const wow = new Wow({
@@ -22,13 +23,12 @@
             offset: 0, // distance to the element when triggering the animation (default is 0)
             mobile: true, // trigger animations on mobile devices (default is true)
             live: true, // act on asynchronously loaded content (default is true)
-            callback: function (box) {
+            callback: function () {
                 // the callback is fired every time an animation is started
                 // the argument that is passed in is the DOM node being animated
             },
             scrollContainer: null, // optional scroll container selector, otherwise use window
         })
-
         wow.init()
     })
 </script>

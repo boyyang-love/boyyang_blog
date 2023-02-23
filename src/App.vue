@@ -1,13 +1,3 @@
-<template>
-    <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides">
-        <!-- <n-theme-editor> -->
-        <AppProvider>
-            <router-view></router-view>
-        </AppProvider>
-        <!-- </n-theme-editor> -->
-    </n-config-provider>
-</template>
-
 <script lang="ts" setup>
     import {
         NConfigProvider,
@@ -40,6 +30,16 @@
         },
     }
 </script>
+
+<template>
+    <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides">
+        <!-- <n-theme-editor> -->
+        <AppProvider>
+            <router-view></router-view>
+        </AppProvider>
+        <!-- </n-theme-editor> -->
+    </n-config-provider>
+</template>
 
 <style>
     @font-face {

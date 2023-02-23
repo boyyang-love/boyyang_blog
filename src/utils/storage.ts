@@ -1,13 +1,20 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:47:03
- * @LastEditTime: 2022-05-16 11:51:58
+ * @LastEditTime: 2023-02-23 15:36:02
  * @LastEditors: boyyang
  * @Description: 本地储存
- * @FilePath: \drawingBed\src\utils\storage.ts
+ * @FilePath: \blog_web\src\utils\storage.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
+
+/**
+ * @description 创建本地存储对象
+ * @param {string} prefixKey 存储对象前缀
+ * @param {Storage} storage 存储类型 默认为 localStorage
+ * @param {number | undefined} expire 存储有效时间 默认为 undefined(永久保存)
+ * */ 
 const createStorage = (prefixKey?: string, storage: Storage = localStorage, expire: number | undefined = undefined) => {
     class Store {
         private prefixKey: string

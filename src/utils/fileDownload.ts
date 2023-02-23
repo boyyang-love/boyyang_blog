@@ -1,14 +1,19 @@
 /**
  * @Author: boyyang
  * @Date: 2022-05-10 13:42:59
- * @LastEditTime: 2022-07-12 09:39:57
+ * @LastEditTime: 2023-02-23 15:30:00
  * @LastEditors: boyyang
  * @Description: 文件下载
- * @FilePath: \blog\web\src\utils\fileDownload.ts
+ * @FilePath: \blog_web\src\utils\fileDownload.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-const imageDownload = (url: string, name: string) => {
+/**
+ * @description 根据图片链接本地下载图片
+ * @param {string} url //下载图片地址
+ * @param {string} name // 下载图片名称
+ * */
+const imageDownload = (url: string, name: string): Promise<boolean> => {
     return new Promise(resolve => {
         const link = document.createElement('a')
         link.setAttribute('download', name)
@@ -24,6 +29,7 @@ const imageDownload = (url: string, name: string) => {
         }
     })
 }
+
 
 const getImageBase64 = (image: HTMLImageElement) => {
     const canvas = document.createElement('canvas')

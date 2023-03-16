@@ -2,16 +2,13 @@
     import { onMounted } from 'vue'
     import Wow from 'wow.js'
     import BlogCard from './blogCard.vue'
-    import { BackGround } from '@/components/Background'
-    import { PrintText } from '@/components/PrintText'
+    import PrintText  from '@/components/PrintText'
     import User from './user.vue'
     import Tags from './tags.vue'
-    import HotBlog from './hotBlog.vue'
     import Tile from './tile.vue'
     import PublishChart from './publishChart.vue'
     import Notice from './notice.vue'
     import Carousel from './carousel.vue'
-    import banner from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
 
     // hooks
     import { useHome } from '../hooks/useHome'

@@ -1,10 +1,10 @@
-import { computed, reactive } from 'vue'
-import { UploadFileInfo, UploadInst } from 'naive-ui'
-import { env } from '@/utils/env'
+import {computed, reactive} from 'vue'
+import {UploadFileInfo, UploadInst} from 'naive-ui'
+import {env} from '@/utils/env'
 
 // api
-import { createExhibition } from '@/api/exhibition'
-import { upload } from '@/api/upload'
+import {createExhibition} from '@/api/exhibition'
+import {upload} from '@/api/upload'
 
 const uploadData = reactive({
     isShowSpin: false,
@@ -88,4 +88,4 @@ const submit = (uploadRef: UploadInst | null) => {
     })
 }
 
-export { useUpload }
+export {useUpload}

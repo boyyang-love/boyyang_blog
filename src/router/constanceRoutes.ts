@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 16:23:46
- * @LastEditTime: 2023-02-09 09:49:19
+ * @LastEditTime: 2023-03-06 15:14:19
  * @LastEditors: boyyang
  * @Description: 静态路由
  * @FilePath: \blog_web\src\router\constanceRoutes.ts
@@ -10,15 +10,16 @@
 
 import { RouteRecordRaw } from 'vue-router'
 const constantRoutes: RouteRecordRaw[] = [
-    {
-        path: '/',
-        name: 'Home',
-        redirect: '/homePage',
-        meta: {
-            title: '首页',
-        },
-        component: () => import('@/views/home/index.vue'),
-    },
+    // {
+    //     path: '/',
+    //     name: 'Home',
+    //     redirect: '/homePage',
+    //     meta: {
+    //         title: '首页',
+    //     },
+    //     children:[],
+    //     component: () => import('@/views/home/index.vue'),
+    // },
     {
         path: '/login',
         name: 'Login',

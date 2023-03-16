@@ -57,6 +57,8 @@
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
         background-color: #393e46;
+        scroll-behavior: smooth;
+
     }
     /*修改滚动条样式*/
     ::-webkit-scrollbar {

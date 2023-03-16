@@ -4,7 +4,7 @@ import { RequestOptions, Result, AxiosOptions } from './types'
 import { transForm } from './transform'
 
 class Axios {
-    private options: AxiosOptions
+    private readonly options: AxiosOptions
     private axiosInstance: AxiosInstance
     constructor(options: AxiosOptions) {
         this.options = options

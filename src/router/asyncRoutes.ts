@@ -1,7 +1,7 @@
 /**
  * @Author: boyyang
  * @Date: 2022-04-04 17:25:00
- * @LastEditTime: 2023-02-11 21:17:47
+ * @LastEditTime: 2023-03-06 15:12:30
  * @LastEditors: boyyang
  * @Description: 异步路由
  * @FilePath: \blog_web\src\router\asyncRoutes.ts
@@ -62,15 +62,6 @@ const asyncRoutes: RouteRecordRaw[] = [
                 component: () => import('@/views/user/index.vue'),
             },
             {
-                path: 'admin',
-                name: 'Admin',
-                meta: {
-                    title: '管理后台',
-                    // roles: ['admin'],
-                },
-                component: () => import('@/views/admin/index.vue'),
-            },
-            {
                 path: 'blog',
                 name: 'Blog',
                 meta: {
@@ -89,6 +80,15 @@ const asyncRoutes: RouteRecordRaw[] = [
                 component: () => import('@/views/upload/index.vue'),
             },
         ],
+    },
+    {
+        path: '/admin',
+        name: 'Admin',
+        meta: {
+            title: '管理后台',
+            // roles: ['admin'],
+        },
+        component: () => import('@/views/admin/index.vue'),
     },
 ]
 

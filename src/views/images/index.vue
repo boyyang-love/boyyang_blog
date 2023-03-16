@@ -1,7 +1,7 @@
 <!--
  * @Author: boyyang
  * @Date: 2023-01-30 15:02:10
- * @LastEditTime: 2023-02-17 16:54:41
+ * @LastEditTime: 2023-03-01 17:59:23
  * @LastEditors: boyyang
  * @Description: 所有图片展示
  * @FilePath: \blog_web\src\views\images\index.vue
@@ -82,6 +82,7 @@
         height: 100%;
         overflow-x: hidden;
         overflow-y: auto;
+        scroll-behavior: smooth;
 
         .top-banner {
             width: 100%;

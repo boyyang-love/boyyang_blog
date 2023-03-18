@@ -8,7 +8,7 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { scrollToBottom } from './scrollToBottom'
+import {scrollToBottom} from './scrollToBottom'
 
 const useHooks = () => {
     return {
@@ -16,4 +16,4 @@ const useHooks = () => {
     }
 }
 
-export { useHooks }
+export {useHooks}

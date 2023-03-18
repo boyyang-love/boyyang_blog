@@ -17,5 +17,5 @@ const resolveImage = (url?: string): string => {
 }
 
 export {
-    resolveImage
+    resolveImage,
 }

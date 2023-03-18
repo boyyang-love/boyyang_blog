@@ -1,11 +1,11 @@
-import { h, reactive, watchEffect } from 'vue'
-import { NAvatar, SelectRenderLabel, SelectRenderTag } from 'naive-ui'
+import {h, reactive, watchEffect} from 'vue'
+import {NAvatar, SelectRenderLabel, SelectRenderTag} from 'naive-ui'
 
 // api
-import { exhibitionList } from '@/api/exhibition'
-import { createBlog } from '@/api/blog'
+import {exhibitionList} from '@/api/exhibition'
+import {createBlog} from '@/api/blog'
 
-import { env } from '@/utils/env'
+import {env} from '@/utils/env'
 
 const publishData = reactive({
     submit: {
@@ -107,13 +107,13 @@ const getList = () => {
                     value: item.cover,
                     cover: `${env.VITE_APP_IMG_URL}${item.cover}`,
                 }
-            })
+            }),
         )
 
         if (publishData.modal.options.length >= publishData.modal.count) {
             publishData.modal.isMore = false
         }
-        
+
         publishData.modal.isMoreLoading = false
     })
 }
@@ -147,10 +147,10 @@ const renderLabel: SelectRenderTag = option => {
                     'box-shadow': '2px 2px 2px black',
                 },
             }),
-        ]
+        ],
     )
 }
-const renderSingleSelectTag: SelectRenderLabel = ({ option }) => {
+const renderSingleSelectTag: SelectRenderLabel = ({option}) => {
     console.log(option)
     if ((option as any).value == '') {
         return h('div', {
@@ -179,7 +179,7 @@ const renderSingleSelectTag: SelectRenderLabel = ({ option }) => {
                     border: '2px solid white',
                 },
             }),
-        ]
+        ],
     )
 }
 
@@ -206,4 +206,4 @@ const usePublish = () => {
     }
 }
 
-export { usePublish }
+export {usePublish}

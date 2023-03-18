@@ -9,28 +9,28 @@
 -->
 
 <script lang="ts" setup>
-    import { onMounted, nextTick } from 'vue'
-    import Wow from 'wow.js'
-    import TopMenu from './components/topMenu.vue'
-    import { BackGround } from '@/components/Background'
-    import banner from '@/assets/00008.png'
+import {onMounted, nextTick} from 'vue'
+import Wow from 'wow.js'
+import TopMenu from './components/topMenu.vue'
+import {BackGround} from '@/components/Background'
+import banner from '@/assets/00008.png'
 
-    onMounted(() => {
-        const wow = new Wow({
-            boxClass: 'wow', // animated element css class (default is wow)
-            animateClass: 'animated', // animation css class (default is animated)
-            offset: 0, // distance to the element when triggering the animation (default is 0)
-            mobile: true, // trigger animations on mobile devices (default is true)
-            live: true, // act on asynchronously loaded content (default is true)
-            callback: function () {
-                // the callback is fired every time an animation is started
-                // the argument that is passed in is the DOM node being animated
-            },
-            scrollContainer: null, // optional scroll container selector, otherwise use window
-        })
-
-        wow.init()
+onMounted(() => {
+    const wow = new Wow({
+        boxClass: 'wow', // animated element css class (default is wow)
+        animateClass: 'animated', // animation css class (default is animated)
+        offset: 0, // distance to the element when triggering the animation (default is 0)
+        mobile: true, // trigger animations on mobile devices (default is true)
+        live: true, // act on asynchronously loaded content (default is true)
+        callback: function () {
+            // the callback is fired every time an animation is started
+            // the argument that is passed in is the DOM node being animated
+        },
+        scrollContainer: null, // optional scroll container selector, otherwise use window
     })
+
+    wow.init()
+})
 </script>
 
 <template>
@@ -44,12 +44,10 @@
 </template>
 
 <style scoped lang="less">
-    .index {
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        // background-color: rgba(22, 24, 35, 1);
-        // background-color: rgba(57, 62, 70, 0.1);
-    }
+.index {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
 </style>

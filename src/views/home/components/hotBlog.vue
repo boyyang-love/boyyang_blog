@@ -2,7 +2,7 @@
 
 <template>
     <div class="hot-blog-wrapper">
-        
+
     </div>
 </template>
 

@@ -7,7 +7,7 @@
  * @FilePath: \blog\web\src\plugin\markDown.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
-import { type App } from 'vue'
+import {type App} from 'vue'
 import VueMarkdownEditor from '@kangc/v-md-editor'
 import VMdPreview from '@kangc/v-md-editor/lib/preview'
 import '@kangc/v-md-editor/lib/style/base-editor.css'
@@ -20,10 +20,10 @@ const setupMarkDown = (app: App) => {
         Prism,
     })
     VMdPreview.use(vuepressTheme, {
-        Prism
+        Prism,
     })
     app.use(VueMarkdownEditor)
     app.use(VMdPreview)
 }
 
-export { setupMarkDown }
+export {setupMarkDown}

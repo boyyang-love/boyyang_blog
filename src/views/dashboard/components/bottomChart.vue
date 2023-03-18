@@ -9,7 +9,7 @@
 -->
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import {computed, ref} from 'vue'
 import qiunVueUcharts from '@qiun/vue-ucharts'
 
 interface chartProps {
@@ -22,51 +22,51 @@ interface chartInfo {
 }
 
 const props = withDefaults(defineProps<chartProps>(), {
-    chartData: () => []
+    chartData: () => [],
 })
 
 const opts = {
-    color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"],
+    color: ['#1890FF', '#91CB74', '#FAC858', '#EE6666', '#73C0DE', '#3CA272', '#FC8452', '#9A60B4', '#ea7ccc'],
     padding: [30, 30, 15, 5],
     enableScroll: false,
     xAxis: {
         disableGrid: true,
         showTitle: true,
-        title: "时间",
+        title: '时间',
     },
     yAxis: {
         splitNumber: 4,
         showTitle: true,
         data: [
             {
-                title: "作品上传数",
-            }
-        ]
+                title: '作品上传数',
+            },
+        ],
     },
     extra: {
         mount: {
-            type: "mount",
+            type: 'mount',
             widthRatio: 1.5,
             borderWidth: 0,
-            linearType: "custom"
-        }
-    }
+            linearType: 'custom',
+        },
+    },
 }
 
 const chartData = computed(() => {
     return {
         series: [
             {
-                data: props.chartData
-            }
-        ]
+                data: props.chartData,
+            },
+        ],
     }
 })
 
 </script>
 
 <template>
-    <qiun-vue-ucharts type="mount" :opts="opts" :chartData="chartData" />
+    <qiun-vue-ucharts type="mount" :opts="opts" :chartData="chartData"/>
 </template>
 
 <style scoped>

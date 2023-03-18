@@ -3,12 +3,12 @@
  * @Date: 2022-04-17 11:32:55
  * @LastEditTime: 2022-04-17 17:52:38
  * @LastEditors: boyyang
- * @Description: 
+ * @Description:
  * @FilePath: \drawingBed\src\utils\http\types.ts
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+import type {AxiosRequestConfig, AxiosResponse} from 'axios'
 
 export interface AxiosOptions extends AxiosRequestConfig {
     requestOptions?: RequestOptions,
@@ -46,9 +46,9 @@ export interface Result<T = any> {
 
 export abstract class TransForm {
     /**
-    * @description: 请求之前处理配置
-    * @description: Process configuration before request
-    */
+     * @description: 请求之前处理配置
+     * @description: Process configuration before request
+     */
     beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig
 
     /**

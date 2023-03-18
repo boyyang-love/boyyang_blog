@@ -8,9 +8,9 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { reactive } from 'vue'
-import { exhibitionList } from '@/api/exhibition'
-import { env } from '@/utils/env'
+import {reactive} from 'vue'
+import {exhibitionList} from '@/api/exhibition'
+import {env} from '@/utils/env'
 
 const exhibitionData = reactive({
     exhibitionList: [] as exhibitionsInfo[],
@@ -41,4 +41,4 @@ const useExhibition = () => {
     }
 }
 
-export { useExhibition }
+export {useExhibition}

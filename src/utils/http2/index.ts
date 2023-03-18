@@ -1,4 +1,4 @@
-import { Axios } from './axios'
+import {Axios} from './axios'
 
 const createHttp = () => {
     return new Axios({
@@ -10,6 +10,6 @@ const createHttp = () => {
 
 const http = createHttp()
 
-http.request({ url: '', method: 'GET', baseURL: "" })
+http.request({url: '', method: 'GET', baseURL: ''})
 
-export { http }
+export {http}

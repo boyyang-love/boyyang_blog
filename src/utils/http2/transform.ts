@@ -1,10 +1,11 @@
 import qs from 'qs'
-import type { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { RequestOptions, Result, TransForm } from './types'
+import type {AxiosRequestConfig, AxiosResponse} from 'axios'
+import {RequestOptions, Result, TransForm} from './types'
+
 const transForm: TransForm = {
     // 请求前
     beforeRequestHook: (config: AxiosRequestConfig, options: RequestOptions) => {
-        const { joinTime, serializeParams, withToken } = options
+        const {joinTime, serializeParams, withToken} = options
 
         if (joinTime) {
             if (config.method?.toUpperCase() === 'GET') {
@@ -31,12 +32,12 @@ const transForm: TransForm = {
     },
     // 请求后
     transformResponseData: (res: AxiosResponse<Result<any>, any>, options: RequestOptions) => {
-        const { isTransformResponse } = options
+        const {isTransformResponse} = options
         if (!isTransformResponse) {
             return res
         }
-        
+
     },
 }
 
-export { transForm }
+export {transForm}

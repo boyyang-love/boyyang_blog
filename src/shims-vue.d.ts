@@ -8,8 +8,8 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { MessageApi, DialogApi, NotificationApi } from 'naive-ui'
-import type { LoadingApi } from './components/Loading'
+import {MessageApi, DialogApi, NotificationApi} from 'naive-ui'
+import type {LoadingApi} from './components/Loading'
 
 declare global {
     interface Window {

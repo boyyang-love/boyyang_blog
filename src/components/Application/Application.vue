@@ -9,26 +9,26 @@
 -->
 
 <script lang="ts" setup>
-    import {
-        NDialogProvider,
-        NNotificationProvider,
-        NMessageProvider,
-        NLoadingBarProvider,
-    } from 'naive-ui'
-    import { MessageContent } from '@/components/MessageContent'
-    import { DialogContent } from '@/components/DialogContent'
-    import { NotificationContent } from '@/components/Notification'
-    import { Loading } from '@/components/Loading'
+import {
+    NDialogProvider,
+    NNotificationProvider,
+    NMessageProvider,
+    NLoadingBarProvider,
+} from 'naive-ui'
+import {MessageContent} from '@/components/MessageContent'
+import {DialogContent} from '@/components/DialogContent'
+import {NotificationContent} from '@/components/Notification'
+import {Loading} from '@/components/Loading'
 </script>
 
 <template>
     <n-loading-bar-provider>
         <n-dialog-provider>
-            <DialogContent />
+            <DialogContent/>
             <n-notification-provider placement="bottom-right">
-                <NotificationContent />
+                <NotificationContent/>
                 <n-message-provider>
-                    <MessageContent />
+                    <MessageContent/>
                     <Loading>
                         <slot slot="default"></slot>
                     </Loading>

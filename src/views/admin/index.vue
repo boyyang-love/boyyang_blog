@@ -11,13 +11,14 @@
 <script lang="ts" setup>
 
 import {computed} from 'vue'
+
 interface adminProps {
     name: string
     age: number
 }
 
 const props = withDefaults(defineProps<adminProps>(), {
-    name: "yang",
+    name: 'yang',
     age: 18,
 })
 

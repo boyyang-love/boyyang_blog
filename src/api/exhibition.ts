@@ -8,8 +8,8 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { http } from '@/utils/http'
-import { Result } from '@/utils/http/types'
+import {http} from '@/utils/http'
+import {Result} from '@/utils/http/types'
 
 export const createExhibition = (data: { title: string; des: string; cover: string }) => {
     return http.request({
@@ -32,6 +32,6 @@ export const exhibitionList = (params: {
         },
         {
             isShowSuccessMessage: false,
-        }
+        },
     )
 }

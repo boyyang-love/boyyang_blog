@@ -8,10 +8,10 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { reactive } from 'vue'
-import { login, register } from '@/api/login'
-import { router } from '@/router'
-import { useUserStoreWithOut } from '@/store/modules/user'
+import {reactive} from 'vue'
+import {login, register} from '@/api/login'
+import {router} from '@/router'
+import {useUserStoreWithOut} from '@/store/modules/user'
 
 // 登录 注册 data
 const loginData = reactive({
@@ -67,7 +67,7 @@ const loginSuccess = (data: loginRes) => {
     userStore.setUserinfo(data.info)
     window.$loading.loadingEnd()
 
-    router.replace({ name: 'Home' })
+    router.replace({name: 'Home'})
 }
 
 const useLogin = () => {
@@ -77,4 +77,4 @@ const useLogin = () => {
     }
 }
 
-export { useLogin }
+export {useLogin}

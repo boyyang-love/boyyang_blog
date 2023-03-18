@@ -43,4 +43,4 @@ const getImageBase64 = (image: HTMLImageElement) => {
     return canvas.toDataURL('image/' + extension, 1)
 }
 
-export { imageDownload }
+export {imageDownload}

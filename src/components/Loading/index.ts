@@ -5,4 +5,4 @@ export interface LoadingApi {
     loadingEnd: () => void
 }
 
-export { Loading }
+export {Loading}

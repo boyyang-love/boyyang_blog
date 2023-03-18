@@ -8,8 +8,8 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { http } from '@/utils/http'
-import { Result } from '@/utils/http/types'
+import {http} from '@/utils/http'
+import {Result} from '@/utils/http/types'
 
 // 登录
 export const login = (data: { username: string; password: string }): Promise<Result<loginRes>> => {
@@ -21,7 +21,7 @@ export const login = (data: { username: string; password: string }): Promise<Res
         },
         {
             withToken: false,
-        }
+        },
     )
 }
 
@@ -39,6 +39,6 @@ export const register = (data: {
         },
         {
             withToken: false,
-        }
+        },
     )
 }

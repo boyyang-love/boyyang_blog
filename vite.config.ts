@@ -1,8 +1,8 @@
-import { defineConfig, ConfigEnv, loadEnv, UserConfig } from 'vite'
+import {defineConfig, ConfigEnv, loadEnv, UserConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
+export default defineConfig(({mode}: ConfigEnv): UserConfig => {
     const root = process.cwd()
     const env = loadEnv(mode, root)
     return {

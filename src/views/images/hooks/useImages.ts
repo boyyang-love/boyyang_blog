@@ -1,8 +1,8 @@
-import { reactive, watchEffect } from 'vue'
-import { env } from '@/utils/env'
+import {reactive, watchEffect} from 'vue'
+import {env} from '@/utils/env'
 
 // api
-import { exhibitionList } from '@/api/exhibition'
+import {exhibitionList} from '@/api/exhibition'
 
 const imagesData = reactive({
     page: 1,
@@ -80,4 +80,4 @@ const pageSizeChange = (n: number) => {
     getList()
 }
 
-export { useImages }
+export {useImages}

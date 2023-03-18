@@ -1,7 +1,7 @@
-import { reactive } from 'vue'
-import { LocationQuery } from 'vue-router'
-import { blogDetail } from '@/api/blog'
-import { env } from '@/utils/env'
+import {reactive} from 'vue'
+import {LocationQuery} from 'vue-router'
+import {blogDetail} from '@/api/blog'
+import {env} from '@/utils/env'
 
 const blogData = reactive({
     blogInfo: {} as blog_blogInfo,
@@ -37,4 +37,4 @@ const useBlog = () => {
     }
 }
 
-export { useBlog }
+export {useBlog}

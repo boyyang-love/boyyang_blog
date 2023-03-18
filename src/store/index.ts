@@ -8,10 +8,10 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import type { App } from 'vue'
-import { createApp } from 'vue'
+import type {App} from 'vue'
+import {createApp} from 'vue'
 import ap from '@/App.vue'
-import { createPinia } from 'pinia'
+import {createPinia} from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 // use store without setup
@@ -25,4 +25,4 @@ const setupStore = (app: App) => {
     app.use(store)
 }
 
-export { setupStore, store }
+export {setupStore, store}

@@ -8,11 +8,11 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { App } from 'vue'
+import {App} from 'vue'
 import '@/tailwind/tailwind.css'
 
 const setupTailwind = (app: App) => {
-    
+
 }
 
-export { setupTailwind }
+export {setupTailwind}

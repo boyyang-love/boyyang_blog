@@ -1,18 +1,18 @@
 <script lang="ts" setup>
-    import {
-        ManOutlined,
-        WomanOutlined,
-        LikeOutlined,
-        HeartOutlined,
-        SendOutlined,
-        StarOutlined,
-    } from '@vicons/antd'
+import {
+    ManOutlined,
+    WomanOutlined,
+    LikeOutlined,
+    HeartOutlined,
+    SendOutlined,
+    StarOutlined,
+} from '@vicons/antd'
 
-    interface userInfoProps {
-        userInfo: dashboard_user_info
-    }
+interface userInfoProps {
+    userInfo: dashboard_user_info
+}
 
-    const props = withDefaults(defineProps<userInfoProps>(), {})
+const props = withDefaults(defineProps<userInfoProps>(), {})
 </script>
 
 <template>
@@ -20,19 +20,19 @@
         <div class="info-top">
             <n-space>
                 <n-avatar
-                    round
-                    :size="58"
-                    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                        round
+                        :size="58"
+                        src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
                 />
 
                 <div class="name-email">
                     <n-badge :dot="false" color="none">
                         <template #value>
                             <n-icon
-                                :component="
+                                    :component="
                                     props.userInfo.gender == 1 ? ManOutlined : WomanOutlined
                                 "
-                                :size="25"
+                                    :size="25"
                             />
                         </template>
                         <span class="name">{{ props.userInfo.username }}</span>
@@ -73,47 +73,47 @@
 </template>
 
 <style scoped lang="less">
-    .info-wrapper {
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        background-color: #3d3b4f;
-        padding: 20px 20px 10px;
+.info-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  background-color: #3d3b4f;
+  padding: 20px 20px 10px;
 
-        .info-top {
-            .name-email {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                padding-left: 15px;
-                color: whitesmoke;
-                font-size: 15px;
+  .info-top {
+    .name-email {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-left: 15px;
+      color: whitesmoke;
+      font-size: 15px;
 
-                .name {
-                    font-weight: bold;
-                }
+      .name {
+        font-weight: bold;
+      }
 
-                .email {
-                    font-size: 15px;
-                }
-            }
-        }
-
-        .info-bottom {
-            margin-top: 35px;
-
-            .icon-item {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                cursor: pointer;
-
-                span {
-                    color: whitesmoke;
-                    font-size: 13px;
-                }
-            }
-        }
+      .email {
+        font-size: 15px;
+      }
     }
+  }
+
+  .info-bottom {
+    margin-top: 35px;
+
+    .icon-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+
+      span {
+        color: whitesmoke;
+        font-size: 13px;
+      }
+    }
+  }
+}
 </style>

@@ -8,7 +8,7 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { App } from 'vue'
+import {App} from 'vue'
 import * as THREE from '@/three/three.min.js'
 import RINGS from 'vanta/dist/vanta.rings.min.js'
 import WAVES from 'vanta/dist/vanta.waves.min.js'
@@ -33,4 +33,4 @@ const setupVanta = (app: App) => {
     window.VANTA.HALO = HALO
 }
 
-export { setupVanta }
+export {setupVanta}

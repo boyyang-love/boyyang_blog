@@ -8,18 +8,19 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { RouteRecordRaw } from 'vue-router'
+import {RouteRecordRaw} from 'vue-router'
+
 const constantRoutes: RouteRecordRaw[] = [
-    // {
-    //     path: '/',
-    //     name: 'Home',
-    //     redirect: '/homePage',
-    //     meta: {
-    //         title: '首页',
-    //     },
-    //     children:[],
-    //     component: () => import('@/views/home/index.vue'),
-    // },
+    {
+        path: '/',
+        name: 'Home',
+        redirect: '/homePage',
+        meta: {
+            title: '首页',
+        },
+        children: [],
+        component: () => import('@/views/home/index.vue'),
+    },
     {
         path: '/login',
         name: 'Login',
@@ -30,4 +31,4 @@ const constantRoutes: RouteRecordRaw[] = [
     },
 ]
 
-export { constantRoutes }
+export {constantRoutes}

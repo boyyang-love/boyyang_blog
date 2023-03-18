@@ -1,11 +1,12 @@
 import axios from 'axios'
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios'
-import { RequestOptions, Result, AxiosOptions } from './types'
-import { transForm } from './transform'
+import type {AxiosRequestConfig, AxiosInstance, AxiosResponse} from 'axios'
+import {RequestOptions, Result, AxiosOptions} from './types'
+import {transForm} from './transform'
 
 class Axios {
     private readonly options: AxiosOptions
     private axiosInstance: AxiosInstance
+
     constructor(options: AxiosOptions) {
         this.options = options
         this.axiosInstance = axios.create(options)
@@ -13,10 +14,10 @@ class Axios {
 
     public request<T = any>(
         config: AxiosRequestConfig,
-        options?: RequestOptions
+        options?: RequestOptions,
     ): Promise<Result<T | any>> {
-        const { requestOptions } = this.options
-        const { beforeRequestHook, transformResponseData } = transForm || {}
+        const {requestOptions} = this.options
+        const {beforeRequestHook, transformResponseData} = transForm || {}
         const opt: RequestOptions = Object.assign({}, requestOptions, options)
         if (beforeRequestHook) {
             config = beforeRequestHook(config, opt)
@@ -39,4 +40,4 @@ class Axios {
     }
 }
 
-export { Axios }
+export {Axios}

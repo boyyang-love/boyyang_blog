@@ -8,7 +8,7 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import type { App } from 'vue'
+import type {App} from 'vue'
 import {
     create,
     NConfigProvider,
@@ -182,4 +182,4 @@ const setupNaive = (app: App<Element>) => {
     document.head.appendChild(meta)
 }
 
-export { setupNaive }
+export {setupNaive}

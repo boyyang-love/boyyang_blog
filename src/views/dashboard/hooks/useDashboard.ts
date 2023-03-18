@@ -1,6 +1,6 @@
-import { reactive } from 'vue'
-import { env } from '@/utils/env'
-import { dashboard } from '@/api/dashboard'
+import {reactive} from 'vue'
+import {env} from '@/utils/env'
+import {dashboard} from '@/api/dashboard'
 
 interface rouseData {
     name: string
@@ -25,10 +25,10 @@ const getDashboard = () => {
         dashboardData.dashboard = res.data.dashboard
         dashboardData.user_info = res.data.user_info
         dashboardData.rouseData = [
-            { name: '获赞数', value: res.data.user_info.thumbs_up },
-            { name: '发布数', value: res.data.user_info.publish },
-            { name: '收藏数', value: res.data.user_info.like },
-            { name: '粉丝数', value: res.data.user_info.following },
+            {name: '获赞数', value: res.data.user_info.thumbs_up},
+            {name: '发布数', value: res.data.user_info.publish},
+            {name: '收藏数', value: res.data.user_info.like},
+            {name: '粉丝数', value: res.data.user_info.following},
         ]
         dashboardData.exhibitions = res.data.exhibitions.map(item => {
             return {

@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+import type {AxiosRequestConfig, AxiosResponse} from 'axios'
 
 export interface Result<T = any> {
     code: number

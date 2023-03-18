@@ -19,32 +19,32 @@ interface carouselItem {
 }
 
 const props = withDefaults(defineProps<carouselProps>(), {
-    list: () => []
+    list: () => [],
 })
 </script>
 
 <template>
     <n-carousel
-        effect="card"
-        prev-slide-style="transform: translateX(-150%) translateZ(-800px);"
-        next-slide-style="transform: translateX(50%) translateZ(-800px);"
-        style="height: 240px"
-        autoplay
+            effect="card"
+            prev-slide-style="transform: translateX(-150%) translateZ(-800px);"
+            next-slide-style="transform: translateX(50%) translateZ(-800px);"
+            style="height: 240px"
+            autoplay
     >
         <n-carousel-item :style="{ width: '60%' }" v-for="item in props.list" :key="item.name">
             <img
-                class="carousel-img"
-                :src="item.url"
+                    class="carousel-img"
+                    :src="item.url"
             />
         </n-carousel-item>
     </n-carousel>
 </template>
 
 <style scoped lang="less">
-    .carousel-img {
-        margin: 0 auto;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+.carousel-img {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 </style>

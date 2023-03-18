@@ -1,9 +1,9 @@
-import { reactive } from 'vue'
-import { env } from '@/utils/env'
-import { router } from '@/router'
+import {reactive} from 'vue'
+import {env} from '@/utils/env'
+import {router} from '@/router'
 // api
-import { blogList } from '@/api/blog'
-import { dashboard } from '@/api/dashboard'
+import {blogList} from '@/api/blog'
+import {dashboard} from '@/api/dashboard'
 
 const homeData = reactive({
     blog: {
@@ -62,10 +62,10 @@ const getDashboard = () => {
                 return item.name
             })
         res.data.dashboard &&
-            res.data.dashboard.forEach((item, i) => {
-                homeData.chart.blogChartData.push(item.blog_publish_value || '0')
-                homeData.chart.exhibitionChartData.push(item.exhibitions_publish_value || '0')
-            })
+        res.data.dashboard.forEach((item, i) => {
+            homeData.chart.blogChartData.push(item.blog_publish_value || '0')
+            homeData.chart.exhibitionChartData.push(item.exhibitions_publish_value || '0')
+        })
         res.data.user_info.avatar_url = `${env.VITE_APP_IMG_URL}${res.data.user_info.avatar_url}`
         homeData.userInfo = res.data.user_info
     })
@@ -103,4 +103,4 @@ const useHome = () => {
     }
 }
 
-export { useHome }
+export {useHome}

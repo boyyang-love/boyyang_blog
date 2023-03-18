@@ -1,21 +1,22 @@
 <script lang="ts" setup>
-    import { GithubOutlined, QqOutlined, WechatOutlined } from '@vicons/antd'
+import {GithubOutlined, QqOutlined, WechatOutlined} from '@vicons/antd'
 
-    interface userProps {
-        userInfo: dashboard_user_info
-    }
-    const props = withDefaults(defineProps<userProps>(), {})
+interface userProps {
+    userInfo: dashboard_user_info
+}
+
+const props = withDefaults(defineProps<userProps>(), {})
 </script>
 
 <template>
     <div class="user-wrapper">
         <div class="header">
             <n-avatar
-                class="header-img wow slideInDown"
-                round
-                bordered
-                :size="95"
-                :src="props.userInfo.avatar_url"
+                    class="header-img wow slideInDown"
+                    round
+                    bordered
+                    :size="95"
+                    :src="props.userInfo.avatar_url"
             />
             <div class="user-name wow slideInDown" data-wow-delay="0.5s">
                 {{ props.userInfo.username }}
@@ -65,71 +66,71 @@
 </template>
 
 <style scoped lang="less">
-    .user-wrapper {
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
+.user-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .header-img {
+      border: 5px solid whitesmoke;
+    }
+
+    .user-name {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+      color: whitesmoke;
+      text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+    }
+
+    .user-signature {
+      font-size: 14px;
+      color: whitesmoke;
+      text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+    }
+
+    .info {
+      box-sizing: border-box;
+      width: 100%;
+      margin-top: 15px;
+      padding: 0 5px;
+      display: flex;
+      justify-content: space-between;
+
+      .icon-item {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
 
-        .header {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            .header-img {
-                border: 5px solid whitesmoke;
-            }
-
-            .user-name {
-                font-size: 16px;
-                font-weight: bold;
-                margin-top: 10px;
-                color: whitesmoke;
-                text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
-            }
-
-            .user-signature {
-                font-size: 14px;
-                color: whitesmoke;
-                text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
-            }
-
-            .info {
-                box-sizing: border-box;
-                width: 100%;
-                margin-top: 15px;
-                padding: 0 5px;
-                display: flex;
-                justify-content: space-between;
-
-                .icon-item {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-
-                    .text {
-                        font-size: 15px;
-                        color: whitesmoke;
-                        font-weight: bold;
-                        text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
-                    }
-
-                    .num {
-                        font-size: 14px;
-                        color: whitesmoke;
-                    }
-                }
-            }
-
-            .btn-wrapper {
-                box-sizing: border-box;
-                width: 100%;
-                margin-top: 20px;
-            }
+        .text {
+          font-size: 15px;
+          color: whitesmoke;
+          font-weight: bold;
+          text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
         }
+
+        .num {
+          font-size: 14px;
+          color: whitesmoke;
+        }
+      }
     }
+
+    .btn-wrapper {
+      box-sizing: border-box;
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+}
 </style>

@@ -1,5 +1,5 @@
-import { http } from '@/utils/http'
-import { Result } from '@/utils/http/types'
+import {http} from '@/utils/http'
+import {Result} from '@/utils/http/types'
 
 export const createBlog = (data: {
     title: string
@@ -26,7 +26,7 @@ export const blogList = (params: {
         },
         {
             isShowSuccessMessage: false,
-        }
+        },
     )
 }
 
@@ -39,6 +39,6 @@ export const blogDetail = (params: { ids: string }): Promise<Result<blog_blogLis
         },
         {
             isShowSuccessMessage: false,
-        }
+        },
     )
 }

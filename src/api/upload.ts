@@ -1,5 +1,5 @@
-import { http } from '@/utils/http'
-import { Result } from '@/utils/http/types'
+import {http} from '@/utils/http'
+import {Result} from '@/utils/http/types'
 
 interface beforeUploadRes {
     url: string
@@ -21,7 +21,7 @@ export const upload = async (params: { file_name: string; file: File }) => {
         },
         {
             isShowMessage: false,
-        }
+        },
     )
 
     const data = new FormData()
@@ -43,7 +43,7 @@ export const upload = async (params: { file_name: string; file: File }) => {
                 isShowMessage: false,
                 isReturnNativeResponse: true,
                 isTransformResponse: false,
-            }
+            },
         )
 
         resolve(res.data)

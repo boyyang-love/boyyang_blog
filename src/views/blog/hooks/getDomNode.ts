@@ -1,4 +1,4 @@
 const getDomNode = (nodes: NodeList) => {
-    
+
 
 }

@@ -8,8 +8,9 @@
  * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
  */
 
-import { store } from '@/store'
-import { defineStore } from 'pinia'
+import {store} from '@/store'
+import {defineStore} from 'pinia'
+
 interface info {
     id: number
     username: string
@@ -46,7 +47,7 @@ const useUserStore = defineStore({
             this.token = token
         },
         setUserinfo(userInfo: info) {
-            let info = { ...userInfo }
+            let info = {...userInfo}
             this.userInfo = info
         },
     },
@@ -63,4 +64,4 @@ const useUserStoreWithOut = () => {
     return useUserStore(store)
 }
 
-export { useUserStore, useUserStoreWithOut }
+export {useUserStore, useUserStoreWithOut}

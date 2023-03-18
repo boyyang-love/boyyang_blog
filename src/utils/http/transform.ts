@@ -9,17 +9,17 @@
  */
 
 import qs from 'qs'
-import { TransForm, RequestOptions, Result, AxiosOptions } from './types'
-import { AxiosResponse, AxiosRequestConfig } from 'axios'
-import { useUserStoreWithOut } from '@/store/modules/user'
-import { router } from '@/router'
+import {TransForm, RequestOptions, Result, AxiosOptions} from './types'
+import {AxiosResponse, AxiosRequestConfig} from 'axios'
+import {useUserStoreWithOut} from '@/store/modules/user'
+import {router} from '@/router'
 
 const userStore = useUserStoreWithOut()
 
 const transForm: TransForm = {
     // 请求前hook
     beforeRequestHook: (config: AxiosRequestConfig, options: RequestOptions) => {
-        const { serializeParams, joinTime, withToken } = options
+        const {serializeParams, joinTime, withToken} = options
         if (serializeParams) {
             // 序列化参数
             if (config.method?.toUpperCase() === 'GET') {
@@ -52,8 +52,8 @@ const transForm: TransForm = {
             isReturnNativeResponse,
             isTransformResponse,
         } = options
-        const { data, config } = res
-        const { code, msg } = data
+        const {data, config} = res
+        const {code, msg} = data
         // 是否显示请求成功信息
         if (isShowMessage) {
             if (isShowSuccessMessage) {
@@ -81,7 +81,7 @@ const transForm: TransForm = {
     // 请求拦截器
     requestInterceptors: (
         config: AxiosRequestConfig,
-        options: AxiosOptions
+        options: AxiosOptions,
     ): AxiosRequestConfig => {
         return config
     },
@@ -93,8 +93,8 @@ const transForm: TransForm = {
         console.log(error)
     },
     requestCatch: (error: any) => {
-        const { data, status } = error.response || {}
-        const { msg } = data
+        const {data, status} = error.response || {}
+        const {msg} = data
         // token 过期
         if (status === 401) {
             window.$message.error('token过期！')
@@ -109,4 +109,4 @@ const transForm: TransForm = {
     },
 }
 
-export { transForm }
+export {transForm}

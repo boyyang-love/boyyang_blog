@@ -9,8 +9,8 @@
 -->
 
 <script lang="ts" setup>
-import { Component, markRaw, onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import {Component, markRaw, onMounted, ref} from 'vue'
+import {useRoute, useRouter} from 'vue-router'
 
 import {
     HomeOutlined,
@@ -32,11 +32,11 @@ interface menuList {
 
 const props = withDefaults(defineProps<menuProps>(), {
     menuList: () => [
-        { name: 'Home', com: markRaw(HomeOutlined), path: '/home' },
-        { name: 'Images', com: markRaw(FileImageOutlined), path: '/images' },
-        { name: 'Publish', com: markRaw(SendOutlined), path: '/publish' },
-        { name: 'User', com: markRaw(UserOutlined), path: '/user' },
-        { name: 'Admin', com: markRaw(SettingOutlined), path: '/admin' },
+        {name: 'Home', com: markRaw(HomeOutlined), path: '/home'},
+        {name: 'Images', com: markRaw(FileImageOutlined), path: '/images'},
+        {name: 'Publish', com: markRaw(SendOutlined), path: '/publish'},
+        {name: 'User', com: markRaw(UserOutlined), path: '/user'},
+        {name: 'Admin', com: markRaw(SettingOutlined), path: '/admin'},
     ],
 })
 
@@ -81,7 +81,7 @@ const menuClick = (item: menuList, index: number) => {
             <div class="left"></div>
             <transition-group tag="ul" name="list" class="right">
                 <div :class="['btn', { 'btn-active': active == i }]" v-for="(item, i) in list" :key="'list-' + i"
-                    @click="menuClick(item, i)">
+                     @click="menuClick(item, i)">
                     <n-icon :component="item.com" :color="active == i ? '#3d3b4f' : '#fff'" size="25"></n-icon>
                 </div>
             </transition-group>
@@ -91,80 +91,80 @@ const menuClick = (item: menuList, index: number) => {
 
 <style scoped lang="less">
 .menu-wrapper {
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .menu-btn-wrapper {
     box-sizing: border-box;
-    height: 100vh;
+    width: 50px;
+    height: 60%;
+    background-color: #3d3b4f;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
     display: flex;
-    align-items: center;
-    position: relative;
+    z-index: 9;
 
-    .menu-btn-wrapper {
-        box-sizing: border-box;
-        width: 50px;
-        height: 60%;
-        background-color: #3d3b4f;
-        border-radius: 0 10px 10px 0;
-        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-        display: flex;
-        z-index: 9;
-
-        .left {
-            box-sizing: border-box;
-            width: 5px;
-            height: 100%;
-            background-color: #1bd1a5;
-            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .right {
-            box-sizing: border-box;
-            width: calc(100% - 5px);
-            height: 100%;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: flex-start;
-            flex-direction: column;
-
-            .btn {
-                box-sizing: border-box;
-                width: 45px;
-                height: 45px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                background-color: #1bd1a5;
-                box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-                transition: all 0.6s ease-in-out;
-            }
-
-            .btn:hover {
-                width: 120%;
-                border-radius: 0 0 15px 0;
-            }
-
-            .btn-active {
-                width: 120%;
-                border-radius: 0 0 15px 0;
-            }
-        }
+    .left {
+      box-sizing: border-box;
+      width: 5px;
+      height: 100%;
+      background-color: #1bd1a5;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     }
+
+    .right {
+      box-sizing: border-box;
+      width: calc(100% - 5px);
+      height: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      flex-direction: column;
+
+      .btn {
+        box-sizing: border-box;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: #1bd1a5;
+        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+        transition: all 0.6s ease-in-out;
+      }
+
+      .btn:hover {
+        width: 120%;
+        border-radius: 0 0 15px 0;
+      }
+
+      .btn-active {
+        width: 120%;
+        border-radius: 0 0 15px 0;
+      }
+    }
+  }
 }
 
 .list-move,
 .list-enter-active,
 .list-leave-active {
-    transition: all 1s ease;
+  transition: all 1s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
-    opacity: 0;
-    transform: translateX(-30px);
+  opacity: 0;
+  transform: translateX(-30px);
 }
 
 /* 确保将离开的元素从布局流中删除
   以便能够正确地计算移动的动画。 */
 .list-leave-active {
-    position: absolute;
+  position: absolute;
 }
 </style>

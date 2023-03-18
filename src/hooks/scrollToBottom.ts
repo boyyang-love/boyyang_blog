@@ -13,10 +13,7 @@
  * @param {number} speed
  * @return {*}
  */
-const scrollToBottom = (speed: number): void => {
-    if (typeof speed !== 'number') {
-        speed = 5
-    }
+const scrollToBottom = (speed: number = 5): void => {
     let RAF = 0
     let height = window.screen.height
     let begin = 0
@@ -31,4 +28,4 @@ const scrollToBottom = (speed: number): void => {
     })
 }
 
-export { scrollToBottom }
+export {scrollToBottom}

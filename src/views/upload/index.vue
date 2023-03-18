@@ -49,37 +49,37 @@ onMounted(() => {
                     <div class="title">
                         <span>图片名称：</span>
                         <n-input
-                            v-model:value="uploadData.submit.title"
-                            placeholder="请输入博客标题"
-                            type="textarea"
-                            size="small"
-                            style="max-width: 300px; min-width: 300px"
-                            :autosize="{
+                                v-model:value="uploadData.submit.title"
+                                placeholder="请输入博客标题"
+                                type="textarea"
+                                size="small"
+                                style="max-width: 300px; min-width: 300px"
+                                :autosize="{
                                 minRows: 2,
                                 maxRows: 5,
                             }"
-                            maxlength="50"
-                            show-count
-                            clearable
-                            class="input"
+                                maxlength="50"
+                                show-count
+                                clearable
+                                class="input"
                         />
                     </div>
                     <div class="sub-title">
                         <span>图片描述：</span>
                         <n-input
-                            v-model:value="uploadData.submit.des"
-                            placeholder="请输入博客描述"
-                            type="textarea"
-                            size="small"
-                            style="max-width: 300px; min-width: 300px; color: whitesmoke"
-                            :autosize="{
+                                v-model:value="uploadData.submit.des"
+                                placeholder="请输入博客描述"
+                                type="textarea"
+                                size="small"
+                                style="max-width: 300px; min-width: 300px; color: whitesmoke"
+                                :autosize="{
                                 minRows: 3,
                                 maxRows: 5,
                             }"
-                            maxlength="150"
-                            show-count
-                            clearable
-                            class="input"
+                                maxlength="150"
+                                show-count
+                                clearable
+                                class="input"
                         />
                     </div>
                 </div>
@@ -88,15 +88,15 @@ onMounted(() => {
                         <img :src="uploadData.previewUrl" alt=""/>
                     </div>
                     <n-upload
-                        ref="uploadRef"
-                        v-model:file-list="uploadData.fileList"
-                        :default-upload="false"
-                        directory-dnd
-                        action="#"
-                        :max="1"
-                        class="upload-btn"
-                        @change="handleUploadChange"
-                        :disabled="false"
+                            ref="uploadRef"
+                            v-model:file-list="uploadData.fileList"
+                            :default-upload="false"
+                            directory-dnd
+                            action="#"
+                            :max="1"
+                            class="upload-btn"
+                            @change="handleUploadChange"
+                            :disabled="false"
                     >
                         <n-upload-dragger v-if="uploadData.previewUrl == ''">
                             <div style="margin-bottom: 12px">
@@ -114,10 +114,10 @@ onMounted(() => {
 
                 <div class="upload-btn">
                     <n-button
-                        color="#8a2be2"
-                        text-color="#fff"
-                        size="large"
-                        @click="submit(uploadRef)"
+                            color="#8a2be2"
+                            text-color="#fff"
+                            size="large"
+                            @click="submit(uploadRef)"
                     >
                         <template #icon>
                             <n-icon color="white" size="20">
@@ -134,102 +134,102 @@ onMounted(() => {
 
 <style scoped lang="less">
 .upload-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .top-banner {
     box-sizing: border-box;
     width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .top-banner {
-        box-sizing: border-box;
-        width: 100%;
-        height: 550px;
+  .upload-content {
+    padding: 50px 200px;
+    background-color: rgba(57, 62, 70, 0.9);
+    margin: 0 100px 50px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+
+    .title-wrapper {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .title,
+      .sub-title {
+        color: whitesmoke;
+        text-shadow: 3px 3px 3px #393e46;
         display: flex;
-        justify-content: center;
         align-items: center;
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 15px;
+
+        span {
+          white-space: nowrap;
+        }
+
+        .input {
+          background-color: rgba(57, 62, 70, 0.5);
+          box-shadow: 3px 3px 3px #393e46;
+          border: 1px solid whitesmoke;
+        }
+      }
     }
 
-    .upload-content {
-        padding: 50px 200px;
-        background-color: rgba(57, 62, 70, 0.9);
-        margin: 0 100px 50px;
+    .upload {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .upload-btn {
+        display: flex;
+        flex-direction: column;
+        // height: 100%;
+        // width: 550px;
+        // border: 2px solid whitesmoke;
+        // background-color: rgba(57, 62, 70, 0.5);
+      }
+
+      .img-preview {
+        box-sizing: border-box;
+        height: 350px;
+        margin-top: 20px;
         border-radius: 5px;
         box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        z-index: 999;
 
-        .title-wrapper {
-            box-sizing: border-box;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            .title,
-            .sub-title {
-                color: whitesmoke;
-                text-shadow: 3px 3px 3px #393e46;
-                display: flex;
-                align-items: center;
-                font-size: 18px;
-                font-weight: 400;
-                margin-bottom: 15px;
-
-                span {
-                    white-space: nowrap;
-                }
-
-                .input {
-                    background-color: rgba(57, 62, 70, 0.5);
-                    box-shadow: 3px 3px 3px #393e46;
-                    border: 1px solid whitesmoke;
-                }
-            }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
-
-        .upload {
-            box-sizing: border-box;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            .upload-btn {
-                display: flex;
-                flex-direction: column;
-                // height: 100%;
-                // width: 550px;
-                // border: 2px solid whitesmoke;
-                // background-color: rgba(57, 62, 70, 0.5);
-            }
-
-            .img-preview {
-                box-sizing: border-box;
-                height: 350px;
-                margin-top: 20px;
-                border-radius: 5px;
-                box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-                overflow: hidden;
-                z-index: 999;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-        }
-
-        .upload-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 25px;
-
-            color: whitesmoke;
-        }
+      }
     }
+
+    .upload-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 25px;
+
+      color: whitesmoke;
+    }
+  }
 }
 </style>

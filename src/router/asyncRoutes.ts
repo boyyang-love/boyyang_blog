@@ -79,6 +79,14 @@ const asyncRoutes: RouteRecordRaw[] = [
                 },
                 component: () => import('@/views/upload/index.vue'),
             },
+            {
+                path: 'timeAxis',
+                name: 'TimeAxis',
+                meta: {
+                    title: '时间轴',
+                },
+                component: () => import('@/views/timeAxis/index.vue'),
+            }
         ],
     },
     {

@@ -12,8 +12,8 @@
 import {onMounted, nextTick} from 'vue'
 import Wow from 'wow.js'
 import TopMenu from './components/topMenu.vue'
-import {BackGround} from '@/components/Background'
-import banner from '@/assets/00008.png'
+import BackGround from '@/components/Background/index.vue'
+import banner from '@/assets/007.jpg'
 
 onMounted(() => {
     const wow = new Wow({
@@ -34,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <BackGround width="100vw" height="100vh" :url="banner" class="wow slideInDown">
+    <BackGround width="100vw" height="100vh" :url="banner"  class="wow slideInDown">
         <div class="index">
             <TopMenu style="z-index: 99"></TopMenu>
             <!-- 路由出口 -->

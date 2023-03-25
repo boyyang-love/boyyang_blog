@@ -20,6 +20,7 @@ import {
     UserOutlined,
     SettingOutlined,
     CloudUploadOutlined,
+    NodeIndexOutlined,
 } from '@vicons/antd'
 import {userInfo} from 'os'
 
@@ -40,6 +41,7 @@ const props = withDefaults(defineProps<menuProps>(), {
         {name: 'Images', com: markRaw(FileImageOutlined), path: '/images', text: '壁纸'},
         {name: 'Publish', com: markRaw(SendOutlined), path: '/publish', text: '上传博客'},
         {name: 'Upload', com: markRaw(CloudUploadOutlined), path: '/upload', text: '上传壁纸'},
+        {name: 'TimeAxis', com: markRaw(NodeIndexOutlined), path: '/timeAxis', text: '时间轴'},
         {name: 'User', com: markRaw(UserOutlined), path: '/user', text: '我的'},
         {name: 'Admin', com: markRaw(SettingOutlined), path: '/admin', text: '设置'},
     ],
@@ -89,8 +91,8 @@ const menuClick = (item: menuList, index: number) => {
                     <n-icon
                             class="wow bounceInLeft"
                             :key="item.path"
-                            :component="item.com"
-                            :size="25"
+                            :component="item.com as any"
+                            :size="23"
                             :data-wow-delay="i * 0.3 + 's'"
                             :color="active == i ? '#00adb5' : 'whitesmoke'"
                             @click="menuClick(item, i)"

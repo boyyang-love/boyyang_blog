@@ -15,10 +15,10 @@ import {
     NMessageProvider,
     NLoadingBarProvider,
 } from 'naive-ui'
-import {MessageContent} from '@/components/MessageContent'
-import {DialogContent} from '@/components/DialogContent'
-import {NotificationContent} from '@/components/Notification'
-import {Loading} from '@/components/Loading'
+import {MessageContent} from '@/components/MessageContent/index'
+import {DialogContent} from '@/components/DialogContent/index'
+import {NotificationContent} from '@/components/Notification/index'
+import {Loading} from '@/components/Loading/index'
 </script>
 
 <template>

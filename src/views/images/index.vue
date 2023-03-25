@@ -12,7 +12,7 @@ import {onMounted, ref} from 'vue'
 import Wow from 'wow.js'
 
 // import { init } from './hooks/three'
-import {PrintText} from '@/components/PrintText'
+import PrintText from '@/components/PrintText/index.vue'
 import ImgCard from './components/imgCard.vue'
 
 // hooks

@@ -12,7 +12,7 @@
 import {onMounted} from 'vue'
 import Wow from 'wow.js'
 import bgImg from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
-import {BackGround} from '@/components/Background'
+import {BackGround} from '@/components/Background/index.ts'
 import signInAndUp from './components/signInAndUp.vue'
 import Loading from '@/components/Loading/index.vue'
 

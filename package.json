@@ -16,6 +16,7 @@
     "@vicons/ionicons5": "^0.12.0",
     "autoprefixer": "^10.4.7",
     "axios": "^0.26.1",
+    "boyyang_tools": "^1.2.5",
     "less": "^4.1.2",
     "moment": "^2.29.2",
     "node": "^16.13.2",
@@ -26,7 +27,7 @@
     "tailwindcss": "^3.0.24",
     "three": "^0.149.0",
     "vanta": "^0.5.22",
-    "vue": "^3.2.45",
+    "vue": "^3.2.47",
     "vue-picture-cropper": "^0.5.1",
     "vue-router": "4",
     "wow.js": "^1.2.2"

@@ -9,19 +9,13 @@
  */
 
 import type {App} from 'vue'
-import {createApp} from 'vue'
-import ap from '@/App.vue'
 import {createPinia} from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
-// use store without setup
-const store = createPinia().use(piniaPluginPersistedstate)
-const app = createApp(ap)
-app.use(store)
-
+const store = createPinia()
+store.use(piniaPluginPersistedstate)
 // pinia 数据持久化
 const setupStore = (app: App) => {
-    const store = createPinia().use(piniaPluginPersistedstate)
     app.use(store)
 }
 

@@ -47,8 +47,7 @@ const useUserStore = defineStore({
             this.token = token
         },
         setUserinfo(userInfo: info) {
-            let info = {...userInfo}
-            this.userInfo = info
+            this.userInfo = {...userInfo}
         },
     },
     //开启持久化

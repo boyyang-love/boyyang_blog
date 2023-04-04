@@ -26,8 +26,7 @@ const usePermissionRotesStore = defineStore({
     },
     actions: {
         async setRoutes(roles: string[]) {
-            const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-            this.routes = accessedRoutes
+            this.routes = filterAsyncRoutes(asyncRoutes, roles)
         },
     },
 })

@@ -13,9 +13,6 @@ import {useUserStoreWithOut} from '@/store/modules/user'
 import {usePermissionRotesStoreWithOut} from '@/store/modules/permissionRoutes'
 import {errRoutes} from '@/router/404'
 
-// 路由白名单
-const whiteRouterList = []
-
 const createRouterGuards = (router: Router) => {
     // userStore routesStore
     const userStore = useUserStoreWithOut()
@@ -60,7 +57,7 @@ const createRouterGuards = (router: Router) => {
         }
     })
     // 路由错误
-    router.onError(error => {
+    router.onError(() => {
         console.log(
             `%c 错误： %c 路由错误  %c`,
             'background:red ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',

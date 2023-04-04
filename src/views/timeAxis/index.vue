@@ -17,7 +17,7 @@ onMounted(() => {
                     v-for="item in timeAxisData.list"
                     :key="item.id"
                     type="success"
-                    title="1111111111111111111111111111111111"
+                    title=""
                     time="item.time"
             >
                 <template #header>
@@ -25,7 +25,7 @@ onMounted(() => {
                         {{ item.title }}
                     </div>
                     <div class="item-content">
-                        <img :src="item.cover">
+                        <img :src="item.cover" alt="图片">
                     </div>
                 </template>
             </n-timeline-item>
@@ -38,7 +38,7 @@ onMounted(() => {
   padding: 100px;
 
   .item-title {
-    color: whitesmoke;
+    color: #f5f5f5;
     font-size: 15px;
     font-weight: bold;
     margin-bottom: 5px;

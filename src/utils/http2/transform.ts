@@ -1,43 +1,35 @@
+import {Result, TransForm} from './types'
+import {AxiosResponse} from 'axios'
 import qs from 'qs'
-import type {AxiosRequestConfig, AxiosResponse} from 'axios'
-import {RequestOptions, Result, TransForm} from './types'
 
 const transForm: TransForm = {
-    // 请求前
-    beforeRequestHook: (config: AxiosRequestConfig, options: RequestOptions) => {
-        const {joinTime, serializeParams, withToken} = options
-
-        if (joinTime) {
-            if (config.method?.toUpperCase() === 'GET') {
-                config.params = {
-                    ...config.params,
-                    _t: new Date().getTime(),
-                }
-            }
-        }
-
+    beforeRequestHook(config, opt) {
+        const {serializeParams, joinTime} = opt
         if (serializeParams) {
-            if (config.method?.toUpperCase() === 'POST') {
+            // 序列化参数
+            if (config.method?.toUpperCase() === 'GET') {
+                if (joinTime) {
+                    // 是否拼接时间戳
+                    config.params = {
+                        ...config.params,
+                        _t: Date.now(),
+                    }
+                }
+            } else {
                 config.data = qs.stringify(config.data)
-            }
-        }
-
-        if (withToken) {
-            config.headers = {
-                ...config.headers,
-                Authorization: '',
             }
         }
         return config
     },
-    // 请求后
-    transformResponseData: (res: AxiosResponse<Result<any>, any>, options: RequestOptions) => {
-        const {isTransformResponse} = options
-        if (!isTransformResponse) {
-            return res
-        }
 
+    transformRequestData(res: AxiosResponse<Result>, opt) {
+        const {isShowMessage, isShowSuccessMessage, isShowErrorMessage} = opt
+        const {code, msg, data} = res.data
+
+        return res.data
     },
 }
 
-export {transForm}
+export {
+    transForm,
+}

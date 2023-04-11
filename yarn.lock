@@ -951,10 +951,10 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmmirror.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-boyyang_tools@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.npmjs.org/boyyang_tools/-/boyyang_tools-1.2.5.tgz#d186b425fee297534286397048fd789bb6417e67"
-  integrity sha512-rWm1S/SAB7/43+ipUoA/Uq2zRy0Elq5ooyJc3CISGjb4HIj7W9bDHr1TPwdaDdy2+VlejkWtablhub1Tukugjw==
+boyyang_tools@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/boyyang_tools/-/boyyang_tools-1.3.0.tgz#0adc789d9d3b376b5d43c9a079cfa256340d5641"
+  integrity sha512-CRZc8L5a62/3ipx7ztzKEDRxEdzhjcwv1qx8glr7PmrYgb+rSviupg+i84EpeIHv+6xYEmdNts5RkytgB4/QDw==
   dependencies:
     "@types/node" "^18.15.3"
     typescript "^5.0.2"

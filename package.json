@@ -16,7 +16,7 @@
     "@vicons/ionicons5": "^0.12.0",
     "autoprefixer": "^10.4.7",
     "axios": "^0.26.1",
-    "boyyang_tools": "^1.2.5",
+    "boyyang_tools": "^1.3.0",
     "less": "^4.1.2",
     "moment": "^2.29.2",
     "node": "^16.13.2",

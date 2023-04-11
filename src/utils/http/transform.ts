@@ -53,6 +53,7 @@ const transForm: TransForm = {
             isTransformResponse,
         } = options
         const {data, config} = res
+
         const {code, msg} = data
         // 是否显示请求成功信息
         if (isShowMessage) {

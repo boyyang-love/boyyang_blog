@@ -3,7 +3,7 @@
  * @Date: 2023-01-30 17:19:54
  * @LastEditTime: 2023-02-06 10:52:49
  * @LastEditors: boyyang
- * @Description: 
+ * @Description:
  * @FilePath: \blog_web\src\views\dashboard\index.vue
  * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
 -->
@@ -20,6 +20,7 @@ import '@/utils/cloudbase'
 import {useDashboard} from './hooks/useDashboard'
 
 const {dashboardData, getDashboard} = useDashboard()
+
 
 onMounted(() => {
     getDashboard()

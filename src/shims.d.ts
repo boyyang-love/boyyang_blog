@@ -26,3 +26,6 @@ declare module 'vanta/dist/vanta.birds.min.js'
 declare module 'vanta/dist/vanta.trunk.min.js'
 declare module 'vanta/dist/vanta.globe.min.js'
 declare module 'vanta/dist/vanta.halo.min.js'
+
+// jjjj
+// aaaaaaaaaaaaaaaaaaaaaaaaaaa

@@ -26,3 +26,5 @@ declare module 'vanta/dist/vanta.halo.min.js'
 declare module '@qiun/vue-ucharts'
 declare module '@wxcloud/cloud-sdk'
 declare module 'wow.js'
+
+//   e'e       的哈哈哈哈哈哈哈哈哈哈哈哈哈

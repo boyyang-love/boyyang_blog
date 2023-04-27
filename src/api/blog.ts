@@ -43,4 +43,4 @@ export const blogDetail = (params: { ids: string }): Promise<Result<blog_blogLis
     )
 }
 
-const test = ""
+const test = "1111222"

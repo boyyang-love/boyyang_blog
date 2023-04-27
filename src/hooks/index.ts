@@ -16,4 +16,6 @@ const useHooks = () => {
     }
 }
 
+const name = 'test'
+
 export {useHooks}

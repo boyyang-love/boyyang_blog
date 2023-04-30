@@ -1,5 +1,6 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
 import {AxiosOptions, RequestOptions, Result} from './types'
+
 class Http {
     private axiosInstance: AxiosInstance
     private readonly options: AxiosOptions
@@ -21,7 +22,7 @@ class Http {
         return new Promise((resolve, reject) => {
             this.axiosInstance.request<any, AxiosResponse<Result>>(axiosRequestConfig).then((res: AxiosResponse<Result>) => {
                 if (transformRequestData) {
-                        res = transformRequestData(res, options)
+                    res = transformRequestData(res, options)
                 }
                 resolve(res as unknown as Promise<Result<T>>)
             }).catch((err) => {

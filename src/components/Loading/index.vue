@@ -51,122 +51,122 @@ window.$loading = useLoading()
 @h: 200px;
 
 .loading-wrapper {
-  box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .slot {
     box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #3d3b4f;
-  }
-
-  .loading-content {
-    box-sizing: border-box;
-    width: @w;
-    height: @h;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    border-radius: 50%;
-
-    perspective: 20px;
-    transform-style: preserve-3d;
-
-    z-index: 99;
-
-    .circle {
-      box-sizing: border-box;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      position: absolute;
-
-      &::before,
-      &::after {
+    .slot {
         box-sizing: border-box;
-        content: '';
         width: 100%;
         height: 100%;
         position: absolute;
-      }
-
-      &::before {
-        top: -100%;
-        border-radius: 50%;
-        background-color: @circleone;
-        animation: whiteBallMove @duration infinite;
-      }
-
-      &::after {
-        top: 100%;
-        border-radius: 50%;
-        background-color: @circletwo;
-        animation: blackBallMove @duration infinite;
-      }
+        top: 0;
+        left: 0;
+        background-color: #3d3b4f;
     }
 
-      .loop(@num) when (@num > 0) {
-        .circle:nth-child(@{num}) {
-          transform: rotate((@t * @num)) translateY((@w / 2));
+    .loading-content {
+        box-sizing: border-box;
+        width: @w;
+        height: @h;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-          &::before,
-          &::after {
-            animation-delay: -(@duration / @n * 6 * @num);
-          }
+        border-radius: 50%;
+
+        perspective: 20px;
+        transform-style: preserve-3d;
+
+        z-index: 99;
+
+        .circle {
+            box-sizing: border-box;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            position: absolute;
+
+            &::before,
+            &::after {
+                box-sizing: border-box;
+                content: '';
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            }
+
+            &::before {
+                top: -100%;
+                border-radius: 50%;
+                background-color: @circleone;
+                animation: whiteBallMove @duration infinite;
+            }
+
+            &::after {
+                top: 100%;
+                border-radius: 50%;
+                background-color: @circletwo;
+                animation: blackBallMove @duration infinite;
+            }
         }
-          .loop(@num - 1);
-      }
 
-      .loop(@n);
-  }
+        .loop(@num) when (@num > 0) {
+            .circle:nth-child(@{num}) {
+                transform: rotate((@t * @num)) translateY((@w / 2));
+
+                &::before,
+                &::after {
+                    animation-delay: -(@duration / @n * 6 * @num);
+                }
+            }
+            .loop(@num - 1);
+        }
+
+        .loop(@n);
+    }
 }
 
 @keyframes whiteBallMove {
-  0% {
-    animation-timing-function: ease-in;
-  }
-  25% {
-    transform: translate3d(0, 100%, 5px);
-    animation-timing-function: ease-out;
-  }
-  50% {
-    transform: translate3d(0, 200%, 0px);
-    animation-timing-function: ease-in;
-  }
-  75% {
-    transform: translate3d(0, 100%, -5px);
-    animation-timing-function: ease-out;
-  }
+    0% {
+        animation-timing-function: ease-in;
+    }
+    25% {
+        transform: translate3d(0, 100%, 5px);
+        animation-timing-function: ease-out;
+    }
+    50% {
+        transform: translate3d(0, 200%, 0px);
+        animation-timing-function: ease-in;
+    }
+    75% {
+        transform: translate3d(0, 100%, -5px);
+        animation-timing-function: ease-out;
+    }
 }
 
 @keyframes blackBallMove {
-  0% {
-    animation-timing-function: ease-in;
-  }
-  25% {
-    transform: translate3d(0, -100%, -5px);
-    animation-timing-function: ease-out;
-  }
-  50% {
-    transform: translate3d(0, -200%, 0px);
-    animation-timing-function: ease-in;
-  }
-  75% {
-    transform: translate3d(0, -100%, 5px);
-    animation-timing-function: ease-out;
-  }
+    0% {
+        animation-timing-function: ease-in;
+    }
+    25% {
+        transform: translate3d(0, -100%, -5px);
+        animation-timing-function: ease-out;
+    }
+    50% {
+        transform: translate3d(0, -200%, 0px);
+        animation-timing-function: ease-in;
+    }
+    75% {
+        transform: translate3d(0, -100%, 5px);
+        animation-timing-function: ease-out;
+    }
 }
 </style>

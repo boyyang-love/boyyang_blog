@@ -124,102 +124,102 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .upload-wrapper {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  .top-banner {
     box-sizing: border-box;
     width: 100%;
-    height: 550px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 
-  .upload-content {
-    padding: 50px 200px;
-    background-color: rgba(57, 62, 70, 0.9);
-    margin: 0 100px 50px;
-    border-radius: 5px;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-
-    .title-wrapper {
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .title,
-      .sub-title {
-        color: whitesmoke;
-        text-shadow: 3px 3px 3px #393e46;
+    .top-banner {
+        box-sizing: border-box;
+        width: 100%;
+        height: 550px;
         display: flex;
+        justify-content: center;
         align-items: center;
-        font-size: 18px;
-        font-weight: 400;
-        margin-bottom: 15px;
-
-        span {
-          white-space: nowrap;
-        }
-
-        .input {
-          background-color: rgba(57, 62, 70, 0.5);
-          box-shadow: 3px 3px 3px #393e46;
-          border: 1px solid whitesmoke;
-        }
-      }
     }
 
-    .upload {
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .upload-btn {
-        display: flex;
-        flex-direction: column;
-        // height: 100%;
-        // width: 550px;
-        // border: 2px solid whitesmoke;
-        // background-color: rgba(57, 62, 70, 0.5);
-      }
-
-      .img-preview {
-        box-sizing: border-box;
-        height: 350px;
-        margin-top: 20px;
+    .upload-content {
+        padding: 50px 200px;
+        background-color: rgba(57, 62, 70, 0.9);
+        margin: 0 100px 50px;
         border-radius: 5px;
         box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-        overflow: hidden;
-        z-index: 999;
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        .title-wrapper {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .title,
+            .sub-title {
+                color: whitesmoke;
+                text-shadow: 3px 3px 3px #393e46;
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                font-weight: 400;
+                margin-bottom: 15px;
+
+                span {
+                    white-space: nowrap;
+                }
+
+                .input {
+                    background-color: rgba(57, 62, 70, 0.5);
+                    box-shadow: 3px 3px 3px #393e46;
+                    border: 1px solid whitesmoke;
+                }
+            }
         }
-      }
-    }
 
-    .upload-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 25px;
+        .upload {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
-      color: whitesmoke;
+            .upload-btn {
+                display: flex;
+                flex-direction: column;
+                // height: 100%;
+                // width: 550px;
+                // border: 2px solid whitesmoke;
+                // background-color: rgba(57, 62, 70, 0.5);
+            }
+
+            .img-preview {
+                box-sizing: border-box;
+                height: 350px;
+                margin-top: 20px;
+                border-radius: 5px;
+                box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+                overflow: hidden;
+                z-index: 999;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .upload-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+
+            color: whitesmoke;
+        }
     }
-  }
 }
 </style>

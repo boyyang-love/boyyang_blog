@@ -51,31 +51,31 @@ const background_img = computed(() => {
 
 <style lang="less" scoped>
 .background {
-  box-sizing: border-box;
-  width: v-bind('props.width');
-  height: v-bind('props.height');
-  background-image: v-bind('background_img');
-  background-position: center;
-  background-size: cover;
-  background-color: v-bind('props.color');
-  position: relative;
-  overflow: hidden;
-  scroll-behavior: smooth;
-
-  .background-content {
-    scroll-behavior: smooth;
     box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-  }
+    width: v-bind('props.width');
+    height: v-bind('props.height');
+    background-image: v-bind('background_img');
+    background-position: center;
+    background-size: cover;
+    background-color: v-bind('props.color');
+    position: relative;
+    overflow: hidden;
+    scroll-behavior: smooth;
 
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+    .background-content {
+        scroll-behavior: smooth;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+    }
+
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 }
 </style>

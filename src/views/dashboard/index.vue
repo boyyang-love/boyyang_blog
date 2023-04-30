@@ -47,68 +47,68 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .dashboard-wrapper {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  .left {
     box-sizing: border-box;
-    width: 75%;
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
 
-    .banner {
-      box-sizing: border-box;
-      width: 100%;
-      height: 280px;
-      background-color: #eeeeee;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .dashboard {
-      box-sizing: border-box;
-      width: 100%;
-      height: calc(100% - 290px);
-      background-color: #eeeeee;
-
-      .charts-box {
-        width: 500px;
-        height: 300px;
-      }
-    }
-  }
-
-  .right {
-    box-sizing: border-box;
-    width: calc(25% - 10px);
-    height: 100%;
-
-    .user-info {
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-      background-color: #eeeeee;
-
-      .info {
+    .left {
         box-sizing: border-box;
-        width: 100%;
-        height: 180px;
-      }
+        width: 75%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
 
-      .info-charts {
-        box-sizing: border-box;
-        width: 100%;
-        height: 300px;
-      }
+        .banner {
+            box-sizing: border-box;
+            width: 100%;
+            height: 280px;
+            background-color: #eeeeee;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard {
+            box-sizing: border-box;
+            width: 100%;
+            height: calc(100% - 290px);
+            background-color: #eeeeee;
+
+            .charts-box {
+                width: 500px;
+                height: 300px;
+            }
+        }
     }
-  }
+
+    .right {
+        box-sizing: border-box;
+        width: calc(25% - 10px);
+        height: 100%;
+
+        .user-info {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            background-color: #eeeeee;
+
+            .info {
+                box-sizing: border-box;
+                width: 100%;
+                height: 180px;
+            }
+
+            .info-charts {
+                box-sizing: border-box;
+                width: 100%;
+                height: 300px;
+            }
+        }
+    }
 }
 </style>

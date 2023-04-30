@@ -70,102 +70,102 @@ const intoAndLeave = () => {
 
 <style scoped lang="less">
 .ex-wrapper {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  .images-box {
     box-sizing: border-box;
-    width: 70%;
-    height: 600px;
-    position: relative;
-    overflow: hidden;
-    // border: 15px solid #3d3b4f;
-    border-radius: 2px;
-    box-shadow: 10px 2px 3px rgba(19, 18, 18, 0.3);
-    -webkit-box-reflect: below 20px linear-gradient(transparent 60%, rgba(0, 0, 0, 0.3));
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
-    .carousel-img {
-      box-sizing: border-box;
-      width: 100%;
-      // height: 100%;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 600px;
-
-      .img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border: 3px solid whitesmoke;
-      }
-    }
-
-    .images-preview {
-      box-sizing: border-box;
-      width: 100%;
-      height: 150px;
-      padding: 10px 0;
-      position: absolute;
-      bottom: -10px;
-      background-color: rgba(19, 18, 18, 0.3);
-      display: flex;
-      justify-content: flex-start;
-      overflow-x: auto;
-
-      transition: all 1s linear;
-
-      .preview-img {
+    .images-box {
         box-sizing: border-box;
-        height: 100%;
-        min-width: 250px;
+        width: 70%;
+        height: 600px;
+        position: relative;
         overflow: hidden;
-        border: 5px solid whitesmoke;
-        margin: 0 3px;
+        // border: 15px solid #3d3b4f;
+        border-radius: 2px;
+        box-shadow: 10px 2px 3px rgba(19, 18, 18, 0.3);
+        -webkit-box-reflect: below 20px linear-gradient(transparent 60%, rgba(0, 0, 0, 0.3));
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          cursor: pointer;
-          overflow: hidden;
+        .carousel-img {
+            box-sizing: border-box;
+            width: 100%;
+            // height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 600px;
+
+            .img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border: 3px solid whitesmoke;
+            }
         }
 
-        img:hover {
-          transition: all 0.5s ease;
-          transform: scale(1.1);
+        .images-preview {
+            box-sizing: border-box;
+            width: 100%;
+            height: 150px;
+            padding: 10px 0;
+            position: absolute;
+            bottom: -10px;
+            background-color: rgba(19, 18, 18, 0.3);
+            display: flex;
+            justify-content: flex-start;
+            overflow-x: auto;
+
+            transition: all 1s linear;
+
+            .preview-img {
+                box-sizing: border-box;
+                height: 100%;
+                min-width: 250px;
+                overflow: hidden;
+                border: 5px solid whitesmoke;
+                margin: 0 3px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    cursor: pointer;
+                    overflow: hidden;
+                }
+
+                img:hover {
+                    transition: all 0.5s ease;
+                    transform: scale(1.1);
+                }
+            }
         }
-      }
     }
-  }
 
-  .pagination {
-    position: absolute;
-    bottom: 20px;
-  }
+    .pagination {
+        position: absolute;
+        bottom: 20px;
+    }
 }
 
 .list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 1.5s ease;
+    transition: all 1.5s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
-  opacity: 0;
-  transform: translateY(100px);
+    opacity: 0;
+    transform: translateY(100px);
 }
 
 /* 确保将离开的元素从布局流中删除
   以便能够正确地计算移动的动画。 */
 .list-leave-active {
-  position: absolute;
+    position: absolute;
 }
 </style>

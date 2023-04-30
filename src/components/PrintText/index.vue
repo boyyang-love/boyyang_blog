@@ -60,71 +60,71 @@ const beginAni = () => {
 
 <style scoped lang="less">
 .print-text-wrapper {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: whitesmoke;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
 
-  .print-text-title {
-    font-size: 35px;
-    font-weight: bold;
-    animation: scaleText 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-    text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
-  }
-
-  .print-text-subtitle {
-    font-size: 18px;
-    margin-top: 15px;
-    font-weight: bold;
-
-    .inner-text {
-      font-weight: bold;
-      padding: 5px;
-      text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+    .print-text-title {
+        font-size: 35px;
+        font-weight: bold;
+        animation: scaleText 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+        text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
     }
 
-    .line {
-      animation: show 0.9s ease-in-out infinite;
-    }
-  }
+    .print-text-subtitle {
+        font-size: 18px;
+        margin-top: 15px;
+        font-weight: bold;
 
-  @keyframes show {
-    0% {
-      opacity: 0;
+        .inner-text {
+            font-weight: bold;
+            padding: 5px;
+            text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+        }
+
+        .line {
+            animation: show 0.9s ease-in-out infinite;
+        }
     }
 
-    100% {
-      opacity: 1;
+    @keyframes show {
+        0% {
+            opacity: 0;
+        }
 
-      // color: blue;
-    }
-  }
+        100% {
+            opacity: 1;
 
-  @keyframes scaleText {
-    0% {
-      transform: scale(1);
+            // color: blue;
+        }
     }
-    100% {
-      transform: scale(1.2);
+
+    @keyframes scaleText {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1.2);
+        }
     }
-  }
 }
 
 .list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
+    opacity: 0;
+    transform: translateX(30px);
 }
 
 .list-leave-active {
-  position: absolute;
+    position: absolute;
 }
 </style>

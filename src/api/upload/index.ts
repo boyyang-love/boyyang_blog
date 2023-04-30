@@ -1,5 +1,6 @@
 import {http} from '@/utils/http'
 import {Result} from '@/utils/http/types'
+
 interface beforeUploadRes {
     url: string
     token: string

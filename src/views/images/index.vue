@@ -42,7 +42,7 @@ onMounted(() => {
         <div class="images-content">
             <ImgCard
                     v-for="(item, i) in imagesData.list"
-                    :key="i"
+                    :key="item.id"
                     :class="[
                     'wow',
                     i % 2 == 0 ? 'fadeInDownBig' : i % 3 == 0 ? 'fadeInRightBig' : 'fadeInLeftBig',
@@ -68,38 +68,38 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .images-wrapper {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-
-  &:hover {
-    will-change: scroll-position;
-  }
-
-  .top-banner {
+    box-sizing: border-box;
     width: 100%;
-    height: 650px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
 
-  .images-content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    padding: 50px 150px;
-  }
+    &:hover {
+        will-change: scroll-position;
+    }
 
-  .pagination {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    .top-banner {
+        width: 100%;
+        height: 650px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-    padding: 50px 0;
-  }
+    .images-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        padding: 50px 150px;
+    }
+
+    .pagination {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        padding: 50px 0;
+    }
 }
 </style>

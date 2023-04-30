@@ -42,9 +42,9 @@ const props = withDefaults(defineProps<carouselProps>(), {
 
 <style scoped lang="less">
 .carousel-img {
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>

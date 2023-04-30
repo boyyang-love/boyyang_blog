@@ -1,4 +1,4 @@
-declare namespace Blog  {
+declare namespace Blog {
     interface BlogList {
         blog_info: BlogInfo[]
         count: number

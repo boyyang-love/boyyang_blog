@@ -35,21 +35,21 @@ onMounted(() => {
 
 <style lang="less">
 .time-axis-wrapper {
-  padding: 100px;
+    padding: 100px;
 
-  .item-title {
-    color: #f5f5f5;
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  .item-content {
-    img {
-      box-sizing: border-box;
-      height: 250px;
-      border: 2px solid antiquewhite;
+    .item-title {
+        color: #f5f5f5;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 5px;
     }
-  }
+
+    .item-content {
+        img {
+            box-sizing: border-box;
+            height: 250px;
+            border: 2px solid antiquewhite;
+        }
+    }
 }
 </style>

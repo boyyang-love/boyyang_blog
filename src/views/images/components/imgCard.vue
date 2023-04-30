@@ -43,57 +43,57 @@ const props = withDefaults(defineProps<imgCardProps>(), {
 
 <style scoped lang="less">
 .imgcard-wrapper {
-  box-sizing: border-box;
-  width: 100%;
-  max-height: 250px;
-  background-color: #fff;
-  border: 4px solid whitesmoke;
-  border-radius: 2px;
-  box-shadow: 5px 2px 3px #393e46;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-
-  img {
+    box-sizing: border-box;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: left top;
-    transition: all 1s linear;
+    max-height: 250px;
+    background-color: #fff;
+    border: 4px solid whitesmoke;
+    border-radius: 2px;
+    box-shadow: 5px 2px 3px #393e46;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left top;
+        transition: all 1s linear;
+
+        &:hover {
+            object-position: right bottom;
+        }
+    }
 
     &:hover {
-      object-position: right bottom;
+        z-index: 9;
+        transform: scale(1.2);
+        border: 1px solie black;
     }
-  }
 
-  &:hover {
-    z-index: 9;
-    transform: scale(1.2);
-    border: 1px solie black;
-  }
+    .imgcard-bottom {
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 45px;
+        background-color: rgba(57, 62, 70, 0.6);
+        color: whitesmoke;
+        padding: 5px 10px;
 
-  .imgcard-bottom {
-    box-sizing: border-box;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 45px;
-    background-color: rgba(57, 62, 70, 0.6);
-    color: whitesmoke;
-    padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+        .right-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    .right-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .icon {
-        cursor: pointer;
-      }
+            .icon {
+                cursor: pointer;
+            }
+        }
     }
-  }
 }
 </style>

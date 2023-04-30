@@ -64,91 +64,91 @@ const aniStatus = (num: number) => {
 
 <style scoped lang="less">
 .clock-wrapper {
-  box-sizing: border-box;
-  width: 70px;
-  height: 80px;
-  overflow: hidden;
-  position: relative;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: #3d3b4f;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-
-  &::before {
-    content: '';
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.4);
-    height: 3px;
-    z-index: 99;
-  }
-
-  .clock-card {
     box-sizing: border-box;
-    width: 100%;
-    height: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 50px;
-    font-weight: bold;
-    text-align: center;
+    width: 70px;
+    height: 80px;
     overflow: hidden;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background-color: #3d3b4f;
-    color: whitesmoke;
-    line-height: 80px;
-  }
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 
-  .card-1 {
-    top: 0;
-    left: 0;
-    z-index: 1;
-  }
+    &::before {
+        content: '';
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.4);
+        height: 3px;
+        z-index: 99;
+    }
 
-  .card-2 {
-    top: 50%;
-    left: 0;
-    transform-origin: center top;
-    z-index: 2;
-    line-height: 0;
-    backface-visibility: hidden;
-    transform-origin: center top;
-    transform: rotateX(180 * 1deg);
-  }
+    .clock-card {
+        box-sizing: border-box;
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        overflow: hidden;
+        background-color: #3d3b4f;
+        color: whitesmoke;
+        line-height: 80px;
+    }
 
-  .card-3 {
-    backface-visibility: hidden;
-    z-index: 2;
-    transform-origin: center bottom;
-  }
+    .card-1 {
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
 
-  .card-4 {
-    top: 50%;
-    line-height: 0;
-    z-index: 1;
-  }
+    .card-2 {
+        top: 50%;
+        left: 0;
+        transform-origin: center top;
+        z-index: 2;
+        line-height: 0;
+        backface-visibility: hidden;
+        transform-origin: center top;
+        transform: rotateX(180 * 1deg);
+    }
+
+    .card-3 {
+        backface-visibility: hidden;
+        z-index: 2;
+        transform-origin: center bottom;
+    }
+
+    .card-4 {
+        top: 50%;
+        line-height: 0;
+        z-index: 1;
+    }
 }
 
 .card-ani2 {
-  animation: ani-card2 0.8s linear;
-  // animation: ani-card3 1s linear;
+    animation: ani-card2 0.8s linear;
+    // animation: ani-card3 1s linear;
 }
 
 .card-ani3 {
-  animation: ani-card3 0.8s linear;
+    animation: ani-card3 0.8s linear;
 }
 
 @keyframes ani-card2 {
-  100% {
-    transform: rotateX(0);
-  }
+    100% {
+        transform: rotateX(0);
+    }
 }
 
 @keyframes ani-card3 {
-  100% {
-    transform: rotateX(-180deg);
-  }
+    100% {
+        transform: rotateX(-180deg);
+    }
 }
 </style>

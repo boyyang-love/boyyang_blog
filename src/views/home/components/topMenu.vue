@@ -106,15 +106,15 @@ const menuClick = (item: menuList, index: number) => {
 
 <style scoped lang="less">
 .menu-wrapper {
-  position: fixed;
-  top: 0;
-  box-sizing: border-box;
-  width: 100%;
-  height: 60px;
-  // background-color: rgba(22, 24, 35, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 20px;
+    position: fixed;
+    top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 60px;
+    // background-color: rgba(22, 24, 35, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px;
 }
 </style>

@@ -35,16 +35,16 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .bg-wrapper {
-  background-color: #3d3b4f;
-  overflow: hidden;
+    background-color: #3d3b4f;
+    overflow: hidden;
 }
 
 .bg {
-  box-sizing: border-box;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 </style>

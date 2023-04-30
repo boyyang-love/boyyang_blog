@@ -76,7 +76,7 @@ const asyncRoutes: RouteRecordRaw[] = [
                     title: '时间轴',
                 },
                 component: () => import('@/views/timeAxis/index.vue'),
-            }
+            },
         ],
     },
     {

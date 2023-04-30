@@ -1,13 +1,16 @@
 import type {AxiosRequestConfig, AxiosResponse} from 'axios'
+
 export interface Result<T = any> {
     code: number
     msg: string
     data: T
 }
+
 export interface AxiosOptions extends AxiosRequestConfig {
     transform: TransForm
     requestOptions?: RequestOptions
 }
+
 export interface RequestOptions {
     // 序列化请求参数
     serializeParams?: boolean

@@ -74,46 +74,46 @@ const props = withDefaults(defineProps<userInfoProps>(), {})
 
 <style scoped lang="less">
 .info-wrapper {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  background-color: #3d3b4f;
-  padding: 20px 20px 10px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: #3d3b4f;
+    padding: 20px 20px 10px;
 
-  .info-top {
-    .name-email {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding-left: 15px;
-      color: whitesmoke;
-      font-size: 15px;
+    .info-top {
+        .name-email {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-left: 15px;
+            color: whitesmoke;
+            font-size: 15px;
 
-      .name {
-        font-weight: bold;
-      }
+            .name {
+                font-weight: bold;
+            }
 
-      .email {
-        font-size: 15px;
-      }
+            .email {
+                font-size: 15px;
+            }
+        }
     }
-  }
 
-  .info-bottom {
-    margin-top: 35px;
+    .info-bottom {
+        margin-top: 35px;
 
-    .icon-item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      cursor: pointer;
+        .icon-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            cursor: pointer;
 
-      span {
-        color: whitesmoke;
-        font-size: 13px;
-      }
+            span {
+                color: whitesmoke;
+                font-size: 13px;
+            }
+        }
     }
-  }
 }
 </style>

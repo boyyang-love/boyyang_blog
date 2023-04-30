@@ -54,24 +54,24 @@ onMounted(() => {
 
 <style scoped lang="less">
 .blog-wrapper {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-
-  .top-banner {
-    box-sizing: border-box;
-    height: 450px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .blog-content {
     box-sizing: border-box;
     width: 100%;
-    padding: 0 200px 300px;
-  }
+    height: 100%;
+    overflow: auto;
+
+    .top-banner {
+        box-sizing: border-box;
+        height: 450px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .blog-content {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 200px 300px;
+    }
 }
 </style>

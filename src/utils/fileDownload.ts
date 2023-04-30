@@ -1,14 +1,4 @@
 /**
- * @Author: boyyang
- * @Date: 2022-05-10 13:42:59
- * @LastEditTime: 2023-02-23 15:30:00
- * @LastEditors: boyyang
- * @Description: 文件下载
- * @FilePath: \blog_web\src\utils\fileDownload.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
-/**
  * @description 根据图片链接本地下载图片
  * @param {string} url //下载图片地址
  * @param {string} name // 下载图片名称

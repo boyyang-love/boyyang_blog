@@ -1,13 +1,3 @@
-/**
- * @Author: boyyang
- * @Date: 2022-07-12 10:03:24
- * @LastEditTime: 2022-09-03 16:40:12
- * @LastEditors: boyyang
- * @Description:
- * @FilePath: \blog_web\src\plugin\vanta.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
 import {App} from 'vue'
 import * as THREE from '@/three/three.min.js'
 import RINGS from 'vanta/dist/vanta.rings.min.js'

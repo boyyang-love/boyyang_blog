@@ -1,13 +1,3 @@
-/**
- * @Author: boyyang
- * @Date: 2022-04-04 22:23:14
- * @LastEditTime: 2022-12-30 11:13:20
- * @LastEditors: boyyang
- * @Description: user store
- * @FilePath: \blog_web\src\store\modules\user.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
 import {store} from '@/store'
 import {defineStore} from 'pinia'
 

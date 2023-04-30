@@ -1,13 +1,3 @@
-/**
- * @Author: boyyang
- * @Date: 2022-04-04 17:25:32
- * @LastEditTime: 2023-02-13 16:01:02
- * @LastEditors: boyyang
- * @Description: 路由守卫
- * @FilePath: \blog_web\src\router\routerGuards.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
 import {Router, RouteRecordRaw} from 'vue-router'
 import {useUserStoreWithOut} from '@/store/modules/user'
 import {usePermissionRotesStoreWithOut} from '@/store/modules/permissionRoutes'

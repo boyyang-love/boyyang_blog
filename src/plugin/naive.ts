@@ -1,13 +1,3 @@
-/**
- * @Author: boyyang
- * @Date: 2022-04-04 22:53:40
- * @LastEditTime: 2023-02-10 14:14:23
- * @LastEditors: boyyang
- * @Description:
- * @FilePath: \blog_web\src\plugin\naive.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
 import type {App} from 'vue'
 import {
     create,

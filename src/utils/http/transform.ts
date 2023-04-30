@@ -1,13 +1,3 @@
-/**
- * @Author: boyyang
- * @Date: 2022-04-17 11:51:40
- * @LastEditTime: 2023-02-07 11:14:06
- * @LastEditors: boyyang
- * @Description:
- * @FilePath: \blog_web\src\utils\http\transform.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
 import qs from 'qs'
 import {TransForm, RequestOptions, Result, AxiosOptions} from './types'
 import {AxiosResponse, AxiosRequestConfig} from 'axios'
@@ -15,7 +5,6 @@ import {useUserStoreWithOut} from '@/store/modules/user'
 import {router} from '@/router'
 
 const userStore = useUserStoreWithOut()
-
 const transForm: TransForm = {
     // 请求前hook
     beforeRequestHook: (config: AxiosRequestConfig, options: RequestOptions) => {
@@ -58,13 +47,13 @@ const transForm: TransForm = {
         // 是否显示请求成功信息
         if (isShowMessage) {
             if (isShowSuccessMessage) {
-                if (code === 1 && msg) {
+                if (code === 0 && msg) {
                     // 成功
                     window.$message.success(msg)
                 }
             }
             if (isShowErrorMessage) {
-                if (code === 0 && msg) {
+                if (code === 1 && msg) {
                     // 失败
                     window.$message.error(msg)
                 }

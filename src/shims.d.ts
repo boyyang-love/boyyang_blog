@@ -1,13 +1,3 @@
-/**
- * @Author: boyyang
- * @Date: 2022-07-04 17:32:09
- * @LastEditTime: 2023-01-30 17:12:44
- * @LastEditors: boyyang
- * @Description:
- * @FilePath: \blog_web\src\shims.d.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
 declare module 'qs'
 declare module 'three'
 declare module 'wow.js'

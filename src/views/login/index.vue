@@ -1,13 +1,3 @@
-<!--
- * @Author: boyyang
- * @Date: 2022-12-28 14:30:33
- * @LastEditTime: 2023-02-23 14:41:53
- * @LastEditors: boyyang
- * @Description: 
- * @FilePath: \blog_web\src\views\login\index.vue
- * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
--->
-
 <script lang="ts" setup>
 import {onMounted} from 'vue'
 import Wow from 'wow.js'
@@ -35,15 +25,15 @@ onMounted(() => {
 
 <template>
     <div class="bg-wrapper">
-        <BackGround width="100vw" height="100vh" :url="bgImg" class="wow pulse">
-            <div class="bg" ref="bgWrapper">
+        <BackGround :url="bgImg" class="wow pulse" height="100vh" width="100vw">
+            <div ref="bgWrapper" class="bg">
                 <signInAndUp style="position: absolute"></signInAndUp>
             </div>
         </BackGround>
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .bg-wrapper {
   background-color: #3d3b4f;
   overflow: hidden;

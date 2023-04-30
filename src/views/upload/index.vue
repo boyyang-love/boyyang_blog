@@ -1,13 +1,3 @@
-<!--
- * @Author: boyyang
- * @Date: 2023-02-11 21:16:31
- * @LastEditTime: 2023-02-12 14:02:28
- * @LastEditors: boyyang
- * @Description: 
- * @FilePath: \blog_web\src\views\upload\index.vue
- * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
--->
-
 <script lang="ts" setup>
 import {onMounted, ref, computed} from 'vue'
 import Wow from 'wow.js'
@@ -38,7 +28,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="upload-wrapper container m-auto" id="upload-container">
+    <div id="upload-container" class="upload-wrapper container m-auto">
         <div class="top-banner">
             <PrintText title="壁纸上传"></PrintText>
         </div>
@@ -50,57 +40,57 @@ onMounted(() => {
                         <span>图片名称：</span>
                         <n-input
                                 v-model:value="uploadData.submit.title"
-                                placeholder="请输入博客标题"
-                                type="textarea"
-                                size="small"
-                                style="max-width: 300px; min-width: 300px"
                                 :autosize="{
                                 minRows: 2,
                                 maxRows: 5,
                             }"
-                                maxlength="50"
-                                show-count
-                                clearable
                                 class="input"
+                                clearable
+                                maxlength="50"
+                                placeholder="请输入博客标题"
+                                show-count
+                                size="small"
+                                style="max-width: 300px; min-width: 300px"
+                                type="textarea"
                         />
                     </div>
                     <div class="sub-title">
                         <span>图片描述：</span>
                         <n-input
                                 v-model:value="uploadData.submit.des"
-                                placeholder="请输入博客描述"
-                                type="textarea"
-                                size="small"
-                                style="max-width: 300px; min-width: 300px; color: whitesmoke"
                                 :autosize="{
                                 minRows: 3,
                                 maxRows: 5,
                             }"
-                                maxlength="150"
-                                show-count
-                                clearable
                                 class="input"
+                                clearable
+                                maxlength="150"
+                                placeholder="请输入博客描述"
+                                show-count
+                                size="small"
+                                style="max-width: 300px; min-width: 300px; color: whitesmoke"
+                                type="textarea"
                         />
                     </div>
                 </div>
                 <div class="upload">
-                    <div class="img-preview" v-if="uploadData.previewUrl != ''">
+                    <div v-if="uploadData.previewUrl != ''" class="img-preview">
                         <img :src="uploadData.previewUrl" alt=""/>
                     </div>
                     <n-upload
                             ref="uploadRef"
                             v-model:file-list="uploadData.fileList"
                             :default-upload="false"
-                            directory-dnd
-                            action="#"
-                            :max="1"
-                            class="upload-btn"
-                            @change="handleUploadChange"
                             :disabled="false"
+                            :max="1"
+                            action="#"
+                            class="upload-btn"
+                            directory-dnd
+                            @change="handleUploadChange"
                     >
                         <n-upload-dragger v-if="uploadData.previewUrl == ''">
                             <div style="margin-bottom: 12px">
-                                <n-icon size="48" :depth="3">
+                                <n-icon :depth="3" size="48">
                                     <CloudUploadOutlined/>
                                 </n-icon>
                             </div>
@@ -115,8 +105,8 @@ onMounted(() => {
                 <div class="upload-btn">
                     <n-button
                             color="#8a2be2"
-                            text-color="#fff"
                             size="large"
+                            text-color="#fff"
                             @click="submit(uploadRef)"
                     >
                         <template #icon>
@@ -132,7 +122,7 @@ onMounted(() => {
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .upload-wrapper {
   box-sizing: border-box;
   width: 100%;

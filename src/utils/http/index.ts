@@ -1,13 +1,3 @@
-/**
- * @Author: boyyang
- * @Date: 2022-04-16 11:45:46
- * @LastEditTime: 2022-06-28 18:53:04
- * @LastEditors: boyyang
- * @Description:
- * @FilePath: \blog\web\src\utils\http\index.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
 import {Axios} from './http'
 import {transForm} from './transform'
 import {env} from '@/utils/env'

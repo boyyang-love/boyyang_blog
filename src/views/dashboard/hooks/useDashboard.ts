@@ -1,6 +1,6 @@
 import {reactive} from 'vue'
 import {env} from '@/utils/env'
-import {dashboard} from '@/api/dashboard'
+import {dashboard} from '@/api/dashboard/index'
 
 interface rouseData {
     name: string
@@ -13,8 +13,8 @@ interface exhibitions {
 }
 
 const dashboardData = reactive({
-    dashboard: [] as dashboard_dashboard[],
-    user_info: {} as dashboard_user_info,
+    dashboard: [] as Dashboard.Dashboard[],
+    user_info: {} as Dashboard.DashboardUserinfo,
     rouseData: [] as rouseData[],
     exhibitions: [] as exhibitions[],
 })

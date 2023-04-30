@@ -17,7 +17,7 @@ enum Type {
 }
 
 interface Background {
-    type?: string // image video color
+    type?: 'image' | 'video' | 'color' // image video color
     url?: string
     color?: string
     width?: string
@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<Background>(), {
 })
 
 const background_img = computed(() => {
-    if (props.type == Type.color) {
+    if (props.type == 'color') {
         return 'none'
     }
     return `url(${new URL(props.url as any, import.meta.url).href})`
@@ -42,14 +42,14 @@ const background_img = computed(() => {
 
 <template>
     <div class="background">
-        <video :src="props.url" loop muted autoplay v-if="props.type == Type.video"></video>
+        <video v-if="props.type == Type.video" :src="props.url" autoplay loop muted></video>
         <div class="background-content">
             <slot></slot>
         </div>
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .background {
   box-sizing: border-box;
   width: v-bind('props.width');

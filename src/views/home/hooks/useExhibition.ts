@@ -1,19 +1,9 @@
-/**
- * @Author: boyyang
- * @Date: 2022-12-30 15:32:26
- * @LastEditTime: 2023-02-14 13:57:56
- * @LastEditors: boyyang
- * @Description:
- * @FilePath: \blog_web\src\views\home\hooks\useExhibition.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
 import {reactive} from 'vue'
-import {exhibitionList} from '@/api/exhibition'
+import {exhibitionList} from '@/api/exhibition/index'
 import {env} from '@/utils/env'
 
 const exhibitionData = reactive({
-    exhibitionList: [] as exhibitionsInfo[],
+    exhibitionList: [] as Exhibition.ExhibitionsInfo[],
     page: 1,
     limit: 10,
 })

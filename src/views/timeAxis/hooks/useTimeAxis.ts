@@ -1,11 +1,11 @@
 import {reactive} from 'vue'
-import {exhibitionList} from '@/api/exhibition'
+import {exhibitionList} from '@/api/exhibition/index'
 import {env} from '@/utils/env'
 
 const timeAxisData = reactive(
     {
         count: 0,
-        list: [] as exhibitionsInfo[],
+        list: [] as Exhibition.ExhibitionsInfo[],
     },
 )
 

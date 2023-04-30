@@ -3,8 +3,8 @@ import {UploadFileInfo, UploadInst} from 'naive-ui'
 import {env} from '@/utils/env'
 
 // api
-import {createExhibition} from '@/api/exhibition'
-import {upload} from '@/api/upload'
+import {createExhibition} from '@/api/exhibition/index'
+import {upload} from '@/api/upload/index'
 
 const uploadData = reactive({
     isShowSpin: false,

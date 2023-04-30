@@ -1,13 +1,3 @@
-/**
- * @Author: boyyang
- * @Date: 2022-04-16 11:29:46
- * @LastEditTime: 2022-12-30 15:15:43
- * @LastEditors: boyyang
- * @Description:
- * @FilePath: \blog_web\src\utils\http\http.ts
- * @[如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
- */
-
 import axios from 'axios'
 import type {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
 import {AxiosOptions, RequestOptions, Result} from './types'

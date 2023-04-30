@@ -2,8 +2,8 @@ import {h, reactive, watchEffect} from 'vue'
 import {NAvatar, SelectRenderLabel, SelectRenderTag} from 'naive-ui'
 
 // api
-import {exhibitionList} from '@/api/exhibition'
-import {createBlog} from '@/api/blog'
+import {exhibitionList} from '@/api/exhibition/index'
+import {createBlog} from '@/api/blog/index'
 
 import {env} from '@/utils/env'
 

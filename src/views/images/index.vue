@@ -1,12 +1,3 @@
-<!--
- * @Author: boyyang
- * @Date: 2023-01-30 15:02:10
- * @LastEditTime: 2023-03-01 17:59:23
- * @LastEditors: boyyang
- * @Description: 所有图片展示
- * @FilePath: \blog_web\src\views\images\index.vue
- * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
--->
 <script lang="ts" setup>
 import {onMounted, ref} from 'vue'
 import Wow from 'wow.js'
@@ -43,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="images-wrapper container m-auto" ref="wrapper" id="images-container">
+    <div id="images-container" ref="wrapper" class="images-wrapper container m-auto">
         <div class="top-banner">
             <PrintText title="壁纸"></PrintText>
         </div>
@@ -52,13 +43,13 @@ onMounted(() => {
             <ImgCard
                     v-for="(item, i) in imagesData.list"
                     :key="i"
-                    class="wow fadeInDownBig"
                     :class="[
                     'wow',
                     i % 2 == 0 ? 'fadeInDownBig' : i % 3 == 0 ? 'fadeInRightBig' : 'fadeInLeftBig',
                 ]"
-                    :url="item.cover"
                     :name="item.title"
+                    :url="item.cover"
+                    class="wow fadeInDownBig"
             ></ImgCard>
         </div>
         <div class="pagination wow bounceInUp">
@@ -67,15 +58,15 @@ onMounted(() => {
                     v-model:page="imagesData.page"
                     v-model:page-size="imagesData.limit"
                     v-model:page-sizes="imagesData.pageSizes"
+                    show-size-picker
                     @update:page-size="pageSizeChange"
                     @update:page="pageChange"
-                    show-size-picker
             />
         </div>
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .images-wrapper {
   box-sizing: border-box;
   width: 100%;

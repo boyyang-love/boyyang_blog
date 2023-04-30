@@ -2,13 +2,13 @@ import {reactive, watchEffect} from 'vue'
 import {env} from '@/utils/env'
 
 // api
-import {exhibitionList} from '@/api/exhibition'
+import {exhibitionList} from '@/api/exhibition/index'
 
 const imagesData = reactive({
     page: 1,
     limit: 12,
     count: 0,
-    list: [] as exhibitionsInfo[],
+    list: [] as Exhibition.ExhibitionsInfo[],
     pageSizes: [
         {
             label: '12 每页',

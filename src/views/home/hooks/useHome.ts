@@ -2,12 +2,12 @@ import {reactive} from 'vue'
 import {env} from '@/utils/env'
 import {router} from '@/router'
 // api
-import {blogList} from '@/api/blog'
-import {dashboard} from '@/api/dashboard'
+import {blogList} from '@/api/blog/index'
+import {dashboard} from '@/api/dashboard/index'
 
 const homeData = reactive({
     blog: {
-        list: [] as blog_blogInfo[],
+        list: [] as Blog.BlogInfo[],
         count: 0,
         page: 1,
         limit: 5,
@@ -18,7 +18,7 @@ const homeData = reactive({
         exhibitionChartData: [] as string[],
         exhibitionPublishData: [] as string[],
     },
-    userInfo: {} as dashboard_user_info,
+    userInfo: {} as Dashboard.DashboardUserinfo,
 })
 
 const paginationOpt = {

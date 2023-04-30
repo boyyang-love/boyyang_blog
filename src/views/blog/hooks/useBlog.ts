@@ -1,10 +1,10 @@
 import {reactive} from 'vue'
 import {LocationQuery} from 'vue-router'
-import {blogDetail} from '@/api/blog'
+import {blogDetail} from '@/api/blog/index'
 import {env} from '@/utils/env'
 
 const blogData = reactive({
-    blogInfo: {} as blog_blogInfo,
+    blogInfo: {} as Blog.BlogInfo,
 })
 
 const getBlogDetail = (query: LocationQuery): Promise<boolean> => {

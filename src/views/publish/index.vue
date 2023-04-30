@@ -1,13 +1,3 @@
-<!--
- * @Author: boyyang
- * @Date: 2023-01-30 15:03:27
- * @LastEditTime: 2023-02-13 16:54:31
- * @LastEditors: boyyang
- * @Description: 图片发布
- * @FilePath: \blog_web\src\views\publish\index.vue
- * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
--->
-
 <script lang="ts" setup>
 import {onMounted} from 'vue'
 import {UploadFileInfo} from 'naive-ui'
@@ -49,7 +39,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="publish-wrapper container m-auto" id="publish-container">
+    <div id="publish-container" class="publish-wrapper container m-auto">
         <div class="top-banner">
             <PrintText title="上传博客"></PrintText>
         </div>
@@ -58,44 +48,44 @@ onMounted(() => {
                 <div class="title">
                     <span>标题：</span>
                     <n-input
-                            placeholder="请输入博客标题"
-                            type="textarea"
-                            size="small"
-                            style="max-width: 300px; min-width: 300px"
+                            v-model:value="publishData.submit.title"
                             :autosize="{
                             minRows: 2,
                             maxRows: 5,
                         }"
-                            maxlength="50"
-                            show-count
-                            clearable
                             class="input"
-                            v-model:value="publishData.submit.title"
+                            clearable
+                            maxlength="50"
+                            placeholder="请输入博客标题"
+                            show-count
+                            size="small"
+                            style="max-width: 300px; min-width: 300px"
+                            type="textarea"
                     />
                 </div>
                 <div class="sub-title">
                     <span>描述：</span>
                     <n-input
-                            placeholder="请输入博客描述"
-                            type="textarea"
-                            size="small"
-                            style="max-width: 300px; min-width: 300px; color: whitesmoke"
+                            v-model:value="publishData.submit.subtitle"
                             :autosize="{
                             minRows: 3,
                             maxRows: 5,
                         }"
-                            maxlength="150"
-                            show-count
-                            clearable
                             class="input"
-                            v-model:value="publishData.submit.subtitle"
+                            clearable
+                            maxlength="150"
+                            placeholder="请输入博客描述"
+                            show-count
+                            size="small"
+                            style="max-width: 300px; min-width: 300px; color: whitesmoke"
+                            type="textarea"
                     />
                 </div>
             </div>
             <v-md-editor v-model="publishData.submit.text" height="750px"></v-md-editor>
 
             <div class="upload-btn">
-                <n-button color="#8a2be2" text-color="#fff" size="large" @click="submit">
+                <n-button color="#8a2be2" size="large" text-color="#fff" @click="submit">
                     <template #icon>
                         <n-icon color="white" size="20">
                             <SendOutlined/>
@@ -110,30 +100,30 @@ onMounted(() => {
     <!-- modal  -->
     <n-modal
             v-model:show="publishData.modal.show"
+            negative-text="取消"
+            positive-text="确认"
             preset="dialog"
             title="请选择一张图片"
-            positive-text="确认"
-            negative-text="取消"
             @positive-click="submit(true)"
             @negative-click="submit(false)"
     >
         <div class="modal-wrapper">
             <n-select
-                    size="100"
                     v-model:value="publishData.modal.value"
                     :options="publishData.modal.options"
                     :render-label="renderLabel"
                     :render-tag="renderSingleSelectTag"
                     :reset-menu-on-options-change="false"
+                    size="100"
             >
                 <template #action>
                     <div class="bottom-text">
                         <n-icon
-                                :component="SyncOutlined"
                                 v-if="publishData.modal.isMore"
-                                @click="more"
                                 :class="{ 'circle-ani': publishData.modal.isMoreLoading }"
+                                :component="SyncOutlined"
                                 size="20"
+                                @click="more"
                         ></n-icon>
                         <span v-if="publishData.modal.isMoreLoading">图片获取中·····</span>
                         <span v-else>
@@ -146,7 +136,7 @@ onMounted(() => {
     </n-modal>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .publish-wrapper {
   box-sizing: border-box;
   width: 100%;

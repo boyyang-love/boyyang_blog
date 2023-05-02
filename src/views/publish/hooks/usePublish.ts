@@ -1,4 +1,4 @@
-import {h, reactive, watchEffect} from 'vue'
+import {h, reactive, VNodeChild, watchEffect} from 'vue'
 import {NAvatar, SelectRenderLabel, SelectRenderTag} from 'naive-ui'
 
 // api
@@ -28,6 +28,7 @@ const publishData = reactive({
         limit: 10,
         isMore: true,
         isMoreLoading: false,
+        loading: false,
     },
 })
 
@@ -65,7 +66,6 @@ const submit = (type?: boolean) => {
     }
 
     if (type === true) {
-        //
         let params = {
             title: publishData.submit.title,
             sub_title: publishData.submit.subtitle,
@@ -73,7 +73,6 @@ const submit = (type?: boolean) => {
             cover: publishData.modal.value,
         }
         createBlog(params).then(res => {
-            console.log(res)
             publishData.submit = {
                 title: '',
                 subtitle: '',
@@ -106,6 +105,7 @@ const getList = () => {
                     label: item.title,
                     value: item.cover,
                     cover: `${env.VITE_APP_IMG_URL}${item.cover}`,
+                    id: item.id,
                 }
             }),
         )
@@ -113,7 +113,7 @@ const getList = () => {
         if (publishData.modal.options.length >= publishData.modal.count) {
             publishData.modal.isMore = false
         }
-
+        console.log(publishData.modal.options)
         publishData.modal.isMoreLoading = false
     })
 }
@@ -125,10 +125,6 @@ const more = () => {
     }
 }
 
-// watchEffect(() => {
-//     getList()
-// })
-
 const renderLabel: SelectRenderTag = option => {
     return h(
         'div',
@@ -138,6 +134,7 @@ const renderLabel: SelectRenderTag = option => {
                 alignItems: 'center',
                 padding: '15px',
             },
+            key: (option as any).id,
         },
         [
             h('img', {
@@ -146,12 +143,12 @@ const renderLabel: SelectRenderTag = option => {
                     border: '2px solid #fff',
                     'box-shadow': '2px 2px 2px black',
                 },
+                key: (option as any).id,
             }),
         ],
-    )
+    ) as VNodeChild
 }
 const renderSingleSelectTag: SelectRenderLabel = ({option}) => {
-    console.log(option)
     if ((option as any).value == '') {
         return h('div', {
             style: {
@@ -178,6 +175,7 @@ const renderSingleSelectTag: SelectRenderLabel = ({option}) => {
                     'object-fit': 'cover',
                     border: '2px solid white',
                 },
+                key: (option as any).id,
             }),
         ],
     )

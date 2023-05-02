@@ -108,30 +108,11 @@ onMounted(() => {
             @negative-click="submit(false)"
     >
         <div class="modal-wrapper">
-            <n-select
-                    v-model:value="publishData.modal.value"
-                    :options="publishData.modal.options"
-                    :render-label="renderLabel"
-                    :render-tag="renderSingleSelectTag"
-                    :reset-menu-on-options-change="false"
-                    size="100"
-            >
-                <template #action>
-                    <div class="bottom-text">
-                        <n-icon
-                                v-if="publishData.modal.isMore"
-                                :class="{ 'circle-ani': publishData.modal.isMoreLoading }"
-                                :component="SyncOutlined"
-                                size="20"
-                                @click="more"
-                        ></n-icon>
-                        <span v-if="publishData.modal.isMoreLoading">图片获取中·····</span>
-                        <span v-else>
-                            {{ publishData.modal.isMore ? '点击加载更多图片' : '没有更多图片了' }}
-                        </span>
-                    </div>
-                </template>
-            </n-select>
+            <div class="images-wrapper">
+                <div v-for="item in publishData.modal.options" :key="item.id" class="img">
+                    <img :src="item.cover">
+                </div>
+            </div>
         </div>
     </n-modal>
 </template>
@@ -204,7 +185,17 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    // height: 500px;
+    width: 500px;
+
+    .images-wrapper {
+        box-sizing: border-box;
+        max-height: 400px;
+        overflow-y: auto;
+
+        img {
+            margin-bottom: 10px;
+        }
+    }
 }
 
 .bottom-text {

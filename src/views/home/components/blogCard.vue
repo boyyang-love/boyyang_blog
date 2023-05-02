@@ -13,6 +13,7 @@ interface blogCardProps {
     subtitle: string
     cover: string
     author: string
+    time: number | string
 }
 
 const router = useRouter()
@@ -59,7 +60,7 @@ const toBlogDetail = () => {
                 <div class="bottom-left">
                     <n-space vertical>
                         <div>作者：{{ props.author }}</div>
-                        <div>时间：2022-01-01</div>
+                        <div>时间：{{ props.time }}</div>
                     </n-space>
                 </div>
                 <div class="bottom-right">

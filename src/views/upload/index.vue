@@ -47,7 +47,7 @@ onMounted(() => {
                                 class="input"
                                 clearable
                                 maxlength="50"
-                                placeholder="请输入博客标题"
+                                placeholder="请输入壁纸名称"
                                 show-count
                                 size="small"
                                 style="max-width: 300px; min-width: 300px"
@@ -65,7 +65,7 @@ onMounted(() => {
                                 class="input"
                                 clearable
                                 maxlength="150"
-                                placeholder="请输入博客描述"
+                                placeholder="请输入壁纸描述"
                                 show-count
                                 size="small"
                                 style="max-width: 300px; min-width: 300px; color: whitesmoke"

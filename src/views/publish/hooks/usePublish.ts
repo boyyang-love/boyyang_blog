@@ -1,207 +1,97 @@
-import {h, reactive, VNodeChild, watchEffect} from 'vue'
-import {NAvatar, SelectRenderLabel, SelectRenderTag} from 'naive-ui'
-
+import {reactive, ref} from 'vue'
+import type {UploadFileInfo} from 'naive-ui'
 // api
-import {exhibitionList} from '@/api/exhibition/index'
-import {createBlog} from '@/api/blog/index'
+import {upload} from '@/api/upload'
+import {createBlog} from '@/api/blog'
 
-import {env} from '@/utils/env'
-
-const publishData = reactive({
-    submit: {
-        title: '',
-        subtitle: '',
-        text: '',
-    },
-    modal: {
-        show: false,
-        options: [
-            // {
-            //     label: '',
-            //     value: '',
-            //     cover: '',
-            // },
-        ] as any,
-        value: '',
-        count: 0,
-        page: 1,
-        limit: 10,
-        isMore: true,
-        isMoreLoading: false,
-        loading: false,
-    },
+// 博客表单
+const BlogForm = reactive({
+    title: '',
+    des: '',
+    content: '',
+    cover: '',
 })
-
-const paginationOpt = {
-    pageSizes: [
-        {
-            label: '10 每页',
-            value: 10,
-        },
-        {
-            label: '20 每页',
-            value: 20,
-        },
-        {
-            label: '30 每页',
-            value: 30,
-        },
-    ],
-}
-
-const submit = (type?: boolean) => {
-    if (
-        publishData.submit.title == '' ||
-        publishData.submit.subtitle == '' ||
-        publishData.submit.text == ''
-    ) {
-        window.$notification.create({
-            type: 'error',
+// 博客表单 更多
+const BlogFormMore = reactive({
+    tags: [],
+    tagsOptions: [],
+    fileList: [] as UploadFileInfo[],
+})
+// btn 加载
+const isLoading = ref<boolean>(false)
+// 图片上传弹框
+const isShowDialog = ref<boolean>(false)
+// 判断必填项是否全部填写
+const beforeBlogSubmit = () => {
+    if (BlogForm.title.trim() == '' || BlogForm.des.trim() == '' || BlogForm.content.trim() == '') {
+        window.$notification.warning({
             title: '提示',
-            content: '标题 描述 内容为必填项！',
+            content: '博客标题，博客描述，以及博客内容为必填项。',
             duration: 3000,
         })
-
         return
+    } else {
+        isShowDialog.value = true
     }
-
-    if (type === true) {
-        let params = {
-            title: publishData.submit.title,
-            sub_title: publishData.submit.subtitle,
-            content: publishData.submit.text,
-            cover: publishData.modal.value,
-        }
-        createBlog(params).then(res => {
-            publishData.submit = {
-                title: '',
-                subtitle: '',
-                text: '',
-            }
-            publishData.modal.value = ''
-        })
-        return
-    }
-
-    if (type === false) {
-        publishData.modal.show = false
-    }
-
-    publishData.modal.show = true
-    getList()
 }
-
-const getList = () => {
-    let imgParams = {
-        page: publishData.modal.page,
-        limit: publishData.modal.limit,
+// 博客提交
+const blogSubmit = async () => {
+    isLoading.value = true
+    let uploadParams = {
+        file_name: BlogFormMore.fileList[0].name,
+        file: BlogFormMore.fileList[0].file as File,
     }
-    publishData.modal.isMoreLoading = true
-    exhibitionList(imgParams).then(res => {
-        publishData.modal.count = res.data.count
-        publishData.modal.options = publishData.modal.options.concat(
-            res.data.exhibitions.map(item => {
-                return {
-                    label: item.title,
-                    value: item.cover,
-                    cover: `${env.VITE_APP_IMG_URL}${item.cover}`,
-                    id: item.id,
-                }
-            }),
-        )
-
-        if (publishData.modal.options.length >= publishData.modal.count) {
-            publishData.modal.isMore = false
-        }
-        console.log(publishData.modal.options)
-        publishData.modal.isMoreLoading = false
+    let fileInfo = await upload(uploadParams)
+    let blogParams = {
+        title: BlogForm.title,
+        sub_title: BlogForm.des,
+        cover: fileInfo.key,
+        content: BlogForm.content,
+    }
+    await createBlog(blogParams)
+    isLoading.value = false
+    window.$notification.success({
+        title: '提示',
+        content: `博客《${BlogForm.title}》上传成功`,
+        duration: 3000,
     })
+    //  清空数据
+    BlogForm.title = ''
+    BlogForm.des = ''
+    BlogForm.content = ''
+    BlogForm.cover = ''
+    BlogFormMore.fileList = []
+    BlogFormMore.tags = []
+    BlogFormMore.tagsOptions = []
 }
-
-const more = () => {
-    if (publishData.modal.isMore) {
-        publishData.modal.page++
-        getList()
-    }
+// 文件上传 change
+const uploadChange = (
+    options: {
+        event: Event
+        fileList: UploadFileInfo[]
+        file: UploadFileInfo
+    },
+) => {
+    BlogFormMore.fileList = options.fileList
 }
-
-const renderLabel: SelectRenderTag = option => {
-    return h(
-        'div',
-        {
-            style: {
-                display: 'flex',
-                alignItems: 'center',
-                padding: '15px',
-            },
-            key: (option as any).id,
-        },
-        [
-            h('img', {
-                src: (option as any).cover,
-                style: {
-                    border: '2px solid #fff',
-                    'box-shadow': '2px 2px 2px black',
-                },
-                key: (option as any).id,
-            }),
-        ],
-    ) as VNodeChild
-}
-const renderSingleSelectTag: SelectRenderLabel = ({option}) => {
-    if ((option as any).value == '') {
-        return h('div', {
-            style: {
-                height: '45px',
-            },
-        })
-    }
-    return h(
-        'div',
-        {
-            style: {
-                display: 'flex',
-                alignItems: 'center',
-                height: '200px',
-                overflow: 'hidden',
-            },
-        },
-        [
-            h('img', {
-                src: (option as any).cover,
-                style: {
-                    height: '80%',
-                    width: '100%',
-                    'object-fit': 'cover',
-                    border: '2px solid white',
-                },
-                key: (option as any).id,
-            }),
-        ],
-    )
-}
-
-const handleScroll = (e: Event) => {
-    const currentTarget = e.currentTarget as HTMLElement
-    if (currentTarget.scrollTop + currentTarget.offsetHeight >= currentTarget.scrollHeight) {
-        if (publishData.modal.options.length < publishData.modal.count) {
-            publishData.modal.page++
-            getList()
-        }
-    }
-}
-
-const usePublish = () => {
+// hooks
+const usePublishData = () => {
     return {
-        publishData,
-        submit,
-        getList,
-        renderLabel,
-        renderSingleSelectTag,
-        paginationOpt,
-        handleScroll,
-        more,
+        BlogForm,
+        BlogFormMore,
+        isLoading,
+        isShowDialog,
+    }
+}
+const usePublishMethods = () => {
+    return {
+        beforeBlogSubmit,
+        blogSubmit,
+        uploadChange,
     }
 }
 
-export {usePublish}
+export {
+    usePublishData,
+    usePublishMethods,
+}

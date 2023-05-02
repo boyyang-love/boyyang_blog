@@ -1,24 +1,15 @@
 <script lang="ts" setup>
 import {onMounted} from 'vue'
-import {UploadFileInfo} from 'naive-ui'
 import Wow from 'wow.js'
+// components
 import {AccountBookFilled, SendOutlined, SyncOutlined} from '@vicons/antd'
-import {upload} from '@/api/upload'
-import {PrintText} from '@/components/PrintText'
-
+import PrintText from '@/components/PrintText/index.vue'
 // hooks
-import {usePublish} from './hooks/usePublish'
+import {usePublishData, usePublishMethods} from './hooks/usePublish'
 
-const {
-    publishData,
-    submit,
-    getList,
-    renderLabel,
-    renderSingleSelectTag,
-    paginationOpt,
-    handleScroll,
-    more,
-} = usePublish()
+const {BlogForm, BlogFormMore, isLoading, isShowDialog} = usePublishData()
+const {beforeBlogSubmit, blogSubmit, uploadChange} = usePublishMethods()
+
 
 onMounted(() => {
     const wow = new Wow({
@@ -48,11 +39,8 @@ onMounted(() => {
                 <div class="title">
                     <span>标题：</span>
                     <n-input
-                            v-model:value="publishData.submit.title"
-                            :autosize="{
-                            minRows: 2,
-                            maxRows: 5,
-                        }"
+                            v-model:value="BlogForm.title"
+                            :autosize="{minRows: 2,maxRows: 5,}"
                             class="input"
                             clearable
                             maxlength="50"
@@ -66,11 +54,8 @@ onMounted(() => {
                 <div class="sub-title">
                     <span>描述：</span>
                     <n-input
-                            v-model:value="publishData.submit.subtitle"
-                            :autosize="{
-                            minRows: 3,
-                            maxRows: 5,
-                        }"
+                            v-model:value="BlogForm.des"
+                            :autosize="{minRows: 3,maxRows: 5,}"
                             class="input"
                             clearable
                             maxlength="150"
@@ -82,10 +67,16 @@ onMounted(() => {
                     />
                 </div>
             </div>
-            <v-md-editor v-model="publishData.submit.text" height="750px"></v-md-editor>
+            <v-md-editor v-model="BlogForm.content" height="750px"></v-md-editor>
 
             <div class="upload-btn">
-                <n-button color="#8a2be2" size="large" text-color="#fff" @click="submit">
+                <n-button
+                        :loading="isLoading"
+                        color="#8a2be2"
+                        size="large"
+                        text-color="#fff"
+                        @click="beforeBlogSubmit"
+                >
                     <template #icon>
                         <n-icon color="white" size="20">
                             <SendOutlined/>
@@ -96,24 +87,37 @@ onMounted(() => {
             </div>
         </div>
     </div>
-
-    <!-- modal  -->
     <n-modal
-            v-model:show="publishData.modal.show"
-            negative-text="取消"
+            v-model:show="isShowDialog"
+            :loading="isLoading"
+            negative-text="算了"
             positive-text="确认"
             preset="dialog"
-            title="请选择一张图片"
-            @positive-click="submit(true)"
-            @negative-click="submit(false)"
+            title="更多信息"
+            @positive-click="blogSubmit"
     >
-        <div class="modal-wrapper">
-            <div class="images-wrapper">
-                <div v-for="item in publishData.modal.options" :key="item.id" class="img">
-                    <img :src="item.cover">
-                </div>
-            </div>
-        </div>
+        <n-form>
+            <n-form-item label="图片">
+                <n-upload
+                        :default-file-list="BlogFormMore.fileList"
+                        :default-upload="false"
+                        :disabled="false"
+                        :max="1"
+                        action="#"
+                        list-type="image-card"
+                        @change="uploadChange"
+                />
+            </n-form-item>
+            <n-form-item label="标签">
+                <n-select
+                        v-model:value="BlogFormMore.tags"
+                        :options="BlogFormMore.tagsOptions"
+                        filterable
+                        multiple
+                        tag
+                />
+            </n-form-item>
+        </n-form>
     </n-modal>
 </template>
 

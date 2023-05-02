@@ -5,7 +5,7 @@ export const createBlog = (data: {
     title: string
     sub_title: string
     content: string
-    cover: string
+    cover?: string
 }) => {
     return http.request({
         url: '/blog/create',

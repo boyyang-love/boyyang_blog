@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import {onMounted} from 'vue'
-import {useTimeAxis} from './hooks/useTimeAxis'
+import moment from 'moment/moment'
 // hooks
-const {timeAxisData, getData} = useTimeAxis()
+import {useTimeAxisData, useTimeAxisMethods} from './hooks/useTimeAxis'
+
+const {timeAxisData} = useTimeAxisData()
+const {getData} = useTimeAxisMethods()
+
 
 onMounted(() => {
-    console.log(timeAxisData)
     getData()
 })
 </script>
@@ -16,16 +19,34 @@ onMounted(() => {
             <n-timeline-item
                     v-for="item in timeAxisData.list"
                     :key="item.id"
-                    type="success"
-                    title=""
-                    time="item.time"
+                    :type="['default', 'success', 'info', 'warning', 'error'][parseInt(Math.random() * 4 as string)]"
             >
                 <template #header>
                     <div class="item-title">
                         {{ item.title }}
                     </div>
                     <div class="item-content">
-                        <img :src="item.cover" alt="图片">
+                        <n-image
+                                :intersection-observer-options="{root: '#image-scroll-container' }"
+                                :src="item.cover"
+                                height="100"
+                                lazy
+                                width="100"
+                        >
+                            <template #placeholder>
+                                loading....
+                            </template>
+                        </n-image>
+                    </div>
+                </template>
+                <template #footer>
+                    <div class="time">
+                        <span>
+                            {{ moment(item.created * 1000).format('YYYY-MM-DD') }}
+                        </span>
+                        <span>
+                            {{ item.user_info.username }}
+                        </span>
                     </div>
                 </template>
             </n-timeline-item>
@@ -45,10 +66,25 @@ onMounted(() => {
     }
 
     .item-content {
+        box-sizing: border-box;
+        display: inline-block;
+
         img {
             box-sizing: border-box;
             height: 250px;
+            width: 450px;
+            object-fit: cover;
             border: 2px solid antiquewhite;
+        }
+    }
+
+    .time {
+        display: flex;
+        font-width: bloder;
+        color: whitesmoke;
+
+        span {
+            margin: 0 15px;
         }
     }
 }

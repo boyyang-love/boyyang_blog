@@ -1,15 +1,6 @@
 <script lang="ts" setup>
-import {
-    ManOutlined,
-    WomanOutlined,
-    LikeOutlined,
-    HeartOutlined,
-    SendOutlined,
-    StarOutlined,
-    GithubOutlined,
-    QqOutlined,
-    WechatOutlined,
-} from '@vicons/antd'
+import {StarOutlined} from '@vicons/antd'
+import {Fitness} from '@vicons/ionicons5'
 
 interface imgCardProps {
     url?: string
@@ -24,8 +15,17 @@ const props = withDefaults(defineProps<imgCardProps>(), {
 
 <template>
     <div class="imgcard-wrapper">
-        <img :src="props.url" :alt="props.name" :key="props.url"/>
-
+        <n-image
+                :src="props.url"
+                class="img"
+                lazy
+        >
+            <template #placeholder>
+                <div class="loading">
+                    <n-icon :component="Fitness as any" class="icon" color="#f00056" size="55"></n-icon>
+                </div>
+            </template>
+        </n-image>
         <div class="imgcard-bottom">
             <div class="left-text">
                 <n-ellipsis style="max-width: 240px">
@@ -33,27 +33,26 @@ const props = withDefaults(defineProps<imgCardProps>(), {
                 </n-ellipsis>
             </div>
             <div class="right-icon">
-                <n-space align="center" justify="center" :size="500"></n-space>
-                <n-icon :component="HeartOutlined" size="25" class="icon"></n-icon>
-                <n-icon :component="StarOutlined" size="25" class="icon"></n-icon>
+                <n-space :size="500" align="center" justify="center"></n-space>
+                <n-icon :component="StarOutlined as any" class="icon" size="25"></n-icon>
             </div>
         </div>
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .imgcard-wrapper {
     box-sizing: border-box;
     width: 100%;
     max-height: 250px;
-    background-color: #fff;
+    background-color: #3d3b4f;
     border: 4px solid whitesmoke;
     border-radius: 2px;
     box-shadow: 5px 2px 3px #393e46;
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
 
-    img {
+    .img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -63,12 +62,21 @@ const props = withDefaults(defineProps<imgCardProps>(), {
         &:hover {
             object-position: right bottom;
         }
+
+        .loading {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 
     &:hover {
         z-index: 9;
         transform: scale(1.2);
-        border: 1px solie black;
+        border: 1px solid black;
     }
 
     .imgcard-bottom {

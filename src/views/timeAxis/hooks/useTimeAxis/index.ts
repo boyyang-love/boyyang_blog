@@ -1,5 +1,5 @@
 import {reactive} from 'vue'
-import {exhibitionList} from '@/api/exhibition/index'
+import {exhibitionList} from '@/api/exhibition'
 import {env} from '@/utils/env'
 
 const timeAxisData = reactive(
@@ -25,15 +25,20 @@ const getData = () => {
     })
 }
 
-const useTimeAxis = () => {
-
+const useTimeAxisData = () => {
     return {
         timeAxisData,
+    }
+}
+
+const useTimeAxisMethods = () => {
+    return {
         getData,
     }
 }
 
 export {
-    useTimeAxis,
+    useTimeAxisData,
+    useTimeAxisMethods,
 }
 

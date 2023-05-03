@@ -25,32 +25,6 @@ const imagesData = reactive({
     ],
 })
 
-const paginationOpt = {
-    pageSizes: [
-        {
-            label: '12/页',
-            value: 12,
-        },
-        {
-            label: '24/页',
-            value: 24,
-        },
-        {
-            label: '36/页',
-            value: 36,
-        },
-    ],
-}
-
-const useImages = () => {
-    return {
-        imagesData,
-        getList,
-        paginationOpt,
-        pageChange,
-        pageSizeChange,
-    }
-}
 
 const getList = () => {
     let params = {
@@ -80,4 +54,19 @@ const pageSizeChange = (n: number) => {
     getList()
 }
 
-export {useImages}
+const useImagesData = () => {
+    return {
+        imagesData,
+
+    }
+}
+
+const useImagesMethods = () => {
+    return {
+        getList,
+        pageChange,
+        pageSizeChange,
+    }
+}
+
+export {useImagesData, useImagesMethods}

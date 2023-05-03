@@ -47,6 +47,7 @@ const blogSubmit = async () => {
         sub_title: BlogForm.des,
         cover: fileInfo.key,
         content: BlogForm.content,
+        tags: BlogFormMore.tags.join(','),
     }
     await createBlog(blogParams)
     isLoading.value = false

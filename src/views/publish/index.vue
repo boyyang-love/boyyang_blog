@@ -97,7 +97,7 @@ onMounted(() => {
             @positive-click="blogSubmit"
     >
         <n-form>
-            <n-form-item label="图片">
+            <n-form-item>
                 <n-upload
                         :default-file-list="BlogFormMore.fileList"
                         :default-upload="false"
@@ -112,6 +112,7 @@ onMounted(() => {
                 <n-select
                         v-model:value="BlogFormMore.tags"
                         :options="BlogFormMore.tagsOptions"
+                        placeholder="请添加标签"
                         filterable
                         multiple
                         tag

@@ -6,6 +6,7 @@ import {
     CommentOutlined,
     SendOutlined,
 } from '@vicons/antd'
+import moment from 'moment'
 
 interface blogCardProps {
     isReverse: boolean
@@ -43,7 +44,7 @@ const toBlogDetail = () => {
                 ></n-icon>
             </div>
 
-            <img :src="props.cover" :alt="props.cover"/>
+            <img :alt="props.cover" :src="props.cover"/>
         </div>
         <div class="right">
             <div class="title">
@@ -52,7 +53,7 @@ const toBlogDetail = () => {
                 </n-ellipsis>
             </div>
             <div class="sub-title">
-                <n-ellipsis :line-clamp="3" style="max-width: 520px" :tooltip="false">
+                <n-ellipsis :line-clamp="3" :tooltip="false" style="max-width: 520px">
                     {{ props.subtitle }}
                 </n-ellipsis>
             </div>
@@ -60,7 +61,9 @@ const toBlogDetail = () => {
                 <div class="bottom-left">
                     <n-space vertical>
                         <div>作者：{{ props.author }}</div>
-                        <div>时间：{{ props.time }}</div>
+                        <div>时间：
+                            {{ moment(props.time * 1000).format('YYYY-MM-DD') }}
+                        </div>
                     </n-space>
                 </div>
                 <div class="bottom-right">
@@ -75,31 +78,31 @@ const toBlogDetail = () => {
                         <n-icon :component="EyeOutlined" size="27" color="#eeeeee"></n-icon>
                     </n-badge> -->
                     <n-badge
-                            :value="10"
-                            :max="999"
                             :dot="false"
+                            :max="999"
+                            :value="10"
                             color="none"
                             type="error"
                     >
-                        <n-icon :component="HeartOutlined" size="27" color="#eeeeee"></n-icon>
+                        <n-icon :component="HeartOutlined" color="#eeeeee" size="27"></n-icon>
                     </n-badge>
                     <n-badge
-                            :value="10"
-                            :max="999"
                             :dot="false"
+                            :max="999"
+                            :value="10"
                             color="none"
                             type="error"
                     >
-                        <n-icon :component="StarOutlined" size="27" color="#eeeeee"></n-icon>
+                        <n-icon :component="StarOutlined" color="#eeeeee" size="27"></n-icon>
                     </n-badge>
                     <n-badge
-                            :value="10"
-                            :max="999"
                             :dot="false"
+                            :max="999"
+                            :value="10"
                             color="none"
                             type="error"
                     >
-                        <n-icon :component="CommentOutlined" size="27" color="#eeeeee"></n-icon>
+                        <n-icon :component="CommentOutlined" color="#eeeeee" size="27"></n-icon>
                     </n-badge>
                 </div>
             </div>
@@ -107,7 +110,7 @@ const toBlogDetail = () => {
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .is-reverse {
     flex-direction: row-reverse;
 }

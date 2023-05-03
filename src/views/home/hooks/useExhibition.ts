@@ -24,11 +24,16 @@ const getExhibitionList = () => {
     })
 }
 
-const useExhibition = () => {
+const useExhibitionData = () => {
     return {
         exhibitionData,
+    }
+}
+
+const useExhibitionMethods = () => {
+    return {
         getExhibitionList,
     }
 }
 
-export {useExhibition}
+export {useExhibitionData, useExhibitionMethods}

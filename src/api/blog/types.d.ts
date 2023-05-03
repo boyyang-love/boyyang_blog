@@ -11,6 +11,8 @@ declare namespace Blog {
         sub_title: string
         thumbs_up: number
         title: string
+        created: number
+        updated: number
         user_info: BlogUserinfo
     }
 

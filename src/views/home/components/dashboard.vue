@@ -96,9 +96,10 @@ const chartData_1 = {
     <div class="dashboard-wrapper">
         <div class="left">
             <div class="banner">
-                <n-carousel effect="card" prev-slide-style="transform: translateX(-150%) translateZ(-800px);"
-                            next-slide-style="transform: translateX(50%) translateZ(-800px);" style="height: 240px"
-                            :show-dots="false">
+                <n-carousel :show-dots="false" effect="card"
+                            next-slide-style="transform: translateX(50%) translateZ(-800px);"
+                            prev-slide-style="transform: translateX(-150%) translateZ(-800px);"
+                            style="height: 240px">
                     <n-carousel-item :style="{ width: '60%' }">
                         <img class="carousel-img"
                              src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg">
@@ -119,7 +120,7 @@ const chartData_1 = {
             </div>
 
             <div class="dashboard">
-                <qiun-vue-ucharts type="mount" :opts="opts" :chartData="chartData"/>
+                <qiun-vue-ucharts :chartData="chartData" :opts="opts" type="mount"/>
             </div>
         </div>
 
@@ -128,7 +129,7 @@ const chartData_1 = {
 
                 <div class="info"></div>
                 <div class="info-charts">
-                    <qiun-vue-ucharts type="radar" :opts="opts_1" :chartData="chartData_1"/>
+                    <qiun-vue-ucharts :chartData="chartData_1" :opts="opts_1" type="radar"/>
                 </div>
             </div>
         </div>
@@ -136,7 +137,7 @@ const chartData_1 = {
 
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .dashboard-wrapper {
     box-sizing: border-box;
     width: 100%;

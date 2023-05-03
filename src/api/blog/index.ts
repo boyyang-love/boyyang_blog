@@ -6,6 +6,7 @@ export const createBlog = (data: {
     sub_title: string
     content: string
     cover?: string
+    tags?: string
 }) => {
     return http.request({
         url: '/blog/create',

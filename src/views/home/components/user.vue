@@ -2,7 +2,7 @@
 import {GithubOutlined, QqOutlined, WechatOutlined} from '@vicons/antd'
 
 interface userProps {
-    userInfo: dashboard_user_info
+    userInfo: Dashboard.DashboardUserinfo
 }
 
 const props = withDefaults(defineProps<userProps>(), {})
@@ -12,11 +12,11 @@ const props = withDefaults(defineProps<userProps>(), {})
     <div class="user-wrapper">
         <div class="header">
             <n-avatar
-                    class="header-img wow slideInDown"
-                    round
-                    bordered
                     :size="95"
                     :src="props.userInfo.avatar_url"
+                    bordered
+                    class="header-img wow slideInDown"
+                    round
             />
             <div class="user-name wow slideInDown" data-wow-delay="0.5s">
                 {{ props.userInfo.username }}
@@ -65,7 +65,7 @@ const props = withDefaults(defineProps<userProps>(), {})
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .user-wrapper {
     box-sizing: border-box;
     width: 100%;

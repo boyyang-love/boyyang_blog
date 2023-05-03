@@ -14,6 +14,7 @@ declare namespace Exhibition {
         title: string
         user_id: number
         user_info: UserInfo
+        created: number
     }
 
     interface UserInfo {

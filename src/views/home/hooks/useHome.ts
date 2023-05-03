@@ -91,16 +91,22 @@ const pageSizeChange = (n: number) => {
     getBlogList()
 }
 
-const useHome = () => {
+const useHomeData = () => {
     return {
         homeData,
+        paginationOpt,
+
+    }
+}
+
+const useHomeMethods = () => {
+    return {
         getBlogList,
         getDashboard,
         cardClick,
-        paginationOpt,
         pageChange,
         pageSizeChange,
     }
 }
 
-export {useHome}
+export {useHomeData, useHomeMethods}

@@ -11,19 +11,13 @@ import Notice from './notice.vue'
 import Carousel from './carousel.vue'
 
 // hooks
-import {useHome} from '../hooks/useHome'
-import {useExhibition} from '../hooks/useExhibition'
+import {useHomeData, useHomeMethods} from '../hooks/useHome'
+import {useExhibitionData, useExhibitionMethods} from '../hooks/useExhibition'
 
-const {
-    homeData,
-    getBlogList,
-    getDashboard,
-    cardClick,
-    pageChange,
-    pageSizeChange,
-    paginationOpt,
-} = useHome()
-const {exhibitionData, getExhibitionList} = useExhibition()
+const {homeData, paginationOpt} = useHomeData()
+const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange} = useHomeMethods()
+const {exhibitionData} = useExhibitionData()
+const {getExhibitionList} = useExhibitionMethods()
 
 onMounted(() => {
     const wow = new Wow({
@@ -48,7 +42,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="home container m-auto" id="home-container">
+    <div id="home-container" class="home container m-auto">
         <div class="top-banner">
             <PrintText></PrintText>
         </div>
@@ -71,17 +65,18 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="blog">
-                    <n-space vertical size="large">
+                    <n-space size="large" vertical>
                         <div class="title wow slideInDown">我的博客</div>
                         <BlogCard
                                 v-for="(item, i) in homeData.blog.list"
                                 :key="item.id"
-                                :class="['wow', (i + 1) % 2 == 0 ? 'bounceInLeft' : 'bounceInRight']"
-                                :is-reverse="(i + 1) % 2 == 0"
-                                :title="item.title"
-                                :subtitle="item.sub_title"
-                                :cover="item.cover"
                                 :author="item.user_info.username"
+                                :class="['wow', (i + 1) % 2 == 0 ? 'bounceInLeft' : 'bounceInRight']"
+                                :cover="item.cover"
+                                :is-reverse="(i + 1) % 2 == 0"
+                                :subtitle="item.sub_title"
+                                :time="item.created"
+                                :title="item.title"
                                 @cardClick="cardClick(item.id)"
                         ></BlogCard>
                         <div class="pagination wow bounceInUp">
@@ -89,8 +84,8 @@ onMounted(() => {
                                     v-model:page="homeData.blog.page"
                                     v-model:page-size="homeData.blog.limit"
                                     :item-count="homeData.blog.count"
-                                    show-size-picker
                                     :page-sizes="paginationOpt.pageSizes"
+                                    show-size-picker
                                     @update:page-size="pageSizeChange"
                                     @update:page="pageChange"
                             />
@@ -117,7 +112,7 @@ onMounted(() => {
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .title {
     font-family: inherit;
     font-size: 18px;

@@ -7,9 +7,11 @@ import PrintText from '@/components/PrintText/index.vue'
 import ImgCard from './components/imgCard.vue'
 
 // hooks
-import {useImages} from './hooks/useImages'
+import {useImagesData, useImagesMethods} from './hooks/useImages'
 
-const {imagesData, getList, pageChange, pageSizeChange} = useImages()
+const {imagesData} = useImagesData()
+const {getList, pageChange, pageSizeChange} = useImagesMethods()
+
 
 const wrapper = ref<Element | null>(null)
 

@@ -75,8 +75,8 @@ const props = withDefaults(defineProps<imgCardProps>(), {
 
     &:hover {
         z-index: 9;
-        transform: scale(1.2);
-        border: 1px solid black;
+        transform: scale(1.1);
+        //border: 1px solid black;
     }
 
     .imgcard-bottom {

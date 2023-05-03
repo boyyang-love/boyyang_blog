@@ -1,12 +1,3 @@
-<!--
- * @Author: boyyang
- * @Date: 2022-04-20 13:03:04
- * @LastEditTime: 2023-02-23 15:08:44
- * @LastEditors: boyyang
- * @Description: 
- * @FilePath: \blog_web\src\components\Background\index.vue
- * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
--->
 <script lang="ts" setup>
 import {computed} from 'vue'
 
@@ -42,7 +33,7 @@ const background_img = computed(() => {
 
 <template>
     <div class="background">
-        <video v-if="props.type == Type.video" :src="props.url" autoplay loop muted></video>
+        <video v-if="props.type == Type.video" :src="props.url" autoplay class="video" loop muted></video>
         <div class="background-content">
             <slot></slot>
         </div>
@@ -69,7 +60,7 @@ const background_img = computed(() => {
         height: 100%;
     }
 
-    video {
+    .video {
         width: 100%;
         height: 100%;
         object-fit: fill;

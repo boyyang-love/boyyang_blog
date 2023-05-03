@@ -92,7 +92,7 @@ onMounted(() => {
     .images-content {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 10px;
+        grid-gap: 15px;
         padding: 50px 150px;
     }
 

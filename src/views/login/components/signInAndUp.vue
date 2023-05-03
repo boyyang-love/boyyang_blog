@@ -1,13 +1,3 @@
-<!--
- * @Author: boyyang
- * @Date: 2022-12-28 14:39:54
- * @LastEditTime: 2023-02-07 16:56:47
- * @LastEditors: boyyang
- * @Description: 登录
- * @FilePath: \blog_web\src\views\login\components\signInAndUp.vue
- * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
--->
-
 <script lang="ts" setup>
 import {UserOutlined, KeyOutlined, PhoneOutlined} from '@vicons/antd'
 import {useLogin} from '../hooks/useLogin'
@@ -16,61 +6,61 @@ const {loginData, submit} = useLogin()
 </script>
 
 <template>
-    <div class="sign-in-wrapper" id="sign-in-wrapper">
+    <div id="sign-in-wrapper" class="sign-in-wrapper">
         <div class="box-wrapper">
             <div class="title-wrapper">
-                <div class="title-left" v-if="loginData.isSignIn">登录</div>
-                <div class="title-right" v-else>注册</div>
+                <div v-if="loginData.isSignIn" class="title-left">登录</div>
+                <div v-else class="title-right">注册</div>
             </div>
             <div class="box-input">
                 <TransitionGroup name="list" tag="ul">
                     <n-input
-                            type="text"
-                            size="large"
-                            placeholder="请输入用户名"
-                            class="input-ani"
-                            v-model:value="loginData.username"
                             key="list-0"
+                            v-model:value="loginData.username"
+                            class="input-ani"
+                            placeholder="请输入用户名"
+                            size="large"
+                            type="text"
                     >
                         <template #prefix>
                             <n-icon :component="UserOutlined"/>
                         </template>
                     </n-input>
                     <n-input
-                            type="text"
-                            size="large"
-                            placeholder="请输入手机号"
-                            class="input-ani"
                             v-if="!loginData.isSignIn"
-                            v-model:value="loginData.tel"
                             key="list-1"
+                            v-model:value="loginData.tel"
+                            class="input-ani"
+                            placeholder="请输入手机号"
+                            size="large"
+                            type="text"
                     >
                         <template #prefix>
                             <n-icon :component="PhoneOutlined"/>
                         </template>
                     </n-input>
                     <n-input
-                            type="password"
-                            size="large"
-                            placeholder="请输入密码"
-                            class="input-ani"
-                            show-password-on="mousedown"
-                            v-model:value="loginData.password"
                             key="list-2"
+                            v-model:value="loginData.password"
+                            class="input-ani"
+                            placeholder="请输入密码"
+                            show-password-on="mousedown"
+                            size="large"
+                            type="password"
                     >
                         <template #prefix>
                             <n-icon :component="KeyOutlined"/>
                         </template>
                     </n-input>
                     <n-input
-                            type="password"
-                            size="large"
-                            placeholder="请输入密码"
-                            class="input-ani"
-                            show-password-on="mousedown"
                             v-if="!loginData.isSignIn"
-                            v-model:value="loginData.repassword"
                             key="list-3"
+                            v-model:value="loginData.repassword"
+                            class="input-ani"
+                            placeholder="请输入密码"
+                            show-password-on="mousedown"
+                            size="large"
+                            type="password"
                     >
                         <template #prefix>
                             <n-icon :component="KeyOutlined"/>
@@ -89,7 +79,7 @@ const {loginData, submit} = useLogin()
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .sign-in-wrapper {
     box-sizing: border-box;
     width: 100%;

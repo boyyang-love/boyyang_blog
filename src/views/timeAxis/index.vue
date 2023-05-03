@@ -3,6 +3,7 @@ import {onMounted} from 'vue'
 import moment from 'moment/moment'
 // hooks
 import {useTimeAxisData, useTimeAxisMethods} from './hooks/useTimeAxis'
+import {Fitness} from '@vicons/ionicons5'
 
 const {timeAxisData} = useTimeAxisData()
 const {getData} = useTimeAxisMethods()
@@ -27,14 +28,14 @@ onMounted(() => {
                     </div>
                     <div class="item-content">
                         <n-image
-                                :intersection-observer-options="{root: '#image-scroll-container' }"
                                 :src="item.cover"
-                                height="100"
+                                class="img"
                                 lazy
-                                width="100"
                         >
                             <template #placeholder>
-                                loading....
+                                <div class="loading">
+                                    <n-icon :component="Fitness as any" class="icon" color="#f00056" size="55"></n-icon>
+                                </div>
                             </template>
                         </n-image>
                     </div>

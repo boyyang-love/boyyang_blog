@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<imgCardProps>(), {
                 :src="props.url"
                 class="img"
                 lazy
+                object-fit="cover"
         >
             <template #placeholder>
                 <div class="loading">
@@ -44,7 +45,7 @@ const props = withDefaults(defineProps<imgCardProps>(), {
 .imgcard-wrapper {
     box-sizing: border-box;
     width: 100%;
-    max-height: 250px;
+    height: 250px;
     background-color: #3d3b4f;
     border: 4px solid whitesmoke;
     border-radius: 2px;

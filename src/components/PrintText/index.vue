@@ -48,17 +48,15 @@ const beginAni = () => {
     <div class="print-text-wrapper">
         <div class="print-text-title">⌈ {{ props.title }} ⌋</div>
         <div class="print-text-subtitle">
-            <TransitionGroup name="list" tag="ul">
-                <span class="inner-text" v-for="(item, i) in subTitleText" :key="i" :size="24">
+            <span v-for="(item, i) in subTitleText" :key="i" :size="24" class="inner-text">
                     {{ item }}
                 </span>
-                <span class="line" key="line">|</span>
-            </TransitionGroup>
+            <span key="line" class="line">|</span>
         </div>
     </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .print-text-wrapper {
     box-sizing: border-box;
     display: flex;

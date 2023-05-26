@@ -1,5 +1,5 @@
 import {reactive} from 'vue'
-import {login, register} from '@/api/login/index'
+import {login, register} from '@/api/login'
 import {router} from '@/router'
 import {useUserStoreWithOut} from '@/store/modules/user'
 

@@ -12,7 +12,12 @@ export default defineConfig(({mode}: ConfigEnv): UserConfig => {
                     '@': '/src',
                 },
             },
-            plugins: [vue()],
+            plugins: [vue({
+                script: {
+                    defineModel: true,
+                    propsDestructure: true,
+                }
+            })],
             server: {
                 port: Number(env.VITE_APP_PORT) || 3000,
                 host: '0.0.0.0',

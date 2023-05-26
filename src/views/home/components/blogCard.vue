@@ -37,10 +37,10 @@ const toBlogDetail = () => {
         <div class="left">
             <div class="mask" @click="toBlogDetail">
                 <n-icon
-                        :component="SendOutlined"
-                        class="send-icon"
-                        color="whitesmoke"
-                        size="25"
+                    :component="SendOutlined"
+                    class="send-icon"
+                    color="whitesmoke"
+                    size="25"
                 ></n-icon>
             </div>
 
@@ -78,29 +78,29 @@ const toBlogDetail = () => {
                         <n-icon :component="EyeOutlined" size="27" color="#eeeeee"></n-icon>
                     </n-badge> -->
                     <n-badge
-                            :dot="false"
-                            :max="999"
-                            :value="10"
-                            color="none"
-                            type="error"
+                        :dot="false"
+                        :max="999"
+                        :value="10"
+                        color="none"
+                        type="error"
                     >
                         <n-icon :component="HeartOutlined" color="#eeeeee" size="27"></n-icon>
                     </n-badge>
                     <n-badge
-                            :dot="false"
-                            :max="999"
-                            :value="10"
-                            color="none"
-                            type="error"
+                        :dot="false"
+                        :max="999"
+                        :value="10"
+                        color="none"
+                        type="error"
                     >
                         <n-icon :component="StarOutlined" color="#eeeeee" size="27"></n-icon>
                     </n-badge>
                     <n-badge
-                            :dot="false"
-                            :max="999"
-                            :value="10"
-                            color="none"
-                            type="error"
+                        :dot="false"
+                        :max="999"
+                        :value="10"
+                        color="none"
+                        type="error"
                     >
                         <n-icon :component="CommentOutlined" color="#eeeeee" size="27"></n-icon>
                     </n-badge>

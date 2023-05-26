@@ -1,6 +1,6 @@
 import {reactive} from 'vue'
 import {env} from '@/utils/env'
-import {dashboard} from '@/api/dashboard/index'
+import {dashboard} from '@/api/dashboard'
 
 interface rouseData {
     name: string

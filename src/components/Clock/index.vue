@@ -1,13 +1,3 @@
-<!--
- * @Author: boyyang
- * @Date: 2023-01-03 14:56:42
- * @LastEditTime: 2023-01-05 15:36:17
- * @LastEditors: boyyang
- * @Description: 
- * @FilePath: \blog_web\src\components\Clock\index.vue
- * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
--->
-
 <script lang="ts" setup>
 import {onMounted, ref, watch} from 'vue'
 
@@ -114,7 +104,6 @@ const aniStatus = (num: number) => {
         z-index: 2;
         line-height: 0;
         backface-visibility: hidden;
-        transform-origin: center top;
         transform: rotateX(180 * 1deg);
     }
 

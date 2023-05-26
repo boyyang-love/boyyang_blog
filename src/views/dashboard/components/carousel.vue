@@ -25,16 +25,16 @@ const props = withDefaults(defineProps<carouselProps>(), {
 
 <template>
     <n-carousel
-            effect="card"
-            prev-slide-style="transform: translateX(-150%) translateZ(-800px);"
-            next-slide-style="transform: translateX(50%) translateZ(-800px);"
-            style="height: 240px"
-            autoplay
+        effect="card"
+        prev-slide-style="transform: translateX(-150%) translateZ(-800px);"
+        next-slide-style="transform: translateX(50%) translateZ(-800px);"
+        style="height: 240px"
+        autoplay
     >
         <n-carousel-item :style="{ width: '60%' }" v-for="item in props.list" :key="item.name">
             <img
-                    class="carousel-img"
-                    :src="item.url"
+                class="carousel-img"
+                :src="item.url"
             />
         </n-carousel-item>
     </n-carousel>

@@ -15,52 +15,52 @@ const {loginData, submit} = useLogin()
             <div class="box-input">
                 <TransitionGroup name="list" tag="ul">
                     <n-input
-                            key="list-0"
-                            v-model:value="loginData.username"
-                            class="input-ani"
-                            placeholder="请输入用户名"
-                            size="large"
-                            type="text"
+                        key="list-0"
+                        v-model:value="loginData.username"
+                        class="input-ani"
+                        placeholder="请输入用户名"
+                        size="large"
+                        type="text"
                     >
                         <template #prefix>
                             <n-icon :component="UserOutlined"/>
                         </template>
                     </n-input>
                     <n-input
-                            v-if="!loginData.isSignIn"
-                            key="list-1"
-                            v-model:value="loginData.tel"
-                            class="input-ani"
-                            placeholder="请输入手机号"
-                            size="large"
-                            type="text"
+                        v-if="!loginData.isSignIn"
+                        key="list-1"
+                        v-model:value="loginData.tel"
+                        class="input-ani"
+                        placeholder="请输入手机号"
+                        size="large"
+                        type="text"
                     >
                         <template #prefix>
                             <n-icon :component="PhoneOutlined"/>
                         </template>
                     </n-input>
                     <n-input
-                            key="list-2"
-                            v-model:value="loginData.password"
-                            class="input-ani"
-                            placeholder="请输入密码"
-                            show-password-on="mousedown"
-                            size="large"
-                            type="password"
+                        key="list-2"
+                        v-model:value="loginData.password"
+                        class="input-ani"
+                        placeholder="请输入密码"
+                        show-password-on="mousedown"
+                        size="large"
+                        type="password"
                     >
                         <template #prefix>
                             <n-icon :component="KeyOutlined"/>
                         </template>
                     </n-input>
                     <n-input
-                            v-if="!loginData.isSignIn"
-                            key="list-3"
-                            v-model:value="loginData.repassword"
-                            class="input-ani"
-                            placeholder="请输入密码"
-                            show-password-on="mousedown"
-                            size="large"
-                            type="password"
+                        v-if="!loginData.isSignIn"
+                        key="list-3"
+                        v-model:value="loginData.repassword"
+                        class="input-ani"
+                        placeholder="请输入密码"
+                        show-password-on="mousedown"
+                        size="large"
+                        type="password"
                     >
                         <template #prefix>
                             <n-icon :component="KeyOutlined"/>

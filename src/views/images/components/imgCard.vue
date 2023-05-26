@@ -16,10 +16,10 @@ const props = withDefaults(defineProps<imgCardProps>(), {
 <template>
     <div class="imgcard-wrapper">
         <n-image
-                :src="props.url"
-                class="img"
-                lazy
-                object-fit="cover"
+            :src="props.url"
+            class="img"
+            lazy
+            object-fit="cover"
         >
             <template #placeholder>
                 <div class="loading">

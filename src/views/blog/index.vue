@@ -37,15 +37,15 @@ onMounted(() => {
         <div class="blog-wrapper container m-auto" id="blog-container">
             <div class="top-banner">
                 <PrintText
-                        :title="blogData.blogInfo.title"
-                        :subtitle="blogData.blogInfo.sub_title"
+                    :title="blogData.blogInfo.title"
+                    :subtitle="blogData.blogInfo.sub_title"
                 ></PrintText>
             </div>
             <div class="blog-content wow fadeInUpBig" data-wow-delay="1s">
                 <v-md-preview
-                        :text="blogData.blogInfo.content"
-                        :include-level="[3, 4]"
-                        ref="mdPreview"
+                    :text="blogData.blogInfo.content"
+                    :include-level="[3, 4]"
+                    ref="mdPreview"
                 ></v-md-preview>
             </div>
         </div>

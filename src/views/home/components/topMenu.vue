@@ -70,13 +70,13 @@ const menuClick = (item: menuList, index: number) => {
             <n-tooltip v-for="(item, i) in props.menuList" trigger="hover">
                 <template #trigger>
                     <n-icon
-                            :key="item.path"
-                            :color="active == i ? '#00adb5' : 'whitesmoke'"
-                            :component="item.com as any"
-                            :data-wow-delay="i * 0.3 + 's'"
-                            :size="23"
-                            class="wow bounceInLeft"
-                            @click="menuClick(item, i)"
+                        :key="item.path"
+                        :color="active == i ? '#00adb5' : 'whitesmoke'"
+                        :component="item.com as any"
+                        :data-wow-delay="i * 0.3 + 's'"
+                        :size="23"
+                        class="wow bounceInLeft"
+                        @click="menuClick(item, i)"
                     ></n-icon>
                 </template>
                 {{ item.text }}

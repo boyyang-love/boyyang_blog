@@ -2,8 +2,6 @@
 import {
     NConfigProvider,
     darkTheme,
-    NThemeEditor,
-    lightTheme,
     GlobalThemeOverrides,
 } from 'naive-ui'
 import {AppProvider} from '@/components/Application'

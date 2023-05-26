@@ -1,39 +1,27 @@
 <script lang="ts" setup>
 import {computed} from 'vue'
+import {Background} from './types/props'
 
-enum Type {
-    image = 'image',
-    video = 'video',
-    color = 'color',
-}
 
-interface Background {
-    type?: 'image' | 'video' | 'color' // image video color
-    url?: string
-    color?: string
-    width?: string
-    height?: string
-}
-
-const props = withDefaults(defineProps<Background>(), {
+const props = withDefaults(defineProps<Background.Props>(), {
     type: 'image',
     color: '#3d3b4f',
     width: '100%',
     height: '100%',
+    url: '',
 })
 
 const background_img = computed(() => {
-    if (props.type == 'color') {
+    if (props.type == Background.Type.color) {
         return 'none'
     }
     return `url(${new URL(props.url as any, import.meta.url).href})`
-    // return ` url(${props.url})`
 })
 </script>
 
 <template>
     <div class="background">
-        <video v-if="props.type == Type.video" :src="props.url" autoplay class="video" loop muted></video>
+        <video v-if="props.type == Background.Type.video" :src="props.url" autoplay class="video" loop muted></video>
         <div class="background-content">
             <slot></slot>
         </div>

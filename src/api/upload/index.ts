@@ -10,7 +10,7 @@ interface beforeUploadRes {
     key: string
 }
 
-export const upload = async (params: { file_name: string; file: File }):Promise<beforeUploadRes> => {
+export const upload = async (params: { file_name: string; file: File }): Promise<beforeUploadRes> => {
     let res = await http.request(
         {
             url: '/cos/upload',

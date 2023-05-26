@@ -1,13 +1,3 @@
-<!--
- * @Author: boyyang
- * @Date: 2022-04-06 11:57:35
- * @LastEditTime: 2023-02-23 14:30:06
- * @LastEditors: boyyang
- * @Description: 
- * @FilePath: \blog_web\src\components\Application\Application.vue
- * [如果痛恨所处的黑暗，请你成为你想要的光。 --塞尔维亚的天空]
--->
-
 <script lang="ts" setup>
 import {
     NDialogProvider,

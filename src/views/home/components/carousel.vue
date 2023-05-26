@@ -12,13 +12,13 @@ const props = withDefaults(defineProps<carouselProps>(), {})
 
 <template>
     <n-carousel
-            direction="vertical"
-            dot-placement="right"
-            show-arrow
-            style="width: 100%; height: 250px"
-            autoplay
-            effect="card"
-            :show-dots="false"
+        direction="vertical"
+        dot-placement="right"
+        show-arrow
+        style="width: 100%; height: 250px"
+        autoplay
+        effect="card"
+        :show-dots="false"
     >
         <img v-for="(item, i) in props.list" :key="i" class="carousel-img" :src="item.cover"/>
     </n-carousel>

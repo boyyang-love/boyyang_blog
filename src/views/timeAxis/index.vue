@@ -35,9 +35,9 @@ onMounted(() => {
         <div class="time-axis-box">
             <n-timeline>
                 <n-timeline-item
-                        v-for="item in timeAxisData.list"
-                        :key="item.id"
-                        :type="['default', 'success', 'info', 'warning', 'error'][parseInt(Math.random() * 4 as string)]"
+                    v-for="item in timeAxisData.list"
+                    :key="item.id"
+                    :type="['default', 'success', 'info', 'warning', 'error'][parseInt(Math.random() * 4 as string)]"
                 >
                     <template #header>
                         <div class="item-title">
@@ -45,17 +45,17 @@ onMounted(() => {
                         </div>
                         <div class="item-content">
                             <n-image
-                                    :src="item.cover"
-                                    class="img wow bounceInRight"
-                                    lazy
+                                :src="item.cover"
+                                class="img wow bounceInRight"
+                                lazy
                             >
                                 <template #placeholder>
                                     <div class="loading">
                                         <n-icon
-                                                :component="Fitness as any"
-                                                class="icon"
-                                                color="#f00056"
-                                                size="55"
+                                            :component="Fitness as any"
+                                            class="icon"
+                                            color="#f00056"
+                                            size="55"
                                         ></n-icon>
                                     </div>
                                 </template>
@@ -111,7 +111,7 @@ onMounted(() => {
 
         .time {
             display: flex;
-            font-width: bloder;
+            font-weight: bolder;
             color: whitesmoke;
 
             span {

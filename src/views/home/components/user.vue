@@ -12,11 +12,11 @@ const props = withDefaults(defineProps<userProps>(), {})
     <div class="user-wrapper">
         <div class="header">
             <n-avatar
-                    :size="95"
-                    :src="props.userInfo.avatar_url"
-                    bordered
-                    class="header-img wow slideInDown"
-                    round
+                :size="95"
+                :src="props.userInfo.avatar_url"
+                bordered
+                class="header-img wow slideInDown"
+                round
             />
             <div class="user-name wow slideInDown" data-wow-delay="0.5s">
                 {{ props.userInfo.username }}

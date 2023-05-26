@@ -39,37 +39,37 @@ onMounted(() => {
                     <div class="title">
                         <span>图片名称：</span>
                         <n-input
-                                v-model:value="uploadData.submit.title"
-                                :autosize="{
+                            v-model:value="uploadData.submit.title"
+                            :autosize="{
                                 minRows: 2,
                                 maxRows: 5,
                             }"
-                                class="input"
-                                clearable
-                                maxlength="50"
-                                placeholder="请输入壁纸名称"
-                                show-count
-                                size="small"
-                                style="max-width: 300px; min-width: 300px"
-                                type="textarea"
+                            class="input"
+                            clearable
+                            maxlength="50"
+                            placeholder="请输入壁纸名称"
+                            show-count
+                            size="small"
+                            style="max-width: 300px; min-width: 300px"
+                            type="textarea"
                         />
                     </div>
                     <div class="sub-title">
                         <span>图片描述：</span>
                         <n-input
-                                v-model:value="uploadData.submit.des"
-                                :autosize="{
+                            v-model:value="uploadData.submit.des"
+                            :autosize="{
                                 minRows: 3,
                                 maxRows: 5,
                             }"
-                                class="input"
-                                clearable
-                                maxlength="150"
-                                placeholder="请输入壁纸描述"
-                                show-count
-                                size="small"
-                                style="max-width: 300px; min-width: 300px; color: whitesmoke"
-                                type="textarea"
+                            class="input"
+                            clearable
+                            maxlength="150"
+                            placeholder="请输入壁纸描述"
+                            show-count
+                            size="small"
+                            style="max-width: 300px; min-width: 300px; color: whitesmoke"
+                            type="textarea"
                         />
                     </div>
                 </div>
@@ -78,15 +78,15 @@ onMounted(() => {
                         <img :src="uploadData.previewUrl" alt=""/>
                     </div>
                     <n-upload
-                            ref="uploadRef"
-                            v-model:file-list="uploadData.fileList"
-                            :default-upload="false"
-                            :disabled="false"
-                            :max="1"
-                            action="#"
-                            class="upload-btn"
-                            directory-dnd
-                            @change="handleUploadChange"
+                        ref="uploadRef"
+                        v-model:file-list="uploadData.fileList"
+                        :default-upload="false"
+                        :disabled="false"
+                        :max="1"
+                        action="#"
+                        class="upload-btn"
+                        directory-dnd
+                        @change="handleUploadChange"
                     >
                         <n-upload-dragger v-if="uploadData.previewUrl == ''">
                             <div style="margin-bottom: 12px">
@@ -104,10 +104,10 @@ onMounted(() => {
 
                 <div class="upload-btn">
                     <n-button
-                            color="#8a2be2"
-                            size="large"
-                            text-color="#fff"
-                            @click="submit(uploadRef)"
+                        color="#8a2be2"
+                        size="large"
+                        text-color="#fff"
+                        @click="submit(uploadRef)"
                     >
                         <template #icon>
                             <n-icon color="white" size="20">

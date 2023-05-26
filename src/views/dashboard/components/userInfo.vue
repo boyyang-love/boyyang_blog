@@ -20,19 +20,19 @@ const props = withDefaults(defineProps<userInfoProps>(), {})
         <div class="info-top">
             <n-space>
                 <n-avatar
-                        round
-                        :size="58"
-                        src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                    round
+                    :size="58"
+                    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
                 />
 
                 <div class="name-email">
                     <n-badge :dot="false" color="none">
                         <template #value>
                             <n-icon
-                                    :component="
+                                :component="
                                     props.userInfo.gender == 1 ? ManOutlined : WomanOutlined
                                 "
-                                    :size="25"
+                                :size="25"
                             />
                         </template>
                         <span class="name">{{ props.userInfo.username }}</span>

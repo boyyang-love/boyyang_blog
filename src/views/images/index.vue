@@ -43,26 +43,26 @@ onMounted(() => {
 
         <div class="images-content">
             <ImgCard
-                    v-for="(item, i) in imagesData.list"
-                    :key="item.id"
-                    :class="[
+                v-for="(item, i) in imagesData.list"
+                :key="item.id"
+                :class="[
                     'wow',
                     i % 2 == 0 ? 'fadeInDownBig' : i % 3 == 0 ? 'fadeInRightBig' : 'fadeInLeftBig',
                 ]"
-                    :name="item.title"
-                    :url="item.cover"
-                    class="wow fadeInDownBig"
+                :name="item.title"
+                :url="item.cover"
+                class="wow fadeInDownBig"
             ></ImgCard>
         </div>
         <div class="pagination wow bounceInUp">
             <n-pagination
-                    v-model:item-count="imagesData.count"
-                    v-model:page="imagesData.page"
-                    v-model:page-size="imagesData.limit"
-                    v-model:page-sizes="imagesData.pageSizes"
-                    show-size-picker
-                    @update:page-size="pageSizeChange"
-                    @update:page="pageChange"
+                v-model:item-count="imagesData.count"
+                v-model:page="imagesData.page"
+                v-model:page-size="imagesData.limit"
+                v-model:page-sizes="imagesData.pageSizes"
+                show-size-picker
+                @update:page-size="pageSizeChange"
+                @update:page="pageChange"
             />
         </div>
     </div>

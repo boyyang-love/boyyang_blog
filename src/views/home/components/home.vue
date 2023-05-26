@@ -51,9 +51,9 @@ onMounted(() => {
                 <!-- <div class="title wow slideInDown">热门博客</div> -->
                 <div class="publish-charts wow bounceInDown">
                     <PublishChart
-                            :categories="homeData.chart.categories"
-                            :series-data-blog="homeData.chart.blogChartData"
-                            :series-data-exhibition="homeData.chart.exhibitionChartData"
+                        :categories="homeData.chart.categories"
+                        :series-data-blog="homeData.chart.blogChartData"
+                        :series-data-exhibition="homeData.chart.exhibitionChartData"
                     ></PublishChart>
                 </div>
                 <div class="tile wow bounceInUp">
@@ -68,26 +68,26 @@ onMounted(() => {
                     <n-space size="large" vertical>
                         <div class="title wow slideInDown">我的博客</div>
                         <BlogCard
-                                v-for="(item, i) in homeData.blog.list"
-                                :key="item.id"
-                                :author="item.user_info.username"
-                                :class="['wow', (i + 1) % 2 == 0 ? 'bounceInLeft' : 'bounceInRight']"
-                                :cover="item.cover"
-                                :is-reverse="(i + 1) % 2 == 0"
-                                :subtitle="item.sub_title"
-                                :time="item.created"
-                                :title="item.title"
-                                @cardClick="cardClick(item.id)"
+                            v-for="(item, i) in homeData.blog.list"
+                            :key="item.id"
+                            :author="item.user_info.username"
+                            :class="['wow', (i + 1) % 2 == 0 ? 'bounceInLeft' : 'bounceInRight']"
+                            :cover="item.cover"
+                            :is-reverse="(i + 1) % 2 == 0"
+                            :subtitle="item.sub_title"
+                            :time="item.created"
+                            :title="item.title"
+                            @cardClick="cardClick(item.id)"
                         ></BlogCard>
                         <div class="pagination wow bounceInUp">
                             <n-pagination
-                                    v-model:page="homeData.blog.page"
-                                    v-model:page-size="homeData.blog.limit"
-                                    :item-count="homeData.blog.count"
-                                    :page-sizes="paginationOpt.pageSizes"
-                                    show-size-picker
-                                    @update:page-size="pageSizeChange"
-                                    @update:page="pageChange"
+                                v-model:page="homeData.blog.page"
+                                v-model:page-size="homeData.blog.limit"
+                                :item-count="homeData.blog.count"
+                                :page-sizes="paginationOpt.pageSizes"
+                                show-size-picker
+                                @update:page-size="pageSizeChange"
+                                @update:page="pageChange"
                             />
                         </div>
                     </n-space>

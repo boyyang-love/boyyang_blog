@@ -15,12 +15,6 @@ const asyncRoutes: RouteRecordRaw[] = [
                 name: 'HomePage',
                 component: () => import('@/views/home/components/home.vue'),
             },
-            // 仪表盘
-            {
-                path: 'dashboard',
-                name: 'Dashboard',
-                component: () => import('@/views/dashboard/index.vue'),
-            },
             // 图片展示
             {
                 path: 'images',

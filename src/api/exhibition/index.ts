@@ -25,3 +25,11 @@ export const exhibitionList = (params: {
         },
     )
 }
+
+export const deleteExhibition = (data: {id: string | number}) => {
+    return http.request({
+        url: '/exhibition/del',
+        method: 'post',
+        data,
+    })
+}

@@ -1,20 +1,39 @@
 <script lang="ts" setup>
 import {StarOutlined} from '@vicons/antd'
-import {Fitness} from '@vicons/ionicons5'
+import {Fitness, Close} from '@vicons/ionicons5'
 
 interface imgCardProps {
     url?: string
     name?: string
+    id?: number | string
+    isLike?: boolean
+}
+
+interface emit {
+    (e: 'del', id: number | string): void
+    (e: 'like', id: number | string, likeStatus: boolean): void
 }
 
 const props = withDefaults(defineProps<imgCardProps>(), {
     url: '',
     name: '',
+    id: 0,
+    isLike: false,
 })
+
+const emit = defineEmits<emit>()
+const del = () => {
+    emit('del', props.id)
+}
+
+const like = () => {
+    emit('like', props.id, !props.isLike)
+}
 </script>
 
 <template>
-    <div class="imgcard-wrapper">
+    <div class="img-card-wrapper">
+
         <n-image
             :src="props.url"
             class="img"
@@ -23,26 +42,42 @@ const props = withDefaults(defineProps<imgCardProps>(), {
         >
             <template #placeholder>
                 <div class="loading">
-                    <n-icon :component="Fitness as any" class="icon" color="#f00056" size="55"></n-icon>
+                    <n-icon
+                        :component="Fitness as any"
+                        class="icon"
+                        color="#f00056"
+                        size="55"
+                    ></n-icon>
                 </div>
             </template>
         </n-image>
-        <div class="imgcard-bottom">
+        <div class="img-card-bottom">
             <div class="left-text">
                 <n-ellipsis style="max-width: 240px">
                     {{ props.name }}
                 </n-ellipsis>
             </div>
             <div class="right-icon">
-                <n-space :size="500" align="center" justify="center"></n-space>
-                <n-icon :component="StarOutlined as any" class="icon" size="25"></n-icon>
+                <n-icon
+                    :component="StarOutlined as any"
+                    :color="props.isLike ? 'red' : 'white'"
+                    class="star-icon"
+                    size="18"
+                    @click="like"
+                ></n-icon>
+                <n-icon
+                    :component="Close as any"
+                    class="del-icon"
+                    size="18"
+                    @click="del"
+                ></n-icon>
             </div>
         </div>
     </div>
 </template>
 
 <style lang="less" scoped>
-.imgcard-wrapper {
+.img-card-wrapper {
     box-sizing: border-box;
     width: 100%;
     height: 250px;
@@ -62,6 +97,7 @@ const props = withDefaults(defineProps<imgCardProps>(), {
 
         &:hover {
             object-position: right bottom;
+
         }
 
         .loading {
@@ -80,27 +116,43 @@ const props = withDefaults(defineProps<imgCardProps>(), {
         //border: 1px solid black;
     }
 
-    .imgcard-bottom {
+    .img-card-bottom {
         box-sizing: border-box;
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 45px;
-        background-color: rgba(57, 62, 70, 0.6);
-        color: whitesmoke;
-        padding: 5px 10px;
+        height: 30px;
+        background-color: rgba(57, 62, 70, 0.9);
+        padding: 3px 5px;
 
         display: flex;
         align-items: center;
         justify-content: space-between;
 
+        .left-text {
+            font-size: 13px;
+            color: #66dda3;
+            font-weight: bold;
+        }
+
         .right-icon {
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
 
-            .icon {
+            .star-icon {
                 cursor: pointer;
+                margin: 0 10px;
+            }
+
+            .del-icon {
+                cursor: pointer;
+                color: #ffffff;
+
+                &:hover {
+                    color: #ff8a14;
+                }
             }
         }
     }

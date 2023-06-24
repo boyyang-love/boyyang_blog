@@ -3,7 +3,15 @@ import {Component, markRaw, onMounted, ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 
 import Wow from 'wow.js'
-import {PaperPlane, ImagesSharp, Home, CloudUploadSharp, GitCommit, PersonSharp, SettingsSharp} from '@vicons/ionicons5'
+import {
+    ImagesSharp,
+    Home,
+    CloudUploadSharp,
+    GitCommit,
+    PersonCircleSharp,
+    SettingsSharp,
+    RocketSharp,
+} from '@vicons/ionicons5'
 
 interface menuProps {
     menuList?: menuList[]
@@ -35,7 +43,7 @@ const props = withDefaults(defineProps<menuProps>(), {
         },
         {
             name: 'Publish',
-            com: markRaw(PaperPlane),
+            com: markRaw(RocketSharp),
             path: '/publish',
             text: '上传博客',
             color: '#00b8a9',
@@ -56,7 +64,7 @@ const props = withDefaults(defineProps<menuProps>(), {
         },
         {
             name: 'User',
-            com: markRaw(PersonSharp),
+            com: markRaw(PersonCircleSharp),
             path: '/user',
             text: '我的',
             color: '#3ec1d3',

@@ -60,7 +60,7 @@ const status = computed(() => {
     @statusH: 45px;
     @radius: 5px;
     box-sizing: border-box;
-    width: 450px;
+    //width: 450px;
     height: 250px;
     background-color: #fff;
     border-radius: 0 @radius;

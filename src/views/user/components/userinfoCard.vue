@@ -1,13 +1,27 @@
 <script lang="ts" setup>
-import {reactive, ref, markRaw} from 'vue'
+import {reactive, ref, markRaw, Component} from 'vue'
 import {Star, Rocket, Create} from '@vicons/ionicons5'
 
-const showOrEdit = ref<boolean>(false)
-const motto = ref<string>("第一行没有你，第")
+interface TabListItem {
+    icon: Component
+    label: string
+    size: number
+    num: number
+}
 
-const tabList = ref([
+interface Emit {
+    (e: 'tabChange', id: number): void
+}
+
+const emit = defineEmits<Emit>()
+
+const showOrEdit = ref<boolean>(false)
+const motto = ref<string>('第一行没有你，第')
+const tab = ref<number>(0)
+
+const tabList = ref<TabListItem[]>([
     {
-        icon: markRaw(Rocket) as any,
+        icon: markRaw(Rocket),
         label: '发布',
         size: 20,
         num: 10,
@@ -40,6 +54,11 @@ const rightList = ref([
         num: 2000,
     },
 ])
+
+const tabListClick = (tabItem: TabListItem, i: number) => {
+    tab.value = i
+    emit('tabChange', i)
+}
 </script>
 
 <template>
@@ -72,7 +91,12 @@ const rightList = ref([
         <div class="bottom">
             <div class="bottom-left">
                 <n-space align="center" justify="center">
-                    <div v-for="item in tabList" :key="item.label" class="icon-wrapper">
+                    <div
+                        v-for="(item, i) in tabList"
+                        :key="item.label"
+                        :class="['icon-wrapper', i == tab ? 'tab-active': '']"
+                        @click="tabListClick(item, i)"
+                    >
                         <n-icon :component="item.icon" class="icon" size="20"></n-icon>
                         <span class="text">{{ item.label }}</span>
                         <span class="num">{{ item.num }}</span>
@@ -82,8 +106,8 @@ const rightList = ref([
             <div class="bottom-right">
                 <n-space>
                     <div class="right-list" v-for="item in rightList" :key="item.label">
-                        <span class="label">{{item.label}}</span>
-                        <span class="num">{{ item.num}}</span>
+                        <span class="label">{{ item.label }}</span>
+                        <span class="num">{{ item.num }}</span>
                     </div>
                 </n-space>
             </div>
@@ -175,6 +199,32 @@ const rightList = ref([
             height: 100%;
             display: flex;
             align-items: center;
+
+            .tab-active {
+                position: relative;
+            }
+
+            .tab-active::before {
+                content: '';
+                width: 100%;
+                height: 3px;
+                position: absolute;
+                bottom: -13px;
+                left: 0;
+                background-color: #66dda3;
+                box-shadow: inset 3px 3px 3px #66dda3;
+                animation: tab 1s ease-in-out;
+            }
+
+            @keyframes tab {
+                0% {
+                    transform: translateY(-40px);
+                }
+
+                100% {
+                    transform: translateY(0%)
+                }
+            }
 
             .icon-wrapper {
                 display: flex;

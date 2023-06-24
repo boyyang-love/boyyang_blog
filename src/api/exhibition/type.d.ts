@@ -2,6 +2,7 @@ declare namespace Exhibition {
     interface ExhibitionListRes {
         count: number
         exhibitions: ExhibitionsInfo[]
+        likes_ids: number[]
     }
 
     interface ExhibitionsInfo {

@@ -42,7 +42,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 60px 0;
+    padding: 60px 120px;
     overflow-y: auto;
 
 
@@ -58,7 +58,8 @@ onMounted(() => {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 15px;
-        justify-items: center;
+        //justify-items: center;
+        justify-content: space-between;
     }
 }
 </style>

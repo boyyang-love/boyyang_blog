@@ -9,20 +9,20 @@ console.log(name.value)
 </script>
 
 <template>
-    <div class="container">
-        <div class="name">
-            <div class="age" style="color: whitesmoke;">2222222{{ name }}</div>
+  <div class="container">
+    <div class="name">
+      <div class="age" style="color: whitesmoke;">2222222{{ name }}</div>
 
-            <Input v-model="name"></Input>
-        </div>
+      <Input v-model="name"></Input>
     </div>
+  </div>
 </template>
 
 <style lang="less" scoped>
 .container {
-    .name {
-        .age {
-        }
+  .name {
+    .age {
     }
+  }
 }
 </style>

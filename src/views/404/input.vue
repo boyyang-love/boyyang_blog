@@ -8,9 +8,9 @@ const mod = defineModel()
 </script>
 
 <template>
-    <div class="input">
-        <input v-model="mod.age" type="text">
-    </div>
+  <div class="input">
+    <input v-model="mod.age" type="text">
+  </div>
 </template>
 
 <style lang="less" scoped>

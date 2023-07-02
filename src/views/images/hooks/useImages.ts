@@ -32,6 +32,7 @@ const getList = () => {
     let params = {
         page: imagesData.page,
         limit: imagesData.limit,
+        type: 2,
     }
     exhibitionList(params).then(res => {
         imagesData.count = res.data.count

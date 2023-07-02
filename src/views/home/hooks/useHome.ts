@@ -2,8 +2,8 @@ import {reactive} from 'vue'
 import {env} from '@/utils/env'
 import {router} from '@/router'
 // api
-import {blogList} from '@/api/blog/index'
-import {dashboard} from '@/api/dashboard/index'
+import {blogList, blogDel} from '@/api/blog'
+import {dashboard} from '@/api/dashboard'
 
 const homeData = reactive({
     blog: {
@@ -71,6 +71,12 @@ const getDashboard = () => {
     })
 }
 
+const del = (id: number) => {
+    blogDel({id: id}).then(() => {
+        getBlogList()
+    })
+}
+
 const cardClick = (id: number) => {
     router.push({
         name: 'Blog',
@@ -106,6 +112,7 @@ const useHomeMethods = () => {
         cardClick,
         pageChange,
         pageSizeChange,
+        del,
     }
 }
 

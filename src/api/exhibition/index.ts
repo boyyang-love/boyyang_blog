@@ -13,6 +13,7 @@ export const exhibitionList = (params: {
     ids?: string
     page?: number
     limit?: number
+    type?: number
 }): Promise<Result<Exhibition.ExhibitionListRes>> => {
     return http.request(
         {

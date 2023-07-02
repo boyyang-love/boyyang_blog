@@ -4,18 +4,17 @@ import Wow from 'wow.js'
 import BlogCard from './blogCard.vue'
 import {PrintText} from '@/components/PrintText/index.ts'
 import User from './user.vue'
-import Tags from './tags.vue'
 import Tile from './tile.vue'
-import PublishChart from './publishChart.vue'
 import Notice from './notice.vue'
 import Carousel from './carousel.vue'
+import PublishChart from './publishChart.vue'
 
 // hooks
 import {useHomeData, useHomeMethods} from '../hooks/useHome'
 import {useExhibitionData, useExhibitionMethods} from '../hooks/useExhibition'
 
 const {homeData, paginationOpt} = useHomeData()
-const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange} = useHomeMethods()
+const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange, del} = useHomeMethods()
 const {exhibitionData} = useExhibitionData()
 const {getExhibitionList} = useExhibitionMethods()
 
@@ -77,7 +76,9 @@ onMounted(() => {
                 :subtitle="item.sub_title"
                 :time="item.created"
                 :title="item.title"
+                :id="item.id"
                 @cardClick="cardClick(item.id)"
+                @delClick="del"
             ></BlogCard>
             <div class="pagination wow bounceInUp">
               <n-pagination
@@ -98,7 +99,6 @@ onMounted(() => {
           <User :user-info="homeData.userInfo"></User>
         </div>
         <div class="tags wow slideInDown">
-          <Tags></Tags>
         </div>
         <div class="notice wow pulse">
           <Notice></Notice>

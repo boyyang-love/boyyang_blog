@@ -1,12 +1,21 @@
 <script lang="ts" setup>
-import {ref, markRaw, Component} from 'vue'
-import {Star, Rocket, Create} from '@vicons/ionicons5'
+import {ref, markRaw, Component, computed} from 'vue'
+import {Rocket, Create} from '@vicons/ionicons5'
+import {RollbackOutlined} from '@vicons/antd'
 
 interface TabListItem {
   icon: Component
   label: string
   size: number
   num: number
+  id: number
+  color: string
+}
+
+interface Props {
+  approved: number
+  in_review: number
+  review_rjection: number
 }
 
 interface Emit {
@@ -14,29 +23,43 @@ interface Emit {
 }
 
 const emit = defineEmits<Emit>()
+const props = withDefaults(defineProps<Props>(), {
+  approved: 0,
+  in_review: 0,
+  review_rjection: 0,
+})
+
+console.log(props)
 
 const showOrEdit = ref<boolean>(false)
 const motto = ref<string>('第一行没有你，第')
-const tab = ref<number>(0)
+const tab = ref<number>(1)
 
-const tabList = ref<TabListItem[]>([
-  {
-    icon: markRaw(Rocket),
-    label: '发布',
-    size: 20,
-    num: 10,
-  },
+const tabList = computed<TabListItem[]>(() => [
+  //   1待审核 2审核通过 3未通过审核
   {
     icon: markRaw(Create) as any,
     label: '审核中',
     size: 20,
-    num: 10,
+    color: 'deeppink',
+    num: props.in_review,
+    id: 1,
   },
   {
-    icon: markRaw(Star) as any,
-    label: '收藏',
+    icon: markRaw(Rocket),
+    label: '审核通过',
     size: 20,
-    num: 10,
+    color: '#00e09e',
+    num: props.approved,
+    id: 2,
+  },
+  {
+    icon: markRaw(RollbackOutlined),
+    label: '未通过审核',
+    size: 20,
+    color: '#cc1515',
+    num: props.review_rjection,
+    id: 3,
   },
 ])
 
@@ -95,11 +118,16 @@ const tabListClick = (tabItem: TabListItem, i: number) => {
           <div
               v-for="(item, i) in tabList"
               :key="item.label"
-              :class="['icon-wrapper', i == tab ? 'tab-active': '']"
-              @click="tabListClick(item, i)"
+              :class="['icon-wrapper', item.id == tab ? 'tab-active': '']"
+              @click="tabListClick(item, item.id)"
           >
-            <n-icon :component="item.icon" class="icon" size="20"></n-icon>
-            <span class="text">{{ item.label }}</span>
+            <n-icon
+                :component="item.icon as any"
+                class="icon"
+                :size="item.size"
+                :color="item.color"
+            ></n-icon>
+            <span class="text" :style="{color: item.color}">{{ item.label }}</span>
             <span class="num">{{ item.num }}</span>
           </div>
         </n-space>

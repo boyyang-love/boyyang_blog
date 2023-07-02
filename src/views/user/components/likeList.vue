@@ -4,6 +4,7 @@ import {computed} from 'vue'
 interface Props {
   label?: string
   status: number // 1待审核 2审核通过 3未通过审核
+  url: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -18,7 +19,7 @@ const status = computed(() => {
   switch (props.status) {
     case 1:
       _status = {
-        label: props.label ? props.label : '待审核',
+        label: props.label ? props.label : '审核中',
         color: 'deeppink',
       }
       break
@@ -45,7 +46,7 @@ const status = computed(() => {
 <template>
   <div class="like-list-wrapper">
     <div class="img-wrapper">
-      <img alt="" src="@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg">
+      <img alt="" :src="url">
     </div>
 
     <div :style="{'--color': status.color}" class="status-wrapper">

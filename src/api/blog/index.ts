@@ -44,3 +44,13 @@ export const blogDetail = (params: { ids: string }): Promise<Result<Blog.BlogLis
     )
 }
 
+export const blogDel = (params: { id: number }) => {
+    return http.request(
+        {
+            url: '/blog/delete',
+            method: 'get',
+            params,
+        },
+    )
+}
+

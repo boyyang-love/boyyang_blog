@@ -1,97 +1,172 @@
-<script lang="ts" setup>
-import {computed} from 'vue'
-import qiunVueUcharts from '@qiun/vue-ucharts'
+<script setup lang="ts">
+import {EChartsOption} from 'echarts'
+import EchartsCompt from '@/components/EchartsCompt/index.vue'
+import {computed, watchEffect} from 'vue'
 
-interface publisChartProps {
+interface ChartData {
   categories: string[]
-  seriesDataBlog: string[]
-  seriesDataExhibition: string[]
+  seriesDataBlog: number[] | string[]
+  seriesDataExhibition: number[] | string[]
 }
 
-const props = withDefaults(defineProps<publisChartProps>(), {})
-const opts = {
-  color: [
-    '#1890FF',
-    '#91CB74',
-    '#FAC858',
-    '#EE6666',
-    '#73C0DE',
-    '#3CA272',
-    '#FC8452',
-    '#9A60B4',
-    '#ea7ccc',
-  ],
-  padding: [15, 10, 0, 15],
-  dataLabel: false,
-  dataPointShape: false,
-  enableScroll: false,
-  legend: {
-    fontColor: '#fff',
-  },
-  xAxis: {
-    disableGrid: true,
-    fontColor: '#fff',
-  },
-  yAxis: {
-    disabled: true,
-    gridType: 'dash',
-    dashLength: 2,
-    data: [
-      // {
-      //     min: 0,
-      //     max: 150,
-      // },
-    ],
-  },
-  extra: {
-    line: {
-      type: 'curve',
-      width: 2,
-      activeType: 'hollow',
-      linearType: 'custom',
-      onShadow: true,
-      animation: 'horizontal',
-    },
-  },
-}
+const props = defineProps<ChartData>()
 
-const chartData = computed(() => {
+const options = computed<EChartsOption>(() => {
+  let xData = props.categories
+  let yData1 = props.seriesDataBlog
+  let yData2 = props.seriesDataExhibition
   return {
-    categories: props.categories,
+    // color: ['#63caff', '#49beff', 'rgb(2,47,87)', 'rgb(2,47,87)'],
+    grid: {
+      top: '15%',
+      left: '3%',
+      right: '3%',
+      bottom: '5%',
+      containLabel: true,
+    },
+    legend: {
+      show: true,
+      icon: 'circle',
+      left: 'right',
+      itemWidth: 12,
+      itemHeight: 12,
+      textStyle: {
+        fontSize: 12,
+        color: '#6A93B9',
+        height: 8,
+        rich: {
+          a: {
+            verticalAlign: 'bottom',
+          },
+        },
+      },
+      data: ['博客发布', '图片上传'],
+    },
+    tooltip: {
+      show: true,
+      trigger: 'item', // 触发类型。坐标轴触发
+      axisPointer: {
+        // 坐标轴指示器配置项
+        type: 'cross', // 指示器类型 十字准星指示器
+        label: {
+          // 坐标轴指示器的文本标签
+          backgroundColor: '#e6b600' // 文本标签的背景颜色就是x轴y轴上的内容
+        }
+      }
+    },
+    xAxis: {
+      type: 'category',
+      axisLine: {
+        lineStyle: {
+          color: '#BDD8FB',
+          fontSize: 12,
+        },
+      },
+      axisLabel: {
+        // interval:0,
+        color: '#BDD8FB',
+        fontSize: 12,
+      },
+      axisTick: {
+        show: false,
+      },
+      data: xData,
+    },
+    yAxis: {
+      type: 'value',
+      min: 0,
+      minInterval: 1,
+      nameTextStyle: {
+        fontSize: 12,
+        color: '#BDD8FB',
+        align: 'center',
+      },
+      splitLine: {
+        lineStyle: {
+          color: 'rgba(255, 255, 255, 0.15)',
+        },
+      },
+      splitArea: {show: false},
+      axisLine: {
+        show: false,
+      },
+      axisTick: {
+        show: false,
+      },
+      axisLabel: {
+        fontSize: 12,
+        fontFamily: 'Bebas',
+        color: '#BDD8FB',
+      },
+    },
     series: [
       {
-        name: '图片发布数',
-        linearColor: [
-          [0, '#1890FF'],
-          [0.25, '#00B5FF'],
-          [0.5, '#00D1ED'],
-          [0.75, '#00E6BB'],
-          [1, '#90F489'],
-        ],
-        color: '#fff',
-        setShadow: [3, 8, 10, '#1890FF'],
-        data: props.seriesDataExhibition,
+        type: 'line',
+        smooth: true, // 是否曲线
+        name: '博客发布', // 图例对应类别
+        data: yData1, // 纵坐标数据
+        areaStyle: {
+          color: {
+            type: 'linear',
+            x: 0,  //右
+            y: 0,  //下
+            x2: 0,  //左
+            y2: 1,  //上
+            colorStops: [
+              {
+                offset: 0.1,
+                color: '#dc3bce', // 0% 处的颜色
+              },
+              {
+                offset: 1,
+                color: '#987295', // 100% 处的颜色
+              },
+            ],
+          },
+        },
       },
       {
-        name: '博客发布数',
-        linearColor: [
-          [0, '#b949de'],
-          [0.25, '#9a2435'],
-          [0.5, '#d967d7'],
-          [0.75, '#11705e'],
-          [1, '#18ea09'],
-        ],
-        color: '#fff',
-        setShadow: [3, 8, 10, '#1890FF'],
-        data: props.seriesDataBlog,
+        type: 'line',
+        smooth: true,
+        name: '图片上传',
+        data: yData2,
+        areaStyle: {
+          color: {
+            type: 'linear',
+            x: 0,  //右
+            y: 0,  //下
+            x2: 0,  //左
+            y2: 1,  //上
+            colorStops: [
+              {
+                offset: 0.1,
+                color: '#01B3E4', // 0% 处的颜色
+              },
+              {
+                offset: 1,
+                color: '#86DCF300', // 100% 处的颜色
+              },
+            ],
+          },
+        },
       },
     ],
   }
 })
+
+
 </script>
 
 <template>
-  <qiun-vue-ucharts type="line" :opts="opts" :chartData="chartData"/>
+  <div class="publish-chart">
+    <EchartsCompt id="publish-chart" :options="options"></EchartsCompt>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="less">
+.publish-chart {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+</style>

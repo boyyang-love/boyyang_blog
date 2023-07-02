@@ -1,5 +1,5 @@
 import {reactive} from 'vue'
-import {exhibitionList} from '@/api/exhibition/index'
+import {exhibitionList} from '@/api/exhibition'
 import {env} from '@/utils/env'
 
 const exhibitionData = reactive({
@@ -13,6 +13,7 @@ const getExhibitionList = () => {
     let params = {
         page: exhibitionData.page,
         limit: exhibitionData.limit,
+        type: 2,
     }
     exhibitionList(params).then(res => {
         exhibitionData.exhibitionList =

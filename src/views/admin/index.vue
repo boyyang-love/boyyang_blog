@@ -1,28 +1,19 @@
 <script lang="ts" setup>
 
-import {computed} from 'vue'
-
-interface adminProps {
-  name: string
-  age: number
-}
-
-const props = withDefaults(defineProps<adminProps>(), {
-  name: 'yang',
-  age: 18,
-})
-
-const nn = computed(() => props.name)
 
 </script>
 
 <template>
-  <div class="ttt">11111111111111111111</div>
-  <div class="test">
-    <div></div>
+  <div class="admin-container">
+    1
   </div>
 </template>
 
 <style lang="less" scoped>
-
+.admin-container {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  background-color: whitesmoke;
+}
 </style>

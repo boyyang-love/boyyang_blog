@@ -34,7 +34,7 @@ const createStorage = (prefixKey?: string, storage: Storage = localStorage, expi
                         return _value.value
                     }
                 } catch (e) {
-                    value = value
+                    return value
                 }
             } else {
                 return null

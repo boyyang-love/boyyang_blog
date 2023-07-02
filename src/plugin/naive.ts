@@ -79,6 +79,7 @@ import {
     NTimelineItem,
     NEllipsis,
     NCalendar,
+    NPopconfirm,
 } from 'naive-ui'
 
 const naive = create({
@@ -161,6 +162,7 @@ const naive = create({
         NTimelineItem,
         NEllipsis,
         NCalendar,
+        NPopconfirm,
     ],
 })
 

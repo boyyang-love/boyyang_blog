@@ -5,6 +5,7 @@ import {
   StarOutlined,
   CommentOutlined,
   SendOutlined,
+  CloseCircleOutlined,
 } from '@vicons/antd'
 import moment from 'moment'
 
@@ -15,6 +16,7 @@ interface blogCardProps {
   cover: string
   author: string
   time: number | string
+  id: number
 }
 
 const router = useRouter()
@@ -25,6 +27,7 @@ const props = withDefaults(defineProps<blogCardProps>(), {
 
 const emits = defineEmits<{
   (e: 'cardClick'): void
+  (e: 'delClick', id: number): void
 }>()
 
 const toBlogDetail = () => {
@@ -104,6 +107,17 @@ const toBlogDetail = () => {
           >
             <n-icon :component="CommentOutlined" color="#eeeeee" size="27"></n-icon>
           </n-badge>
+          <n-popconfirm
+              @positive-click="emits('delClick', props.id)"
+              positive-text="删除"
+              negative-text="取消"
+          >
+            <template #trigger>
+              <n-icon :component="CloseCircleOutlined" color="#eeeeee" size="27"></n-icon>
+            </template>
+            删-舍不得删-但是手机空间已被你占满
+          </n-popconfirm>
+
         </div>
       </div>
     </div>

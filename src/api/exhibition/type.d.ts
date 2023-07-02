@@ -3,7 +3,11 @@ declare namespace Exhibition {
         count: number
         exhibitions: ExhibitionsInfo[]
         likes_ids: number[]
+        approved: number
+        in_review: number
+        review_rjection: number
     }
+
 
     interface ExhibitionsInfo {
         cover: string

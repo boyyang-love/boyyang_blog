@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {defineModel} from "vue";
+import {defineModel} from 'vue'
 
 const props = defineProps(['name'])
 

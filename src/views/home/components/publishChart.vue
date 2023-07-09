@@ -50,9 +50,9 @@ const options = computed<EChartsOption>(() => {
         type: 'cross', // 指示器类型 十字准星指示器
         label: {
           // 坐标轴指示器的文本标签
-          backgroundColor: '#e6b600' // 文本标签的背景颜色就是x轴y轴上的内容
-        }
-      }
+          backgroundColor: '#e6b600', // 文本标签的背景颜色就是x轴y轴上的内容
+        },
+      },
     },
     xAxis: {
       type: 'category',

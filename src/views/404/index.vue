@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Input from './input.vue'
 import type {F404Props} from './Props'
-import {ref} from "vue"
+import {ref} from 'vue'
 
 const name = ref<any>({name: 'yang', age: 10})
 

@@ -20,8 +20,10 @@ console.log(name.value)
 
 <style lang="less" scoped>
 .container {
+  background-image: url("@/assets/00008-preview.jpg");
   .name {
     .age {
+      color: v-bind('props.name')
     }
   }
 }

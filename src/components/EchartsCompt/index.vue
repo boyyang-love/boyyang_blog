@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, nextTick, onMounted, ref, watchEffect} from 'vue'
+import {nextTick, onMounted, ref, watchEffect} from 'vue'
 import * as echarts from 'echarts'
 import {EChartsOption, EChartsType} from 'echarts'
 

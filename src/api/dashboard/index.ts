@@ -1,8 +1,7 @@
 import {http} from '@/utils/http'
-import {Result} from '@/utils/http/types'
 
-export const dashboard = (): Promise<Result<Dashboard.DashboardRes>> => {
-    return http.request(
+export const dashboard = () => {
+    return http.request<Dashboard.DashboardRes>(
         {
             url: '/dashboard',
             method: 'get',

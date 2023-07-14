@@ -1,5 +1,4 @@
 import {http} from '@/utils/http'
-import {Result} from '@/utils/http/types'
 
 export const createExhibition = (data: { title: string; des: string; cover: string }) => {
     return http.request({
@@ -14,8 +13,8 @@ export const exhibitionList = (params: {
     page?: number
     limit?: number
     type?: number
-}): Promise<Result<Exhibition.ExhibitionListRes>> => {
-    return http.request(
+}) => {
+    return http.request<Exhibition.ExhibitionListRes>(
         {
             url: '/exhibition/info',
             method: 'get',

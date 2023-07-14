@@ -1,32 +1,35 @@
-import {Axios} from './http'
+import {Http} from './http'
 import {transForm} from './transform'
 import {env} from '@/utils/env'
-
+import {token} from './token'
 const createHttp = () => {
-    return new Axios({
-        baseURL: env.VITE_APP_API_URL,
-        timeout: 20 * 1000,
-        transForm: transForm,
-        // 配置项，下面的选项都可以在独立的接口请求中覆盖
-        requestOptions: {
-            // 是否返回原生响应头 比如：需要获取响应头时使用该属性
-            isReturnNativeResponse: false,
-            // 需要对返回数据进行处理
-            isTransformResponse: true,
-            // get请求添加时间戳
-            joinTime: true,
-            // 是否携带token
-            withToken: true,
-            // 显示请求后message
-            isShowMessage: true,
-            // 显示请求成功message
-            isShowSuccessMessage: true,
-            // 显示请求失败message
-            isShowErrorMessage: true,
-            // 序列化请求参数 post formData
-            serializeParams: true,
+    return new Http(
+        {
+            baseURL: env.VITE_APP_API_URL,
+            timeout: 5 * 1000,
+            // 以下配置都可以在接口配置中直接配置，接口配置会覆盖以下配置
+            requestOptions: {
+                // POST请求是否序列化请求参数
+                serializeParams: true,
+                // 是否显示提示信息
+                isShowMessage: true,
+                // 是否显示成功信息
+                isShowSuccessMessage: true,
+                // 是否显示失败信息
+                isShowErrorMessage: true,
+                // GET请求是否添加时间戳
+                joinTime: true,
+                // 是否携带token
+                withToken: true,
+                // token key
+                tokenKey: 'Authorization',
+                // token value 可以在这儿直接配置 也可以直接在接口配置中直接配置
+                token: token(),
+
+            },
+            transform: transForm,
         },
-    })
+    )
 }
 
 const http = createHttp()

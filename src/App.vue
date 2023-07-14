@@ -6,8 +6,6 @@ import {
 } from 'naive-ui'
 import {AppProvider} from '@/components/Application'
 
-console.log(111)
-
 const themeOverrides: GlobalThemeOverrides = {
   common: {},
   // 弹出框

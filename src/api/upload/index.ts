@@ -1,5 +1,4 @@
 import {http} from '@/utils/http'
-import {Result} from '@/utils/http/types'
 
 interface beforeUploadRes {
     url: string
@@ -41,8 +40,6 @@ export const upload = async (params: { file_name: string; file: File }): Promise
             {
                 serializeParams: false,
                 isShowMessage: false,
-                isReturnNativeResponse: true,
-                isTransformResponse: false,
             },
         )
 

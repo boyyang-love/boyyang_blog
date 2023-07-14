@@ -29,6 +29,7 @@ const submit = (type: boolean) => {
         }
         window.$loading.loadingStart()
         login(params).then(res => {
+            console.log(res)
             loginSuccess(res.data)
         })
     } else {

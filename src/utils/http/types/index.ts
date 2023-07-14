@@ -24,6 +24,10 @@ export interface RequestOptions {
     joinTime?: boolean
     // 是否携带token
     withToken?: boolean
+    // token key
+    tokenKey?: string
+    // token value
+    token?: string
 }
 
 export abstract class TransForm {

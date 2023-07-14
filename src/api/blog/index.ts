@@ -1,5 +1,4 @@
 import {http} from '@/utils/http'
-import {Result} from '@/utils/http/types'
 
 export const createBlog = (data: {
     title: string
@@ -18,8 +17,8 @@ export const createBlog = (data: {
 export const blogList = (params: {
     page: number
     limit: number
-}): Promise<Result<Blog.BlogList>> => {
-    return http.request(
+}) => {
+    return http.request<Blog.BlogList>(
         {
             url: '/blog/info',
             method: 'get',
@@ -31,8 +30,8 @@ export const blogList = (params: {
     )
 }
 
-export const blogDetail = (params: { ids: string }): Promise<Result<Blog.BlogList>> => {
-    return http.request(
+export const blogDetail = (params: { ids: string }) => {
+    return http.request<Blog.BlogList>(
         {
             url: '/blog/info',
             method: 'get',

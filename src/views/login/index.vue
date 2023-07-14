@@ -4,7 +4,7 @@ import Wow from 'wow.js'
 import bgImg from '@/assets/赛博朋克风格奇幻少女_集原美电脑4k壁纸3840x2160_彼岸图网.jpg'
 import {BackGround} from '@/components/Background/index.ts'
 import signInAndUp from './components/signInAndUp.vue'
-import Loading from '@/components/Loading/index.vue'
+
 
 onMounted(() => {
   const wow = new Wow({

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {useRouter} from 'vue-router'
 
-import {BackGround} from '@/components/Background'
+import {BackGround} from '@/components/Background/index'
 import bg from '@/assets/00008.png'
 
 const router = useRouter()

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {onMounted, ref, computed} from 'vue'
+import {onMounted, ref} from 'vue'
 import Wow from 'wow.js'
 import {CloudUploadOutlined} from '@vicons/antd'
 import {PrintText} from '@/components/PrintText'

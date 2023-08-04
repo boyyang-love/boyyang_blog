@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import {onMounted, nextTick} from 'vue'
 import Wow from 'wow.js'
-import TopMenu from './components/topMenu.vue'
+import Menu from './components/menu/index.vue'
 import BackGround from '@/components/Background/index.vue'
-import banner from '@/assets/007.jpg'
+import banner from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
 
 onMounted(() => {
   const wow = new Wow({
@@ -24,9 +24,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <BackGround :url="banner" class="wow slideInDown" height="100vh" width="100vw">
-    <div class="index">
-      <TopMenu style="z-index: 99"></TopMenu>
+  <BackGround
+      :url="banner"
+      class="wow slideInDown"
+      height="100vh"
+      width="100vw"
+  >
+    <div class="router-out">
+      <Menu style="z-index: 9"></Menu>
       <!-- 路由出口 -->
       <router-view></router-view>
     </div>
@@ -34,7 +39,7 @@ onMounted(() => {
 </template>
 
 <style lang="less" scoped>
-.index {
+.router-out {
   box-sizing: border-box;
   width: 100%;
   height: 100%;

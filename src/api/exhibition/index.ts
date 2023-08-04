@@ -8,12 +8,14 @@ export const createExhibition = (data: { title: string; des: string; cover: stri
     })
 }
 
-export const exhibitionList = (params: {
-    ids?: string
-    page?: number
-    limit?: number
-    type?: number
-}) => {
+export const exhibitionList = (
+    params: {
+        ids?: string
+        page?: number
+        limit?: number
+        type?: number
+    },
+) => {
     return http.request<Exhibition.ExhibitionListRes>(
         {
             url: '/exhibition/info',

@@ -13,7 +13,7 @@ const asyncRoutes: RouteRecordRaw[] = [
             {
                 path: 'homePage',
                 name: 'HomePage',
-                component: () => import('@/views/home/components/home.vue'),
+                component: () => import('@/views/home/components/home/index.vue'),
             },
             // 图片展示
             {

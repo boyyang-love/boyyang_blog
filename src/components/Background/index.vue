@@ -2,26 +2,35 @@
 import {computed} from 'vue'
 import {Background} from './types/props'
 
-
 const props = withDefaults(defineProps<Background.Props>(), {
   type: 'image',
   color: '#3d3b4f',
   width: '100%',
   height: '100%',
   url: '',
+  opacity: 0.5,
 })
 
+// 背景图片
 const background_img = computed(() => {
   if (props.type == Background.Type.color) {
     return 'none'
   }
-  return `url(${new URL(props.url as any, import.meta.url).href})`
+  return `url(${new URL(props.url, import.meta.url).href})`
 })
+
 </script>
 
 <template>
   <div class="background">
-    <video v-if="props.type == Background.Type.video" :src="props.url" autoplay class="video" loop muted></video>
+    <video
+        v-if="props.type == Background.Type.video"
+        :src="props.url"
+        autoplay
+        class="video"
+        loop
+        muted
+    ></video>
     <div class="background-content">
       <slot></slot>
     </div>
@@ -33,13 +42,12 @@ const background_img = computed(() => {
   box-sizing: border-box;
   width: v-bind('props.width');
   height: v-bind('props.height');
-  background-image: v-bind('background_img');
+  background-image: v-bind(background_img);
   background-position: center;
   background-size: cover;
   background-color: v-bind('props.color');
   position: relative;
   overflow: hidden;
-  scroll-behavior: smooth;
 
   .background-content {
     scroll-behavior: smooth;

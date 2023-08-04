@@ -14,6 +14,7 @@
     "@kangc/v-md-editor": "^2.3.15",
     "@types/node": "^17.0.23",
     "@vicons/ionicons5": "^0.12.0",
+    "animejs": "^3.2.1",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
     "boyyang_tools": "^1.3.0",
@@ -34,6 +35,7 @@
     "wow.js": "^1.2.2"
   },
   "devDependencies": {
+    "@types/animejs": "^3.1.7",
     "@types/prismjs": "^1.26.0",
     "@types/qs": "^6.9.7",
     "@vicons/antd": "^0.12.0",

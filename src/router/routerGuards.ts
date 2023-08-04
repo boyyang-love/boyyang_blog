@@ -10,13 +10,6 @@ const createRouterGuards = (router: Router) => {
     // 路由前置守卫
     router.beforeEach(async (to, from, next) => {
         document.title = to.meta.title as string
-        // console.log(
-        //     `%c 路由 %c from：${from.path} %c to: ${to.path} %c`,
-        //     'background:#00e079; border-radius: 3px 0 0 3px;  color: #fff;line-height: 30px;',
-        //     'background:#ff4e20; color: #fff;line-height: 30px;',
-        //     'background:#3d3b4f; border-radius: 0 3px 3px 0;  color: #fff;line-height: 30px;',
-        //     'background:transparent'
-        // )
         if (to.path === '/login') {
             next()
             return

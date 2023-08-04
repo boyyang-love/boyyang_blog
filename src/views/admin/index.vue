@@ -1,19 +1,24 @@
 <script lang="ts" setup>
+import {BackGround} from '@/components/Background'
 
+const BACKGROUND_COLOR = 'rgba(0, 0, 0, 0.3)'
 
 </script>
 
 <template>
-  <div class="admin-container">
-    1
-  </div>
+  <BackGround type="color" :color="BACKGROUND_COLOR">
+    <div class="container m-auto">
+
+    </div>
+  </BackGround>
 </template>
 
 <style lang="less" scoped>
-.admin-container {
+.container {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  background-color: whitesmoke;
+
 }
+
 </style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {EChartsOption} from 'echarts'
 import EchartsCompt from '@/components/EchartsCompt/index.vue'
-import {computed, watchEffect} from 'vue'
+import {computed} from 'vue'
 
 interface ChartData {
   categories: string[]
@@ -75,7 +75,7 @@ const options = computed<EChartsOption>(() => {
     yAxis: {
       type: 'value',
       min: 0,
-      minInterval: 1,
+      // minInterval: 1,
       nameTextStyle: {
         fontSize: 12,
         color: '#BDD8FB',

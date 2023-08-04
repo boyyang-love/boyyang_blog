@@ -1,17 +1,17 @@
 <script lang="ts" setup>
 import {onMounted} from 'vue'
 import Wow from 'wow.js'
-import BlogCard from './blogCard.vue'
+import BlogCard from '../blogCard/index.vue'
 import {PrintText} from '@/components/PrintText/index.ts'
-import User from './user.vue'
-import Tile from './tile.vue'
-import Notice from './notice.vue'
-import Carousel from './carousel.vue'
-import PublishChart from './publishChart.vue'
+import User from '../user/index.vue'
+import Tile from '../tile/index.vue'
+import Notice from '../notice/index.vue'
+import Carousel from '../carousel/index.vue'
+import PublishChart from '../publishChart/index.vue'
 
 // hooks
-import {useHomeData, useHomeMethods} from '../hooks/useHome'
-import {useExhibitionData, useExhibitionMethods} from '../hooks/useExhibition'
+import {useHomeData, useHomeMethods} from '../../hooks/useHome'
+import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition'
 
 const {homeData, paginationOpt} = useHomeData()
 const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange, del} = useHomeMethods()

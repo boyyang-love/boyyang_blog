@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {StarOutlined} from '@vicons/antd'
+import {StarOutlined, LikeOutlined} from '@vicons/antd'
 import {Fitness, Close} from '@vicons/ionicons5'
 
 interface imgCardProps {
@@ -66,6 +66,12 @@ const like = () => {
             @click="like"
         ></n-icon>
         <n-icon
+            :component="LikeOutlined as any"
+            class="star-icon"
+            size="18"
+            color="white"
+        ></n-icon>
+        <n-icon
             :component="Close as any"
             class="del-icon"
             size="18"
@@ -82,7 +88,7 @@ const like = () => {
   width: 100%;
   height: 250px;
   background-color: #3d3b4f;
-  border: 4px solid whitesmoke;
+  border: 4px solid rgb(245, 245, 245);
   border-radius: 2px;
   box-shadow: 5px 2px 3px #393e46;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);

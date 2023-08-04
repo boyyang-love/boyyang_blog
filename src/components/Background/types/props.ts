@@ -5,6 +5,7 @@ export namespace Background {
         color?: string
         width?: string
         height?: string
+        opacity?: number
     }
 
     export enum Type {

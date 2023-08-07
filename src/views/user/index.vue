@@ -61,7 +61,7 @@ onMounted(() => {
             ]"
           show-size-picker
           @page="(e: number) => userData.page = e"
-          @pageSizeChange="(e: number) => userData.limit = e"
+          @update:page-size="(e: number) => userData.limit = e"
       />
     </div>
 

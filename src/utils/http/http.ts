@@ -37,7 +37,13 @@ class Http {
                             res = transformRequestData(res, options)
                         }
 
-                        resolve(res as unknown as Promise<Result<T>>)
+                        if (res.data.code === 1) {
+                            reject(res.data.msg)
+                        }
+
+                        if (res.data.code === 0) {
+                            resolve(res.data as unknown as Promise<Result<T>>)
+                        }
                     },
                 )
                 .catch((err) => {

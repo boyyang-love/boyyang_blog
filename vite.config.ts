@@ -21,13 +21,6 @@ export default defineConfig(({mode}: ConfigEnv): UserConfig => {
             server: {
                 port: Number(env.VITE_APP_PORT) || 3000,
                 host: '0.0.0.0',
-                // proxy: {
-                //     '/api': {
-                //         target: 'https://golang-ynhc-26761-6-1301921121.sh.run.tcloudbase.com',
-                //         changeOrigin: true,
-                //         rewrite: (path) => path.replace(/^\/api/, '/api/')
-                //     }
-                // }
             },
             build: {
                 assetsDir: 'assets',

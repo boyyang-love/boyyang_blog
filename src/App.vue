@@ -26,6 +26,10 @@ const themeOverrides: GlobalThemeOverrides = {
   Card: {
     colorModal: '#3d3b4f',
   },
+  Input: {
+    textColor: '#303d4e',
+    placeholderColor: '#303d4e',
+  },
 }
 </script>
 
@@ -52,8 +56,7 @@ const themeOverrides: GlobalThemeOverrides = {
 
 #app {
   /* Avenir, Helvetica, Arial, sans-serif, */
-//font-family: zpix; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+//font-family: zpix; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; color: #2c3e50;
   background-color: #244f9f;
   scroll-behavior: smooth;
 

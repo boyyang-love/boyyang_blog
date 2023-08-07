@@ -45,7 +45,18 @@ const transForm: TransForm = {
 
         const {code, msg, data} = res.data
 
-        return res.data
+
+        if(isShowMessage) {
+            if (isShowSuccessMessage && code === 0) {
+                window.$message.success(msg)
+            }
+
+            if (isShowErrorMessage && code === 1) {
+                window.$message.error(msg)
+            }
+        }
+
+        return res
     },
 }
 

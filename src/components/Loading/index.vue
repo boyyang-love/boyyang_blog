@@ -2,7 +2,7 @@
 import {ref} from 'vue'
 
 const isLoading = ref<boolean>(false)
-const t = ref<NodeJS.Timer | null>(null)
+const t = ref<number | null>(null)
 
 const loadingStart = () => {
   isLoading.value = true

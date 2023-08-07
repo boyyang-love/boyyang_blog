@@ -3,6 +3,7 @@ import {onMounted} from 'vue'
 import Wow from 'wow.js'
 import bgImg from '@/assets/赛博朋克风格奇幻少女_集原美电脑4k壁纸3840x2160_彼岸图网.jpg'
 import {BackGround} from '@/components/Background/index.ts'
+import Login from '@/views/login/components/loginBox/index.vue'
 import signInAndUp from './components/signInAndUp.vue'
 
 
@@ -25,9 +26,14 @@ onMounted(() => {
 
 <template>
   <div class="bg-wrapper">
-    <BackGround :url="bgImg" class="wow pulse" height="100vh" width="100vw">
+    <BackGround
+        :url="bgImg"
+        height="100vh"
+        width="100vw"
+        class="wow tada"
+    >
       <div ref="bgWrapper" class="bg">
-        <signInAndUp style="position: absolute"></signInAndUp>
+        <Login class="wow swing" data-wow-delay="0.6s"></Login>
       </div>
     </BackGround>
   </div>
@@ -46,5 +52,8 @@ onMounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

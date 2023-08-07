@@ -34,8 +34,6 @@ onMounted(() => {
       ],
       loop: true,
       easing: 'easeInOutElastic',
-      duration: 2000,
-
     })
   })
   props.menuList.forEach((item, i) => {

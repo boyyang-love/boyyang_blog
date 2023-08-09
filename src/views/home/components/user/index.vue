@@ -1,11 +1,9 @@
 <script lang="ts" setup>
 import {GithubOutlined, QqOutlined, WechatOutlined} from '@vicons/antd'
+import {useUserStore} from '@/store/modules/user'
+const userStore = useUserStore()
 
-interface userProps {
-  userInfo: Dashboard.DashboardUserinfo
-}
 
-const props = withDefaults(defineProps<userProps>(), {})
 </script>
 
 <template>
@@ -13,16 +11,16 @@ const props = withDefaults(defineProps<userProps>(), {})
     <div class="header">
       <n-avatar
           :size="95"
-          :src="props.userInfo.avatar_url"
+          :src="userStore.userInfo.avatar_url"
           bordered
           class="header-img wow slideInDown"
           round
       />
       <div class="user-name wow slideInDown" data-wow-delay="0.5s">
-        {{ props.userInfo.username }}
+        {{ userStore.userInfo.username }}
       </div>
       <div class="user-signature wow slideInDown" data-wow-delay="1s">
-        {{ props.userInfo.motto }}
+        {{ userStore.userInfo.motto }}
       </div>
       <div class="info">
         <div class="icon-item wow pulse" data-wow-delay="3s">
@@ -30,35 +28,35 @@ const props = withDefaults(defineProps<userProps>(), {})
               <n-icon :component="LikeOutlined" :size="28" color="#3d3b4f"></n-icon>
           </n-badge> -->
           <span class="text">获赞</span>
-          <span class="num">{{ props.userInfo.thumbs_up || 0 }}</span>
+          <span class="num">{{ userStore.userInfo.thumbs_up || 0 }}</span>
         </div>
         <div class="icon-item wow pulse" data-wow-delay="4s">
           <!-- <n-badge :value="12" :dot="false">
               <n-icon :component="SendOutlined" :size="28" color="#3d3b4f"></n-icon>
           </n-badge> -->
           <span class="text">发布</span>
-          <span class="num">{{ props.userInfo.publish || 0 }}</span>
+          <span class="num">{{ userStore.userInfo.publish || 0 }}</span>
         </div>
         <div class="icon-item wow pulse" data-wow-delay="5s">
           <!-- <n-badge :value="20" :dot="false">
               <n-icon :component="HeartOutlined" :size="28" color="#3d3b4f"></n-icon>
           </n-badge> -->
           <span class="text">收藏</span>
-          <span class="num">{{ props.userInfo.like || 0 }}</span>
+          <span class="num">{{ userStore.userInfo.like || 0 }}</span>
         </div>
         <div class="icon-item wow pulse" data-wow-delay="6s">
           <!-- <n-badge :value="22" :dot="false">
               <n-icon :component="StarOutlined" :size="28" color="#3d3b4f"></n-icon>
           </n-badge> -->
           <span class="text">粉丝</span>
-          <span class="num">{{ props.userInfo.following || 0 }}</span>
+          <span class="num">{{ userStore.userInfo.following || 0 }}</span>
         </div>
       </div>
       <div class="btn-wrapper">
         <n-space justify="space-around">
-          <n-icon :component="GithubOutlined" color="whitesmoke" size="30"></n-icon>
-          <n-icon :component="QqOutlined" color="whitesmoke" size="30"></n-icon>
-          <n-icon :component="WechatOutlined" color="whitesmoke" size="30"></n-icon>
+          <n-icon :component="GithubOutlined as any" color="whitesmoke" size="30"></n-icon>
+          <n-icon :component="QqOutlined as any" color="whitesmoke" size="30"></n-icon>
+          <n-icon :component="WechatOutlined as any" color="whitesmoke" size="30"></n-icon>
         </n-space>
       </div>
     </div>

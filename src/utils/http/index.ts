@@ -1,7 +1,6 @@
 import {Http} from './http'
 import {transForm} from './transform'
 import {env} from '@/utils/env'
-import {token} from './token'
 const createHttp = () => {
     return new Http(
         {
@@ -24,7 +23,7 @@ const createHttp = () => {
                 // token key
                 tokenKey: 'Authorization',
                 // token value 可以在这儿直接配置 也可以直接在接口配置中直接配置
-                token: token(),
+                token: '',
 
             },
             transform: transForm,

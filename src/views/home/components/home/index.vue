@@ -13,6 +13,7 @@ import PublishChart from '../publishChart/index.vue'
 import {useHomeData, useHomeMethods} from '../../hooks/useHome'
 import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition'
 
+
 const {homeData, paginationOpt} = useHomeData()
 const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange, del} = useHomeMethods()
 const {exhibitionData} = useExhibitionData()
@@ -96,7 +97,7 @@ onMounted(() => {
       </div>
       <div class="right">
         <div class="user wow slideInDown">
-          <User :user-info="homeData.userInfo"></User>
+          <User></User>
         </div>
         <div class="tags wow slideInDown">
         </div>

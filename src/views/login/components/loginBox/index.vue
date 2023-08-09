@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import {NIcon, NInput} from 'naive-ui'
-import {CloseCircle, CheckmarkCircle, Rocket, ArrowUpCircleSharp, ArrowDownCircleSharp} from '@vicons/ionicons5'
-import {useRegister} from './hooks'
-import {useLogin} from '../../hooks/useLogin'
 import {computed, ref} from 'vue'
+import {NIcon} from 'naive-ui'
+import {
+  CloseCircle,
+  CheckmarkCircle,
+  Rocket,
+  PeopleCircle,
+  ArrowUpCircleSharp,
+  ArrowDownCircleSharp,
+} from '@vicons/ionicons5'
+import Input from '@/components/MimicryInput/index.vue'
+import {useInput} from '../../hooks/useInput'
+import {useLogin} from '../../hooks/useLogin'
 
-const {INPUT} = useRegister()
+const loginInput = useInput('login')
 const {loginData, loginSubmit} = useLogin()
 
 const isUp = ref<boolean>(true)
@@ -18,29 +26,36 @@ const position = computed(() => {
 
 <template>
   <div class="register-wrapper">
+    <div class="top-left-icon">
+      <NIcon
+          class="icon"
+          :component="PeopleCircle"
+          size="22"
+          @click="loginData.isRegister = true"
+      ></NIcon>
+    </div>
     <div class="top-right-icon">
       <NIcon
+          class="icon"
           :component="isUp ? ArrowDownCircleSharp : ArrowUpCircleSharp"
-          size="25"
+          size="22"
           color="red"
           @click="isUp = !isUp"
       ></NIcon>
     </div>
     <div class="inner-wrapper">
-      <div class="input-wrapper" v-for="(item, i) in INPUT" :key="i">
-        <div class="icon">
-          <NIcon :component="item.icon" :size="item.iconSize"></NIcon>
-        </div>
-        <div class="inner-input user-name">
-          <NInput
-              class="input"
-              size="large"
-              :bordered="false"
-              :placeholder="item.placeholder"
-              :type="item.inputType"
-              v-model:value="loginData[item.key]"
-          ></NInput>
-        </div>
+      <div
+          class="input-wrapper"
+          v-for="(item, i) in loginInput"
+      >
+        <Input
+            :key="i"
+            :icon="item.icon"
+            :icon-size="item.iconSize"
+            :input-type="item.inputType"
+            :placeholder="item.placeholder"
+            v-model="loginData[item.key]"
+        ></Input>
       </div>
 
       <div class="btn-wrapper">
@@ -50,8 +65,8 @@ const position = computed(() => {
         <div class="tip-btn">
           <NIcon
               :component="loginData.isError ? CloseCircle :  CheckmarkCircle"
-              size="25"
               :color="loginData.isError ? '#c2516b' : '#23D69B'"
+              size="25"
           ></NIcon>
         </div>
       </div>
@@ -87,20 +102,58 @@ const position = computed(() => {
     border-radius: 10px;
   }
 
-  .top-right-icon {
+  .top-left-icon {
     position: absolute;
-    top: 2px;
-    right: 2px;
-    box-shadow: 20px 20px 60px #c4cacf,
-      -20px -20px 60px #ffffff;
-    transition: all 0.4s linear;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    top: 5px;
+    left: 5px;
+    box-shadow: 5px 5px 6px #c4cacf,
+      -5px -5px 5px #ffffff;
     cursor: pointer;
   }
 
-  .top-right-icon:hover {
-    transform: scale(1.2);
-    font-weight: bolder;
+  .top-right-icon {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    top: 5px;
+    right: 5px;
+    box-shadow: 5px 5px 4px #c4cacf,
+      -5px -5px 5px #ffffff;
+    cursor: pointer;
+
+    .icon {
+      animation: up-down 1s ease-in-out infinite;
+    }
+
+    @keyframes up-down {
+      0% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
   }
+
+  //.top-right-icon:hover {
+  //  transform: scale(1.1);
+  //  font-weight: bolder;
+  //}
 
   .inner-wrapper {
     box-sizing: border-box;
@@ -111,41 +164,6 @@ const position = computed(() => {
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-
-    .input-wrapper {
-      display: flex;
-
-      .icon {
-        box-sizing: border-box;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        box-shadow: 6px 6px 10px #c4cacf,-6px -6px 10px #ffffff;
-        margin-right: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .inner-input {
-        box-sizing: border-box;
-        width: 250px;
-        height: 50px;
-        border-radius: 5px;
-        box-shadow: 6px 6px 10px #c4cacf,
-          -6px -6px 10px #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .input {
-          border: none;
-          background: none;
-          margin: 0 auto;
-          font-size: 15px;
-        }
-      }
-    }
 
     .btn-wrapper {
       box-sizing: border-box;

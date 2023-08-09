@@ -219,7 +219,7 @@ const tabListClick = (tabItem: TabListItem, i: number) => {
     justify-content: space-between;
     width: 100%;
     height: @bottomH;
-    background-color: rgb(245, 245, 245);
+    background: linear-gradient(145deg, #cfd6dc, #f6ffff);
     border-radius: 0 0 @borderRadius @borderRadius;
     padding: 0 20px;
 

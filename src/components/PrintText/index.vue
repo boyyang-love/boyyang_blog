@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<PrintTextProps>(), {
 })
 
 const subTitleText = ref<string[]>([])
-const t = ref<NodeJS.Timer | null>(null)
+const t = ref<number | null>(null)
 
 onMounted(() => {
   beginAni()

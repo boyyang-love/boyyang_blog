@@ -4,7 +4,7 @@ declare namespace Login {
             id: number
             username: string
             gender: number
-            avatarUrl: string
+            avatar_url: string
             tel: string
         }
         token: string

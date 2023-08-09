@@ -15,16 +15,18 @@ export const login = (data: { username: string; password: string }) => {
 }
 
 // 注册
-export const register = (data: {
+export const register = (params: {
     username: string
     tel: string | number
     password: string
+    repassword: string
+    avatar_url: string
 }) => {
     return http.request(
         {
             url: '/register',
             method: 'post',
-            data,
+            data: params,
         },
         {
             withToken: false,

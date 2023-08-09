@@ -3,9 +3,11 @@ import {onMounted} from 'vue'
 import Wow from 'wow.js'
 import bgImg from '@/assets/赛博朋克风格奇幻少女_集原美电脑4k壁纸3840x2160_彼岸图网.jpg'
 import {BackGround} from '@/components/Background/index.ts'
-import Login from '@/views/login/components/loginBox/index.vue'
-import signInAndUp from './components/signInAndUp.vue'
+import Login from './components/loginBox/index.vue'
+import Register from './components/registerBox/index.vue'
+import {useLogin} from './hooks/useLogin'
 
+const {loginData} = useLogin()
 
 onMounted(() => {
   const wow = new Wow({
@@ -34,6 +36,7 @@ onMounted(() => {
     >
       <div ref="bgWrapper" class="bg">
         <Login class="wow swing" data-wow-delay="0.6s"></Login>
+        <Register v-model="loginData.isRegister"></Register>
       </div>
     </BackGround>
   </div>

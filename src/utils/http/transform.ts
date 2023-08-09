@@ -1,6 +1,7 @@
 import {Result, TransForm} from './types'
 import {AxiosResponse} from 'axios'
 import qs from 'qs'
+import {useUserStore} from '@/store/modules/user'
 
 const transForm: TransForm = {
     beforeRequestHook(config, opt) {
@@ -27,9 +28,10 @@ const transForm: TransForm = {
         }
         // 是否加上 token
         if (withToken) {
+            const userStore = useUserStore()
             config.headers = {
                 ...config.headers,
-                [opt.tokenKey as string]: opt.token,
+                [opt.tokenKey as string]: opt.token || userStore.getToken,
             }
         }
 

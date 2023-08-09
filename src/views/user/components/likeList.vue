@@ -58,26 +58,30 @@ const status = computed(() => {
 
 <style lang="less" scoped>
 .like-list-wrapper {
-  @statusH: 45px;
+  @statusH: 35px;
   @radius: 5px;
   box-sizing: border-box;
-  //width: 450px;
   height: 250px;
-  background-color: #fff;
-  border-radius: 0 @radius;
+  background-color: #e0e6ec;
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 5px 5px 6px #c4cacf,
+    -5px -5px 5px #ffffff;
 
   .img-wrapper {
     box-sizing: border-box;
     width: 100%;
     height: calc(100% - @statusH);
-    padding: 5px;
+    padding: 10px;
 
     img {
+      box-sizing: border-box;
       width: 100%;
       height: 100%;
+      box-shadow: 5px 5px 6px #c4cacf,
+        -6px -6px 6px #ffffff;
       object-fit: cover;
-      border-radius: 0 @radius;
+      border-radius: 10px;
     }
   }
 
@@ -96,6 +100,8 @@ const status = computed(() => {
       height: @wh;
       border-radius: 100%;
       background-color: var(--color);
+      box-shadow: 2px 2px 3px #c4cacf,
+        -2px -2px 3px #ffffff;
     }
 
     .status-text {

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import {nextTick, onMounted, ref} from 'vue'
+import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
-import anime from 'animejs'
 import {Menu} from './types'
 import {menuList} from './menuList'
 
@@ -14,35 +13,6 @@ const props = withDefaults(defineProps<Menu.menuProps>(), {
 
 const active = ref<number>(0)
 
-onMounted(() => {
-  nextTick(() => {
-    anime({
-      targets: '#Admin',
-      keyframes: [
-        {
-          rotateZ: 0,
-          scale: 1,
-        },
-        {
-          rotateZ: 360 * 10,
-          scale: 2,
-        },
-        {
-          rotateZ: -360 * 10 ,
-          scale: 1,
-        },
-      ],
-      loop: true,
-      easing: 'easeInOutElastic',
-    })
-  })
-  props.menuList.forEach((item, i) => {
-    if (item.name == route.name) {
-      active.value = i
-    }
-  })
-})
-
 const menuClick = (item: Menu.menuList, index: number) => {
   active.value = index
   router.push({
@@ -54,25 +24,27 @@ const menuClick = (item: Menu.menuList, index: number) => {
 <template>
   <div class="menu-wrapper">
     <div class="menu">
-      <n-space size="large">
-        <n-tooltip
-            v-for="(item, i) in props.menuList"
-            trigger="hover"
-            placement="right"
-        >
-          <template #trigger>
-            <n-icon
-                :component="item.com as any"
-                :data-wow-delay="i * 0.3 + 's'"
-                :size="20"
-                :style="{'--i': i}"
-                :class="['menu-icon', i === active ? 'active' : '']"
-                :id="item.name"
-                @click="menuClick(item, i)"
-            ></n-icon>
-          </template>
-          {{ item.text }}
-        </n-tooltip>
+<!--      <div class="close"></div>-->
+      <n-space size="large" vertical>
+        <div class="icon-wrapper" v-for="(item, i) in props.menuList">
+          <n-tooltip
+              trigger="hover"
+              placement="right"
+          >
+            <template #trigger>
+              <n-icon
+                  :component="item.com as any"
+                  :data-wow-delay="i * 0.3 + 's'"
+                  :size="20"
+                  :style="{'--i': i}"
+                  :class="['menu-icon', i === active ? 'active' : '']"
+                  :id="item.name"
+                  @click="menuClick(item, i)"
+              ></n-icon>
+            </template>
+            {{ item.text }}
+          </n-tooltip>
+        </div>
       </n-space>
     </div>
   </div>
@@ -81,38 +53,63 @@ const menuClick = (item: Menu.menuList, index: number) => {
 <style lang="less" scoped>
 .menu-wrapper {
   height: 100%;
-  width: 60px;
+  width: 55px;
   position: fixed;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 20px;
 
   .menu {
     box-sizing: border-box;
-    background-color: whitesmoke;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, #cfd6dc, #f6ffff);
     padding: 10px;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 15px 15px 0;
     box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.4), 7px 3px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
 
-    .menu-icon {
-      cursor: pointer;
-      color: red;
-      transition: all 0.4s ease-in-out;
+    .icon-wrapper {
+      box-sizing: border-box;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 7px 7px 10px #c4cacf,
+        -7px -7px 10px #ffffff;
 
-      &:hover {
-        color: #181717;
-        transform: scale(1.5);
+      .menu-icon {
+        cursor: pointer;
+        color: red;
+        transition: all 0.4s ease-in-out;
+
+        &:hover {
+          color: #181717;
+          transform: scale(1.1);
+        }
+      }
+
+      .active {
+        color: #00bffd;
       }
     }
 
-    .active {
-      color: #00bffd;
-    }
+    //.close {
+    //  position: absolute;
+    //  right: -30px;
+    //  width: 30px;
+    //  height: 30px;
+    //  border-radius: 0 5px 5px 0;
+    //  background: linear-gradient(145deg, #cfd6dc, #f6ffff);
+    //  z-index: 0;
+    //}
   }
-
-
 }
 
 </style>

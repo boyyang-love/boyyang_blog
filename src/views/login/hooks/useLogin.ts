@@ -2,22 +2,42 @@ import {reactive, watch} from 'vue'
 import {login, register} from '@/api/login'
 import {router} from '@/router'
 import {useUserStoreWithOut} from '@/store/modules/user'
-
+import {env} from '@/utils/env'
 // 登录 注册 data
 const loginData = reactive({
-    isSignIn: true, // 是否登录状态
-    // 账号 密码
+    isRegister: false, // 是否登录状态
+    // 登录 账号 密码
     username: '',
-    tel: '',
     password: '',
-    repassword: '',
+    // 注册
+    r_username: '',
+    r_tel: '',
+    r_password: '',
+    r_repassword: '',
+    r_isError: false,
+    r_avatarUrl: '',
+
+
     isError: false,
 })
 
 watch(
-    [() => loginData.username, () => loginData.password],
+    [
+        () => loginData.username,
+        () => loginData.password,
+        () => loginData.r_username,
+        () => loginData.r_tel,
+        () => loginData.r_password,
+        () => loginData.r_repassword,
+    ],
     () => {
         loginData.isError = !(loginData.username !== '' && loginData.password !== '')
+        loginData.r_isError = !(
+            loginData.r_username !== '' &&
+            loginData.r_tel !== '' &&
+            loginData.r_password !== '' &&
+            loginData.r_repassword !== ''
+        )
     },
     {
         immediate: true,
@@ -49,24 +69,28 @@ const loginSubmit = () => {
 
 const registerSubmit = () => {
     let params = {
-        username: loginData.username,
-        tel: loginData.tel,
-        password: loginData.password,
-        repassword: loginData.repassword,
+        username: loginData.r_username,
+        tel: loginData.r_tel,
+        password: loginData.r_password,
+        repassword: loginData.r_repassword,
+        avatar_url: `avatar/${loginData.r_avatarUrl.split('/').pop()}`,
     }
     // 注册
     if (params.username.trim() == '' || params.password.trim() == '' || params.tel == '') {
         window.$message.error('用户名,手机号,密码不能为空')
-        loginData.isError = true
+        loginData.r_isError = true
         return
     }
     if (params.password.trim() != params.repassword.trim()) {
-        loginData.isError = true
+        loginData.r_isError = true
         window.$message.error('密码不一致')
         return
     }
     register(params).then(res => {
         const t = setTimeout(() => {
+            loginData.isRegister = false
+            loginData.username = loginData.r_username
+            loginData.password = loginData.r_password
             loginSubmit()
             clearTimeout(t)
         }, 2000)
@@ -76,6 +100,7 @@ const registerSubmit = () => {
 // 登录成功
 const loginSuccess = (data: Login.loginRes) => {
     const userStore = useUserStoreWithOut()
+    data.info.avatar_url = `${env.VITE_APP_IMG_URL}/${data.info.avatar_url}`
     userStore.setToken(data.token)
     userStore.setUserinfo(data.info)
     window.$loading.loadingEnd()

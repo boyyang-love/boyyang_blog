@@ -65,7 +65,7 @@ const themeOverrides: GlobalThemeOverrides = {
 /*修改滚动条样式*/
 ::-webkit-scrollbar {
   width: 0;
-  height: 6px;
+  height: 2px;
 }
 
 ::-webkit-scrollbar-track {

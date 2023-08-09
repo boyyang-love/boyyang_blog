@@ -43,7 +43,7 @@ onMounted(() => {
       <div
           v-for="item in userData.list"
           :key="item.id"
-          class="bottom-card-wrapper wow bounceIn"
+          class="bottom-card-wrapper"
       >
         <LikeList :status="item.status" :url="item.cover"></LikeList>
       </div>
@@ -87,9 +87,12 @@ onMounted(() => {
     width: 100%;
     margin-top: 25px;
     display: grid;
+    background: linear-gradient(145deg, #cfd6dc, #f6ffff);
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
     justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
 
   }
 

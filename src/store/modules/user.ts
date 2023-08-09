@@ -1,17 +1,17 @@
 import {store} from '@/store'
 import {defineStore} from 'pinia'
 
-interface info {
+export interface Info {
     id: number
     username: string
     tel: number | string
-    avatarUrl: string
+    avatar_url: string
     gender: number | string
 }
 
-interface UserState {
+export interface UserState {
     token: string
-    userInfo: info
+    userInfo: Info
 }
 
 const useUserStore = defineStore({
@@ -23,7 +23,7 @@ const useUserStore = defineStore({
                 id: 0,
                 username: '',
                 tel: '',
-                avatarUrl: '',
+                avatar_url: '',
                 gender: '',
             },
         }

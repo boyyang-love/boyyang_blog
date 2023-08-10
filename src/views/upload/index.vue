@@ -2,8 +2,11 @@
 import {onMounted, ref} from 'vue'
 import Wow from 'wow.js'
 import {CloudUploadOutlined} from '@vicons/antd'
+import {CloseCircle} from '@vicons/ionicons5'
 import {PrintText} from '@/components/PrintText'
 import {UploadInst} from 'naive-ui'
+import Input from '@/components/MimicryInput/index.vue'
+import Btn from '@/components/MimicryBtn/index.vue'
 import {useUpload} from './hooks/useUpload'
 
 const {uploadData, handleUploadChange, submit} = useUpload()
@@ -37,85 +40,88 @@ onMounted(() => {
       <div class="upload-content wow fadeInUpBig" data-wow-delay="1s">
         <div class="title-wrapper">
           <div class="title">
-            <span>图片名称：</span>
-            <n-input
-                v-model:value="uploadData.submit.title"
-                :autosize="{
-                                minRows: 2,
-                                maxRows: 5,
-                            }"
-                class="input"
-                clearable
-                maxlength="50"
-                placeholder="请输入壁纸名称"
-                show-count
-                size="small"
-                style="max-width: 300px; min-width: 300px"
-                type="textarea"
-            />
+            <Input
+                v-model="uploadData.submit.title"
+                input-width="350px"
+                :more-props="{
+                  placeholder: '请输入壁纸名称',
+                  autosize: {minRows: 3, maxRows: 5},
+                  maxlength: 50,
+                  showCount: true,
+                  clearable: true,
+                  type: 'textarea',
+                }"
+            ></Input>
           </div>
           <div class="sub-title">
-            <span>图片描述：</span>
-            <n-input
-                v-model:value="uploadData.submit.des"
-                :autosize="{
-                                minRows: 3,
-                                maxRows: 5,
-                            }"
-                class="input"
-                clearable
-                maxlength="150"
-                placeholder="请输入壁纸描述"
-                show-count
-                size="small"
-                style="max-width: 300px; min-width: 300px; color: whitesmoke"
-                type="textarea"
-            />
+            <Input
+                v-model="uploadData.submit.des"
+                input-width="350px"
+                :more-props="{
+                  placeholder: '请输入壁纸描述',
+                  autosize: {minRows: 3, maxRows: 5},
+                  maxlength: 150,
+                  showCount: true,
+                  clearable: true,
+                  type: 'textarea',
+                }"
+            >
+            </Input>
           </div>
         </div>
         <div class="upload">
-          <div v-if="uploadData.previewUrl != ''" class="img-preview">
-            <img :src="uploadData.previewUrl" alt=""/>
-          </div>
+          <transition name="preview">
+            <div v-if="uploadData.previewUrl != ''" class="img-preview">
+              <img :src="uploadData.previewUrl" alt=""/>
+              <div class="close">
+                <n-icon
+                    :component="CloseCircle as any"
+                    size="22"
+                    @click="uploadData.previewUrl = ''; uploadData.fileList = [] "
+                ></n-icon>
+              </div>
+            </div>
+          </transition>
+
           <n-upload
+              v-if="uploadData.previewUrl === ''"
               ref="uploadRef"
               v-model:file-list="uploadData.fileList"
               :default-upload="false"
               :disabled="false"
               :max="1"
               action="#"
-              class="upload-btn"
+              class="upload-box"
               directory-dnd
               @change="handleUploadChange"
           >
-            <n-upload-dragger v-if="uploadData.previewUrl == ''">
-              <div style="margin-bottom: 12px">
-                <n-icon :depth="3" size="48">
-                  <CloudUploadOutlined/>
-                </n-icon>
-              </div>
-              <n-text style="font-size: 16px">点击或者拖动文件到该区域来上传</n-text>
-              <n-p depth="3" style="margin: 8px 0 0 0">
-                请不要上传敏感数据，比如你的银行卡号和密码，信用卡号有效期和安全码
-              </n-p>
-            </n-upload-dragger>
+            <div
+                class="upload-dragger"
+                v-if="uploadData.previewUrl === ''"
+            >
+              <n-upload-dragger>
+                <div style="margin-bottom: 12px">
+                  <n-icon :depth="3" size="48">
+                    <CloudUploadOutlined/>
+                  </n-icon>
+                </div>
+                <n-text style="font-size: 16px">点击或者拖动文件到该区域来上传</n-text>
+                <n-p depth="3" style="margin: 8px 0 0 0">
+                  请不要上传敏感数据，比如你的银行卡号和密码，信用卡号有效期和安全码
+                </n-p>
+              </n-upload-dragger>
+            </div>
           </n-upload>
         </div>
 
         <div class="upload-btn">
-          <n-button
-              color="#8a2be2"
-              size="large"
-              text-color="#fff"
-              @click="submit(uploadRef)"
-          >
-            <template #icon>
-              <n-icon color="white" size="20">
-                <CloudUploadOutlined/>
-              </n-icon>
-            </template>
-            上传
-          </n-button>
+          <Btn
+              @btn-click="submit(uploadRef)"
+              :btn-icon="CloudUploadOutlined"
+              :error-btn="false"
+              width="300px"
+              text="上传"
+          ></Btn>
         </div>
       </div>
     </n-spin>
@@ -141,9 +147,10 @@ onMounted(() => {
 
   .upload-content {
     padding: 50px 200px;
-    background-color: rgba(57, 62, 70, 0.9);
+    //background-color: rgba(57, 62, 70, 0.9);
+    background: linear-gradient(145deg, #cfd6dc, #f6ffff);
     margin: 0 100px 50px;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 
     .title-wrapper {
@@ -158,7 +165,7 @@ onMounted(() => {
       .title,
       .sub-title {
         color: whitesmoke;
-        text-shadow: 3px 3px 3px #393e46;
+        //text-shadow: 3px 3px 3px #393e46;
         display: flex;
         align-items: center;
         font-size: 18px;
@@ -186,9 +193,29 @@ onMounted(() => {
       justify-content: center;
       align-items: center;
 
+      .upload-box {
+        box-sizing: border-box;
+        width: 500px;
+        height: 220px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        //flex-direction: column;
+        border-radius: 10px;
+        box-shadow: 7px 7px 10px #c4cacf,
+          -7px -7px 10px #ffffff;
+
+        //.upload-dragger {
+        //  display: flex;
+        //  flex-direction: column;
+        //}
+      }
+
       .upload-btn {
         display: flex;
         flex-direction: column;
+
         // height: 100%;
         // width: 550px;
         // border: 2px solid whitesmoke;
@@ -197,17 +224,34 @@ onMounted(() => {
 
       .img-preview {
         box-sizing: border-box;
-        height: 350px;
-        margin-top: 20px;
+        width: 500px;
+        height: 250px;
+        margin: 20px 0;
         border-radius: 5px;
-        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
         overflow: hidden;
         z-index: 999;
+        position: relative;
+        padding: 15px;
+        box-shadow: 7px 7px 10px #c4cacf,
+          -7px -7px 10px #ffffff;
+
+
+        .close {
+          position: absolute;
+          top: 1px;
+          right: 1px;
+          cursor: pointer;
+
+          &:hover {
+            color: darkred;
+          }
+        }
 
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          border-radius: 10px;
         }
       }
     }
@@ -218,8 +262,32 @@ onMounted(() => {
       align-items: center;
       margin-top: 25px;
 
+
       color: whitesmoke;
     }
   }
+}
+
+.preview-enter-active,
+.preview-leave-active {
+  transition: all .4s ease-in-out;
+  animation-delay: .3s;
+}
+
+.preview-enter-from,
+.preview-leave-to {
+  opacity: 0;
+  transform: translateX(250px);
+}
+
+.upload-enter-active,
+.upload-leave-active {
+  transition: all .3s ease-in-out;
+}
+
+.upload-enter-from,
+.upload-leave-to {
+  opacity: 0;
+  transform: translateX(-250px);
 }
 </style>

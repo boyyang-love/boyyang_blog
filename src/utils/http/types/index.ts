@@ -28,6 +28,8 @@ export interface RequestOptions {
     tokenKey?: string
     // token value
     token?: string
+    // 是否有返回信息
+    isReturn?: boolean
 }
 
 export abstract class TransForm {

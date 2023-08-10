@@ -2,6 +2,7 @@
 import {
   NConfigProvider,
   darkTheme,
+    lightTheme,
   GlobalThemeOverrides,
 } from 'naive-ui'
 import {AppProvider} from '@/components/Application'
@@ -36,7 +37,7 @@ const themeOverrides: GlobalThemeOverrides = {
 <template>
   <!-- <n-theme-editor> -->
   <AppProvider>
-    <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides">
+    <n-config-provider :theme="lightTheme" :theme-overrides="themeOverrides">
       <router-view></router-view>
     </n-config-provider>
   </AppProvider>

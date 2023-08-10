@@ -94,13 +94,13 @@ const toBlogDetail = () => {
           </n-badge>
           <n-popconfirm
               @positive-click="emits('delClick', props.id)"
-              positive-text="删除"
-              negative-text="取消"
+              positive-text="删了吧"
+              negative-text="算了吧"
           >
             <template #trigger>
               <n-icon :component="CloseCircleOutlined as any" size="27"></n-icon>
             </template>
-            删-舍不得删-但是手机空间已被你占满
+            删?还是不删呢?这是一个值得思考的问题
           </n-popconfirm>
 
         </div>
@@ -167,7 +167,7 @@ const toBlogDetail = () => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 10px 15px;
+    padding: 10px 10px;
 
     .title {
       font-size: 15px;
@@ -189,7 +189,7 @@ const toBlogDetail = () => {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      padding-right: 20px;
+      //padding-right: 20px;
 
       .bottom-left {
 

@@ -27,9 +27,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emit>()
 
-
-console.log(props)
-
 const btnClick = () => {
   emit('btnClick')
 }
@@ -63,6 +60,7 @@ const btnClick = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   .btn {
     box-sizing: border-box;

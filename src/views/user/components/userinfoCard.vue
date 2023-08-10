@@ -29,8 +29,6 @@ const props = withDefaults(defineProps<Props>(), {
   review_rjection: 0,
 })
 
-console.log(props)
-
 const showOrEdit = ref<boolean>(false)
 const motto = ref<string>('第一行没有你，第')
 const tab = ref<number>(1)

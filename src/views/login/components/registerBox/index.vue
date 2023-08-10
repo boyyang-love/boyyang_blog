@@ -217,16 +217,6 @@ onMounted(() => {
 }
 
 
-.register-enter-active,
-.register-leave-active {
-  transition: all .4s ease-in-out;
-}
-
-.register-enter-from,
-.register-leave-to {
-  transform: translateY(500px);
-}
-
 .header-enter-active,
 .header-leave-active {
   transition: all .4s ease-in-out;

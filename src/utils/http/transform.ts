@@ -43,12 +43,12 @@ const transForm: TransForm = {
             isShowMessage,
             isShowSuccessMessage,
             isShowErrorMessage,
+            isReturn,
         } = opt
 
         const {code, msg, data} = res.data
 
-
-        if(isShowMessage) {
+        if (isShowMessage) {
             if (isShowSuccessMessage && code === 0) {
                 window.$message.success(msg)
             }
@@ -58,6 +58,17 @@ const transForm: TransForm = {
             }
         }
 
+        if (!isReturn) {
+            return {data: {code: 0, msg: ''}}
+        }
+
+
+        return res
+    },
+
+    responseInterceptors(res: AxiosResponse<Result, any>): AxiosResponse<Result, any> {
+
+        console.log(res)
         return res
     },
 }

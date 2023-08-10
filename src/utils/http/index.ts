@@ -1,11 +1,12 @@
 import {Http} from './http'
 import {transForm} from './transform'
 import {env} from '@/utils/env'
+
 const createHttp = () => {
     return new Http(
         {
             baseURL: env.VITE_APP_API_URL,
-            timeout: 5 * 1000,
+            timeout: 20 * 1000,
             // 以下配置都可以在接口配置中直接配置，接口配置会覆盖以下配置
             requestOptions: {
                 // POST请求是否序列化请求参数
@@ -24,6 +25,8 @@ const createHttp = () => {
                 tokenKey: 'Authorization',
                 // token value 可以在这儿直接配置 也可以直接在接口配置中直接配置
                 token: '',
+                // 是否有返回
+                isReturn: true,
 
             },
             transform: transForm,

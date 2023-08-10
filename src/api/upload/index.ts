@@ -31,7 +31,7 @@ export const upload = async (params: { file_name: string; file: File }): Promise
     data.append('file', params.file)
 
     return new Promise(async (resolve, reject) => {
-        let r = await http.request(
+        await http.request(
             {
                 url: res.data.url,
                 method: 'post',
@@ -40,6 +40,7 @@ export const upload = async (params: { file_name: string; file: File }): Promise
             {
                 serializeParams: false,
                 isShowMessage: false,
+                isReturn: false,
             },
         )
 

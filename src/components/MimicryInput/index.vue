@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {Component, markRaw, PropType} from 'vue'
-import {NIcon, NInput} from 'naive-ui'
+import {Component, computed, markRaw, PropType} from 'vue'
+import {NIcon, NInput, InputProps} from 'naive-ui'
 import {AirplaneSharp} from '@vicons/ionicons5'
 
 interface Props {
@@ -9,7 +9,8 @@ interface Props {
   placeholder?: string
   inputType?: 'text' | 'password' | 'textarea'
   inputWidth?: string
-  inputValue?: string
+
+  moreProps?: InputProps
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -21,6 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const modelValue = defineModel<string>()
+
 </script>
 
 <template>
@@ -37,6 +39,7 @@ const modelValue = defineModel<string>()
           :placeholder="props.placeholder"
           :type="props.inputType"
           v-model:value="modelValue as string"
+          v-bind="{...props.moreProps}"
           class="input"
           size="large"
       ></NInput>
@@ -47,6 +50,7 @@ const modelValue = defineModel<string>()
 <style scoped lang="less">
 .input-wrapper {
   display: flex;
+  align-items: center;
 
   .icon {
     box-sizing: border-box;
@@ -63,7 +67,7 @@ const modelValue = defineModel<string>()
   .inner-input {
     box-sizing: border-box;
     width: v-bind('props.inputWidth');
-    height: 50px;
+    //height: 50px;
     border-radius: 5px;
     box-shadow: 6px 6px 10px #c4cacf,
       -6px -6px 10px #ffffff;

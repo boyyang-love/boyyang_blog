@@ -162,6 +162,7 @@ const tabListClick = (tabItem: TabListItem, i: number) => {
     display: flex;
     align-items: flex-end;
     padding: 10px;
+    border-radius: 10px;
 
     &:hover {
       background-position: center bottom;

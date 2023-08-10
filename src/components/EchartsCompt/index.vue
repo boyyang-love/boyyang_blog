@@ -22,6 +22,7 @@ watchEffect(() => {
 
 onMounted(() => {
   nextTick(() => {
+    myEcharts.value && myEcharts.value?.clear()
     myEcharts.value = echarts.init(chartElement.value as HTMLElement)
   })
 })

@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import {useRouter} from 'vue-router'
 
-import {BackGround} from '@/components/Background/index'
-import bg from '@/assets/00008.png'
-
 const router = useRouter()
 
 const tileClick = () => {
@@ -15,14 +12,7 @@ const tileClick = () => {
 
 <template>
   <div class="tile-wrapper">
-    <div class="title">
-      壁
-      <br/>
-      纸
-    </div>
-
     <div class="tile-content" @click="tileClick"></div>
-    <!-- <img :src="bg" alt="" /> -->
   </div>
 </template>
 
@@ -31,40 +21,26 @@ const tileClick = () => {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  // background-color: #fff;
   padding: 10px;
   position: relative;
-
-  .title {
-    height: 100%;
-    position: absolute;
-    right: 10px;
-    color: whitesmoke;
-    font-size: 20px;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 
   .tile-content {
     box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
     position: relative;
-
     z-index: 2;
     background-image: url('@/assets/00008-preview.jpg');
     background-position: center;
     background-size: cover;
-    box-shadow: 7px 5px 3px #393e46;
+    box-shadow: 5px 5px 5px #c4cacf,
+      -5px -5px 5px #ffffff;
     border-radius: 2px;
     transition: all 0.5s linear;
-
-    &:hover {
-      transform: translateX(-35px);
-    }
   }
 
   img {

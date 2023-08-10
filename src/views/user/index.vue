@@ -101,7 +101,7 @@ onMounted(() => {
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.9);
+    background: linear-gradient(145deg, #cfd6dc, #f6ffff);
     margin: 50px 0;
     padding: 10px 0;
     border-radius: 5px;

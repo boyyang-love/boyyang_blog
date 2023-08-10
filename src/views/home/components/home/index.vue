@@ -48,8 +48,7 @@ onMounted(() => {
     </div>
     <div class="home-content">
       <div class="content">
-        <!-- <div class="title wow slideInDown">热门博客</div> -->
-        <div class="publish-charts wow bounceInDown">
+        <div class="publish-charts wow bounceInDow">
           <PublishChart
               :categories="homeData.chart.categories"
               :series-data-blog="homeData.chart.blogChartData"
@@ -147,6 +146,7 @@ onMounted(() => {
       box-sizing: border-box;
       width: 300px;
       margin: 0 15px;
+
       .user {
         box-sizing: border-box;
         height: 320px;
@@ -186,11 +186,13 @@ onMounted(() => {
         box-sizing: border-box;
         height: 250px;
         margin-bottom: 10px;
-        background-color: rgba(57, 62, 70, 0.9);
+        background: linear-gradient(145deg, #cfd6dc, #f6ffff);
+
         display: flex;
         justify-content: space-between;
         align-items: center;
         box-shadow: 5px 1px 3px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
 
         .tile-left {
           flex: 1;
@@ -204,11 +206,11 @@ onMounted(() => {
       }
 
       .publish-charts {
-        background-color: rgba(57, 62, 70, 0.9);
-        // box-shadow: 5px 6px 0px rgba(61, 59, 79, 0.9);
+        background: linear-gradient(145deg, #cfd6dc, #f6ffff);
         height: 300px;
         margin-bottom: 10px;
         box-shadow: 5px 1px 3px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
       }
 
       .blog {

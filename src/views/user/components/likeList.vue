@@ -72,6 +72,8 @@ const status = computed(() => {
     box-sizing: border-box;
     width: 100%;
     height: calc(100% - @statusH);
+    border-radius: 10px;
+    overflow: hidden;
     padding: 10px;
 
     img {

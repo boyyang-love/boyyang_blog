@@ -20,7 +20,13 @@ const props = withDefaults(defineProps<carouselProps>(), {})
       effect="card"
       :show-dots="false"
   >
-    <img v-for="(item, i) in props.list" :key="i" class="carousel-img" :src="item.cover"/>
+    <img
+        v-for="(item, i) in props.list"
+        :key="i"
+        class="carousel-img"
+        :src="item.cover"
+        alt=""
+    />
   </n-carousel>
 </template>
 
@@ -32,7 +38,8 @@ const props = withDefaults(defineProps<carouselProps>(), {})
   object-fit: cover;
   object-position: left top;
   transition: all 1s ease-in-out;
-
+  padding: 15px;
+  border-radius: 25px;
   &:hover {
     object-position: right bottom;
   }

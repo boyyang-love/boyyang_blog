@@ -40,7 +40,7 @@ const toBlogDetail = () => {
     <div class="left">
       <div class="mask" @click="toBlogDetail">
         <n-icon
-            :component="SendOutlined"
+            :component="SendOutlined as any"
             class="send-icon"
             color="whitesmoke"
             size="25"
@@ -62,50 +62,35 @@ const toBlogDetail = () => {
       </div>
       <div class="bottom">
         <div class="bottom-left">
-          <n-space vertical>
-            <div>作者：{{ props.author }}</div>
-            <div>时间：
-              {{ moment(props.time * 1000).format('YYYY-MM-DD') }}
-            </div>
+          <n-space vertical size="small">
+            <div class="user">作者: {{ props.author }}</div>
+            <div class="time">时间: {{ moment(props.time * 1000).format('YYYY-MM-DD') }}</div>
           </n-space>
         </div>
         <div class="bottom-right">
-          <!-- <n-badge
-              :value="10"
-              :max="999"
-              :dot="false"
-              color="none"
-              :offset="[70, -50]"
-              type="error"
-          >
-              <n-icon :component="EyeOutlined" size="27" color="#eeeeee"></n-icon>
-          </n-badge> -->
           <n-badge
               :dot="false"
               :max="999"
               :value="10"
-              color="none"
               type="error"
           >
-            <n-icon :component="HeartOutlined" color="#eeeeee" size="27"></n-icon>
+            <n-icon :component="HeartOutlined as any" size="27"></n-icon>
           </n-badge>
           <n-badge
               :dot="false"
               :max="999"
               :value="10"
-              color="none"
               type="error"
           >
-            <n-icon :component="StarOutlined" color="#eeeeee" size="27"></n-icon>
+            <n-icon :component="StarOutlined as any" size="27"></n-icon>
           </n-badge>
           <n-badge
               :dot="false"
               :max="999"
               :value="10"
-              color="none"
               type="error"
           >
-            <n-icon :component="CommentOutlined" color="#eeeeee" size="27"></n-icon>
+            <n-icon :component="CommentOutlined as any" size="27"></n-icon>
           </n-badge>
           <n-popconfirm
               @positive-click="emits('delClick', props.id)"
@@ -113,7 +98,7 @@ const toBlogDetail = () => {
               negative-text="取消"
           >
             <template #trigger>
-              <n-icon :component="CloseCircleOutlined" color="#eeeeee" size="27"></n-icon>
+              <n-icon :component="CloseCircleOutlined as any" size="27"></n-icon>
             </template>
             删-舍不得删-但是手机空间已被你占满
           </n-popconfirm>
@@ -131,33 +116,35 @@ const toBlogDetail = () => {
 
 .card-wrapper {
   box-sizing: border-box;
-  height: 220px;
-  background-color: rgba(57, 62, 70, 0.9);
+  height: 235px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 5px 1px 3px rgba(0, 0, 0, 0.5);
+  padding: 0 10px;
+
+  background: #cfd6dc;
+  border-radius: 10px;
+  align-items: center;
 
   .left {
     box-sizing: border-box;
     width: 400px;
-    height: 100%;
-    // border-radius: 5px;
-    // overflow: hidden;
+    height: calc(100% - 30px);
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     position: relative;
-    padding: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #c4cacf,
+      -5px -5px 5px #ffffff;
 
     img {
-      width: 100%;
-      height: 100%;
+      width: calc(100% - 5px);
+      height: calc(100% - 5px);
       object-fit: cover;
       transition: all 0.5s linear;
-      box-shadow: 5px 5px 4px rgba(57, 62, 70, 0.9);
-      border-radius: 4px;
-      border: 5px solid #00adb5;
+      border-radius: 10px;
     }
 
     .mask {
@@ -167,47 +154,31 @@ const toBlogDetail = () => {
       position: absolute;
       top: 0;
       left: 0;
-      // background-color: rgba(61, 59, 79, 0.5);
-      // box-shadow: inset 3px 3px rgba(61, 59, 79, 0.5);
       display: flex;
       justify-content: center;
       align-items: center;
-      opacity: 0;
-      transition: all 1s linear;
-    }
-
-    &:hover {
-      img {
-        transform: scale(1.2);
-        // transform: translateY(-50px);
-      }
-
-      .mask {
-        opacity: 1;
-        z-index: 9;
-      }
     }
   }
 
   .right {
     box-sizing: border-box;
     width: calc(100% - 420px);
+    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px 15px;
+    padding: 10px 15px;
 
     .title {
       font-size: 15px;
-      font-weight: bold;
-      color: whitesmoke;
+      font-weight: bolder;
+      white-space: nowrap;
     }
 
     .sub-title {
-      font-size: 14px;
+      font-size: 13px;
       word-wrap: break-word;
       font-weight: bold;
-      color: #46b7b9;
     }
 
     .content {
@@ -219,7 +190,19 @@ const toBlogDetail = () => {
       justify-content: space-between;
       align-items: flex-end;
       padding-right: 20px;
-      color: #eeeeee;
+
+      .bottom-left {
+
+        .user {
+          font-size: 12px;
+          font-weight: bolder;
+        }
+
+        .time {
+          font-family: "Fira Code";
+          font-size: 12px;
+        }
+      }
 
       .bottom-right {
         display: flex;

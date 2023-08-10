@@ -34,13 +34,13 @@ const themeOverrides: GlobalThemeOverrides = {
 </script>
 
 <template>
-  <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides">
-    <!-- <n-theme-editor> -->
-    <AppProvider>
+  <!-- <n-theme-editor> -->
+  <AppProvider>
+    <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides">
       <router-view></router-view>
-    </AppProvider>
-    <!-- </n-theme-editor> -->
-  </n-config-provider>
+    </n-config-provider>
+  </AppProvider>
+  <!-- </n-theme-editor> -->
 </template>
 
 <style>
@@ -52,14 +52,6 @@ const themeOverrides: GlobalThemeOverrides = {
 @font-face {
   font-family: 'Press Start 2P';
   src: url('./assets/fonts/PressStart2P-1.ttf');
-}
-
-#app {
-  /* Avenir, Helvetica, Arial, sans-serif, */
-//font-family: zpix; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; color: #2c3e50;
-  background-color: #244f9f;
-  scroll-behavior: smooth;
-
 }
 
 /*修改滚动条样式*/

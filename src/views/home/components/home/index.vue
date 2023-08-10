@@ -99,14 +99,8 @@ onMounted(() => {
         <div class="user wow slideInDown">
           <User></User>
         </div>
-        <div class="tags wow slideInDown">
-        </div>
         <div class="notice wow pulse">
           <Notice></Notice>
-        </div>
-
-        <div class="calendar wow slideInDown">
-          <!-- <n-calendar #="{ year, month, date }">{{ year }}{{ month }}{{ date }}</n-calendar> -->
         </div>
       </div>
     </div>
@@ -153,16 +147,10 @@ onMounted(() => {
       box-sizing: border-box;
       width: 300px;
       margin: 0 15px;
-      // background-color: rgba(61, 59, 79, 0.5);
-      // padding: 10px;
       .user {
         box-sizing: border-box;
         height: 320px;
         margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 3px;
-        background-color: rgba(57, 62, 70, 0.9);
-        box-shadow: 5px 1px 3px rgba(0, 0, 0, 0.5);
       }
 
       .tags {
@@ -183,9 +171,6 @@ onMounted(() => {
       .notice {
         border-radius: 3px;
         min-height: 100px;
-        background-color: rgba(57, 62, 70, 0.9);
-        // box-shadow: 5px 6px 0px rgba(61, 59, 79, 0.9);
-        box-shadow: 5px 1px 3px rgba(0, 0, 0, 0.5);
       }
     }
 

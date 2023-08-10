@@ -1,7 +1,39 @@
 <script lang="ts" setup>
 import {GithubOutlined, QqOutlined, WechatOutlined} from '@vicons/antd'
 import {useUserStore} from '@/store/modules/user'
+import {userInfo} from '@/api/user'
+import {User} from '@/api/user/type'
+import {computed, markRaw, onMounted, reactive, ref} from 'vue'
+
 const userStore = useUserStore()
+const info = reactive<User.UserInfo>({
+  user_info: {} as User.Info,
+  user_detail: {} as User.Detail,
+})
+
+onMounted(() => {
+  userInfo().then((res) => {
+    info.user_info = res.data.user_info
+    info.user_detail = res.data.user_detail
+  })
+})
+
+const toolTip = computed(() => {
+  return [
+    {
+      component: markRaw(GithubOutlined),
+      text: info.user_info.git_hub,
+    },
+    {
+      component: markRaw(QqOutlined),
+      text: info.user_info.qq,
+    },
+    {
+      component: markRaw(WechatOutlined),
+      text: info.user_info.wechat,
+    },
+  ]
+})
 
 
 </script>
@@ -17,46 +49,45 @@ const userStore = useUserStore()
           round
       />
       <div class="user-name wow slideInDown" data-wow-delay="0.5s">
-        {{ userStore.userInfo.username }}
+        {{ info.user_info.username }}
       </div>
       <div class="user-signature wow slideInDown" data-wow-delay="1s">
-        {{ userStore.userInfo.motto }}
+        {{ info.user_info.motto }}
       </div>
       <div class="info">
         <div class="icon-item wow pulse" data-wow-delay="3s">
-          <!-- <n-badge :value="10" :dot="false">
-              <n-icon :component="LikeOutlined" :size="28" color="#3d3b4f"></n-icon>
-          </n-badge> -->
           <span class="text">获赞</span>
-          <span class="num">{{ userStore.userInfo.thumbs_up || 0 }}</span>
+          <span class="num">{{ info.user_detail.thumbs_up || 0 }}</span>
         </div>
         <div class="icon-item wow pulse" data-wow-delay="4s">
-          <!-- <n-badge :value="12" :dot="false">
-              <n-icon :component="SendOutlined" :size="28" color="#3d3b4f"></n-icon>
-          </n-badge> -->
           <span class="text">发布</span>
-          <span class="num">{{ userStore.userInfo.publish || 0 }}</span>
+          <span class="num">{{ info.user_detail.publish || 0 }}</span>
         </div>
         <div class="icon-item wow pulse" data-wow-delay="5s">
-          <!-- <n-badge :value="20" :dot="false">
-              <n-icon :component="HeartOutlined" :size="28" color="#3d3b4f"></n-icon>
-          </n-badge> -->
           <span class="text">收藏</span>
-          <span class="num">{{ userStore.userInfo.like || 0 }}</span>
+          <span class="num">{{ info.user_detail.likes || 0 }}</span>
         </div>
         <div class="icon-item wow pulse" data-wow-delay="6s">
-          <!-- <n-badge :value="22" :dot="false">
-              <n-icon :component="StarOutlined" :size="28" color="#3d3b4f"></n-icon>
-          </n-badge> -->
           <span class="text">粉丝</span>
-          <span class="num">{{ userStore.userInfo.following || 0 }}</span>
+          <span class="num">{{ info.user_detail.follows || 0 }}</span>
         </div>
       </div>
       <div class="btn-wrapper">
         <n-space justify="space-around">
-          <n-icon :component="GithubOutlined as any" color="whitesmoke" size="30"></n-icon>
-          <n-icon :component="QqOutlined as any" color="whitesmoke" size="30"></n-icon>
-          <n-icon :component="WechatOutlined as any" color="whitesmoke" size="30"></n-icon>
+          <n-tooltip
+              trigger="hover"
+              placement="bottom"
+              v-for="(item, i) in toolTip"
+          >
+            <template #trigger>
+              <n-icon
+                  :component="item.component as any"
+                  size="30"
+                  :key="i"
+              ></n-icon>
+            </template>
+            {{ item.text || '还未设置微信号' }}
+          </n-tooltip>
         </n-space>
       </div>
     </div>
@@ -71,6 +102,8 @@ const userStore = useUserStore()
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: linear-gradient(145deg, #cfd6dc, #f6ffff);
+  border-radius: 10px;
 
   .header {
     display: flex;
@@ -78,29 +111,31 @@ const userStore = useUserStore()
     justify-content: center;
     align-items: center;
 
+
     .header-img {
+      box-shadow: 3px 3px 3px #c4cacf,
+        -3px -3px 3px #ffffff;
       border: 5px solid whitesmoke;
     }
 
     .user-name {
       font-size: 16px;
-      font-weight: bold;
+      font-weight: bolder;
       margin-top: 10px;
-      color: whitesmoke;
-      text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+      color: #393e46;
     }
 
     .user-signature {
+      padding: 0 10px;
       font-size: 14px;
-      color: whitesmoke;
-      text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+      color: #393e46;
     }
 
     .info {
       box-sizing: border-box;
       width: 100%;
       margin-top: 15px;
-      padding: 0 5px;
+      padding: 0 20px;
       display: flex;
       justify-content: space-between;
 
@@ -112,14 +147,14 @@ const userStore = useUserStore()
 
         .text {
           font-size: 15px;
-          color: whitesmoke;
+          color: rgba(17, 17, 17, 1);
           font-weight: bold;
-          text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+          text-shadow: 2px 2px 2px rgb(233, 234, 234);
         }
 
         .num {
           font-size: 14px;
-          color: whitesmoke;
+          color: #393e46;
         }
       }
     }

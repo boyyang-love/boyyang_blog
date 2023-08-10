@@ -24,7 +24,6 @@ const menuClick = (item: Menu.menuList, index: number) => {
 <template>
   <div class="menu-wrapper">
     <div class="menu">
-<!--      <div class="close"></div>-->
       <n-space size="large" vertical>
         <div class="icon-wrapper" v-for="(item, i) in props.menuList">
           <n-tooltip

@@ -20,9 +20,11 @@ import {NotificationOutlined} from '@vicons/antd'
   width: 100%;
   height: 100%;
   padding: 10px;
+  background: linear-gradient(145deg, #cfd6dc, #f6ffff);
+  border-radius: 10px;
 
   .notice-title {
-    color: whitesmoke;
+    color: #393e46;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -30,12 +32,11 @@ import {NotificationOutlined} from '@vicons/antd'
     span {
       margin-left: 10px;
       font-weight: bold;
-      text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
     }
   }
 
   .notice-content {
-    color: whitesmoke;
+    color: #393e46;
   }
 }
 </style>

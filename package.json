@@ -40,7 +40,7 @@
     "@types/qs": "^6.9.7",
     "@vicons/antd": "^0.12.0",
     "@vitejs/plugin-vue": "^4.2.0",
-    "naive-ui": "^2.34.3",
+    "naive-ui": "^2.34.4",
     "typescript": "^4.5.4",
     "vite": "4.3.9",
     "vite-plugin-prismjs": "^0.0.8",

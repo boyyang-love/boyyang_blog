@@ -62,7 +62,7 @@ const getDashboard = () => {
                 return item.name
             })
         res.data.dashboard &&
-        res.data.dashboard.forEach((item, i) => {
+        res.data.dashboard.forEach((item) => {
             homeData.chart.blogChartData.push(item.blog_publish_value || '0')
             homeData.chart.exhibitionChartData.push(item.exhibitions_publish_value || '0')
         })
@@ -83,6 +83,7 @@ const cardClick = (id: number) => {
         query: {
             id,
         },
+    }).then(() => {
     })
 }
 

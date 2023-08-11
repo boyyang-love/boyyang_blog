@@ -1,25 +1,11 @@
-import {Component} from 'vue'
+import {env} from '@/utils/env'
 
-
-interface AvstarItem {
-    id: string
-    url: string
-    component: Component
-}
-
-const avatar: AvstarItem[] = []
-
-const svgs = import.meta.glob('/src/assets/avater/*.svg')
-
-for (const svgsKey in svgs) {
-    if (Object.prototype.hasOwnProperty.call(svgs, svgsKey)) {
-        avatar.push({
-            id: svgs[svgsKey].name.split('/')[-1],
-            url: svgsKey,
-            component: svgs[svgsKey],
-        })
+const avatar = Array.from({length: 11}).map((_, i) => {
+    return {
+        id: i,
+        url: `${env.VITE_APP_IMG_URL}/avatar/${i < 9 ? '0' + (i + 1) : (i + 1)}m.svg`,
     }
-}
+})
 
 const userAvater = () => {
 

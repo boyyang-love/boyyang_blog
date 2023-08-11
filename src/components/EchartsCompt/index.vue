@@ -1,37 +1,51 @@
 <script setup lang="ts">
-import {nextTick, onMounted, ref, watchEffect} from 'vue'
-import * as echarts from 'echarts'
-import {EChartsOption, EChartsType} from 'echarts'
+import {nextTick, onMounted, ref, watch, watchEffect} from 'vue'
+import {ECElementEvent, ECharts, EChartsOption, EChartsType} from 'echarts'
+import {useEcharts} from '@/hooks/useEcharts'
 
 interface Props {
   id: string
   options: EChartsOption
 }
 
+interface Emits {
+  (e: 'chartClick', p: ECElementEvent): void
+}
+
 const props = defineProps<Props>()
+const emits = defineEmits<Emits>()
+
 const chartElement = ref<HTMLElement | null>(null)
+const instance = ref<ECharts | null>()
 
-const myEcharts = ref<EChartsType | null>()
-
-watchEffect(() => {
-  if (props.options && myEcharts.value !== null) {
-    myEcharts.value?.setOption(props.options)
-  }
-})
-
+watch(
+    () => props.options,
+    (n_options) => {
+      instance.value && instance.value?.setOption(n_options)
+    },
+)
 
 onMounted(() => {
   nextTick(() => {
-    myEcharts.value && myEcharts.value?.clear()
-    myEcharts.value = echarts.init(chartElement.value as HTMLElement)
+    instance.value = useEcharts(
+        chartElement.value,
+        props.options,
+        (e) => {
+          emits('chartClick', e)
+        })
   })
 })
+
 
 </script>
 
 <template>
   <div class="echarts-wrapper">
-    <div class="echart" :id="props.id" ref="chartElement"></div>
+    <div
+        ref="chartElement"
+        class="echart"
+        :id="props.id"
+    ></div>
   </div>
 </template>
 
@@ -40,6 +54,7 @@ onMounted(() => {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
+  padding: 5px;
 
   .echart {
     width: 100%;

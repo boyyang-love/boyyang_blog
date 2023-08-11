@@ -152,12 +152,14 @@ const options = computed<EChartsOption>((): EChartsOption => {
 
 })
 
-
 </script>
 
 <template>
   <div class="publish-chart">
-    <EchartsCompt id="publish-chart" :options="options"></EchartsCompt>
+    <EchartsCompt
+        id="publish-chart"
+        :options="options"
+    ></EchartsCompt>
   </div>
 </template>
 

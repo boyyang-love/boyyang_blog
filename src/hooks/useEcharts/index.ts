@@ -1,20 +1,23 @@
-import type {ECElementEvent, EChartsOption} from 'echarts'
+import type {ECElementEvent, ECharts, EChartsOption} from 'echarts'
+import _ from 'lodash'
 import {init} from './init'
 
-type Cb = (e: ECElementEvent) => void
-
-const useEcharts = (dom: HTMLElement, options: EChartsOption | null, cb: Cb) => {
+const useEcharts = (
+    dom: HTMLElement | null,
+    options: EChartsOption | null,
+    chartClick?: (e: ECElementEvent) => void,
+): ECharts | null => {
 
     const instance = init(dom)
 
     if (instance && options) {
         instance.setOption(options)
-
         instance.on('click', (e) => {
-            cb.call(instance, e)
+            chartClick && _.isFunction(chartClick) && chartClick.call(null, e)
         })
     }
 
+    return instance
 }
 
 

@@ -14,7 +14,7 @@ const {loginData, registerSubmit} = useLogin()
 const {avatar} = userAvater()
 const isShow = defineModel<boolean>()
 const isShowMore = ref<boolean>(false)
-const currentAvater = ref<string>(avatar[0].url)
+const currentAvater = ref<string>(avatar[0]?.url || '')
 
 onMounted(() => {
   loginData.r_avatarUrl = currentAvater.value
@@ -214,6 +214,16 @@ onMounted(() => {
       justify-content: center;
     }
   }
+}
+
+.register-enter-active,
+.register-leave-active {
+  transition: all .4s ease-in-out;
+}
+
+.register-enter-from,
+.register-leave-to {
+  transform: translateY(550px);
 }
 
 

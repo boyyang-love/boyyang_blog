@@ -15,6 +15,8 @@ onMounted(() => {
   userInfo().then((res) => {
     info.user_info = res.data.user_info
     info.user_detail = res.data.user_detail
+    userStore.setInfo(res.data.user_info)
+    userStore.setDetail(res.data.user_detail)
   })
 })
 

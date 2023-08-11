@@ -2,6 +2,9 @@
 import {ref, markRaw, Component, computed} from 'vue'
 import {Rocket, Create} from '@vicons/ionicons5'
 import {RollbackOutlined} from '@vicons/antd'
+import {env} from '@/utils/env'
+import {updateUserInfo} from '@/api/user'
+import {useUserStore} from '@/store/modules/user'
 
 interface TabListItem {
   icon: Component
@@ -22,6 +25,8 @@ interface Emit {
   (e: 'tabChange', id: number): void
 }
 
+const userStore = useUserStore()
+
 const emit = defineEmits<Emit>()
 const props = withDefaults(defineProps<Props>(), {
   approved: 0,
@@ -30,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const showOrEdit = ref<boolean>(false)
-const motto = ref<string>('第一行没有你，第')
+const motto = ref<string>(userStore.info.motto)
 const tab = ref<number>(1)
 
 const tabList = computed<TabListItem[]>(() => [
@@ -61,24 +66,50 @@ const tabList = computed<TabListItem[]>(() => [
   },
 ])
 
-const rightList = ref([
-  {
-    label: '关注数',
-    num: 2000,
-  },
-  {
-    label: '粉丝数',
-    num: 2000,
-  },
-  {
-    label: '获赞数',
-    num: 2000,
-  },
-])
+const rightList = computed(() => {
+
+  return [
+    {
+      label: '关注数',
+      num: userStore.detail.follows,
+    },
+    {
+      label: '收藏数',
+      num: userStore.detail.likes,
+    },
+    {
+      label: '获赞数',
+      num: userStore.detail.thumbs_up,
+    },
+  ]
+})
+
+const backgroundImg = computed(() => {
+  return `url('${env.VITE_APP_IMG_URL}/${userStore.info.background_image}')`
+})
 
 const tabListClick = (tabItem: TabListItem, i: number) => {
   tab.value = i
   emit('tabChange', i)
+}
+
+const saveMotto = () => {
+  showOrEdit.value = false
+  if (userStore.info.motto === motto.value) {
+    return
+  }
+
+  let params = {
+    id: userStore.info.id,
+    motto: motto.value,
+  }
+
+  updateUserInfo(params).then(() => {
+    userStore.$patch((state) => {
+      state.info.motto = motto.value
+    })
+  })
+
 }
 </script>
 
@@ -87,18 +118,21 @@ const tabListClick = (tabItem: TabListItem, i: number) => {
     <div class="top">
       <div class="userinfo">
         <div class="user-avater">
-          <img alt="avater" src="@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg">
+          <img
+              alt="avater"
+              :src="`${env.VITE_APP_IMG_URL}/${userStore.info.avatar_url}`"
+          >
         </div>
         <div class="user-motto-name">
-          <div class="user-name">boyyang</div>
+          <div class="user-name">{{ userStore.info.username }}</div>
           <div class="user-motto">
             <n-input
                 v-if="showOrEdit"
                 v-model:value="motto"
-                autofocus
+                :autofocus="true"
                 type="text"
-                @blur="showOrEdit = false"
-                width="250px"
+                @blur="saveMotto"
+                width="550px"
             ></n-input>
             <div
                 v-else
@@ -147,7 +181,7 @@ const tabListClick = (tabItem: TabListItem, i: number) => {
   @bottomH: 45px;
   @borderRadius: 5px;
   width: 100%;
-  height: 250px;
+  height: 300px;
   background-color: rgba(67, 62, 70, 0.5);
   border-radius: @borderRadius;
 
@@ -155,23 +189,25 @@ const tabListClick = (tabItem: TabListItem, i: number) => {
     box-sizing: border-box;
     width: 100%;
     height: calc(100% - @bottomH);
-    background-image: url('@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg');
+    background-image: v-bind(backgroundImg);
     background-size: cover;
     background-position: center top;
-    transition: all .5s cubic-bezier(.4, 0, .2, 1);
+    transition: all .2s cubic-bezier(.4, 0, .2, 1);
     display: flex;
     align-items: flex-end;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
 
     &:hover {
       background-position: center bottom;
     }
 
     .userinfo {
+      box-sizing: border-box;
+      width: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
 
       .user-avater {
         @wh: 80px;
@@ -190,6 +226,7 @@ const tabListClick = (tabItem: TabListItem, i: number) => {
       }
 
       .user-motto-name {
+        width: 100%;
         display: flex;
         align-items: flex-start;
         flex-direction: column;
@@ -205,6 +242,7 @@ const tabListClick = (tabItem: TabListItem, i: number) => {
         }
 
         .user-motto {
+          width: 100%;
           color: whitesmoke;
           font-size: 15px;
         }
@@ -241,7 +279,7 @@ const tabListClick = (tabItem: TabListItem, i: number) => {
         left: 0;
         background-color: #66dda3;
         box-shadow: inset 3px 3px 3px #66dda3;
-        animation: tab 1s ease-in-out;
+        animation: tab 0.4s ease-in-out;
       }
 
       @keyframes tab {

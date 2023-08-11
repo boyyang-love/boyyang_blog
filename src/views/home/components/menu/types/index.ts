@@ -10,6 +10,6 @@ export declare namespace Menu {
         com: Component
         path: string
         text: string
-        color: string
+        color?: string
     }
 }

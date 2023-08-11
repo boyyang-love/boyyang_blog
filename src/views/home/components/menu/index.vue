@@ -85,29 +85,18 @@ const menuClick = (item: Menu.menuList, index: number) => {
 
       .menu-icon {
         cursor: pointer;
-        color: red;
         transition: all 0.4s ease-in-out;
 
         &:hover {
-          color: #181717;
+          color: rgba(17, 17, 17, 0.6);
           transform: scale(1.1);
         }
       }
 
       .active {
-        color: #00bffd;
+        color: #d50e0e;
       }
     }
-
-    //.close {
-    //  position: absolute;
-    //  right: -30px;
-    //  width: 30px;
-    //  height: 30px;
-    //  border-radius: 0 5px 5px 0;
-    //  background: linear-gradient(145deg, #cfd6dc, #f6ffff);
-    //  z-index: 0;
-    //}
   }
 }
 

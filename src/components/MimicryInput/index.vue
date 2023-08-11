@@ -9,7 +9,6 @@ interface Props {
   placeholder?: string
   inputType?: 'text' | 'password' | 'textarea'
   inputWidth?: string
-
   moreProps?: InputProps
 }
 
@@ -67,7 +66,6 @@ const modelValue = defineModel<string>()
   .inner-input {
     box-sizing: border-box;
     width: v-bind('props.inputWidth');
-    //height: 50px;
     border-radius: 5px;
     box-shadow: 6px 6px 10px #c4cacf,
       -6px -6px 10px #ffffff;

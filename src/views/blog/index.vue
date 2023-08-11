@@ -33,7 +33,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <BackGround width="100vw" height="100vh" :url="blogData.blogInfo.cover" class="wow slideInDown">
+  <BackGround width="100vw" height="100vh" :url="blogData.blogInfo.cover">
     <div class="blog-wrapper container m-auto" id="blog-container">
       <div class="top-banner">
         <PrintText
@@ -42,11 +42,13 @@ onMounted(() => {
         ></PrintText>
       </div>
       <div class="blog-content wow fadeInUpBig" data-wow-delay="1s">
-        <v-md-preview
-            :text="blogData.blogInfo.content"
-            :include-level="[3, 4]"
-            ref="mdPreview"
-        ></v-md-preview>
+        <div class="content-wrapper">
+          <v-md-preview
+              :text="blogData.blogInfo.content"
+              :include-level="[3, 4]"
+              ref="mdPreview"
+          ></v-md-preview>
+        </div>
       </div>
     </div>
   </BackGround>
@@ -71,7 +73,16 @@ onMounted(() => {
   .blog-content {
     box-sizing: border-box;
     width: 100%;
-    padding: 0 200px 300px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 50px;
+
+    .content-wrapper {
+      width: 70%;
+      border-radius: 10px;
+      overflow: hidden;
+    }
   }
 }
 </style>

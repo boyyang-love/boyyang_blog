@@ -2,10 +2,12 @@
 import {onMounted} from 'vue'
 import Wow from 'wow.js'
 // components
-import {SendOutlined} from '@vicons/antd'
+import {CloudUploadOutlined, SendOutlined} from '@vicons/antd'
 import PrintText from '@/components/PrintText/index.vue'
+import Input from '@/components/MimicryInput/index.vue'
 // hooks
 import {usePublishData, usePublishMethods} from './hooks/usePublish'
+import Btn from '@/components/MimicryBtn/index.vue'
 
 const {BlogForm, BlogFormMore, isLoading, isShowDialog} = usePublishData()
 const {beforeBlogSubmit, blogSubmit, uploadChange} = usePublishMethods()
@@ -37,53 +39,47 @@ onMounted(() => {
     <div class="bottom-upload wow fadeInUpBig" data-wow-delay="1s">
       <div class="title-wrapper">
         <div class="title">
-          <span>标题：</span>
-          <n-input
-              v-model:value="BlogForm.title"
-              :autosize="{minRows: 2,maxRows: 5,}"
-              class="input"
-              clearable
-              maxlength="50"
-              placeholder="请输入博客标题"
-              show-count
-              size="small"
-              style="max-width: 300px; min-width: 300px"
-              type="textarea"
-          />
+          <Input
+              v-model="BlogForm.title"
+              input-width="350px"
+              :more-props="{
+                autosize: {minRows: 3,maxRows: 5},
+                clearable: true,
+                maxlength: 50,
+                showCount: true,
+                placeholder: '请输入博客标题',
+                type: 'textarea',
+          }"
+          ></Input>
         </div>
         <div class="sub-title">
-          <span>描述：</span>
-          <n-input
-              v-model:value="BlogForm.des"
-              :autosize="{minRows: 3,maxRows: 5,}"
-              class="input"
-              clearable
-              maxlength="150"
-              placeholder="请输入博客描述"
-              show-count
-              size="small"
-              style="max-width: 300px; min-width: 300px; color: whitesmoke"
-              type="textarea"
-          />
+          <Input
+              v-model="BlogForm.des"
+              input-width="350px"
+              :more-props="{
+                autosize: {minRows: 3,maxRows: 5},
+                clearable: true,
+                maxlength: 50,
+                showCount: true,
+                placeholder: '请输入博客描述',
+                type: 'textarea',
+          }"
+          ></Input>
         </div>
       </div>
-      <v-md-editor v-model="BlogForm.content" height="750px"></v-md-editor>
+
+      <div class="md-editor">
+        <v-md-editor v-model="BlogForm.content" height="750px"></v-md-editor>
+      </div>
 
       <div class="upload-btn">
-        <n-button
-            :loading="isLoading"
-            color="#8a2be2"
-            size="large"
-            text-color="#fff"
-            @click="beforeBlogSubmit"
-        >
-          <template #icon>
-            <n-icon color="white" size="20">
-              <SendOutlined/>
-            </n-icon>
-          </template>
-          上传
-        </n-button>
+        <Btn
+            @btn-click="beforeBlogSubmit"
+            :btn-icon="SendOutlined"
+            :error-btn="false"
+            width="300px"
+            text="上传"
+        ></Btn>
       </div>
     </div>
   </div>
@@ -138,9 +134,7 @@ onMounted(() => {
   }
 
   .bottom-upload {
-    background-color: rgba(57, 62, 70, 0.9);
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-
+    background: linear-gradient(145deg, #cfd6dc, #f6ffff);
     padding: 25px;
     border-radius: 5px;
 
@@ -156,7 +150,7 @@ onMounted(() => {
       .title,
       .sub-title {
         color: whitesmoke;
-        text-shadow: 3px 3px 3px #393e46;
+        //text-shadow: 3px 3px 3px #393e46;
         display: flex;
         align-items: center;
         font-size: 18px;
@@ -173,6 +167,13 @@ onMounted(() => {
           border: 1px solid whitesmoke;
         }
       }
+    }
+
+    .md-editor {
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 7px 7px 10px #c4cacf,
+        -7px -7px 10px #ffffff;
     }
 
     .upload-btn {

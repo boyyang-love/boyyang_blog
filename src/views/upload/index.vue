@@ -147,7 +147,6 @@ onMounted(() => {
 
   .upload-content {
     padding: 50px 200px;
-    //background-color: rgba(57, 62, 70, 0.9);
     background: linear-gradient(145deg, #cfd6dc, #f6ffff);
     margin: 0 100px 50px;
     border-radius: 10px;
@@ -165,7 +164,6 @@ onMounted(() => {
       .title,
       .sub-title {
         color: whitesmoke;
-        //text-shadow: 3px 3px 3px #393e46;
         display: flex;
         align-items: center;
         font-size: 18px;
@@ -201,25 +199,14 @@ onMounted(() => {
         display: flex;
         justify-content: center;
         align-items: center;
-        //flex-direction: column;
         border-radius: 10px;
         box-shadow: 7px 7px 10px #c4cacf,
           -7px -7px 10px #ffffff;
-
-        //.upload-dragger {
-        //  display: flex;
-        //  flex-direction: column;
-        //}
       }
 
       .upload-btn {
         display: flex;
         flex-direction: column;
-
-        // height: 100%;
-        // width: 550px;
-        // border: 2px solid whitesmoke;
-        // background-color: rgba(57, 62, 70, 0.5);
       }
 
       .img-preview {

@@ -38,7 +38,7 @@ const like = () => {
         :src="props.url"
         class="img"
         lazy
-        object-fit="fill"
+        object-fit="cover"
     >
       <template #placeholder>
         <div class="loading">
@@ -66,12 +66,6 @@ const like = () => {
             @click="like"
         ></n-icon>
         <n-icon
-            :component="LikeOutlined as any"
-            class="star-icon"
-            size="18"
-            color="white"
-        ></n-icon>
-        <n-icon
             :component="Close as any"
             class="del-icon"
             size="18"
@@ -87,10 +81,9 @@ const like = () => {
   box-sizing: border-box;
   width: 100%;
   height: 250px;
-  background-color: #3d3b4f;
-  border: 4px solid rgb(245, 245, 245);
-  border-radius: 2px;
-  box-shadow: 5px 2px 3px #393e46;
+  border-radius: 10px;
+  box-shadow: 5px 5px 7px #c4cacf,
+    -5px -5px 5px #ffffff;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
 
@@ -100,10 +93,10 @@ const like = () => {
     object-fit: cover;
     object-position: center;
     transition: all 1s linear;
+    border-radius: 10px;
 
     &:hover {
       object-position: right bottom;
-
     }
 
     .loading {
@@ -118,8 +111,7 @@ const like = () => {
 
   &:hover {
     z-index: 9;
-    transform: scale(1.1);
-    //border: 1px solid black;
+    transform: scale(1.02);
   }
 
   .img-card-bottom {
@@ -134,10 +126,11 @@ const like = () => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-radius: 0 0 10px 10px;
 
     .left-text {
       font-size: 13px;
-      color: #66dda3;
+      color: #ffffff;
       font-weight: bold;
     }
 
@@ -149,7 +142,7 @@ const like = () => {
 
       .star-icon {
         cursor: pointer;
-        margin: 0 10px;
+        margin: 0 5px;
       }
 
       .del-icon {

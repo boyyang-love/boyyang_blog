@@ -36,27 +36,33 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="images-container" ref="wrapper" class="images-wrapper container m-auto">
+  <div
+      id="images-container"
+      ref="wrapper"
+      class="images-wrapper container m-auto"
+  >
     <div class="top-banner">
       <PrintText title="壁纸"></PrintText>
     </div>
 
     <div class="images-content">
-      <ImgCard
-          v-for="(item, i) in imagesData.list"
-          :key="item.id"
-          :class="[
+      <div class="images-wrapper">
+        <ImgCard
+            v-for="(item, i) in imagesData.list"
+            :key="item.id"
+            :class="[
                     'wow',
                     i % 2 == 0 ? 'fadeInDownBig' : i % 3 == 0 ? 'fadeInRightBig' : 'fadeInLeftBig',
                 ]"
-          :name="item.title"
-          :url="item.cover"
-          :id="item.id"
-          :is-like="imagesData.likes.includes(item.id)"
-          @like="like"
-          @del="del"
-          class="wow fadeInDownBig"
-      ></ImgCard>
+            :name="item.title"
+            :url="item.cover"
+            :id="item.id"
+            :is-like="imagesData.likes.includes(item.id)"
+            @like="like"
+            @del="del"
+            class="wow fadeInDownBig"
+        ></ImgCard>
+      </div>
     </div>
     <div class="pagination wow bounceInUp">
       <n-pagination
@@ -94,10 +100,16 @@ onMounted(() => {
   }
 
   .images-content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 15px;
     padding: 50px 150px;
+
+    .images-wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 15px;
+      padding: 25px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #cfd6dc, #f6ffff);
+    }
   }
 
   .pagination {

@@ -17,7 +17,7 @@ declare namespace Blog {
     }
 
     interface BlogUserinfo {
-        avatarUrl: string
+        avatar_url: string
         gender: number
         id: number
         tel: number

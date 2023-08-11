@@ -77,6 +77,7 @@ onMounted(() => {
                 :time="item.created"
                 :title="item.title"
                 :id="item.id"
+                :avatar_url="item.user_info.avatar_url"
                 @cardClick="cardClick(item.id)"
                 @delClick="del"
             ></BlogCard>

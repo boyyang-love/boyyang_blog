@@ -49,7 +49,6 @@ const getBlogList = () => {
             res.data.blog_info &&
             res.data.blog_info.map((item) => {
                 item.cover = `${env.VITE_APP_IMG_URL}${item.cover}`
-                console.log(item)
                 item.user_info.avatar_url = `${env.VITE_APP_IMG_URL}${item.user_info.avatar_url}`
                 return item
             })

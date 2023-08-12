@@ -23,7 +23,7 @@ declare namespace Exhibition {
     }
 
     interface UserInfo {
-        avatarUrl: string
+        avatar_url: string
         gender: number
         id: number
         tel: number

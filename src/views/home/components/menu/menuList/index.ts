@@ -1,7 +1,7 @@
 import {markRaw} from 'vue'
 import {Menu} from '../types'
 import {
-    ImagesSharp,
+    Image,
     Home,
     CloudUploadSharp,
     GitCommit,
@@ -20,7 +20,7 @@ const menuList: Menu.menuList[] = [
     },
     {
         name: 'Images',
-        com: markRaw(ImagesSharp),
+        com: markRaw(Image),
         path: '/images',
         text: '壁纸',
         // color: '#f6416c',

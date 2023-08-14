@@ -1,4 +1,4 @@
-import {reactive, watchEffect} from 'vue'
+import {reactive, watch, watchEffect} from 'vue'
 import {env} from '@/utils/env'
 import {exhibitionList, changeExhibitionStatus} from '@/api/exhibition'
 
@@ -49,9 +49,15 @@ const changeStatus = async (type: number, id: number, reason: string) => {
 
     getExhibitionList(userData.type)
 }
-// watchEffect(() => {
-//     getExhibitionList(userData.type)
-// })
+watch(
+    [
+        () => userData.page,
+        () => userData.limit,
+    ],
+    () => {
+        getExhibitionList(userData.type)
+    },
+)
 
 const useUserData = () => {
 

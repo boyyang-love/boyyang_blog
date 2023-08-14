@@ -37,6 +37,9 @@ const handleUploadChange = (data: {
         uploadData.previewUrl = ''
         return
     }
+    let name = data.file.name.split(".").shift()
+    uploadData.submit.title = name  || ''
+    uploadData.submit.des = name || ''
     const read = new FileReader()
     read.readAsDataURL(data.file.file as Blob)
     read.onload = e => {

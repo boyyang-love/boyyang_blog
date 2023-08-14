@@ -54,10 +54,15 @@ const menuClick = (item: Menu.menuList, index: number) => {
   height: 100%;
   width: 55px;
   position: fixed;
-  left: 0;
+  left: -50px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    left: 0;
+  }
 
   .menu {
     box-sizing: border-box;

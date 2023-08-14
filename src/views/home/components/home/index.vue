@@ -12,12 +12,14 @@ import PublishChart from '../publishChart/index.vue'
 // hooks
 import {useHomeData, useHomeMethods} from '../../hooks/useHome'
 import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition'
+import {useUserStore} from '@/store/modules/user'
 
 
 const {homeData, paginationOpt} = useHomeData()
 const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange, del} = useHomeMethods()
 const {exhibitionData} = useExhibitionData()
 const {getExhibitionList} = useExhibitionMethods()
+const userStore = useUserStore()
 
 onMounted(() => {
   const wow = new Wow({
@@ -44,7 +46,10 @@ onMounted(() => {
 <template>
   <div id="home-container" class="home container m-auto">
     <div class="top-banner">
-      <PrintText></PrintText>
+      <PrintText
+          :title="userStore.info.username"
+          :subtitle="userStore.info.motto"
+      ></PrintText>
     </div>
     <div class="home-content">
       <div class="content">
@@ -207,10 +212,12 @@ onMounted(() => {
       }
 
       .publish-charts {
-        background: linear-gradient(145deg, #cfd6dc, #f6ffff);
+        //background: linear-gradient(145deg, #cfd6dc, #f6ffff);
         height: 300px;
         margin-bottom: 10px;
         box-shadow: 5px 1px 3px rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: saturate(120%) blur(10px);
         border-radius: 10px;
       }
 
@@ -221,6 +228,9 @@ onMounted(() => {
           display: flex;
           justify-content: center;
           margin: 25px 0;
+          background: linear-gradient(145deg, #cfd6dc, #f6ffff);
+          padding: 10px 0;
+          border-radius: 5px;
         }
       }
     }

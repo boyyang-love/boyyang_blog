@@ -11,7 +11,6 @@ const themeOverrides: GlobalThemeOverrides = {
   common: {},
   // 弹出框
   Dialog: {
-    color: '#3d3b4f',
     borderRadius: '12px',
   },
   Tooltip: {
@@ -31,6 +30,14 @@ const themeOverrides: GlobalThemeOverrides = {
     textColor: '#303d4e',
     placeholderColor: '#303d4e',
   },
+  Pagination: {
+    jumperTextColor: '#fff',
+    jumperTextColorDisabled: '#fff',
+    buttonBorder: 'red',
+    itemColor: '#fff',
+    itemColorActive: '#303841',
+    itemTextColorHover: '#2a363b',
+  }
 }
 </script>
 

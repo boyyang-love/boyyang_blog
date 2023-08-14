@@ -11,8 +11,8 @@ const timeAxisData = reactive(
 
 const getData = () => {
     let params = {
-        page: 1,
-        limit: 10,
+        // page: 1,
+        // limit: 10,
         type: 2,
     }
     exhibitionList(params).then(res => {

@@ -272,6 +272,7 @@ const imagesDownload = () => {
         border: 1px solid #888888;
         transform: skew(-20deg);
         text-align: center;
+        white-space: nowrap;
 
         span {
           transform: skew(20deg);

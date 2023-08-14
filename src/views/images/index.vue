@@ -117,11 +117,14 @@ onMounted(() => {
   }
 
   .pagination {
-    width: 100%;
+    //width: 100%;
     display: flex;
     justify-content: center;
-
-    padding: 50px 0;
+    box-sizing: border-box;
+    background: linear-gradient(145deg, #cfd6dc, #f6ffff);
+    margin: 20px 150px 150px;
+    padding: 10px 0;
+    border-radius: 5px;
   }
 }
 </style>

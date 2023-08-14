@@ -49,7 +49,7 @@ onMounted(() => {
                 :more-props="{
                   placeholder: '请输入壁纸名称',
                   autosize: {minRows: 3, maxRows: 5},
-                  maxlength: 50,
+                  maxlength: 100,
                   showCount: true,
                   clearable: true,
                   type: 'textarea',
@@ -82,7 +82,12 @@ onMounted(() => {
                 <n-icon
                     :component="CloseCircle as any"
                     size="22"
-                    @click="uploadData.previewUrl = ''; uploadData.fileList = [] "
+                    @click="
+                    uploadData.previewUrl = '';
+                    uploadData.fileList = [];
+                    uploadData.submit.title = '';
+                    uploadData.submit.des = '';
+                    "
                 ></n-icon>
               </div>
             </div>

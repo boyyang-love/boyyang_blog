@@ -1,9 +1,18 @@
 <script lang="ts" setup>
-import {Fitness, Heart, Star, CloseCircle, Sparkles, ImageSharp} from '@vicons/ionicons5'
+import {
+  Fitness,
+  Heart,
+  CloseCircle,
+  Sparkles,
+  ImageSharp,
+  CloudDownload,
+  Bicycle,
+} from '@vicons/ionicons5'
 import moment from 'moment'
 import {env} from '@/utils/env'
-import {computed} from 'vue'
+import {computed, ref} from 'vue'
 import {useUserStore} from '@/store/modules/user'
+import {imageDownload} from '@/utils/fileDownload'
 
 interface imgCardProps {
   url?: string
@@ -31,6 +40,7 @@ const props = withDefaults(defineProps<imgCardProps>(), {
   isLike: false,
   tags: '',
 })
+const isLoading = ref<boolean>(false)
 
 const emit = defineEmits<emit>()
 
@@ -46,96 +56,127 @@ const like = () => {
   emit('like', props.id, !props.isLike)
 }
 
+const imagesDownload = () => {
+  isLoading.value = true
+  let name = props.url.split('/').pop() as string
+  imageDownload(props.url, name).then(() => {
+    isLoading.value = false
+  })
+}
+
 </script>
 
 <template>
   <div class="img-card-wrapper">
-    <div class="img-content">
-      <n-image
-          :src="props.url"
-          :width="380"
-          class="img"
-          lazy
-          object-fit="cover"
-      >
-        <template #placeholder>
-          <div class="loading">
-            <n-icon
-                :component="Fitness as any"
-                class="icon"
-                color="#f00056"
-                size="55"
-            ></n-icon>
-          </div>
-        </template>
-      </n-image>
-      <div class="img-name">
-        <n-ellipsis style="max-width: 300px">
-          {{ props.name }}
-        </n-ellipsis>
+    <NSpin
+        :show="isLoading"
+        :rotate="false"
+        size="large"
+    >
+      <template #description>
+        <span class="loading-text">
+          图片正在加载中,请稍后...
+        </span>
+      </template>
+      <template #icon>
+        <n-icon color="#373737" :size="40">
+          <Bicycle></Bicycle>
+        </n-icon>
+      </template>
+      <div class="img-content">
+        <n-image
+            :src="props.url"
+            :width="380"
+            class="img"
+            lazy
+            object-fit="cover"
+        >
+          <template #placeholder>
+            <div class="loading">
+              <n-icon
+                  :component="Fitness as any"
+                  class="icon"
+                  color="#f00056"
+                  size="55"
+              ></n-icon>
+            </div>
+          </template>
+        </n-image>
+        <div class="img-name">
+          <n-ellipsis style="max-width: 300px">
+            {{ props.name }}
+          </n-ellipsis>
+        </div>
       </div>
-    </div>
+      <div class="img-bottom">
+        <div class="tags">
+          <div
+              class="tag"
+              v-for="(item, i) in tags"
+              :key="i">
+            <span>{{ item }}</span>
+          </div>
+        </div>
+        <div class="infos">
+          <div class="infos-left">
+            <div class="user-avatar">
+              <n-avatar
+                  :size="40"
+                  :src="`${env.VITE_APP_IMG_URL}/${props.info.avatar_url}`"
+                  bordered
+                  class="header-img wow slideInDown"
+                  round
+              />
+            </div>
+            <div class="name-time">
+              <span class="name">{{ props.info.username }}</span>
+              <span class="time">{{ moment(props.time * 1000).format('YYYY-MM-DD') }}</span>
+            </div>
+          </div>
+          <div class="infos-right">
+            <!-- 点赞 收藏 删除  -->
+            <n-space size="small">
+              <n-icon
+                  :component="Sparkles as any"
+                  color="#373737"
+                  size="18"
+                  class="icon"
+              ></n-icon>
+              <n-icon
+                  :component="Heart as any"
+                  :color="props.isLike ? '#fc5185' : '#373737'"
+                  size="18"
+                  @click="like"
+                  class="icon"
+              ></n-icon>
+              <n-icon
+                  :component="ImageSharp as any"
+                  color="#373737"
+                  size="18"
+                  class="icon"
+                  @click="$emit('setBackground', props.id)"
+              ></n-icon>
+              <n-icon
+                  :component="CloudDownload as any"
+                  color="#373737"
+                  size="18"
+                  class="icon"
+                  @click="imagesDownload"
+              ></n-icon>
+              <n-icon
+                  v-if="props.info.id === userStore.userInfo.id"
+                  :component="CloseCircle as any"
+                  color="#373737"
+                  size="18"
+                  @click="del"
+                  class="icon"
+              ></n-icon>
+            </n-space>
+          </div>
+        </div>
+      </div>
+    </NSpin>
 
-    <div class="img-bottom">
-      <div class="tags">
-        <div
-            class="tag"
-            v-for="(item, i) in tags"
-            :key="i">
-          <span>{{ item }}</span>
-        </div>
-      </div>
-      <div class="infos">
-        <div class="infos-left">
-          <div class="user-avatar">
-            <n-avatar
-                :size="40"
-                :src="`${env.VITE_APP_IMG_URL}/${props.info.avatar_url}`"
-                bordered
-                class="header-img wow slideInDown"
-                round
-            />
-          </div>
-          <div class="name-time">
-            <span class="name">{{ props.info.username }}</span>
-            <span class="time">{{ moment(props.time * 1000).format('YYYY-MM-DD') }}</span>
-          </div>
-        </div>
-        <div class="infos-right">
-          <!-- 点赞 收藏 删除  -->
-          <n-space size="small">
-            <n-icon
-                :component="Sparkles as any"
-                color="#373737"
-                size="18"
-                class="icon"
-            ></n-icon>
-            <n-icon
-                :component="Heart as any"
-                :color="props.isLike ? '#fc5185' : '#373737'"
-                size="18"
-                @click="like"
-                class="icon"
-            ></n-icon>
-            <n-icon
-                :component="ImageSharp as any"
-                color="#373737"
-                size="18"
-                class="icon"
-                @click="$emit('setBackground', props.id)"
-            ></n-icon>
-            <n-icon
-                v-if="props.info.id === userStore.userInfo.id"
-                :component="CloseCircle as any"
-                color="#373737"
-                size="18"
-                @click="del"
-                class="icon"
-            ></n-icon>
-          </n-space>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -150,6 +191,12 @@ const like = () => {
     -5px -5px 5px #ffffff;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
+
+  .loading-text {
+    color: #373737;
+    font-size: 16px;
+    font-weight: bolder;
+  }
 
   .img-content {
     box-sizing: border-box;

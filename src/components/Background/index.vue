@@ -16,7 +16,7 @@ const background_img = computed(() => {
   if (props.type == Background.Type.color) {
     return 'none'
   }
-  return `url(${new URL(props.url, import.meta.url).href})`
+  return `url("${new URL(props.url, import.meta.url).href}")`
 })
 
 </script>

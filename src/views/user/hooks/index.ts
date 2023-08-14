@@ -35,6 +35,7 @@ const getExhibitionList = (type: number) => {
 const tabChange = (type: number) => {
     userData.type = type
     userData.page = 1
+    getExhibitionList(userData.type)
 }
 
 const changeStatus = async (type: number, id: number, reason: string) => {
@@ -48,9 +49,9 @@ const changeStatus = async (type: number, id: number, reason: string) => {
 
     getExhibitionList(userData.type)
 }
-watchEffect(() => {
-    getExhibitionList(userData.type)
-})
+// watchEffect(() => {
+//     getExhibitionList(userData.type)
+// })
 
 const useUserData = () => {
 

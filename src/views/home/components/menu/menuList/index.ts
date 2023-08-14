@@ -8,6 +8,7 @@ import {
     PersonCircleSharp,
     SettingsSharp,
     RocketSharp,
+    Exit
 } from '@vicons/ionicons5'
 
 const menuList: Menu.menuList[] = [
@@ -54,10 +55,10 @@ const menuList: Menu.menuList[] = [
         // color: '#3ec1d3',
     },
     {
-        name: 'Admin',
-        com: markRaw(SettingsSharp),
-        path: '/admin',
-        text: '设置',
+        name: '退出',
+        com: markRaw(Exit),
+        path: '',
+        text: '退出',
         // color: '#9896f1',
     },
 ]

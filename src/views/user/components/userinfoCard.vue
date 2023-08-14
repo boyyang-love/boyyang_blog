@@ -5,6 +5,10 @@ import {RollbackOutlined} from '@vicons/antd'
 import {env} from '@/utils/env'
 import {updateUserInfo} from '@/api/user'
 import {useUserStore} from '@/store/modules/user'
+import {useUserMethods, useUserData} from '../hooks'
+
+const {getExhibitionList} = useUserMethods()
+const {userData} = useUserData()
 
 interface TabListItem {
   icon: Component
@@ -114,6 +118,9 @@ const saveMotto = () => {
 
 onMounted(() => {
   motto.value = userStore.info.motto || '点击修改签名'
+  tab.value = userData.type
+  getExhibitionList(userData.type)
+
 })
 </script>
 
@@ -143,7 +150,7 @@ onMounted(() => {
                 @click="showOrEdit = true"
                 class="text"
             >
-              {{ userStore.info.motto || '点击修改签名'}}
+              {{ userStore.info.motto || '点击修改签名' }}
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {onMounted} from 'vue'
+import {onMounted, watchEffect} from 'vue'
 import Wow from 'wow.js'
 
 import UserinfoCard from './components/userinfoCard.vue'

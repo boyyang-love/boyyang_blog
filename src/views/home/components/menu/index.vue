@@ -14,6 +14,21 @@ const props = withDefaults(defineProps<Menu.menuProps>(), {
 const active = ref<number>(0)
 
 const menuClick = (item: Menu.menuList, index: number) => {
+  if (item.name === '退出') {
+    window.$dialog.warning({
+      title: '提示',
+      content: '是否退出登录？',
+      negativeText: '算了',
+      positiveText: '确定',
+      onPositiveClick: () => {
+        window.sessionStorage.clear()
+        router.push({
+          name: 'Login',
+        })
+      },
+    })
+    return
+  }
   active.value = index
   router.push({
     name: item.name,

@@ -9,6 +9,7 @@ export namespace User {
         email?: string
         address?: string
         motto?: string
+        background_image?: string
     }
 
     export interface UserInfo {

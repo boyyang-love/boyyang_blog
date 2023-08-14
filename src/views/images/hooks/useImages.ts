@@ -1,9 +1,12 @@
 import {reactive, watchEffect} from 'vue'
 import {env} from '@/utils/env'
 
+import {useUserStoreWithOut} from '@/store/modules/user'
+
 // api
 import {exhibitionList, deleteExhibition} from '@/api/exhibition'
 import {likeList} from '@/api/like'
+import {updateUserInfo} from '@/api/user'
 
 const imagesData = reactive({
     page: 1,
@@ -33,16 +36,18 @@ const getList = () => {
         page: imagesData.page,
         limit: imagesData.limit,
         type: 2,
+        public: true,
     }
     exhibitionList(params).then(res => {
         imagesData.count = res.data.count
         imagesData.list =
             res.data.exhibitions &&
             res.data.exhibitions.map(item => {
+                item.cover_url = item.cover
                 item.cover = `${env.VITE_APP_IMG_URL}${item.cover}`
                 return item
             })
-        imagesData.likes = res.data.likes_ids
+        imagesData.likes = res.data.likes_ids || []
     })
 }
 
@@ -88,6 +93,22 @@ const like = (id: number | string, isLike: boolean) => {
     })
 }
 
+const setBackground = async (id: number | string) => {
+    const userStore = useUserStoreWithOut()
+    const background_image = imagesData.list.filter(it => it.id === id)[0].cover_url
+    let params = {
+        id: userStore.userInfo.id,
+        background_image: background_image,
+    }
+
+    await updateUserInfo(params)
+
+    userStore.$patch((state) => {
+        state.userInfo.background_image = background_image
+        state.info.background_image = background_image
+    })
+}
+
 const useImagesData = () => {
     return {
         imagesData,
@@ -102,6 +123,7 @@ const useImagesMethods = () => {
         pageSizeChange,
         del,
         like,
+        setBackground,
     }
 }
 

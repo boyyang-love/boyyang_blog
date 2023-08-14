@@ -10,7 +10,7 @@ import ImgCard from './components/imgCard.vue'
 import {useImagesData, useImagesMethods} from './hooks/useImages'
 
 const {imagesData} = useImagesData()
-const {getList, pageChange, pageSizeChange, del, like} = useImagesMethods()
+const {getList, pageChange, pageSizeChange, del, like, setBackground} = useImagesMethods()
 
 
 const wrapper = ref<Element | null>(null)
@@ -56,12 +56,14 @@ onMounted(() => {
                 ]"
             :name="item.title"
             :url="item.cover"
+            :tags="item.tags"
             :id="item.id"
             :is-like="imagesData.likes.includes(item.id)"
             :time="item.created"
             :info="item.user_info"
             @like="like"
             @del="del"
+            @set-background="setBackground"
             class="wow fadeInDownBig"
         ></ImgCard>
       </div>

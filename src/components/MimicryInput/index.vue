@@ -6,6 +6,7 @@ import {AirplaneSharp} from '@vicons/ionicons5'
 interface Props {
   icon?: Component
   iconSize?: number
+  iconColor?: string
   placeholder?: string
   inputType?: 'text' | 'password' | 'textarea'
   inputWidth?: string
@@ -30,6 +31,7 @@ const modelValue = defineModel<string>()
       <NIcon
           :component="props.icon"
           :size="props.iconSize"
+          :color="props.iconColor"
       ></NIcon>
     </div>
     <div class="inner-input user-name">

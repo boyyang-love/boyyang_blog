@@ -10,9 +10,11 @@ declare namespace Exhibition {
 
 
     interface ExhibitionsInfo {
-        cover: string
-        des: string
         id: number
+        cover: string
+        cover_url: string
+        des: string
+        tags: string
         reject_res: string
         status: number
         sub_title: string

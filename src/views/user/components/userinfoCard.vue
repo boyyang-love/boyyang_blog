@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ref, markRaw, Component, computed} from 'vue'
+import {ref, markRaw, Component, computed, onMounted} from 'vue'
 import {Rocket, Create} from '@vicons/ionicons5'
 import {RollbackOutlined} from '@vicons/antd'
 import {env} from '@/utils/env'
@@ -35,8 +35,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const showOrEdit = ref<boolean>(false)
-const motto = ref<string>(userStore.info.motto)
 const tab = ref<number>(1)
+const motto = ref<string>('')
 
 const tabList = computed<TabListItem[]>(() => [
   //   1待审核 2审核通过 3未通过审核
@@ -102,6 +102,7 @@ const saveMotto = () => {
   let params = {
     id: userStore.info.id,
     motto: motto.value,
+
   }
 
   updateUserInfo(params).then(() => {
@@ -109,8 +110,11 @@ const saveMotto = () => {
       state.info.motto = motto.value
     })
   })
-
 }
+
+onMounted(() => {
+  motto.value = userStore.info.motto || '点击修改签名'
+})
 </script>
 
 <template>
@@ -137,8 +141,9 @@ const saveMotto = () => {
             <div
                 v-else
                 @click="showOrEdit = true"
+                class="text"
             >
-              {{ motto }}
+              {{ userStore.info.motto || '点击修改签名'}}
             </div>
           </div>
         </div>
@@ -181,7 +186,7 @@ const saveMotto = () => {
   @bottomH: 45px;
   @borderRadius: 5px;
   width: 100%;
-  height: 300px;
+  height: 550px;
   background-color: rgba(67, 62, 70, 0.5);
   border-radius: @borderRadius;
 
@@ -195,8 +200,8 @@ const saveMotto = () => {
     transition: all .2s cubic-bezier(.4, 0, .2, 1);
     display: flex;
     align-items: flex-end;
-    padding: 10px;
     border-radius: 10px 10px 0 0;
+    overflow: hidden;
 
     &:hover {
       background-position: center bottom;
@@ -208,6 +213,10 @@ const saveMotto = () => {
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      background-color: rgba(0, 0, 0, .4);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+      padding: 5px 10px;
 
       .user-avater {
         @wh: 80px;
@@ -222,6 +231,7 @@ const saveMotto = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          border-radius: 10px 10px 0 0;
         }
       }
 
@@ -245,6 +255,10 @@ const saveMotto = () => {
           width: 100%;
           color: whitesmoke;
           font-size: 15px;
+
+          .text {
+            text-shadow: 3px 3px rgba(0, 0, 0, .5);
+          }
         }
       }
     }

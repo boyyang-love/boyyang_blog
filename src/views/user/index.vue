@@ -9,7 +9,7 @@ import LikeList from './components/likeList.vue'
 import {useUserData, useUserMethods} from './hooks'
 
 const {userData} = useUserData()
-const {getExhibitionList, tabChange} = useUserMethods()
+const {getExhibitionList, tabChange, changeStatus} = useUserMethods()
 
 onMounted(() => {
   const wow = new Wow({
@@ -27,6 +27,7 @@ onMounted(() => {
 
   wow.init()
 })
+
 </script>
 
 <template>
@@ -45,7 +46,12 @@ onMounted(() => {
           :key="item.id"
           class="bottom-card-wrapper"
       >
-        <LikeList :status="item.status" :url="item.cover"></LikeList>
+        <LikeList
+            :status="item.status"
+            :url="item.cover"
+            v-model="item.reject_res"
+            @submit="(e: number) => changeStatus(e, item.id, item.reject_res)"
+        ></LikeList>
       </div>
     </div>
     <div class="page">

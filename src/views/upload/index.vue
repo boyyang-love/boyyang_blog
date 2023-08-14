@@ -2,14 +2,15 @@
 import {onMounted, ref} from 'vue'
 import Wow from 'wow.js'
 import {CloudUploadOutlined} from '@vicons/antd'
-import {CloseCircle} from '@vicons/ionicons5'
+import {CloseCircle, Text} from '@vicons/ionicons5'
 import {PrintText} from '@/components/PrintText'
 import {UploadInst} from 'naive-ui'
 import Input from '@/components/MimicryInput/index.vue'
 import Btn from '@/components/MimicryBtn/index.vue'
+import TagsInput from '@/components/MimicryTag/index.vue'
 import {useUpload} from './hooks/useUpload'
 
-const {uploadData, handleUploadChange, submit} = useUpload()
+const {uploadData, handleUploadChange, submit, tagsChange} = useUpload()
 const uploadRef = ref<UploadInst | null>(null)
 
 onMounted(() => {
@@ -43,6 +44,8 @@ onMounted(() => {
             <Input
                 v-model="uploadData.submit.title"
                 input-width="350px"
+                icon-color="rgb(0, 0, 0)"
+                :icon="Text"
                 :more-props="{
                   placeholder: '请输入壁纸名称',
                   autosize: {minRows: 3, maxRows: 5},
@@ -57,6 +60,8 @@ onMounted(() => {
             <Input
                 v-model="uploadData.submit.des"
                 input-width="350px"
+                icon-color="rgb(0, 0, 0)"
+                :icon="Text"
                 :more-props="{
                   placeholder: '请输入壁纸描述',
                   autosize: {minRows: 3, maxRows: 5},
@@ -112,6 +117,13 @@ onMounted(() => {
               </n-upload-dragger>
             </div>
           </n-upload>
+        </div>
+        <div class="upload-tags">
+          <TagsInput
+              width="500px"
+              @tags-chage="tagsChange"
+              :status="uploadData.isShowSpin"
+          ></TagsInput>
         </div>
 
         <div class="upload-btn">
@@ -241,6 +253,12 @@ onMounted(() => {
           border-radius: 10px;
         }
       }
+    }
+
+    .upload-tags {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
     }
 
     .upload-btn {

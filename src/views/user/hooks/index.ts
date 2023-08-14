@@ -1,6 +1,6 @@
 import {reactive, watchEffect} from 'vue'
 import {env} from '@/utils/env'
-import {exhibitionList} from '@/api/exhibition'
+import {exhibitionList, changeExhibitionStatus} from '@/api/exhibition'
 
 const userData = reactive({
     page: 1,
@@ -37,6 +37,17 @@ const tabChange = (type: number) => {
     userData.page = 1
 }
 
+const changeStatus = async (type: number, id: number, reason: string) => {
+    let data = {
+        id,
+        status: type,
+        reason: reason,
+    }
+
+    await changeExhibitionStatus(data)
+
+    getExhibitionList(userData.type)
+}
 watchEffect(() => {
     getExhibitionList(userData.type)
 })
@@ -52,6 +63,7 @@ const useUserMethods = () => {
     return {
         getExhibitionList,
         tabChange,
+        changeStatus,
     }
 }
 

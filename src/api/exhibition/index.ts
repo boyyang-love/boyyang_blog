@@ -1,6 +1,6 @@
 import {http} from '@/utils/http'
 
-export const createExhibition = (data: { title: string; des: string; cover: string }) => {
+export const createExhibition = (data: { title: string; des: string; cover: string, tags: string }) => {
     return http.request({
         url: '/exhibition/create',
         method: 'post',
@@ -14,6 +14,7 @@ export const exhibitionList = (
         page?: number
         limit?: number
         type?: number
+        public?: boolean
     },
 ) => {
     return http.request<Exhibition.ExhibitionListRes>(
@@ -31,6 +32,14 @@ export const exhibitionList = (
 export const deleteExhibition = (data: { id: string | number }) => {
     return http.request({
         url: '/exhibition/del',
+        method: 'post',
+        data,
+    })
+}
+
+export const changeExhibitionStatus = (data: { id: string | number, status: number, reason: string }) => {
+    return http.request({
+        url: '/exhibition/approval',
         method: 'post',
         data,
     })

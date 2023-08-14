@@ -1,4 +1,4 @@
-import {computed, reactive} from 'vue'
+import {computed, PropType, reactive} from 'vue'
 import {UploadFileInfo, UploadInst} from 'naive-ui'
 import {env} from '@/utils/env'
 
@@ -14,6 +14,7 @@ const uploadData = reactive({
         title: '',
         des: '',
         cover: '',
+        tags: '',
     },
     previewUrl: '',
 })
@@ -21,6 +22,7 @@ const uploadData = reactive({
 const useUpload = () => {
     return {
         uploadData,
+        tagsChange,
         handleUploadChange,
         submit,
     }
@@ -81,11 +83,16 @@ const submit = (uploadRef: UploadInst | null) => {
                 title: '',
                 des: '',
                 cover: '',
+                tags: '',
             }
             uploadData.fileList = []
             uploadData.previewUrl = ''
         })
     })
+}
+
+const tagsChange = (tagsItem: Array<{ id: number, text: string }>) => {
+    uploadData.submit.tags = tagsItem.map(tag => tag.text).join(",")
 }
 
 export {useUpload}

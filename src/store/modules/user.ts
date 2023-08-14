@@ -8,6 +8,7 @@ export interface Info {
     tel: number | string
     avatar_url: string
     gender: number | string
+    background_image: string
 }
 
 export interface UserState {
@@ -29,6 +30,7 @@ const useUserStore = defineStore({
                 tel: '',
                 avatar_url: '',
                 gender: '',
+                background_image: ''
             },
             // 用户详细信息
             info: {} as User.Info,

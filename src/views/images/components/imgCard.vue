@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import {Fitness, Heart, Star, CloseCircle, Sparkles} from '@vicons/ionicons5'
+import {Fitness, Heart, Star, CloseCircle, Sparkles, ImageSharp} from '@vicons/ionicons5'
 import moment from 'moment'
 import {env} from '@/utils/env'
+import {computed} from 'vue'
+import {useUserStore} from '@/store/modules/user'
 
 interface imgCardProps {
   url?: string
@@ -9,6 +11,7 @@ interface imgCardProps {
   id?: number | string
   isLike?: boolean
   time?: number
+  tags?: string
   info?: Exhibition.UserInfo
 }
 
@@ -16,16 +19,25 @@ interface emit {
   (e: 'del', id: number | string): void
 
   (e: 'like', id: number | string, likeStatus: boolean): void
+
+  (e: 'setBackground', id: number | string): void
 }
 
+const userStore = useUserStore()
 const props = withDefaults(defineProps<imgCardProps>(), {
   url: '',
   name: '',
   id: 0,
   isLike: false,
+  tags: '',
 })
 
 const emit = defineEmits<emit>()
+
+const tags = computed(() => {
+
+  return props.tags.split(',') || []
+})
 const del = () => {
   emit('del', props.id)
 }
@@ -66,8 +78,12 @@ const like = () => {
 
     <div class="img-bottom">
       <div class="tags">
-        <div class="tag">#好看</div>
-        <div class="tag">#风景</div>
+        <div
+            class="tag"
+            v-for="(item, i) in tags"
+            :key="i">
+          <span>{{ item }}</span>
+        </div>
       </div>
       <div class="infos">
         <div class="infos-left">
@@ -102,6 +118,14 @@ const like = () => {
                 class="icon"
             ></n-icon>
             <n-icon
+                :component="ImageSharp as any"
+                color="#373737"
+                size="18"
+                class="icon"
+                @click="$emit('setBackground', props.id)"
+            ></n-icon>
+            <n-icon
+                v-if="props.info.id === userStore.userInfo.id"
                 :component="CloseCircle as any"
                 color="#373737"
                 size="18"
@@ -193,12 +217,18 @@ const like = () => {
         box-shadow: 3px 3px 4px #c4cacf,
           -2px -2px 2px #ffffff;
         color: #888888;
-        border-radius: 6px 0 6px 0;
+        border-radius: 8px 0 8px 0;
         padding: 0 5px;
-        margin: 2px 5px;
+        margin: 2px 3px;
         font-size: 12px;
         cursor: pointer;
         border: 1px solid #888888;
+        transform: skew(-20deg);
+        text-align: center;
+
+        span {
+          transform: skew(20deg);
+        }
       }
     }
 

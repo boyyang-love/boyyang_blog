@@ -8,6 +8,7 @@ import Input from '@/components/MimicryInput/index.vue'
 // hooks
 import {usePublishData, usePublishMethods} from './hooks/usePublish'
 import Btn from '@/components/MimicryBtn/index.vue'
+import {Text} from '@vicons/ionicons5'
 
 const {BlogForm, BlogFormMore, isLoading, isShowDialog} = usePublishData()
 const {beforeBlogSubmit, blogSubmit, uploadChange} = usePublishMethods()
@@ -42,6 +43,8 @@ onMounted(() => {
           <Input
               v-model="BlogForm.title"
               input-width="350px"
+              icon-color="rgb(0, 0, 0)"
+              :icon="Text"
               :more-props="{
                 autosize: {minRows: 3,maxRows: 5},
                 clearable: true,
@@ -56,6 +59,8 @@ onMounted(() => {
           <Input
               v-model="BlogForm.des"
               input-width="350px"
+              icon-color="rgb(0, 0, 0)"
+              :icon="Text"
               :more-props="{
                 autosize: {minRows: 3,maxRows: 5},
                 clearable: true,

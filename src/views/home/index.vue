@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import {onMounted, nextTick} from 'vue'
+import {onMounted, nextTick, computed} from 'vue'
 import Wow from 'wow.js'
 import Menu from './components/menu/index.vue'
 import BackGround from '@/components/Background/index.vue'
-import banner from '@/assets/喝奶茶动漫短发美女美腿_喝奶茶_车厢_4k动漫壁纸_彼岸图网.jpg'
+import {useUserStore} from '@/store/modules/user'
+import {env} from '@/utils/env'
 
+const userStore = useUserStore()
 onMounted(() => {
   const wow = new Wow({
     boxClass: 'wow', // animated element css class (default is wow)
@@ -21,11 +23,16 @@ onMounted(() => {
 
   wow.init()
 })
+
+const background = computed(() => {
+  const url = userStore.info.background_image
+  return `${env.VITE_APP_IMG_URL}/${url}`
+})
 </script>
 
 <template>
   <BackGround
-      :url="banner"
+      :url="background"
       class="wow slideInDown"
       height="100vh"
       width="100vw"

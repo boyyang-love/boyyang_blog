@@ -108,11 +108,12 @@ onMounted(() => {
 
     .images-wrapper {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       grid-gap: 15px;
       padding: 25px;
       border-radius: 10px;
       background: linear-gradient(145deg, #cfd6dc, #f6ffff);
+      overflow: hidden;
     }
   }
 

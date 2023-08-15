@@ -251,6 +251,9 @@ const imagesDownload = () => {
   }
 
   .img-bottom {
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
     margin-top: 5px;
 
     .tags {

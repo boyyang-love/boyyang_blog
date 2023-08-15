@@ -128,6 +128,7 @@ onMounted(() => {
               width="500px"
               @tags-chage="tagsChange"
               :status="uploadData.isShowSpin"
+              :tags="uploadData.defaultTags"
           ></TagsInput>
         </div>
 

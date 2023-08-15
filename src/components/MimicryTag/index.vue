@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import {ref, watch} from 'vue'
+import {onMounted, ref, watch, watchEffect} from 'vue'
 import {NInput} from 'naive-ui'
 import {CloseCircle, Bookmark} from '@vicons/ionicons5'
 
 interface TagItem {
   text: string
-  id: number
+  id: number | string
 }
 
 interface Props {
   width?: string
   status?: boolean
+  tags?: string[]
 }
 
 interface Emits {
@@ -42,6 +43,19 @@ const del = (item: TagItem) => {
   emits('tagsChage', tags.value)
 }
 
+watch(() => props.tags, () => {
+  if (props?.tags?.length) {
+    props.tags.forEach((it, index) => {
+      tags.value.push(
+          {
+            id: `${it}-${index}`,
+            text: it,
+          },
+      )
+    })
+    emits('tagsChage', tags.value)
+  }
+})
 
 </script>
 
@@ -68,7 +82,7 @@ const del = (item: TagItem) => {
           </div>
         </transition-group>
       </div>
-      <div class="input-wrapper" v-if="tags.length < 5">
+      <div class="input-wrapper" v-if="tags.length < 10">
         <NInput
             :bordered="false"
             :clearable="true"

@@ -10,6 +10,7 @@ const uploadData = reactive({
     isShowSpin: false,
     fileList: [] as UploadFileInfo[],
     uploadUrl: '',
+    defaultTags: [] as string[],
     submit: {
         title: '',
         des: '',
@@ -37,9 +38,11 @@ const handleUploadChange = (data: {
         uploadData.previewUrl = ''
         return
     }
-    let name = data.file.name.split(".").shift()
-    uploadData.submit.title = name  || ''
+    let name = data.file.name.split('.').shift()
+    uploadData.submit.title = name || ''
     uploadData.submit.des = name || ''
+    uploadData.defaultTags = name?.split(' ') || []
+    console.log(uploadData.defaultTags)
     const read = new FileReader()
     read.readAsDataURL(data.file.file as Blob)
     read.onload = e => {
@@ -95,7 +98,7 @@ const submit = (uploadRef: UploadInst | null) => {
 }
 
 const tagsChange = (tagsItem: Array<{ id: number, text: string }>) => {
-    uploadData.submit.tags = tagsItem.map(tag => tag.text).join(",")
+    uploadData.submit.tags = tagsItem.map(tag => tag.text).join(',')
 }
 
 export {useUpload}

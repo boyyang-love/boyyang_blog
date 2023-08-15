@@ -73,7 +73,7 @@ onMounted(() => {
             <div class="title wow slideInDown">我的博客</div>
             <BlogCard
                 v-for="(item, i) in homeData.blog.list"
-                :key="item.id"
+                :key="item.uid"
                 :author="item.user_info.username"
                 :class="['wow', (i + 1) % 2 == 0 ? 'bounceInLeft' : 'bounceInRight']"
                 :cover="item.cover"
@@ -81,9 +81,9 @@ onMounted(() => {
                 :subtitle="item.sub_title"
                 :time="item.created"
                 :title="item.title"
-                :id="item.id"
+                :id="item.uid"
                 :avatar_url="item.user_info.avatar_url"
-                @cardClick="cardClick(item.id)"
+                @cardClick="cardClick(item.uid)"
                 @delClick="del"
             ></BlogCard>
             <div class="pagination wow bounceInUp">

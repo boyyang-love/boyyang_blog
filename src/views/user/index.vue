@@ -43,14 +43,14 @@ onMounted(() => {
     <div class="bottom-content wow fadeInRightBig">
       <div
           v-for="item in userData.list"
-          :key="item.id"
+          :key="item.uid"
           class="bottom-card-wrapper"
       >
         <LikeList
             :status="item.status"
             :url="item.cover"
             v-model="item.reject_res"
-            @submit="(e: number) => changeStatus(e, item.id, item.reject_res)"
+            @submit="(e: number) => changeStatus(e, item.uid, item.reject_res)"
         ></LikeList>
       </div>
     </div>

@@ -11,7 +11,7 @@ export const updateUserInfo = (data: User.UpdateUserInfo) => {
     )
 }
 
-export const userInfo = (params?: { id?: number }) => {
+export const userInfo = (params?: { uid?: number }) => {
     return http.request<User.UserInfo>(
         {
             url: '/users/info',

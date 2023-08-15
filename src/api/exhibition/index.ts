@@ -10,7 +10,7 @@ export const createExhibition = (data: { title: string; des: string; cover: stri
 
 export const exhibitionList = (
     params: {
-        ids?: string
+        uids?: string
         page?: number
         limit?: number
         type?: number
@@ -29,7 +29,7 @@ export const exhibitionList = (
     )
 }
 
-export const deleteExhibition = (data: { id: string | number }) => {
+export const deleteExhibition = (data: { uid: string | number }) => {
     return http.request({
         url: '/exhibition/del',
         method: 'post',
@@ -37,7 +37,7 @@ export const deleteExhibition = (data: { id: string | number }) => {
     })
 }
 
-export const changeExhibitionStatus = (data: { id: string | number, status: number, reason: string }) => {
+export const changeExhibitionStatus = (data: { uid: string | number, status: number, reason: string }) => {
     return http.request({
         url: '/exhibition/approval',
         method: 'post',

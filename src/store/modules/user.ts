@@ -3,7 +3,7 @@ import {defineStore} from 'pinia'
 import {User} from '@/api/user/type'
 
 export interface Info {
-    id: number
+    uid: number
     username: string
     tel: number | string
     avatar_url: string
@@ -25,7 +25,7 @@ const useUserStore = defineStore({
             // 登录成功返回的用户信息
             token: '',
             userInfo: {
-                id: 0,
+                uid: 0,
                 username: '',
                 tel: '',
                 avatar_url: '',

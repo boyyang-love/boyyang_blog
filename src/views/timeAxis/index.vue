@@ -36,7 +36,7 @@ onMounted(() => {
       <n-timeline>
         <n-timeline-item
             v-for="(item, index) in timeAxisData.list"
-            :key="item.id"
+            :key="item.uid"
             :type="['default', 'success', 'info', 'warning', 'error'][parseInt(Math.random() * 4 as string)]"
         >
           <template #header>

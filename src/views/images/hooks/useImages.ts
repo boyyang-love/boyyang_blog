@@ -71,7 +71,7 @@ const del = (id: number | string) => {
         positiveText: '确定',
         negativeText: '取消',
         onPositiveClick: () => {
-            deleteExhibition({id}).then(res => {
+            deleteExhibition({uid: id}).then(res => {
                 window.$notification.success({
                     title: '提示',
                     content: '图片删除成功',
@@ -95,9 +95,9 @@ const like = (id: number | string, isLike: boolean) => {
 
 const setBackground = async (id: number | string) => {
     const userStore = useUserStoreWithOut()
-    const background_image = imagesData.list.filter(it => it.id === id)[0].cover_url
+    const background_image = imagesData.list.filter(it => it.uid === id)[0].cover_url
     let params = {
-        id: userStore.userInfo.id,
+        uid: userStore.userInfo.id,
         background_image: background_image,
     }
 

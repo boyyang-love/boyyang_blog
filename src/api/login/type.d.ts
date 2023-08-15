@@ -1,11 +1,12 @@
 declare namespace Login {
     interface loginRes {
         info: {
-            id: number
+            uid: number
             username: string
             gender: number
             avatar_url: string
             tel: string
+            background_image: string
         }
         token: string
     }

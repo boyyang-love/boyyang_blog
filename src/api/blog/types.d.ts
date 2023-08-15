@@ -5,7 +5,7 @@ declare namespace Blog {
     }
 
     interface BlogInfo {
-        id: number
+        uid: number
         content: string
         cover: string
         sub_title: string
@@ -19,7 +19,7 @@ declare namespace Blog {
     interface BlogUserinfo {
         avatar_url: string
         gender: number
-        id: number
+        uid: number
         tel: number
         username: string
     }

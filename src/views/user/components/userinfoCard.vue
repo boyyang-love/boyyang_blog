@@ -104,7 +104,7 @@ const saveMotto = () => {
   }
 
   let params = {
-    id: userStore.info.id,
+    uid: userStore.info.uid,
     motto: motto.value,
 
   }

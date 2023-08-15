@@ -164,7 +164,7 @@ const imagesDownload = () => {
                   @click="imagesDownload"
               ></n-icon>
               <n-icon
-                  v-if="props.info.id === userStore.userInfo.id"
+                  v-if="props.info.uid === userStore.userInfo.uid"
                   :component="CloseCircle as any"
                   color="#373737"
                   size="18"

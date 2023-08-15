@@ -1,6 +1,6 @@
 export namespace User {
     export interface UpdateUserInfo {
-        id: number | string
+        uid: number | string
         username?: string
         age?: number
         gender?: number
@@ -18,7 +18,7 @@ export namespace User {
     }
 
     export interface Info {
-        id: number
+        uid: number
         username: string
         gender: number
         avatar_url: string

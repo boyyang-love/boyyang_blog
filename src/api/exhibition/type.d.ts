@@ -10,7 +10,7 @@ declare namespace Exhibition {
 
 
     interface ExhibitionsInfo {
-        id: number
+        uid: number
         cover: string
         cover_url: string
         des: string
@@ -27,7 +27,7 @@ declare namespace Exhibition {
     interface UserInfo {
         avatar_url: string
         gender: number
-        id: number
+        uid: number
         tel: number
         username: string
     }

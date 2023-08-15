@@ -30,7 +30,7 @@ export const blogList = (params: {
     )
 }
 
-export const blogDetail = (params: { ids: string }) => {
+export const blogDetail = (params: { uids: string }) => {
     return http.request<Blog.BlogList>(
         {
             url: '/blog/info',
@@ -43,7 +43,7 @@ export const blogDetail = (params: { ids: string }) => {
     )
 }
 
-export const blogDel = (params: { id: number }) => {
+export const blogDel = (params: { uid: number }) => {
     return http.request(
         {
             url: '/blog/delete',

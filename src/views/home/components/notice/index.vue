@@ -6,7 +6,7 @@ import {NotificationOutlined} from '@vicons/antd'
   <div class="notice-wrapper">
     <n-space vertical>
       <div class="notice-title">
-        <n-icon :component="NotificationOutlined" size="22" color="#fc5185"></n-icon>
+        <n-icon :component="NotificationOutlined as any" size="22" color="#fc5185"></n-icon>
         <span>公告~~</span>
       </div>
       <div class="notice-content">jfaljjfddddddddddddddshei</div>

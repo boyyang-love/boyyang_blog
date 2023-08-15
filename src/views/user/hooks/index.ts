@@ -40,7 +40,7 @@ const tabChange = (type: number) => {
 
 const changeStatus = async (type: number, id: number, reason: string) => {
     let data = {
-        id,
+        uid: id,
         status: type,
         reason: reason,
     }

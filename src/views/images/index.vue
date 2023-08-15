@@ -49,7 +49,7 @@ onMounted(() => {
       <div class="images-wrapper">
         <ImgCard
             v-for="(item, i) in imagesData.list"
-            :key="item.id"
+            :key="item.uid"
             :class="[
                     'wow',
                     i % 2 == 0 ? 'fadeInDownBig' : i % 3 == 0 ? 'fadeInRightBig' : 'fadeInLeftBig',
@@ -57,8 +57,8 @@ onMounted(() => {
             :name="item.title"
             :url="item.cover"
             :tags="item.tags"
-            :id="item.id"
-            :is-like="imagesData.likes.includes(item.id)"
+            :id="item.uid"
+            :is-like="imagesData.likes.includes(item.uid)"
             :time="item.created"
             :info="item.user_info"
             @like="like"

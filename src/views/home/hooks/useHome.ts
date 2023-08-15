@@ -73,7 +73,7 @@ const getDashboard = () => {
 }
 
 const del = (id: number) => {
-    blogDel({id: id}).then(() => {
+    blogDel({uid: id}).then(() => {
         getBlogList()
     })
 }

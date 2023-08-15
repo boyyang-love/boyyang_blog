@@ -28,7 +28,7 @@ declare namespace Dashboard {
     }
 
     interface DashboardExhibitions {
-        id: number
+        uid: number
         title: string
         des: string
         cover: string

@@ -84,7 +84,7 @@ const del = (id: number | string) => {
 }
 
 const like = (id: number | string, isLike: boolean) => {
-    likeList({exhibition_id: id, likes_type: isLike ? 1 : 0}).then(() => {
+    likeList({uid: id, likes_type: isLike ? 1 : 0, type: 1}).then(() => {
         if (isLike) {
             imagesData.likes.push(id as number)
         } else {
@@ -100,6 +100,8 @@ const setBackground = async (id: number | string) => {
         uid: userStore.userInfo.uid,
         background_image: background_image,
     }
+
+
 
     await updateUserInfo(params)
 

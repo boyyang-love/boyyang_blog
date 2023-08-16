@@ -97,7 +97,7 @@ const setBackground = async (id: number | string) => {
     const userStore = useUserStoreWithOut()
     const background_image = imagesData.list.filter(it => it.uid === id)[0].cover_url
     let params = {
-        uid: userStore.userInfo.id,
+        uid: userStore.userInfo.uid,
         background_image: background_image,
     }
 

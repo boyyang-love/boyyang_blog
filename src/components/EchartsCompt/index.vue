@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import {nextTick, onMounted, ref, watch, watchEffect} from 'vue'
-import {ECElementEvent, ECharts, EChartsOption, EChartsType} from 'echarts'
-import {useEcharts} from '@/hooks/useEcharts'
+import {nextTick, onMounted, PropType, ref, watch} from 'vue'
+import {ECElementEvent, ECharts, EChartsOption} from 'echarts'
+import {useEcharts} from './hooks/useEcharts'
+import Erd from 'element-resize-detector'
 
 interface Props {
   id: string
@@ -16,31 +17,37 @@ const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
 
 const chartElement = ref<HTMLElement | null>(null)
-const instance = ref<ECharts | null>()
+let instance: ECharts | null = null
 
 watch(
     () => props.options,
     (n_options) => {
-      instance.value && instance.value?.setOption(n_options)
+      instance && instance.clear()
+      instance && instance.setOption(n_options, true)
     },
 )
 
 onMounted(() => {
   nextTick(() => {
-    instance.value = useEcharts(
+    instance = useEcharts(
         chartElement.value,
         props.options,
         (e) => {
           emits('chartClick', e)
-        })
+        },
+    )
+
+    const erd = Erd()
+    erd.listenTo(document.getElementById('echarts-wrapper') as HTMLElement, () => {
+      instance?.resize()
+    })
   })
 })
-
 
 </script>
 
 <template>
-  <div class="echarts-wrapper">
+  <div class="echarts-wrapper" id="echarts-wrapper">
     <div
         ref="chartElement"
         class="echart"

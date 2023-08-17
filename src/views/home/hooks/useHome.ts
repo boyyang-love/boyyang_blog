@@ -56,19 +56,27 @@ const getBlogList = () => {
 }
 
 const getDashboard = () => {
+    let categories = []
+    let blogChartData = [] as string[]
+    let exhibitionChartData = [] as string[]
     dashboard().then(res => {
-        homeData.chart.categories =
+        categories =
             res.data.dashboard &&
             res.data.dashboard.map(item => {
                 return item.name
             })
+
         res.data.dashboard &&
         res.data.dashboard.forEach((item) => {
-            homeData.chart.blogChartData.push(item.blog_publish_value || '0')
-            homeData.chart.exhibitionChartData.push(item.exhibitions_publish_value || '0')
+            blogChartData.push(item.blog_publish_value || '0')
+            exhibitionChartData.push(item.exhibitions_publish_value || '0')
         })
+
         res.data.user_info.avatar_url = `${env.VITE_APP_IMG_URL}${res.data.user_info.avatar_url}`
         homeData.userInfo = res.data.user_info
+        homeData.chart.categories = categories
+        homeData.chart.blogChartData = blogChartData
+        homeData.chart.exhibitionChartData = exhibitionChartData
     })
 }
 

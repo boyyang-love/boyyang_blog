@@ -10,11 +10,15 @@ import {updateUserInfo} from '@/api/user'
 
 const imagesData = reactive({
     page: 1,
-    limit: 12,
+    limit: 9,
     count: 0,
     list: [] as Exhibition.ExhibitionsInfo[],
     likes: [] as number[],
     pageSizes: [
+        {
+            label: '9 每页',
+            value: 9,
+        },
         {
             label: '12 每页',
             value: 12,

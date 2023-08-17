@@ -19,6 +19,7 @@
     "axios": "^1.4.0",
     "boyyang_tools": "^1.3.0",
     "echarts": "^5.4.3",
+    "element-resize-detector": "^1.2.4",
     "less": "^4.2.0",
     "moment": "^2.29.2",
     "node": "^16.13.2",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@types/animejs": "^3.1.7",
+    "@types/element-resize-detector": "^1.1.3",
     "@types/prismjs": "^1.26.0",
     "@types/qs": "^6.9.7",
     "@vicons/antd": "^0.12.0",

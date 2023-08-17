@@ -18,210 +18,100 @@ const options = computed<EChartsOption>((): EChartsOption => {
   let yData2 = props.seriesDataExhibition
 
   return {
-    // backgroundColor: '#080b30',
-    legend: {
-      show: true,
-      data: ['图片上传', '博客上传'],
-      right: 10,
-      itemStyle: {
-        color: '#b7bfd7',
-      },
-      textStyle: {
-        color: '#b7bfd7',
-      },
+    grid: {
+      top: '30',
+      bottom: 20,
     },
     tooltip: {
-      show: true,
       trigger: 'axis',
+      backgroundColor: 'rgba(255,255,255,0.1)',
       axisPointer: {
-        lineStyle: {
-          color: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [
-              {
-                offset: 0,
-                color: 'rgba(0, 255, 233,0)',
-              },
-              {
-                offset: 0.5,
-                color: 'rgba(255, 255, 255,1)',
-              },
-              {
-                offset: 1,
-                color: 'rgba(0, 255, 233,0)',
-              },
-            ],
-            global: false,
-          },
-        },
-      },
-    },
-    grid: {
-      top: '15%',
-      left: '5%',
-      right: '5%',
-      bottom: '15%',
-      // containLabel: true
-    },
-    xAxis: [
-      {
-        type: 'category',
-        axisLine: {
-          show: true,
-        },
-        axisLabel: {
-          color: 'rgb(183,191,215, 1)',
-          padding: [10, 0, 0, 0],
-        },
-        splitLine: {
-          show: false,
-        },
-        boundaryGap: false,
-        data: xData,
-      },
-    ],
-
-    yAxis: [
-      {
-        type: 'value',
-        min: 0,
-        splitNumber: 4,
-        splitLine: {
-          show: true,
-          lineStyle: {
-            color: 'rgba(255,255,255,0.1)',
-          },
-        },
-        axisLine: {
-          show: true,
-        },
-        axisLabel: {
-          show: true,
-          margin: 20,
-          color: 'rgb(183,191,215)',
-        },
-        axisTick: {
-          show: true,
-        },
-      },
-    ],
-    series: [
-      {
-        name: '博客上传',
-        type: 'line',
-        // smooth: true, //是否平滑
-        showAllSymbol: true,
-        // symbol: 'image://./static/images/guang-circle.png',
-        symbol: 'circle',
-        symbolSize: 15,
-
-        lineStyle: {
-          color: '#dc3bce',
-          shadowColor: 'rgba(0, 0, 0, .3)',
-          shadowBlur: 0,
-          shadowOffsetY: 5,
-          shadowOffsetX: 5,
-        },
+        type: 'shadow',
         label: {
           show: true,
-          position: 'top',
+          backgroundColor: '#7B7DDC',
           color: '#fff',
-          fontSize: 15,
         },
+      },
+      textStyle: {
+        color: '#fff',
+      },
+    },
+    legend: {
+      data: ['博客发布数', '图片上传数'],
+      textStyle: {
+        color: '#fff',
+      },
+      top: 5,
+      right: 10,
+    },
+    xAxis: {
+      data: xData,
+      axisLine: {
+        lineStyle: {
+          color: '#fff',
+        },
+      },
+      axisTick: {
+        show: false,
+      },
+    },
+    yAxis: [
+      {
+        splitLine: {show: false},
+        axisLine: {
+          lineStyle: {
+            color: '#fff',
+          },
+        },
+
+        axisLabel: {
+          formatter: '{value} ',
+        },
+      },
+      {
+        splitLine: {show: false},
+        axisLine: {
+          lineStyle: {
+            color: '#B4B4B4',
+          },
+        },
+        axisLabel: {
+          formatter: '{value} ',
+        },
+      },
+    ],
+
+    series: [
+      {
+        name: '博客发布数',
+        type: 'bar',
+        barWidth: 10,
         itemStyle: {
-          color: '#dc3bce',
-          borderColor: '#fff',
-          borderWidth: 3,
-          shadowColor: 'rgba(0, 0, 0, .3)',
-          shadowBlur: 0,
-          shadowOffsetY: 2,
-          shadowOffsetX: 2,
-        },
-        tooltip: {
-          show: false,
-        },
-        areaStyle: {
-          shadowColor: 'rgba(108,80,243, 0.9)',
-          shadowBlur: 20,
-          color: new echarts.graphic.LinearGradient(
-              0,
-              0,
-              0,
-              1,
-              [
-                {
-                  offset: 0,
-                  color: 'rgba(108,80,243,0.3)',
-                },
-                {
-                  offset: 1,
-                  color: 'rgba(108,80,243,0)',
-                },
-              ],
-              false,
-          ),
+          borderRadius: 5,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {offset: 0, color: '#12c2e9'},
+            {offset: 0.2, color: '#c471ed'},
+            {offset: 1, color: '#f64f59'},
+          ]),
         },
         data: yData1,
       },
-      {
-        name: '图片上传',
-        type: 'line',
-        // smooth: true, //是否平滑
-        showAllSymbol: true,
-        // symbol: 'image://./static/images/guang-circle.png',
-        symbol: 'circle',
-        symbolSize: 15,
-        lineStyle: {
-          color: '#00ca95',
-          shadowColor: 'rgba(0, 0, 0, .3)',
-          shadowBlur: 0,
-          shadowOffsetY: 5,
-          shadowOffsetX: 5,
-        },
-        label: {
-          show: true,
-          position: 'top',
-          color: '#fff',
-          fontSize: 15,
-        },
 
+      {
+        name: '图片上传数',
+        type: 'bar',
+        // barGap: '-100%',
+        barWidth: 10,
         itemStyle: {
-          color: '#00ca95',
-          borderColor: '#fff',
-          borderWidth: 3,
-          shadowColor: 'rgba(0, 0, 0, .3)',
-          shadowBlur: 0,
-          shadowOffsetY: 2,
-          shadowOffsetX: 2,
+          borderRadius: 5,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {offset: 0, color: '#c6ffdd'},
+            {offset: 0.2, color: '#fbd786'},
+            {offset: 1, color: '#f7797d'},
+          ]),
         },
-        tooltip: {
-          show: false,
-        },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(
-              0,
-              0,
-              0,
-              1,
-              [
-                {
-                  offset: 0,
-                  color: 'rgba(0,202,149,0.3)',
-                },
-                {
-                  offset: 1,
-                  color: 'rgba(0,202,149,0)',
-                },
-              ],
-              false,
-          ),
-          shadowColor: 'rgba(0,202,149, 0.9)',
-          shadowBlur: 20,
-        },
+        z: -12,
         data: yData2,
       },
     ],

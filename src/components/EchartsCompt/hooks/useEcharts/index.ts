@@ -11,7 +11,7 @@ const useEcharts = (
     const instance = init(dom)
 
     if (instance && options) {
-        instance.setOption(options)
+        instance.setOption(options, true)
         instance.on('click', (e) => {
             chartClick && _.isFunction(chartClick) && chartClick.call(null, e)
         })

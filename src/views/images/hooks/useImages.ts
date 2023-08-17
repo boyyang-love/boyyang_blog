@@ -5,7 +5,7 @@ import {useUserStoreWithOut} from '@/store/modules/user'
 
 // api
 import {exhibitionList, deleteExhibition} from '@/api/exhibition'
-import {likeList} from '@/api/like'
+import {changelike, changeStar} from '@/api/like'
 import {updateUserInfo} from '@/api/user'
 
 const imagesData = reactive({
@@ -14,6 +14,7 @@ const imagesData = reactive({
     count: 0,
     list: [] as Exhibition.ExhibitionsInfo[],
     likes: [] as number[],
+    star: [] as number[],
     pageSizes: [
         {
             label: '9 每页',
@@ -52,6 +53,7 @@ const getList = () => {
                 return item
             })
         imagesData.likes = res.data.likes_ids || []
+        imagesData.star = res.data.star_ids || []
     })
 }
 
@@ -88,11 +90,33 @@ const del = (id: number | string) => {
 }
 
 const like = (id: number | string, isLike: boolean) => {
-    likeList({uid: id, likes_type: isLike ? 1 : 0, type: 1}).then(() => {
+    changelike({uid: id, likes_type: isLike ? 1 : 0, type: 1}).then(() => {
         if (isLike) {
             imagesData.likes.push(id as number)
         } else {
             imagesData.likes = imagesData.likes.filter(it => it !== (id as number))
+        }
+    })
+}
+
+const star = (id: number | string, isStar: boolean) => {
+    changeStar({uid: id, star_type: isStar ? 1 : 0, type: 1}).then(() => {
+        if (isStar) {
+            imagesData.star.push(id as number)
+            // 点赞数++
+            imagesData.list.forEach((it) => {
+                if (it.uid === id) {
+                    it.thumbs_up++
+                }
+            })
+        } else {
+            imagesData.star = imagesData.star.filter(it => it !== id as number)
+            // 点赞数--
+            imagesData.list.forEach((it) => {
+                if (it.uid === id) {
+                    it.thumbs_up--
+                }
+            })
         }
     })
 }
@@ -104,7 +128,6 @@ const setBackground = async (id: number | string) => {
         uid: userStore.userInfo.uid,
         background_image: background_image,
     }
-
 
 
     await updateUserInfo(params)
@@ -129,6 +152,7 @@ const useImagesMethods = () => {
         pageSizeChange,
         del,
         like,
+        star,
         setBackground,
     }
 }

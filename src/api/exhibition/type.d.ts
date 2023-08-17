@@ -3,6 +3,7 @@ declare namespace Exhibition {
         count: number
         exhibitions: ExhibitionsInfo[]
         likes_ids: number[]
+        star_ids: number[]
         approved: number
         in_review: number
         review_rjection: number
@@ -22,6 +23,7 @@ declare namespace Exhibition {
         user_id: number
         user_info: UserInfo
         created: number
+        thumbs_up: number
     }
 
     interface UserInfo {

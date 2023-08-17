@@ -25,14 +25,17 @@ const toolTip = computed(() => {
     {
       component: markRaw(GithubOutlined),
       text: info.user_info.git_hub,
+      default: '暂未设置gitHub地址',
     },
     {
       component: markRaw(QqOutlined),
       text: info.user_info.qq,
+      default: '暂未设置QQ号',
     },
     {
       component: markRaw(WechatOutlined),
       text: info.user_info.wechat,
+      default: '暂未设置微信号',
     },
   ]
 })
@@ -88,7 +91,7 @@ const toolTip = computed(() => {
                   :key="i"
               ></n-icon>
             </template>
-            {{ item.text || '还未设置微信号' }}
+            {{ item.text || item.default }}
           </n-tooltip>
         </n-space>
       </div>

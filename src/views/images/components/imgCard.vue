@@ -19,9 +19,11 @@ interface imgCardProps {
   name?: string
   id?: number | string
   isLike?: boolean
+  isStar?: boolean
   time?: number
   tags?: string
   info?: Exhibition.UserInfo
+  star?: number
 }
 
 interface emit {
@@ -30,6 +32,8 @@ interface emit {
   (e: 'like', id: number | string, likeStatus: boolean): void
 
   (e: 'setBackground', id: number | string): void
+
+  (e: 'star', id: number | string, starStatus: boolean): void
 }
 
 const userStore = useUserStore()
@@ -54,6 +58,10 @@ const del = () => {
 
 const like = () => {
   emit('like', props.id, !props.isLike)
+}
+
+const star = () => {
+  emit('star', props.id, !props.isStar)
 }
 
 const imagesDownload = () => {
@@ -136,11 +144,19 @@ const imagesDownload = () => {
           <div class="infos-right">
             <!-- 点赞 收藏 删除  -->
             <n-space size="small">
+              <n-badge
+                  :value="props.star"
+                  :max="1000"
+                  :offset="[0, -20]"
+              >
+                <span></span>
+              </n-badge>
               <n-icon
                   :component="Sparkles as any"
-                  color="#373737"
+                  :color="props.isStar ? '#fc5185' : '#373737'"
                   size="18"
                   class="icon"
+                  @click="star"
               ></n-icon>
               <n-icon
                   :component="Heart as any"
@@ -314,6 +330,7 @@ const imagesDownload = () => {
       .infos-right {
         display: flex;
         align-items: flex-end;
+        justify-content: center;
 
         .icon {
           cursor: pointer;

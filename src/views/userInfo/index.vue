@@ -78,14 +78,15 @@ const isShow = defineModel<boolean>()
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: saturate(120%) blur(10px);
   transition-delay: 3s;
   z-index: 9;
 
 
   .user-info-wrapper {
     box-sizing: border-box;
-    width: 700px;
+    width: 620px;
     //height: 400px;
     background: linear-gradient(145deg, #cfd6dc, #f6ffff);
     border-radius: 5px;
@@ -156,11 +157,11 @@ const isShow = defineModel<boolean>()
 
 .user-info-enter-active,
 .user-info-leave-active {
-  transition: all 0.6s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .user-info-enter-from,
 .user-info-leave-to {
-  transform: translateX(2000px);
+  transform: translateY(-1000px);
 }
 </style>

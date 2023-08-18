@@ -109,7 +109,8 @@ const cancel = () => {
       <VuePictureCropper
           :img="imgDataURL"
           :boxStyle="{
-                    height: '350px',
+                    width: '600px',
+                    height: '345px',
                     backgroundColor: '#f8f8f8',
                     margin: 'auto',
           }"
@@ -184,7 +185,7 @@ const cancel = () => {
   .modal-bottom {
     box-sizing: border-box;
     width: 100%;
-    padding: 20px 0;
+    padding: 20px 0 0;
     display: flex;
     justify-content: space-around;
 

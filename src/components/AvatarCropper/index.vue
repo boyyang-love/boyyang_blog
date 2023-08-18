@@ -79,15 +79,16 @@ const cancel = () => {
 
 <template>
   <div class="avatar-cropper-wrapper">
-    <n-upload
-        action="#"
-        :max="1"
-        :show-file-list="false"
-        :default-upload="false"
-        :file-list="[]"
-        @change="fileChange"
-    >
-      <template #default>
+    <div>
+      <n-upload
+          action="#"
+          :max="1"
+          :show-file-list="false"
+          :default-upload="false"
+          :file-list="[]"
+          @change="fileChange"
+          align="center"
+      >
         <div class="avatar-wrapper">
           <n-avatar
               :src="previewURL"
@@ -97,8 +98,8 @@ const cancel = () => {
               object-fit="cover"
           ></n-avatar>
         </div>
-      </template>
-    </n-upload>
+      </n-upload>
+    </div>
   </div>
 
   <n-modal
@@ -158,8 +159,10 @@ const cancel = () => {
 .avatar-cropper-wrapper {
   box-sizing: border-box;
   border-radius: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
+  --webkit-box-sizing: border-box;
   align-items: center;
 
   .avatar-wrapper {

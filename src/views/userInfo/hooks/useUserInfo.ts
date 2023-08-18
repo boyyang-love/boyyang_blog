@@ -43,6 +43,7 @@ const submit = () => {
             userInfoData.delUrl = data.avatar_url as string
             data.avatar_url = `avatar/${userInfoData.file.name}`
             updateUserInfoApi(data)
+            delOldAvatar()
         })
     } else {
         updateUserInfoApi(data)
@@ -63,7 +64,6 @@ const updateUserInfoApi = (data: User.UpdateUserInfo) => {
 
         userInfoData.isShow = false
         userInfoData.isLoading = false
-        delOldAvatar()
     })
 }
 

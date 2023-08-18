@@ -196,10 +196,7 @@ onMounted(() => {
             object-fit: cover;
           }
         }
-
       }
-
-
     }
 
     .input-wrapper {

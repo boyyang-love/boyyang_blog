@@ -9,13 +9,14 @@ interface beforeUploadRes {
     key: string
 }
 
-export const upload = async (params: { file_name: string; file: File }): Promise<beforeUploadRes> => {
+export const upload = async (params: { file_name: string; file: File, path?: string }): Promise<beforeUploadRes> => {
     let res = await http.request(
         {
             url: '/cos/upload',
             method: 'get',
             params: {
                 file_name: params.file_name,
+                path: params.path,
             },
         },
         {
@@ -46,4 +47,17 @@ export const upload = async (params: { file_name: string; file: File }): Promise
 
         resolve(res.data)
     })
+}
+
+export const delUpload = (params: { key: string }) => {
+    return http.request(
+        {
+            url: '/upload/del',
+            method: 'get',
+            params,
+        },
+        {
+            isShowMessage: false,
+        },
+    )
 }

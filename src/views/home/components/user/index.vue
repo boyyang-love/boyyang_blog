@@ -1,40 +1,33 @@
 <script lang="ts" setup>
 import {GithubOutlined, QqOutlined, WechatOutlined} from '@vicons/antd'
 import {useUserStore} from '@/store/modules/user'
-import {userInfo} from '@/api/user'
-import {User} from '@/api/user/type'
-import {computed, markRaw, onMounted, reactive, ref} from 'vue'
+import {env} from '@/utils/env'
+import {computed, markRaw} from 'vue'
+import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 
 const userStore = useUserStore()
-const info = reactive<User.UserInfo>({
-  user_info: {} as User.Info,
-  user_detail: {} as User.Detail,
-})
+const {showInfo} = useUserInfo()
+console.log(env.VITE_APP_IMG_URL)
 
-onMounted(() => {
-  userInfo().then((res) => {
-    info.user_info = res.data.user_info
-    info.user_detail = res.data.user_detail
-    userStore.setInfo(res.data.user_info)
-    userStore.setDetail(res.data.user_detail)
-  })
+const url = computed(() => {
+  return `${env.VITE_APP_IMG_URL}/${userStore.info.avatar_url}`
 })
 
 const toolTip = computed(() => {
   return [
     {
       component: markRaw(GithubOutlined),
-      text: info.user_info.git_hub,
+      text: userStore.info.git_hub,
       default: '暂未设置gitHub地址',
     },
     {
       component: markRaw(QqOutlined),
-      text: info.user_info.qq,
+      text: userStore.info.qq,
       default: '暂未设置QQ号',
     },
     {
       component: markRaw(WechatOutlined),
-      text: info.user_info.wechat,
+      text: userStore.info.wechat,
       default: '暂未设置微信号',
     },
   ]
@@ -48,33 +41,34 @@ const toolTip = computed(() => {
     <div class="header">
       <n-avatar
           :size="95"
-          :src="userStore.userInfo.avatar_url"
+          :src="url"
           bordered
           class="header-img wow slideInDown"
           round
+          @click="showInfo(true)"
       />
       <div class="user-name wow slideInDown" data-wow-delay="0.5s">
-        {{ info.user_info.username }}
+        {{ userStore.info.username }}
       </div>
       <div class="user-signature wow slideInDown" data-wow-delay="1s">
-        {{ info.user_info.motto }}
+        {{ userStore.info.motto }}
       </div>
       <div class="info">
         <div class="icon-item wow pulse" data-wow-delay="3s">
           <span class="text">获赞</span>
-          <span class="num">{{ info.user_detail.thumbs_up || 0 }}</span>
+          <span class="num">{{ userStore.detail.thumbs_up || 0 }}</span>
         </div>
         <div class="icon-item wow pulse" data-wow-delay="4s">
           <span class="text">发布</span>
-          <span class="num">{{ info.user_detail.publish || 0 }}</span>
+          <span class="num">{{ userStore.detail.publish || 0 }}</span>
         </div>
         <div class="icon-item wow pulse" data-wow-delay="5s">
           <span class="text">收藏</span>
-          <span class="num">{{ info.user_detail.likes || 0 }}</span>
+          <span class="num">{{ userStore.detail.likes || 0 }}</span>
         </div>
         <div class="icon-item wow pulse" data-wow-delay="6s">
           <span class="text">粉丝</span>
-          <span class="num">{{ info.user_detail.follows || 0 }}</span>
+          <span class="num">{{ userStore.detail.follows || 0 }}</span>
         </div>
       </div>
       <div class="btn-wrapper">

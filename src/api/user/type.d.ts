@@ -4,8 +4,9 @@ export namespace User {
         username?: string
         age?: number
         gender?: number
-        avatarUrl?: string
+        avatar_url?: string
         tel?: number
+        wechat?: string
         email?: string
         address?: string
         motto?: string
@@ -20,15 +21,15 @@ export namespace User {
     export interface Info {
         uid: number
         username: string
-        gender: number
+        gender: number | string
         avatar_url: string
-        age: number
+        age: number | string
         email: string
         address: string
-        qq: number
+        qq: number | string
         wechat: string
         git_hub: string
-        tel: number
+        tel: number | string
         background_image: string
         motto: string
     }

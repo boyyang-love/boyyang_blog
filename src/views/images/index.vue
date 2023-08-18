@@ -77,9 +77,10 @@ onMounted(() => {
           v-model:page="imagesData.page"
           v-model:page-size="imagesData.limit"
           v-model:page-sizes="imagesData.pageSizes"
-          show-size-picker
           @update:page-size="pageSizeChange"
           @update:page="pageChange"
+          :page-slot="5"
+          show-size-picker
       />
     </div>
   </div>
@@ -126,9 +127,33 @@ onMounted(() => {
     justify-content: center;
     box-sizing: border-box;
     background: linear-gradient(145deg, #cfd6dc, #f6ffff);
-    margin: 20px 150px 150px;
+    margin: 20px 150px 170px;
     padding: 10px 0;
     border-radius: 5px;
   }
 }
+
+
+@media screen and (max-width: 1200px) {
+  .images-wrapper {
+    .images-content {
+      padding: 25px 10px;
+
+      .images-wrapper {
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        padding: 10px;
+
+      }
+    }
+
+    .pagination {
+      background: none;
+      padding: 0 0 20px;
+      margin-bottom: 60px;
+    }
+  }
+
+}
+
 </style>

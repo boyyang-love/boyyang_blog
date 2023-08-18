@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import {ref} from 'vue'
-import {useRoute, useRouter} from 'vue-router'
+import {useRouter} from 'vue-router'
 import {Menu} from './types'
 import {menuList} from './menuList'
 
-const route = useRoute()
 const router = useRouter()
 
 const props = withDefaults(defineProps<Menu.menuProps>(), {
@@ -22,7 +21,7 @@ const menuClick = (item: Menu.menuList, index: number) => {
       positiveText: '确定',
       onPositiveClick: () => {
         window.sessionStorage.clear()
-        router.push({
+        router.replace({
           name: 'Login',
         })
       },

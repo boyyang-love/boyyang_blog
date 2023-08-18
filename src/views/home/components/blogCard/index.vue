@@ -4,30 +4,38 @@ import {
   SendOutlined,
 } from '@vicons/antd'
 import {
-  CloseCircle
+  CloseCircle,
 } from '@vicons/ionicons5'
 import moment from 'moment'
 
-interface blogCardProps {
-  isReverse: boolean
-  title: string
-  subtitle: string
-  cover: string
-  author: string
-  time: number | string
-  id: number
-  avatar_url: string
+interface BlogCardOptions {
+  isReverse?: boolean
+  title?: string
+  subtitle?: string
+  cover?: string
+  author?: string
+  time?: number | string
+  id?: number
+  avatar_url?: string
+}
+
+interface Props {
+  options?: BlogCardOptions
 }
 
 const router = useRouter()
 
-const props = withDefaults(defineProps<blogCardProps>(), {
-  isReverse: false,
+const props = withDefaults(defineProps<Props>(), {
+  options: () => {
+    return {
+      isReverse: false,
+    } as BlogCardOptions
+  },
 })
 
 const emits = defineEmits<{
   (e: 'cardClick'): void
-  (e: 'delClick', id: number): void
+  (e: 'delClick', id?: number): void
 }>()
 
 const toBlogDetail = () => {
@@ -36,9 +44,12 @@ const toBlogDetail = () => {
 </script>
 
 <template>
-  <div :class="['card-wrapper', { 'is-reverse': props.isReverse }]">
+  <div :class="['card-wrapper', { 'is-reverse': props.options.isReverse }]">
     <div class="left">
-      <div class="mask" @click="toBlogDetail">
+      <div
+          class="mask"
+          @click="toBlogDetail"
+      >
         <n-icon
             :component="SendOutlined as any"
             class="send-icon"
@@ -47,7 +58,10 @@ const toBlogDetail = () => {
         ></n-icon>
       </div>
 
-      <img :alt="props.cover" :src="props.cover"/>
+      <img
+          :alt="props.options.cover"
+          :src="props.options.cover"
+      />
     </div>
     <div class="right">
       <div class="title">
@@ -56,7 +70,7 @@ const toBlogDetail = () => {
             style="max-width: 520px"
             width="trigger"
         >
-          {{ props.title }}
+          {{ props.options.title }}
         </n-ellipsis>
       </div>
       <div class="sub-title">
@@ -65,7 +79,7 @@ const toBlogDetail = () => {
             :tooltip="false"
             style="max-width: 520px"
         >
-          {{ props.subtitle }}
+          {{ props.options.subtitle }}
         </n-ellipsis>
       </div>
       <div class="bottom">
@@ -73,30 +87,29 @@ const toBlogDetail = () => {
           <div class="avatar">
             <n-avatar
                 :size="65"
-                :src="props.avatar_url"
+                :src="props.options.avatar_url"
                 bordered
                 class="header-img wow slideInDown"
                 round
             />
           </div>
           <n-space vertical size="small">
-            <div class="user">作者: {{ props.author }}</div>
-            <div class="time">时间: {{ moment(props.time * 1000).format('YYYY-MM-DD') }}</div>
+            <div class="user">作者: {{ props.options.author }}</div>
+            <div class="time">时间: {{ moment(props.options.time * 1000).format('YYYY-MM-DD') }}</div>
           </n-space>
         </div>
       </div>
     </div>
 
-    <div class="del" :style="props.isReverse ? 'left: 5px' : 'right: 5px' ">
+    <div class="del" :style="props.options.isReverse ? 'left: 5px' : 'right: 5px' ">
       <n-popconfirm
-          @positive-click="emits('delClick', props.id)"
+          @positive-click="emits('delClick', props.options.id)"
           positive-text="删了吧"
           negative-text="算了吧"
       >
         <template #trigger>
           <n-icon
               :component="CloseCircle as any"
-              size="24"
               color="#c03f53"
           ></n-icon>
         </template>
@@ -115,17 +128,18 @@ const toBlogDetail = () => {
 .card-wrapper {
   box-sizing: border-box;
   height: 235px;
-  display: flex;
   justify-content: space-between;
   padding: 0 10px;
   background: #cfd6dc;
   border-radius: 10px;
   align-items: center;
   position: relative;
+  display: flex;
 
   .left {
+    flex: 1;
     box-sizing: border-box;
-    width: 400px;
+    //width: 400px;
     height: calc(100% - 30px);
     display: flex;
     justify-content: center;
@@ -159,8 +173,8 @@ const toBlogDetail = () => {
   }
 
   .right {
+    flex: 1;
     box-sizing: border-box;
-    width: calc(100% - 420px);
     height: 80%;
     display: flex;
     flex-direction: column;
@@ -220,6 +234,28 @@ const toBlogDetail = () => {
     justify-content: center;
     padding: 1px;
     align-items: center;
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .card-wrapper {
+    flex-direction: column;
+    height: auto;
+    padding: 15px 10px;
+
+    .left {
+
+    }
+
+    .right {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .del {
+      font-size: 15px;
+    }
   }
 }
 </style>

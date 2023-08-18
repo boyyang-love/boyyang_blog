@@ -8,18 +8,19 @@ import Tile from '../tile/index.vue'
 import Notice from '../notice/index.vue'
 import Carousel from '../carousel/index.vue'
 import PublishChart from '../publishChart/index.vue'
-
+import UserInfo from '@/views/userInfo/index.vue'
 // hooks
 import {useHomeData, useHomeMethods} from '../../hooks/useHome'
 import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition'
 import {useUserStore} from '@/store/modules/user'
-
+import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 
 const {homeData, paginationOpt} = useHomeData()
 const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange, del} = useHomeMethods()
 const {exhibitionData} = useExhibitionData()
 const {getExhibitionList} = useExhibitionMethods()
 const userStore = useUserStore()
+const {userInfoData} = useUserInfo()
 
 onMounted(() => {
   const wow = new Wow({
@@ -74,15 +75,17 @@ onMounted(() => {
             <BlogCard
                 v-for="(item, i) in homeData.blog.list"
                 :key="item.uid"
-                :author="item.user_info.username"
                 :class="['wow', (i + 1) % 2 == 0 ? 'bounceInLeft' : 'bounceInRight']"
-                :cover="item.cover"
-                :is-reverse="(i + 1) % 2 == 0"
-                :subtitle="item.sub_title"
-                :time="item.created"
-                :title="item.title"
-                :id="item.uid"
-                :avatar_url="item.user_info.avatar_url"
+                :options="{
+                  id: item.uid,
+                  title: item.title,
+                  subtitle: item.sub_title,
+                  author: item.user_info.username,
+                  cover: item.cover,
+                  avatar_url: item.user_info.avatar_url,
+                  isReverse: (i + 1) % 2 === 0,
+                  time: item.created,
+                }"
                 @cardClick="cardClick(item.uid)"
                 @delClick="del"
             ></BlogCard>
@@ -90,11 +93,12 @@ onMounted(() => {
               <n-pagination
                   v-model:page="homeData.blog.page"
                   v-model:page-size="homeData.blog.limit"
-                  :item-count="homeData.blog.count"
-                  :page-sizes="paginationOpt.pageSizes"
-                  show-size-picker
                   @update:page-size="pageSizeChange"
                   @update:page="pageChange"
+                  show-size-picker
+                  :page-slot="5"
+                  :item-count="homeData.blog.count"
+                  :page-sizes="paginationOpt.pageSizes"
               />
             </div>
           </n-space>
@@ -110,6 +114,9 @@ onMounted(() => {
       </div>
     </div>
   </div>
+  <teleport to="body">
+    <UserInfo v-model="userInfoData.isShow"></UserInfo>
+  </teleport>
 </template>
 
 <style lang="less" scoped>
@@ -231,6 +238,35 @@ onMounted(() => {
           background: linear-gradient(145deg, #cfd6dc, #f6ffff);
           padding: 10px 0;
           border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .home {
+
+    .home-content {
+
+      .right {
+        display: none;
+      }
+
+      .content {
+        width: 100%;
+
+        .tile {
+          .tile-left {
+            display: none;
+          }
+        }
+
+        .blog {
+          .pagination {
+            margin: 10px 0;
+            background: none;
+          }
         }
       }
     }

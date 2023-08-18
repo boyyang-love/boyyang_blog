@@ -42,7 +42,6 @@ const handleUploadChange = (data: {
     uploadData.submit.title = name || ''
     uploadData.submit.des = name || ''
     uploadData.defaultTags = name?.split(' ') || []
-    console.log(uploadData.defaultTags)
     const read = new FileReader()
     read.readAsDataURL(data.file.file as Blob)
     read.onload = e => {

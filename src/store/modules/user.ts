@@ -1,19 +1,10 @@
 import {store} from '@/store'
 import {defineStore} from 'pinia'
 import {User} from '@/api/user/type'
-
-export interface Info {
-    uid: number
-    username: string
-    tel: number | string
-    avatar_url: string
-    gender: number | string
-    background_image: string
-}
+import {userInfo} from '@/api/user'
 
 export interface UserState {
     token: string
-    userInfo: Info
     info: User.Info
     detail: User.Detail
 }
@@ -24,14 +15,6 @@ const useUserStore = defineStore({
         return {
             // 登录成功返回的用户信息
             token: '',
-            userInfo: {
-                uid: 0,
-                username: '',
-                tel: '',
-                avatar_url: '',
-                gender: '',
-                background_image: ''
-            },
             // 用户详细信息
             info: {} as User.Info,
             detail: {} as User.Detail,
@@ -39,27 +22,24 @@ const useUserStore = defineStore({
     },
     getters: {
         getToken: (state: UserState): string => state.token,
-        getUserInfo: (state: UserState): Info => state.userInfo,
     },
     actions: {
         setToken(token: string) {
             this.token = token
         },
-        setUserinfo(userInfo: Info) {
-            this.userInfo = {...userInfo}
+        async getInfoDetail() {
+            let res = await userInfo()
+            res.data.user_info.tel = String(res.data.user_info.tel)
+            res.data.user_info.qq = String(res.data.user_info.qq)
+            this.info = res.data.user_info
+            this.detail = res.data.user_detail
         },
-        setInfo(info: User.Info) {
-            this.info = info
-        },
-        setDetail(detail: User.Detail) {
-            this.detail = detail
-        }
     },
     //开启持久化
     persist: {
         key: 'app-user',
         storage: window.sessionStorage,
-        paths: ['token', 'userInfo', 'info', 'detail'],
+        paths: ['token', 'info', 'detail'],
     },
 })
 

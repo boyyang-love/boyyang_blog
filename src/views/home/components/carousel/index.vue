@@ -38,10 +38,20 @@ const props = withDefaults(defineProps<carouselProps>(), {})
   object-fit: cover;
   object-position: left top;
   transition: all 1s ease-in-out;
-  padding: 15px;
-  border-radius: 25px;
+  padding: 15px 5px;
+  border-radius: 15px;
+
   &:hover {
     object-position: right bottom;
   }
 }
+
+
+@media screen and (max-width: 1200px) {
+  .carousel-img {
+    padding: 10px;
+    border-radius: 5px;
+  }
+}
+
 </style>

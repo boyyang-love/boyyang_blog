@@ -64,7 +64,7 @@ const btnClick = () => {
 
   .btn {
     box-sizing: border-box;
-    width: calc(100% - 65px);
+    width: 100%;
     height: 45px;
     border-radius: 5px;
     box-shadow: 6px 6px 10px #c4cacf,-6px -6px 10px #ffffff;

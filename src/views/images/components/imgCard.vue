@@ -94,7 +94,6 @@ const imagesDownload = () => {
       <div class="img-content">
         <n-image
             :src="props.url"
-            :width="380"
             class="img"
             lazy
             object-fit="cover"
@@ -180,7 +179,7 @@ const imagesDownload = () => {
                   @click="imagesDownload"
               ></n-icon>
               <n-icon
-                  v-if="props.info.uid === userStore.userInfo.uid"
+                  v-if="props.info.uid === userStore.info.uid"
                   :component="CloseCircle as any"
                   color="#373737"
                   size="18"
@@ -224,7 +223,6 @@ const imagesDownload = () => {
 
     .img {
       width: 100%;
-      height: 220px;
       object-fit: cover;
       object-position: center;
       transition: all 0.4s ease-in-out;
@@ -338,6 +336,28 @@ const imagesDownload = () => {
       }
     }
   }
+}
 
+@media screen and (max-width: 1200px) {
+  .img-card-wrapper {
+    .img-content {
+      height: 100%;
+    }
+
+    .img-bottom {
+      .tags {
+        display: none
+      }
+
+      .infos {
+        justify-content: flex-end;
+        padding: 15px 0 0;
+
+        .infos-left {
+          display: none;
+        }
+      }
+    }
+  }
 }
 </style>

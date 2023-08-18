@@ -60,8 +60,9 @@ const loginSubmit = () => {
     window.$loading.loadingStart()
     login(params).then(res => {
         loginData.isError = false
-        loginSuccess(res.data)
-    }).catch(err => {
+        loginSuccess(res.data).then(() => {
+        })
+    }).catch(() => {
         loginData.isError = true
         window.$message.error('登陆失败请稍后重试')
     })
@@ -86,7 +87,7 @@ const registerSubmit = () => {
         window.$message.error('密码不一致')
         return
     }
-    register(params).then(res => {
+    register(params).then(() => {
         const t = setTimeout(() => {
             loginData.isRegister = false
             loginData.username = loginData.r_username
@@ -98,14 +99,14 @@ const registerSubmit = () => {
 }
 
 // 登录成功
-const loginSuccess = (data: Login.loginRes) => {
+const loginSuccess = async (data: Login.loginRes) => {
     const userStore = useUserStoreWithOut()
     data.info.avatar_url = `${env.VITE_APP_IMG_URL}/${data.info.avatar_url}`
     userStore.setToken(data.token)
-    userStore.setUserinfo(data.info)
+    await userStore.getInfoDetail()
     window.$loading.loadingEnd()
 
-    router.replace({name: 'Home'}).then(r => {
+    router.replace({name: 'Home'}).then(() => {
     })
 }
 

@@ -21,9 +21,11 @@ const menuClick = (item: Menu.menuList, index: number) => {
       positiveText: '确定',
       onPositiveClick: () => {
         window.sessionStorage.clear()
-        router.replace({
-          name: 'Login',
-        })
+        router.replace(
+            {
+              name: 'Login',
+            },
+        )
       },
     })
     return

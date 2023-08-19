@@ -7,7 +7,6 @@ import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 
 const userStore = useUserStore()
 const {showInfo} = useUserInfo()
-console.log(env.VITE_APP_IMG_URL)
 
 const url = computed(() => {
   return `${env.VITE_APP_IMG_URL}/${userStore.info.avatar_url}`

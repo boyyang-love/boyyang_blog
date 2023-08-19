@@ -30,7 +30,8 @@ class Http {
         }
 
         return new Promise((resolve, reject) => {
-            this.axiosInstance.request<any, AxiosResponse<Result>>(axiosRequestConfig)
+            this.axiosInstance
+                .request<any, AxiosResponse<Result>>(axiosRequestConfig)
                 .then(
                     (res: AxiosResponse<Result>) => {
                         if (transformRequestData) {

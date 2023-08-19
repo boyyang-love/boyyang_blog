@@ -42,6 +42,7 @@ const submit = () => {
         ).then(() => {
             userInfoData.delUrl = data.avatar_url as string
             data.avatar_url = `avatar/${userInfoData.file.name}`
+            userInfoData.file = null as unknown as File
             updateUserInfoApi(data)
             delOldAvatar()
         })

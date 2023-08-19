@@ -173,6 +173,11 @@ const cancel = () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 50%;
+    background: #e6eef4;
+    border: 5px solid rgb(129,129,129);
+    box-shadow: -20px -20px 60px #c4cacf,
+    20px 20px 60px #ffffff;
   }
 }
 

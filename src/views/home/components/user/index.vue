@@ -40,7 +40,7 @@ const toolTip = computed(() => {
   <div class="user-wrapper">
     <div class="header">
       <n-avatar
-          :size="95"
+          :size="105"
           :src="url"
           bordered
           class="header-img wow slideInDown"
@@ -114,7 +114,7 @@ const toolTip = computed(() => {
     .header-img {
       box-shadow: 3px 3px 3px #c4cacf,
         -3px -3px 3px #ffffff;
-      border: 5px solid whitesmoke;
+      border: 5px solid rgba(17, 17, 17, 0.4);
     }
 
     .user-name {

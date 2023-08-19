@@ -1,4 +1,4 @@
-import {reactive, watchEffect} from 'vue'
+import {reactive} from 'vue'
 import {env} from '@/utils/env'
 
 import {useUserStoreWithOut} from '@/store/modules/user'
@@ -77,7 +77,7 @@ const del = (id: number | string) => {
         positiveText: '确定',
         negativeText: '取消',
         onPositiveClick: () => {
-            deleteExhibition({uid: id}).then(res => {
+            deleteExhibition({uid: id}).then(() => {
                 window.$notification.success({
                     title: '提示',
                     content: '图片删除成功',
@@ -125,7 +125,7 @@ const setBackground = async (id: number | string) => {
     const userStore = useUserStoreWithOut()
     const background_image = imagesData.list.filter(it => it.uid === id)[0].cover_url
     let params = {
-        uid: userStore.userInfo.uid,
+        uid: userStore.info.uid,
         background_image: background_image,
     }
 
@@ -133,7 +133,7 @@ const setBackground = async (id: number | string) => {
     await updateUserInfo(params)
 
     userStore.$patch((state) => {
-        state.userInfo.background_image = background_image
+        state.info.background_image = background_image
         state.info.background_image = background_image
     })
 }

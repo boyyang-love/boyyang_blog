@@ -1,17 +1,24 @@
 <script lang="ts" setup>
-import {ref} from 'vue'
-import {useRouter} from 'vue-router'
+import {computed, onMounted, ref} from 'vue'
+import {useRouter, useRoute} from 'vue-router'
+import {useUserStore} from '@/store/modules/user'
 import {Menu} from './types'
 import {menuList} from './menuList'
+import {env} from '@/utils/env'
+import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 
 const router = useRouter()
+const userStore = useUserStore()
+const {userInfoData} = useUserInfo()
 
 const props = withDefaults(defineProps<Menu.menuProps>(), {
   menuList: () => menuList,
 })
 
 const active = ref<number>(0)
-
+const userAvatar = computed(() => {
+  return `${env.VITE_APP_IMG_URL}/${userStore.info.avatar_url}`
+})
 const menuClick = (item: Menu.menuList, index: number) => {
   if (item.name === '退出') {
     window.$dialog.warning({
@@ -35,11 +42,28 @@ const menuClick = (item: Menu.menuList, index: number) => {
     name: item.name,
   })
 }
+
+onMounted(() => {
+  const route = useRoute()
+  menuList.forEach((it, index) => {
+    if (it.name === route.name) {
+      active.value = index
+    }
+  })
+})
 </script>
 
 <template>
   <div class="menu-wrapper">
     <div class="menu">
+      <div class="avatar">
+        <n-avatar
+            size="large"
+            round
+            :src="userAvatar"
+            @click="userInfoData.isShow = true"
+        ></n-avatar>
+      </div>
       <n-space size="large" vertical>
         <div class="icon-wrapper" v-for="(item, i) in props.menuList">
           <n-tooltip
@@ -68,9 +92,9 @@ const menuClick = (item: Menu.menuList, index: number) => {
 <style lang="less" scoped>
 .menu-wrapper {
   height: 100%;
-  width: 55px;
+  width: 50px;
   position: fixed;
-  left: -50px;
+  //left: -50px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -92,6 +116,38 @@ const menuClick = (item: Menu.menuList, index: number) => {
     border-radius: 0 15px 15px 0;
     box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.4), 7px 3px 3px rgba(0, 0, 0, 0.1);
     position: relative;
+
+    .avatar {
+      margin-bottom: 20px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+
+      &:before {
+        content: '';
+        width: 1%;
+        height: 2px;
+        position: absolute;
+        bottom: -10px;
+        background-color: #1fab89;
+
+        animation: thr 1.5s ease-in-out infinite;
+      }
+
+      @keyframes thr {
+        0% {
+          width: 1%;
+        }
+
+        50% {
+          width: 90%;
+        }
+
+        100% {
+          width: 1%;
+        }
+      }
+    }
 
     .icon-wrapper {
       box-sizing: border-box;
@@ -115,7 +171,7 @@ const menuClick = (item: Menu.menuList, index: number) => {
       }
 
       .active {
-        color: #d50e0e;
+        color: #1fab89;
       }
     }
   }

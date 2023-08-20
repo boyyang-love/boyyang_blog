@@ -5,8 +5,12 @@ import Menu from './components/menu/index.vue'
 import BackGround from '@/components/Background/index.vue'
 import {useUserStore} from '@/store/modules/user'
 import {env} from '@/utils/env'
+import UserInfo from '@/views/userInfo/index.vue'
+import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 
 const userStore = useUserStore()
+const {userInfoData} = useUserInfo()
+
 onMounted(() => {
   const wow = new Wow({
     boxClass: 'wow', // animated element css class (default is wow)
@@ -39,6 +43,10 @@ const background = computed(() => {
   >
     <div class="router-out">
       <Menu style="z-index: 9"></Menu>
+
+      <teleport to="body">
+        <UserInfo v-model="userInfoData.isShow"></UserInfo>
+      </teleport>
       <!-- 路由出口 -->
       <router-view></router-view>
     </div>

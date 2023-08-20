@@ -13,14 +13,12 @@ import UserInfo from '@/views/userInfo/index.vue'
 import {useHomeData, useHomeMethods} from '../../hooks/useHome'
 import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition'
 import {useUserStore} from '@/store/modules/user'
-import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 
 const {homeData, paginationOpt} = useHomeData()
 const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange, del} = useHomeMethods()
 const {exhibitionData} = useExhibitionData()
 const {getExhibitionList} = useExhibitionMethods()
 const userStore = useUserStore()
-const {userInfoData} = useUserInfo()
 
 onMounted(() => {
   const wow = new Wow({
@@ -114,9 +112,6 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <teleport to="body">
-    <UserInfo v-model="userInfoData.isShow"></UserInfo>
-  </teleport>
 </template>
 
 <style lang="less" scoped>

@@ -1,8 +1,12 @@
 <script lang="ts" setup>
 import {computed, ref} from 'vue'
 import {ShieldCheckmark, CloseCircle, CheckmarkCircle} from '@vicons/ionicons5'
+import {useUserMethods} from '../hooks'
+
+const {del} = useUserMethods()
 
 interface Props {
+  id: string | number
   label?: string
   status: number // 1待审核 2审核通过 3未通过审核
   url: string
@@ -64,12 +68,20 @@ const status = computed(() => {
       <div class="status-point"></div>
       <div class="status-text">{{ status.label }}</div>
       <div class="setting" v-if="props.status != 2">
-        <n-icon
-            :component="ShieldCheckmark as any"
-            size="25"
-            class="icon"
-            @click="isShowSetting = true"
-        ></n-icon>
+        <n-space>
+          <n-icon
+              :component="ShieldCheckmark as any"
+              size="20"
+              class="icon"
+              @click="isShowSetting = true"
+          ></n-icon>
+          <n-icon
+              :component="CloseCircle as any"
+              size="20"
+              class="icon"
+              @click="del(props.id)"
+          ></n-icon>
+        </n-space>
       </div>
     </div>
 

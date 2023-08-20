@@ -49,6 +49,7 @@ onMounted(() => {
         <LikeList
             :status="item.status"
             :url="item.cover"
+            :id="item.uid"
             v-model="item.reject_res"
             @submit="(e: number) => changeStatus(e, item.uid, item.reject_res)"
         ></LikeList>

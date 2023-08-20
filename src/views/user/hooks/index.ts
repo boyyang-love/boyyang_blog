@@ -1,6 +1,6 @@
 import {reactive, watch, watchEffect} from 'vue'
 import {env} from '@/utils/env'
-import {exhibitionList, changeExhibitionStatus} from '@/api/exhibition'
+import {exhibitionList, changeExhibitionStatus, deleteExhibition} from '@/api/exhibition'
 
 const userData = reactive({
     page: 1,
@@ -29,6 +29,29 @@ const getExhibitionList = (type: number) => {
             ex.cover = `${env.VITE_APP_IMG_URL}/${ex.cover}`
             return ex
         })
+    })
+}
+
+
+const del = (id: number | string) => {
+    window.$dialog.create({
+        type: 'error',
+        title: '提示',
+        content: '确定要删除吗？',
+        positiveText: '确定',
+        negativeText: '取消',
+        onPositiveClick: () => {
+            deleteExhibition({uid: id}).then(() => {
+                window.$notification.success({
+                    title: '提示',
+                    content: '图片删除成功',
+                    duration: 3000,
+                })
+
+                getExhibitionList(userData.type)
+            })
+
+        },
     })
 }
 
@@ -71,6 +94,7 @@ const useUserMethods = () => {
         getExhibitionList,
         tabChange,
         changeStatus,
+        del,
     }
 }
 

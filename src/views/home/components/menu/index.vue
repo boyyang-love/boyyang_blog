@@ -9,7 +9,7 @@ import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 
 const router = useRouter()
 const userStore = useUserStore()
-const {userInfoData} = useUserInfo()
+const {showInfo} = useUserInfo()
 
 const props = withDefaults(defineProps<Menu.menuProps>(), {
   menuList: () => menuList,
@@ -61,7 +61,7 @@ onMounted(() => {
             size="large"
             round
             :src="userAvatar"
-            @click="userInfoData.isShow = true"
+            @click="showInfo(true)"
         ></n-avatar>
       </div>
       <n-space size="large" vertical>

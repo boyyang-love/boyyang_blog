@@ -141,7 +141,6 @@ const setBackground = async (id: number | string) => {
 const useImagesData = () => {
     return {
         imagesData,
-
     }
 }
 

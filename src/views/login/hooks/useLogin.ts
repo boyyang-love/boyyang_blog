@@ -17,7 +17,6 @@ const loginData = reactive({
     r_isError: false,
     r_avatarUrl: '',
 
-
     isError: false,
 })
 

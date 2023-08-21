@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import {BackGround} from '@/components/Background'
+import {useAdmin} from './hooks/useAdmin'
+
+const {adminData, changeUsername} = useAdmin()
 
 const BACKGROUND_COLOR = 'rgba(0, 0, 0, 0.3)'
 

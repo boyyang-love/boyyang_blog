@@ -44,16 +44,6 @@ const modelValue = defineModel<any>()
           class="input"
           size="large"
       ></NInput>
-
-      <!--      <NInputNumber-->
-      <!--          v-else-->
-      <!--          :bordered="false"-->
-      <!--          :show-button="false"-->
-      <!--          v-model:value="modelValue as number"-->
-      <!--          v-bind="{...props.moreProps}"-->
-      <!--          class="input"-->
-      <!--          size="large"-->
-      <!--      />-->
     </div>
   </div>
 </template>

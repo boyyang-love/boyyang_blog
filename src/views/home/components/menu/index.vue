@@ -58,9 +58,10 @@ onMounted(() => {
     <div class="menu">
       <div class="avatar">
         <n-avatar
-            size="large"
-            round
+            :size="45"
+            :bordered="true"
             :src="userAvatar"
+            round
             @click="showInfo(true)"
         ></n-avatar>
       </div>
@@ -92,7 +93,7 @@ onMounted(() => {
 <style lang="less" scoped>
 .menu-wrapper {
   height: 100%;
-  width: 50px;
+  width: 55px;
   position: fixed;
   //left: -50px;
   display: flex;
@@ -122,6 +123,9 @@ onMounted(() => {
       position: relative;
       display: flex;
       justify-content: center;
+      align-items: center;
+      border: 2px solid #1fab89;
+      border-radius: 50%;
 
       &:before {
         content: '';

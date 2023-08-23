@@ -121,7 +121,7 @@ const imagesDownload = () => {
               class="tag"
               v-for="(item, i) in tags"
               :key="i">
-            <span>{{ item }}</span>
+            <span>#{{ item }}</span>
           </div>
         </div>
         <div class="infos">
@@ -276,23 +276,27 @@ const imagesDownload = () => {
       display: flex;
       align-items: center;
       overflow-x: auto;
+      padding: 0 15px;
 
       .tag {
         box-shadow: 3px 3px 4px #c4cacf,
           -2px -2px 2px #ffffff;
         color: #888888;
         border-radius: 8px 0 8px 0;
-        padding: 0 5px;
-        margin: 2px 3px;
+        padding: 2px 10px;
+        margin: 1px 3px;
         font-size: 12px;
         cursor: pointer;
-        border: 1px solid #888888;
-        transform: skew(-20deg);
+        border: 2px solid rgba(17, 17, 17, 1);
+        transform: skew(-10deg);
         text-align: center;
         white-space: nowrap;
 
         span {
-          transform: skew(20deg);
+          transform: skew(10deg);
+          color: #1fab89;
+          font-weight: bolder;
+          font-size: 12px;
         }
       }
     }

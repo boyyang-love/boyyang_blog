@@ -103,7 +103,7 @@ watch(() => props.tags, () => {
   width: v-bind('props.width');
   height: 100%;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
   box-shadow: 7px 7px 10px #c4cacf,
     -7px -7px 10px #ffffff;
   overflow: hidden;
@@ -126,9 +126,10 @@ watch(() => props.tags, () => {
       }
 
       .tag {
-        padding: 5px;
-        border: 1px solid #888888;
-        border-radius: 5px;
+        padding: 5px 10px;
+        border: 2px solid rgba(17, 17, 17, 0.4);
+        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
         margin: 5px;
         font-size: 13px;
         position: relative;

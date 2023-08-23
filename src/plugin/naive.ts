@@ -80,6 +80,7 @@ import {
     NEllipsis,
     NCalendar,
     NPopconfirm,
+    NNumberAnimation,
 } from 'naive-ui'
 
 const naive = create({
@@ -163,6 +164,7 @@ const naive = create({
         NEllipsis,
         NCalendar,
         NPopconfirm,
+        NNumberAnimation,
     ],
 })
 

@@ -48,7 +48,8 @@ const btnClick = () => {
           :component="props.isError ? CloseCircle as any : CheckmarkCircle as any"
           :color="props.isError ? '#c2516b' : '#23D69B'"
           :size="24"
-      ></NIcon>
+      >
+      </NIcon>
     </div>
   </div>
 </template>

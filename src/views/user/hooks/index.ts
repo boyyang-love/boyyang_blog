@@ -18,6 +18,7 @@ const getExhibitionList = (type: number) => {
         page: userData.page,
         limit: userData.limit,
         type: type,
+        sort: 'created desc'
     }
 
     exhibitionList(params).then((res) => {

@@ -9,7 +9,7 @@ import ImgCard from './components/imgCard.vue'
 // hooks
 import {useImagesData, useImagesMethods} from './hooks/useImages'
 
-const {imagesData} = useImagesData()
+const {imagesData, SortOptions} = useImagesData()
 const {getList, pageChange, pageSizeChange, del, like, star, setBackground} = useImagesMethods()
 
 
@@ -72,16 +72,25 @@ onMounted(() => {
       </div>
     </div>
     <div class="pagination wow bounceInUp">
-      <n-pagination
-          v-model:item-count="imagesData.count"
-          v-model:page="imagesData.page"
-          v-model:page-size="imagesData.limit"
-          v-model:page-sizes="imagesData.pageSizes"
-          @update:page-size="pageSizeChange"
-          @update:page="pageChange"
-          :page-slot="5"
-          show-size-picker
-      />
+      <n-space>
+        <n-pagination
+            v-model:item-count="imagesData.count"
+            v-model:page="imagesData.page"
+            v-model:page-size="imagesData.limit"
+            v-model:page-sizes="imagesData.pageSizes"
+            @update:page-size="pageSizeChange"
+            @update:page="pageChange"
+            :page-slot="5"
+            show-size-picker
+        />
+
+        <n-select
+            size="small"
+            v-model:value="imagesData.sort"
+            :options="SortOptions"
+            :consistent-menu-width="false"
+        />
+      </n-space>
     </div>
   </div>
 </template>

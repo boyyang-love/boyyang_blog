@@ -14,6 +14,7 @@ const getData = () => {
         // page: 1,
         // limit: 10,
         type: 2,
+        sort: 'created desc'
     }
     exhibitionList(params).then(res => {
         timeAxisData.count = res.data.count

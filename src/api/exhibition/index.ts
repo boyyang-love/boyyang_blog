@@ -15,6 +15,7 @@ export const exhibitionList = (
         limit?: number
         type?: number
         public?: boolean
+        sort?: string
     },
 ) => {
     return http.request<Exhibition.ExhibitionListRes>(

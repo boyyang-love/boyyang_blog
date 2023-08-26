@@ -1,4 +1,4 @@
-import {reactive} from 'vue'
+import {reactive, watch} from 'vue'
 import {env} from '@/utils/env'
 
 import {useUserStoreWithOut} from '@/store/modules/user'
@@ -33,6 +33,38 @@ const imagesData = reactive({
             value: 36,
         },
     ],
+    sort: 'thumbs_up desc',
+})
+
+const SortOptions = [
+    {
+        label: '发布时间升序',
+        value: 'created asc',
+    },
+    {
+        label: '发布时间降序',
+        value: 'created desc',
+    },
+    {
+        label: '更新时间升序',
+        value: 'updated asc',
+    },
+    {
+        label: '更新时间降序',
+        value: 'updated desc',
+    },
+    {
+        label: '点赞升序',
+        value: 'thumbs_up asc',
+    },
+    {
+        label: '点赞降序',
+        value: 'thumbs_up desc',
+    },
+]
+
+watch(() => imagesData.sort, () => {
+    getList()
 })
 
 
@@ -42,6 +74,7 @@ const getList = () => {
         limit: imagesData.limit,
         type: 2,
         public: true,
+        sort: imagesData.sort,
     }
     exhibitionList(params).then(res => {
         imagesData.count = res.data.count
@@ -141,6 +174,7 @@ const setBackground = async (id: number | string) => {
 const useImagesData = () => {
     return {
         imagesData,
+        SortOptions,
     }
 }
 

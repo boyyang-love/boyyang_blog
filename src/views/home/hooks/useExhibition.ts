@@ -5,7 +5,7 @@ import {env} from '@/utils/env'
 const exhibitionData = reactive({
     exhibitionList: [] as Exhibition.ExhibitionsInfo[],
     page: 1,
-    limit: 10,
+    limit: 20,
 })
 
 // 获取首页图片列表
@@ -14,6 +14,7 @@ const getExhibitionList = () => {
         page: exhibitionData.page,
         limit: exhibitionData.limit,
         type: 2,
+        sort: 'thumbs_up desc'
     }
     exhibitionList(params).then(res => {
         exhibitionData.exhibitionList =

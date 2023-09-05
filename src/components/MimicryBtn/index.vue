@@ -65,7 +65,7 @@ const btnClick = () => {
 
   .btn {
     box-sizing: border-box;
-    width: 100%;
+    width: calc(100% - 50px);
     height: 45px;
     border-radius: 5px;
     box-shadow: 6px 6px 10px #c4cacf,-6px -6px 10px #ffffff;
@@ -74,6 +74,7 @@ const btnClick = () => {
     align-items: center;
     color: #393e46;
     font-weight: bolder;
+    margin-right: 10px;
   }
 
   .error-btn {
@@ -85,7 +86,6 @@ const btnClick = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 15px;
   }
 }
 </style>

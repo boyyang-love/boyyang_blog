@@ -1,6 +1,16 @@
 import {http} from '@/utils/http'
 
-export const createExhibition = (data: { title: string; des: string; cover: string, tags: string }) => {
+export const createExhibition = (
+    data: {
+        title: string;
+        des: string;
+        cover: string,
+        tags: string,
+        size: number,
+        wh: string,
+        type: string,
+    },
+) => {
     return http.request({
         url: '/exhibition/create',
         method: 'post',

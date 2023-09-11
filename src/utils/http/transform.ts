@@ -82,7 +82,6 @@ const transForm: TransForm = {
             router.replace({name: 'Login'}).then(() => {
             })
         }
-
     },
 }
 

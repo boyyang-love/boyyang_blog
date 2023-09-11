@@ -75,7 +75,7 @@ const transForm: TransForm = {
         if (e?.response?.status === 401) {
             window.$notification.error({
                 title: '提示',
-                content: 'token 过期即将重新登录',
+                content: 'token过期请重新登录',
                 duration: 2000,
             })
 

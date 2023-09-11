@@ -1,6 +1,7 @@
 import {http} from '@/utils/http'
+import {imageInfo, type Info} from '@/utils/imageInfo'
 
-interface beforeUploadRes {
+interface beforeUploadRes extends Info {
     url: string
     token: string
     authorization: string
@@ -24,6 +25,8 @@ export const upload = async (params: { file_name: string; file: File, path?: str
         },
     )
 
+    const info = await imageInfo(params.file)
+
     const data = new FormData()
     data.append('key', res.data.key)
     data.append('Signature', res.data.authorization)
@@ -45,7 +48,7 @@ export const upload = async (params: { file_name: string; file: File, path?: str
             },
         )
 
-        resolve(res.data)
+        resolve({...res.data, ...info})
     })
 }
 

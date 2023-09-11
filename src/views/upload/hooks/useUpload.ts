@@ -1,6 +1,5 @@
 import {computed, PropType, reactive} from 'vue'
 import {UploadFileInfo, UploadInst} from 'naive-ui'
-import {env} from '@/utils/env'
 
 // api
 import {createExhibition} from '@/api/exhibition'
@@ -38,6 +37,7 @@ const handleUploadChange = (data: {
         uploadData.previewUrl = ''
         return
     }
+
     let name = data.file.name.split('.').shift()
     uploadData.submit.title = name || ''
     uploadData.submit.des = name || ''
@@ -70,11 +70,14 @@ const submit = (uploadRef: UploadInst | null) => {
         file: uploadData.fileList[0].file as File,
     }
     uploadData.isShowSpin = true
-    upload(params).then((res: any) => {
+    upload(params).then((res) => {
         uploadData.submit.cover = res.key
 
         let params = {
             ...uploadData.submit,
+            size: res.size,
+            wh: res.wh,
+            type: res.type,
         }
         createExhibition(params).then(() => {
             uploadData.isShowSpin = false

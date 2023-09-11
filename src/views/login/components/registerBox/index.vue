@@ -74,7 +74,7 @@ onMounted(() => {
 
         <div class="bottom-btn">
           <Btn
-              width="300px"
+              width="350px"
               @btn-click="registerSubmit"
               :is-error="loginData.r_isError"
           ></Btn>
@@ -205,7 +205,6 @@ onMounted(() => {
 
     .bottom-btn {
       box-sizing: border-box;
-      width: 100%;
       margin-top: 35px;
       display: flex;
       justify-content: center;

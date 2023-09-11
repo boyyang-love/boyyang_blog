@@ -66,6 +66,7 @@ const transForm: TransForm = {
 
         return res
     },
+
     responseInterceptors(res: AxiosResponse<Result, any>): AxiosResponse<Result, any> {
         return res
     },

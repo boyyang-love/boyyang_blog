@@ -3,6 +3,7 @@ import {useUserStoreWithOut} from '@/store/modules/user'
 import {updateUserInfo} from '@/api/user'
 import {upload, delUpload} from '@/api/upload'
 import {User} from '@/api/user/type'
+import {env} from '@/utils/env'
 
 const userStore = useUserStoreWithOut()
 const userInfoData = reactive({
@@ -69,6 +70,13 @@ const updateUserInfoApi = (data: User.UpdateUserInfo) => {
 }
 
 const delOldAvatar = () => {
+    const avatar = Array.from({length: 11}).map((_, i) => {
+        return `avatar/${i < 9 ? '0' + (i + 1) : (i + 1)}m.svg`
+    })
+
+    if (avatar.includes(userInfoData.delUrl)) {
+        return
+    }
     delUpload({key: userInfoData.delUrl}).then(() => {
     })
 }

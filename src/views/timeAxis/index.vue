@@ -43,7 +43,6 @@ onMounted(() => {
             <div class="header-wrapper">
               <div class="item-title">
                 <span>
-                  {{ index + 1 }}
                   <n-icon :size="20" class="icon">
                     <Image></Image>
                   </n-icon>
@@ -144,8 +143,13 @@ onMounted(() => {
           object-fit: cover;
           border: 8px solid rgba(17, 17, 17, 1);
           border-radius: 5px;
-          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3),
-            -5px -5px 5px rgb(183, 191, 215);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3),
+            -5px -5px 10px rgb(183, 191, 215);
+        }
+
+        .loading {
+          width: 100%;
+          height: 100%;
         }
       }
     }

@@ -2,6 +2,7 @@
 import {computed, ref} from 'vue'
 import {ShieldCheckmark, CloseCircle, CheckmarkCircle} from '@vicons/ionicons5'
 import {useUserMethods} from '../hooks'
+import {useUserStore} from '@/store/modules/user'
 
 const {del} = useUserMethods()
 
@@ -21,6 +22,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emits = defineEmits<Emits>()
+
+const userStore = useUserStore()
 
 const modelValue = defineModel<string>()
 
@@ -67,7 +70,7 @@ const status = computed(() => {
     <div :style="{'--color': status.color}" class="status-wrapper">
       <div class="status-point"></div>
       <div class="status-text">{{ status.label }}</div>
-      <div class="setting" v-if="props.status != 2">
+      <div class="setting" v-if="props.status != 2 && userStore.info.role === 'admin'  ">
         <n-space>
           <n-icon
               :component="ShieldCheckmark as any"

@@ -7,6 +7,7 @@ declare namespace Login {
             avatar_url: string
             tel: string
             background_image: string
+            role: string
         }
         token: string
     }

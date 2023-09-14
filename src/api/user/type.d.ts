@@ -32,6 +32,7 @@ export namespace User {
         tel: number | string
         background_image: string
         motto: string
+        role: string
     }
 
     export interface Detail {

@@ -69,6 +69,16 @@
 * 对象存储
 * 微信云开发
 
+## 页面在线预览
+
+* 系统账号：boyyang
+* 系统密码：123456
+
+请不要随意上传，或者删除相关资源。
+
+
+[访问地址](https://prod-2g5hif5wbec83baa-1301921121.tcloudbaseapp.com/)
+
 ## 后端接口文档
 
 [接口文档地址](https://console-docs.apipost.cn/preview/03ccd55c68247833/3eb25d53d437d3ea)

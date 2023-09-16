@@ -2,6 +2,7 @@
 import {onMounted, nextTick, computed} from 'vue'
 import Wow from 'wow.js'
 import Menu from './components/menu/index.vue'
+import UploadMenu from './components/menuUpload/index.vue'
 import BackGround from '@/components/Background/index.vue'
 import {useUserStore} from '@/store/modules/user'
 import {env} from '@/utils/env'
@@ -43,6 +44,7 @@ const background = computed(() => {
   >
     <div class="router-out">
       <Menu style="z-index: 9"></Menu>
+      <UploadMenu style="z-index: 9"></UploadMenu>
 
       <teleport to="body">
         <UserInfo v-model="userInfoData.isShow"></UserInfo>

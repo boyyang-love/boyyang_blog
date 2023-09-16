@@ -8,7 +8,7 @@ import Tile from '../tile/index.vue'
 import Notice from '../notice/index.vue'
 import Carousel from '../carousel/index.vue'
 import PublishChart from '../publishChart/index.vue'
-import UserInfo from '@/views/userInfo/index.vue'
+import {ArrowDown} from '@vicons/ionicons5'
 // hooks
 import {useHomeData, useHomeMethods} from '../../hooks/useHome'
 import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition'
@@ -49,6 +49,15 @@ onMounted(() => {
           :title="userStore.info.username"
           :subtitle="userStore.info.motto"
       ></PrintText>
+
+      <div class="home-bottom-arrow">
+        <n-icon
+            size="34"
+            class="icon"
+        >
+          <ArrowDown></ArrowDown>
+        </n-icon>
+      </div>
     </div>
     <div class="home-content">
       <div class="content">
@@ -142,6 +151,30 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
     color: whitesmoke;
+    position: relative;
+
+    .home-bottom-arrow {
+      position: absolute;
+      bottom: 15px;
+
+      .icon {
+        animation: downUp .5s linear infinite;
+      }
+
+      @keyframes downUp {
+        0% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(20px);
+        }
+
+        100% {
+          transform: translateY(0);
+        }
+      }
+    }
   }
 
   .home-content {

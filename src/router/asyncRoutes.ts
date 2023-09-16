@@ -82,6 +82,15 @@ const asyncRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/admin/index.vue'),
     },
+    {
+        path: '/editor',
+        name: 'Editor',
+        meta: {
+            title: '富文本编辑',
+            // roles: ['admin'],
+        },
+        component: () => import('@/views/editor/index.vue'),
+    },
 ]
 
 export {asyncRoutes}

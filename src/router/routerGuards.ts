@@ -21,7 +21,7 @@ const createRouterGuards = (router: Router) => {
                 return
             } else {
                 // 添加权限路由
-                await routesStore.setRoutes(['admin'])
+                await routesStore.setRoutes([userStore.info.role])
                 const permissionRoutes = routesStore.getRoutes
                 permissionRoutes.forEach((item: RouteRecordRaw) => {
                     router.addRoute(item)

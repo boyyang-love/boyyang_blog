@@ -78,7 +78,7 @@ const asyncRoutes: RouteRecordRaw[] = [
         name: 'Admin',
         meta: {
             title: '管理后台',
-            // roles: ['admin'],
+            roles: ['admin'],
         },
         component: () => import('@/views/admin/index.vue'),
     },

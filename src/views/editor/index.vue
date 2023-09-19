@@ -14,6 +14,7 @@ const {
   isShowDialog,
   articleData,
   handleCreated,
+  handleUploadChange,
   submit,
   back,
 } = useEditor()
@@ -22,7 +23,7 @@ onMounted(() => {
   const wow = new Wow({
     boxClass: 'wow', // animated element css class (default is wow)
     animateClass: 'animated', // animation css class (default is animated)
-    offset: 100, // distance to the element when triggering the animation (default is 0)
+    offset: 10, // distance to the element when triggering the animation (default is 0)
     mobile: true, // trigger animations on mobile devices (default is true)
     live: true, // act on asynchronously loaded content (default is true)
     callback: function () {
@@ -89,7 +90,6 @@ onMounted(() => {
           返回
         </n-tooltip>
       </n-space>
-
     </div>
     <n-modal
         v-model:show="isShowDialog"
@@ -135,8 +135,16 @@ onMounted(() => {
               multiple
               tag
           />
-        </n-space>
 
+          <n-upload
+              action="#"
+              list-type="image-card"
+              :max="1"
+              @change="handleUploadChange"
+              :default-upload="false"
+              :default-file-list="articleData.preview_url"
+          />
+        </n-space>
       </div>
     </n-modal>
   </div>
@@ -158,15 +166,14 @@ onMounted(() => {
     border: 1px solid cadetblue;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow:  10px 10px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
   }
 
   .submit-wrapper {
     box-sizing: border-box;
     position: absolute;
-    width: 40px;
-    right: 20px;
-    bottom: 20px;
+    right: 10px;
+    bottom: 10px;
 
     .icon {
       border: 1px solid whitesmoke;

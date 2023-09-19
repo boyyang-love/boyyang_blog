@@ -15,7 +15,7 @@ const useConfig = () => {
                     const fileInfo = await upload({
                         file_name: file.name,
                         file: file,
-                        path: `${userStore.info.uid}/editor`,
+                        path: `${userStore.info.uid}/article`,
                     })
 
                     window.$loading.loadingEnd()

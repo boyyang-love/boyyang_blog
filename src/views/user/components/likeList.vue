@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {computed, ref} from 'vue'
-import {ShieldCheckmark, CloseCircle, CheckmarkCircle} from '@vicons/ionicons5'
+import {ShieldCheckmark, CloseCircle, CheckmarkCircle, Fitness, PaperPlane, Reader} from '@vicons/ionicons5'
 import {useUserMethods} from '../hooks'
 import {useUserStore} from '@/store/modules/user'
 
@@ -62,28 +62,92 @@ const status = computed(() => {
 </script>
 
 <template>
-  <div class="like-list-wrapper">
+  <div class="like-list-wrapper" id="like-list-wrapper">
     <div class="img-wrapper">
-      <img alt="" :src="url">
+      <n-image
+          class="img"
+          object-fit="cover"
+          lazy
+          :src="props.url"
+      >
+        <template #placeholder>
+          <div class="loading">
+            <n-icon
+                class="icon"
+                color="#f00056"
+                size="55"
+            >
+              <Fitness></Fitness>
+            </n-icon>
+          </div>
+        </template>
+      </n-image>
     </div>
 
     <div :style="{'--color': status.color}" class="status-wrapper">
       <div class="status-point"></div>
       <div class="status-text">{{ status.label }}</div>
-      <div class="setting" v-if="props.status != 2 && userStore.info.role === 'admin'  ">
-        <n-space>
-          <n-icon
-              :component="ShieldCheckmark as any"
-              size="20"
-              class="icon"
-              @click="isShowSetting = true"
-          ></n-icon>
-          <n-icon
-              :component="CloseCircle as any"
-              size="20"
-              class="icon"
-              @click="del(props.id)"
-          ></n-icon>
+      <div class="setting">
+        <n-space size="small">
+          <div>
+            <n-tooltip trigger="hover">
+              <template #trigger>
+                <div>
+                  <n-icon
+                      v-if="props.status === 3"
+                      size="20"
+                      class="icon"
+                      @click="isShowSetting = true"
+                  >
+                    <Reader></Reader>
+                  </n-icon>
+                </div>
+              </template>
+              查看驳回原因
+            </n-tooltip>
+          </div>
+          <div>
+            <n-popconfirm
+                trigger="hover"
+                positive-text="提交"
+                negative-text="算了"
+                @positive-click="emits('submit', 1)"
+            >
+              <template
+                  #trigger>
+                <div>
+                  <n-icon
+                      v-if="props.status === 3"
+                      size="20"
+                      class="icon"
+                  >
+                    <PaperPlane></PaperPlane>
+                  </n-icon>
+                </div>
+              </template>
+              重新提交审核
+            </n-popconfirm>
+          </div>
+
+          <div>
+            <n-popconfirm
+                trigger="hover"
+                positive-text="删除"
+                negative-text="算了"
+                @click="del(props.id)"
+            >
+              <template #trigger>
+                <div>
+                  <n-icon
+                      :component="CloseCircle as any"
+                      size="20"
+                      class="icon"
+                  ></n-icon>
+                </div>
+              </template>
+              删除图片
+            </n-popconfirm>
+          </div>
         </n-space>
       </div>
     </div>
@@ -95,30 +159,11 @@ const status = computed(() => {
             <n-input
                 type="textarea"
                 :bordered="false"
-                placeholder="请输入驳回原因"
+                placeholder=""
                 :autosize="{maxRows: 5, minRows: 5}"
-                v-model:value="modelValue as string"
+                :value="modelValue as string"
+                readonly
             ></n-input>
-          </div>
-          <div class="bottom-btns">
-            <n-space align="end">
-              <n-button color="#1fab89" size="small" @click="emits('submit', 2); isShowSetting = false">
-                <template #icon>
-                  <n-icon>
-                    <CheckmarkCircle/>
-                  </n-icon>
-                </template>
-                通过
-              </n-button>
-              <n-button color="#f73859" size="small" @click="emits('submit', 3); isShowSetting = false">
-                <template #icon>
-                  <n-icon>
-                    <CloseCircle/>
-                  </n-icon>
-                </template>
-                驳回
-              </n-button>
-            </n-space>
           </div>
         </div>
         <div class="close">
@@ -155,14 +200,20 @@ const status = computed(() => {
     overflow: hidden;
     padding: 10px;
 
-    img {
+    .img {
       box-sizing: border-box;
       width: 100%;
       height: 100%;
-      box-shadow: 5px 5px 6px #c4cacf,
-        -6px -6px 6px #ffffff;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 5px;
+
+      .loading {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 
@@ -266,5 +317,12 @@ const status = computed(() => {
 .setting-enter-from,
 .setting-leave-to {
   transform: translateY(-400px);
+}
+</style>
+
+<style>
+#like-list-wrapper .n-image img {
+  width: 100%;
+  height: 100%;
 }
 </style>

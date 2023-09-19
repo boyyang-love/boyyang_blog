@@ -1,5 +1,8 @@
 import {onBeforeUnmount, reactive, ref, shallowRef} from 'vue'
 import {router} from '@/router'
+import {UploadFileInfo} from 'naive-ui'
+import {upload, delUpload} from '@/api/upload'
+import {useUserStoreWithOut} from '@/store/modules/user'
 
 const useEditor = () => {
     // 编辑器实例，必须用 shallowRef
@@ -10,6 +13,7 @@ const useEditor = () => {
         title: '',
         sub_title: '',
         tags: [],
+        preview_url: [] as UploadFileInfo[],
     })
 
     // 组件销毁时，也及时销毁编辑器
@@ -26,7 +30,7 @@ const useEditor = () => {
 
     const submit = () => {
         const editor = editorRef.value
-        console.log(editor.getHtml())
+        console.log(articleData.preview_url)
     }
 
     const back = () => {
@@ -35,11 +39,26 @@ const useEditor = () => {
         }).then()
     }
 
+    const handleUploadChange = (data: {
+        event: Event
+        fileList: UploadFileInfo[]
+        file: UploadFileInfo
+    }) => {
+        const userStore = useUserStoreWithOut()
+        if (data.event == null) {
+            articleData.preview_url = []
+            return
+        }
+
+        articleData.preview_url = data.fileList
+    }
+
     return {
         editorRef,
         html,
         isShowDialog,
         articleData,
+        handleUploadChange,
         handleCreated,
         submit,
         back,

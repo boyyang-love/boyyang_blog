@@ -40,7 +40,19 @@ onMounted(() => {
           :review_rjection="userData.review_rjection"
       ></UserinfoCard>
     </div>
-    <div class="bottom-content wow fadeInRightBig">
+
+    <n-empty
+        description="是空的？"
+        v-if="userData.list.length === 0"
+    >
+      <template #icon></template>
+      <template #extra>
+        <div class="empty-wrapper">
+          <img src="@/assets/empty.png" alt="呆萌" style="height: 300px"/>
+        </div>
+      </template>
+    </n-empty>
+    <div class="bottom-content wow fadeInRightBig" v-else>
       <div
           v-for="item in userData.list"
           :key="item.uid"

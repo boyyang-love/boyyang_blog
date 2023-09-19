@@ -1,30 +1,57 @@
 <script lang="ts" setup>
-import Input from './input.vue'
-import type {F404Props} from './Props'
-import {ref} from 'vue'
-
-const name = ref<any>({name: 'yang', age: 10})
-
-console.log(name.value)
+import {ChevronBack} from '@vicons/ionicons5'
+import {router} from '@/router'
 </script>
 
 <template>
   <div class="container">
-    <div class="name">
-      <div class="age" style="color: whitesmoke;">2222222{{ name }}</div>
+    <div class="back" @click="router.back()">
+        <n-icon
+            :size="25"
+            color="#fff"
+        >
+          <ChevronBack></ChevronBack>
+        </n-icon>
+        <span class="text">
+        返回
+      </span>
 
-      <Input v-model="name"></Input>
     </div>
   </div>
 </template>
 
 <style lang="less" scoped>
 .container {
-  background-image: url("@/assets/00008-preview.jpg");
-  .name {
-    .age {
-      color: v-bind('props.name')
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("@/assets/404.png");
+  background-repeat: no-repeat;
+  background-size: 50% 80%;
+  background-position: center center;
+  display: flex;
+  justify-content: center;
+
+  .back {
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid whitesmoke;
+    padding: 5px 25px 5px 20px ;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    &:hover {
+      border: 1px solid palevioletred;
+    }
+
+    .text {
+      color: whitesmoke;
+      font-size: 20px;
     }
   }
+
 }
 </style>

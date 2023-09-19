@@ -49,8 +49,11 @@ const isLoading = ref<boolean>(false)
 const emit = defineEmits<emit>()
 
 const tags = computed(() => {
-
-  return props.tags.split(',') || []
+  if (props.tags && props.tags !== ""){
+    return props.tags.split(',').filter(t => t !== "")
+  }else {
+    return []
+  }
 })
 const del = () => {
   emit('del', props.id)
@@ -116,7 +119,7 @@ const imagesDownload = () => {
         </div>
       </div>
       <div class="img-bottom">
-        <div class="tags">
+        <div class="tags" v-show="tags.length > 0">
           <div
               class="tag"
               v-for="(item, i) in tags"

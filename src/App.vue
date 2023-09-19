@@ -32,11 +32,11 @@ const themeOverrides: GlobalThemeOverrides = {
   },
   Pagination: {
     jumperTextColor: '#fff',
-    jumperTextColorDisabled: '#fff',
-    buttonBorder: 'red',
+    jumperTextColorDisabled: '#ff8a14',
     itemColor: '#fff',
     itemColorActive: '#303841',
-    itemTextColorHover: '#2a363b',
+    itemTextColorHover: '#fff',
+    itemBorderHover: '#23d69b',
   }
 }
 </script>

@@ -3,10 +3,15 @@ import {BackGround} from '@/components/Background'
 import {useAdmin} from './hooks/useAdmin'
 import Card from './components/card/index.vue'
 import ImageCard from './components/imageCard/index.vue'
-import {onMounted} from 'vue'
+import {computed, onMounted} from 'vue'
 import Wow from 'wow.js'
+import {useUserStore} from '@/store/modules/user'
+import {env} from '@/utils/env'
+import {useMenu} from './hooks/useMenu'
+import {router} from '@/router'
 
 const {adminData, getList, changeStatus} = useAdmin()
+const {menu, active, menuClick} = useMenu()
 
 getList()
 
@@ -27,10 +32,27 @@ onMounted(() => {
   wow.init()
 })
 
+const url = computed(() => {
+  const userStore = useUserStore()
+  return `${env.VITE_APP_IMG_URL}${userStore.info.background_image}`
+})
+
+const menuIconClick = (i: number) => {
+  if (i === 4) {
+    router.back()
+  } else {
+    adminData.type = i
+    menuClick(i)
+  }
+}
+
 </script>
 
 <template>
-  <BackGround type="color">
+  <BackGround
+      :url="url"
+      type="image"
+  >
     <div class="container m-auto" id="admin-container">
       <div class="top-cards">
         <div class="card">
@@ -46,8 +68,12 @@ onMounted(() => {
           <Card></Card>
         </div>
       </div>
+      <div class="empty" v-if="adminData.list.length == 0">
+        <n-empty size="large" description="啥也没有?">
 
-      <div class="content" id="admin-content">
+        </n-empty>
+      </div>
+      <div class="content" id="admin-content" v-else>
         <div
             class="image-card-box wow bounceIn"
             v-for="item in adminData.list"
@@ -58,6 +84,8 @@ onMounted(() => {
               :name="item.title"
               :is-show="item.isShow"
               :is-show-del="item.isShowDel"
+              :is-show-approved="active != 2"
+              :is-show-rejected="active != 3"
               :image-info="{
                 name: item.title,
                 username: item.user_info.username,
@@ -72,7 +100,6 @@ onMounted(() => {
           ></ImageCard>
         </div>
       </div>
-
       <div class="bottom">
         <div class="page">
           <n-pagination
@@ -90,10 +117,32 @@ onMounted(() => {
               @update:page-size="(e: number) => adminData.limit = e"
           >
             <template #prefix="{ itemCount, startIndex }">
-              共 {{ itemCount }} 张
+              <span style="color:#fff">共 {{ itemCount }} 张</span>
             </template>
           </n-pagination>
         </div>
+      </div>
+      <div class="menu-wrapper">
+        <n-space>
+          <div
+              :class="['menu-item', item.id === active ? 'menu-item-active' : '']"
+              v-for="item in menu"
+              :key="item.id"
+              @click="menuIconClick(item.id)"
+          >
+            <n-tooltip trigger="hover" placement="left">
+              <template #trigger>
+                <n-icon
+                    size="24"
+                    class="icon"
+                    :component="item.icon as any"
+                >
+                </n-icon>
+              </template>
+              {{ item.name }}
+            </n-tooltip>
+          </div>
+        </n-space>
       </div>
     </div>
   </BackGround>
@@ -102,11 +151,11 @@ onMounted(() => {
 <style lang="less" scoped>
 .container {
   box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
   display: flex;
+  height: 100vh;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 70px;
+  background-color: rgba(0, 0, 0, 0.5);
 
   .top-cards {
     box-sizing: border-box;
@@ -128,7 +177,8 @@ onMounted(() => {
     width: 100%;
     height: calc(100% - 100px);
     overflow-y: auto;
-    background-color: #f9f7f7;
+    background-color: rgba(249, 247, 247, 0.5);
+    backdrop-filter: saturate(120%) blur(20px);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
@@ -140,9 +190,19 @@ onMounted(() => {
     .image-card-box {
       box-sizing: border-box;
       width: 100%;
-      //height: 100%;
       min-height: 245px;
     }
+  }
+
+  .empty {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(100% - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(249, 247, 247, 0.2);
+    backdrop-filter: saturate(120%) blur(2px);
   }
 
   .bottom {
@@ -150,7 +210,9 @@ onMounted(() => {
     width: 100%;
     height: 55px;
     border-radius: 5px;
-    background-color: #f9f7f7;
+    background-color: rgba(249, 247, 247, 0.2);
+    backdrop-filter: saturate(120%) blur(2px);
+
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     margin-top: 15px;
     display: flex;
@@ -158,6 +220,39 @@ onMounted(() => {
     align-items: center;
   }
 
+  .menu-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .menu-item {
+      border: 1px solid whitesmoke;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      border-radius: 3px;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: saturate(120%) blur(10px);
+
+      .icon {
+        color: whitesmoke;
+      }
+    }
+
+    .menu-item-active {
+      border-color: rgb(35, 214, 155);
+    }
+  }
+
 }
+
 
 </style>

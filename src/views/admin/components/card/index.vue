@@ -22,7 +22,9 @@ import {Airplane} from '@vicons/ionicons5'
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  background-color: whitesmoke;
+  backdrop-filter: saturate(120%) blur(20px);
+  background-color: rgba(249, 247, 247, 0.2);
+
   border-radius: 5px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   display: flex;

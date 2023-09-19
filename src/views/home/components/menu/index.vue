@@ -75,7 +75,7 @@ onMounted(() => {
               <n-icon
                   :component="item.com as any"
                   :data-wow-delay="i * 0.3 + 's'"
-                  :size="20"
+                  :size="18"
                   :style="{'--i': i}"
                   :class="['menu-icon', i === active ? 'active' : '']"
                   :id="item.name"
@@ -93,7 +93,7 @@ onMounted(() => {
 <style lang="less" scoped>
 .menu-wrapper {
   height: 100%;
-  width: 55px;
+  width: 50px;
   position: fixed;
   //left: -50px;
   display: flex;
@@ -113,8 +113,8 @@ onMounted(() => {
     flex-direction: column;
     align-items: center;
     background: linear-gradient(145deg, #cfd6dc, #f6ffff);
-    padding: 10px;
-    border-radius: 0 15px 15px 0;
+    padding: 10px 5px;
+    border-radius: 0 5px 5px 0;
     box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.4), 7px 3px 3px rgba(0, 0, 0, 0.1);
     position: relative;
 
@@ -155,8 +155,8 @@ onMounted(() => {
 
     .icon-wrapper {
       box-sizing: border-box;
-      width: 35px;
-      height: 35px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       display: flex;
       justify-content: center;

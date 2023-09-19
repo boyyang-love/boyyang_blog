@@ -6,6 +6,8 @@ import {ref} from 'vue'
 interface Props {
   isShow: boolean
   isShowDel: boolean
+  isShowApproved: boolean
+  isShowRejected: boolean
   url: string
   name: string
   imageInfo: ImageInfo
@@ -74,6 +76,7 @@ const reason = ref<string>('')
               positive-text="通过"
               negative-text="再想想"
               @positive-click="emits('approved', 2)"
+              v-if="props.isShowApproved"
           >
             <template #trigger>
               <n-icon
@@ -92,6 +95,7 @@ const reason = ref<string>('')
               color="#ffffff"
               class="icon"
               @click="emits('delClick', true)"
+              v-if="props.isShowRejected"
           >
             <Close></Close>
           </n-icon>
@@ -150,10 +154,10 @@ const reason = ref<string>('')
 
   <n-modal
       :show="props.isShow"
-      :mask-closable="false"
       preset="dialog"
       title="详细信息"
       @close="emits('detailClick', false)"
+      @mask-click="emits('detailClick', false)"
   >
     <div class="modal-content">
       <div class="img">

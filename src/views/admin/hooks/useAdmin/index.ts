@@ -82,6 +82,7 @@ const useAdmin = () => {
         [
             () => adminData.page,
             () => adminData.limit,
+            () => adminData.type,
         ],
         () => {
             getList()

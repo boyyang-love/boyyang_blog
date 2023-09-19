@@ -76,7 +76,6 @@ onMounted(() => {
             [
                 {label: '9/页', value: 9},
                 {label: '12/页', value: 12},
-                {label: '24/页', value: 24}
             ]"
           show-size-picker
           @page="(e: number) => userData.page = e"

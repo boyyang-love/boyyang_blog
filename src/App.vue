@@ -34,9 +34,15 @@ const themeOverrides: GlobalThemeOverrides = {
     jumperTextColor: '#fff',
     jumperTextColorDisabled: '#ff8a14',
     itemColor: '#fff',
+    itemColorHover: '#fff',
     itemColorActive: '#303841',
-    itemTextColorHover: '#fff',
+    itemTextColorHover: '#ff8a14',
     itemBorderHover: '#23d69b',
+    buttonColor: '#fff',
+    buttonIconColor: '#23d69b',
+    buttonIconSizeLarge: true,
+    buttonColorHover: '#cc1515',
+    buttonIconColorHover: '#fff'
   }
 }
 </script>
@@ -64,7 +70,7 @@ const themeOverrides: GlobalThemeOverrides = {
 
 /*修改滚动条样式*/
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 0;
   height: 2px;
 }
 

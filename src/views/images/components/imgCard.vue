@@ -78,7 +78,7 @@ const imagesDownload = () => {
 </script>
 
 <template>
-  <div class="img-card-wrapper">
+  <div class="img-card-wrapper" id="img-card-wrapper">
     <NSpin
         :show="isLoading"
         :rotate="false"
@@ -366,5 +366,12 @@ const imagesDownload = () => {
       }
     }
   }
+}
+</style>
+
+<style>
+#img-card-wrapper .n-image img {
+  width: 100%;
+  height: 100%;
 }
 </style>

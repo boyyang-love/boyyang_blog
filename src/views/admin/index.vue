@@ -3,7 +3,7 @@ import {BackGround} from '@/components/Background'
 import {useAdmin} from './hooks/useAdmin'
 import Card from './components/card/index.vue'
 import ImageCard from './components/imageCard/index.vue'
-import {computed, onMounted} from 'vue'
+import {computed, nextTick, onMounted} from 'vue'
 import Wow from 'wow.js'
 import {useUserStore} from '@/store/modules/user'
 import {env} from '@/utils/env'
@@ -16,20 +16,22 @@ const {menu, active, menuClick} = useMenu()
 getList()
 
 onMounted(() => {
-  const wow = new Wow({
-    boxClass: 'wow', // animated element css class (default is wow)
-    animateClass: 'animated', // animation css class (default is animated)
-    offset: 0, // distance to the element when triggering the animation (default is 0)
-    mobile: true, // trigger animations on mobile devices (default is true)
-    live: true, // act on asynchronously loaded content (default is true)
-    callback: function () {
-      // the callback is fired every time an animation is started
-      // the argument that is passed in is the DOM node being animated
-    },
-    scrollContainer: '#admin-content', // optional scroll container selector, otherwise use window
-  })
+  nextTick(() => {
+    const wow = new Wow({
+      boxClass: 'wow', // animated element css class (default is wow)
+      animateClass: 'animated', // animation css class (default is animated)
+      offset: 1, // distance to the element when triggering the animation (default is 0)
+      mobile: false, // trigger animations on mobile devices (default is true)
+      live: true, // act on asynchronously loaded content (default is true)
+      callback: function () {
+        // the callback is fired every time an animation is started
+        // the argument that is passed in is the DOM node being animated
+      },
+      scrollContainer: '#admin-container', // optional scroll container selector, otherwise use window
+    })
 
-  wow.init()
+    wow.init()
+  })
 })
 
 const url = computed(() => {
@@ -110,7 +112,6 @@ const menuIconClick = (i: number) => {
             [
                 {label: '9/页', value: 9},
                 {label: '12/页', value: 12},
-                {label: '24/页', value: 24}
             ]"
               show-size-picker
               @page="(e: number) => adminData.page = e"
@@ -156,6 +157,7 @@ const menuIconClick = (i: number) => {
   flex-direction: column;
   padding: 20px 70px;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: hidden;
 
   .top-cards {
     box-sizing: border-box;
@@ -185,6 +187,7 @@ const menuIconClick = (i: number) => {
 
     display: grid;
     grid-template-columns:  repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     grid-gap: 10px;
 
     .image-card-box {

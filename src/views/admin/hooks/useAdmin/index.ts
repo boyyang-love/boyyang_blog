@@ -4,11 +4,6 @@ import {Admin} from '@/api/admin/types'
 import {env} from '@/utils/env'
 import {changeExhibitionStatus} from '@/api/exhibition'
 
-export interface AdminData {
-    username: string
-    role: string
-}
-
 const useAdmin = () => {
     const adminData = reactive({
         page: 1,

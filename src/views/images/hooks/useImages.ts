@@ -24,14 +24,6 @@ const imagesData = reactive({
             label: '12 每页',
             value: 12,
         },
-        {
-            label: '24 每页',
-            value: 24,
-        },
-        {
-            label: '36 每页',
-            value: 36,
-        },
     ],
     sort: 'thumbs_up desc',
 })

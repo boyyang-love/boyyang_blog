@@ -1,12 +1,14 @@
 import {reactive, watch, watchEffect} from 'vue'
 import {env} from '@/utils/env'
+import {Exhibition} from '@/api/exhibition/type'
 import {exhibitionList, changeExhibitionStatus, deleteExhibition} from '@/api/exhibition'
+import {delUpload} from '@/api/upload'
 
 const userData = reactive({
     page: 1,
     limit: 9,
     total: 0,
-    list: [] as Exhibition.ExhibitionsInfo[],
+    list: [] as (Exhibition.ExhibitionsInfo & { path: string })[],
     type: 1,
     approved: 0,
     in_review: 0,
@@ -18,7 +20,7 @@ const getExhibitionList = (type: number) => {
         page: userData.page,
         limit: userData.limit,
         type: type,
-        sort: 'created desc'
+        sort: 'created desc',
     }
 
     exhibitionList(params).then((res) => {
@@ -26,7 +28,10 @@ const getExhibitionList = (type: number) => {
         userData.approved = res.data.approved
         userData.in_review = res.data.in_review
         userData.review_rjection = res.data.review_rjection
-        userData.list = res.data.exhibitions && res.data.exhibitions.map((ex) => {
+        userData.list = res.data.exhibitions && res.data.exhibitions.map((ex: Exhibition.ExhibitionsInfo & {
+            path: string
+        }) => {
+            ex.path = ex.cover
             ex.cover = `${env.VITE_APP_IMG_URL}/${ex.cover}`
             return ex
         })
@@ -34,7 +39,7 @@ const getExhibitionList = (type: number) => {
 }
 
 
-const del = (id: number | string) => {
+const del = (id: number | string, path: string) => {
     window.$dialog.create({
         type: 'error',
         title: '提示',
@@ -49,7 +54,9 @@ const del = (id: number | string) => {
                     duration: 3000,
                 })
 
-                getExhibitionList(userData.type)
+                delUpload({key: path}).then(() => {
+                    getExhibitionList(userData.type)
+                })
             })
 
         },

@@ -4,6 +4,7 @@ import {UploadFileInfo, UploadInst} from 'naive-ui'
 // api
 import {createExhibition} from '@/api/exhibition'
 import {upload} from '@/api/upload'
+import {useUserStoreWithOut} from '@/store/modules/user'
 
 const uploadData = reactive({
     isShowSpin: false,
@@ -50,6 +51,7 @@ const handleUploadChange = (data: {
 }
 
 const submit = (uploadRef: UploadInst | null) => {
+    const userStore = useUserStoreWithOut()
     if (
         uploadData.submit.title == '' ||
         uploadData.submit.des == '' ||
@@ -68,6 +70,7 @@ const submit = (uploadRef: UploadInst | null) => {
     let params = {
         file_name: uploadData.fileList[0].name,
         file: uploadData.fileList[0].file as File,
+        path: `${userStore.info.uid}/images`
     }
     uploadData.isShowSpin = true
     upload(params).then((res) => {

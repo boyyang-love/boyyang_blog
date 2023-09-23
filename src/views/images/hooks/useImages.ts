@@ -4,15 +4,17 @@ import {env} from '@/utils/env'
 import {useUserStoreWithOut} from '@/store/modules/user'
 
 // api
+import {Exhibition} from '@/api/exhibition/type'
 import {exhibitionList, deleteExhibition} from '@/api/exhibition'
 import {changelike, changeStar} from '@/api/like'
 import {updateUserInfo} from '@/api/user'
+import {delUpload} from '@/api/upload'
 
 const imagesData = reactive({
     page: 1,
     limit: 9,
     count: 0,
-    list: [] as Exhibition.ExhibitionsInfo[],
+    list: [] as (Exhibition.ExhibitionsInfo & { path: string })[],
     likes: [] as number[],
     star: [] as number[],
     pageSizes: [
@@ -72,8 +74,9 @@ const getList = () => {
         imagesData.count = res.data.count
         imagesData.list =
             res.data.exhibitions &&
-            res.data.exhibitions.map(item => {
+            res.data.exhibitions.map((item: Exhibition.ExhibitionsInfo & { path: string }) => {
                 item.cover_url = item.cover
+                item.path = item.cover
                 item.cover = `${env.VITE_APP_IMG_URL}${item.cover}`
                 return item
             })
@@ -94,7 +97,7 @@ const pageSizeChange = (n: number) => {
     getList()
 }
 
-const del = (id: number | string) => {
+const del = (id: number | string, path: string) => {
     window.$dialog.create({
         type: 'error',
         title: '提示',
@@ -108,7 +111,9 @@ const del = (id: number | string) => {
                     content: '图片删除成功',
                     duration: 3000,
                 })
-                getList()
+                delUpload({key: path}).then(() => {
+                    getList()
+                })
             })
         },
     })

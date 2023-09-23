@@ -11,6 +11,7 @@ interface Props {
   label?: string
   status: number // 1待审核 2审核通过 3未通过审核
   url: string
+  path: string
 }
 
 interface Emits {
@@ -134,7 +135,7 @@ const status = computed(() => {
                 trigger="hover"
                 positive-text="删除"
                 negative-text="算了"
-                @click="del(props.id)"
+                @click="del(props.id, props.path)"
             >
               <template #trigger>
                 <div>

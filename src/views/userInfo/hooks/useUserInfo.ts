@@ -38,11 +38,11 @@ const submit = () => {
         upload({
                 file_name: userInfoData.file.name,
                 file: userInfoData.file,
-                path: 'avatar',
+                path: `${userStore.info.uid}/avatar`,
             },
         ).then(() => {
             userInfoData.delUrl = data.avatar_url as string
-            data.avatar_url = `avatar/${userInfoData.file.name}`
+            data.avatar_url = `${userStore.info.uid}/avatar/${userInfoData.file.name}`
             userInfoData.file = null as unknown as File
             updateUserInfoApi(data)
             delOldAvatar()

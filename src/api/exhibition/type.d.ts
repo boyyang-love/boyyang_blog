@@ -1,4 +1,4 @@
-declare namespace Exhibition {
+export declare namespace Exhibition {
     interface ExhibitionListRes {
         count: number
         exhibitions: ExhibitionsInfo[]

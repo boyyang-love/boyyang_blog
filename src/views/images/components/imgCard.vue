@@ -16,6 +16,7 @@ import {imageDownload} from '@/utils/fileDownload'
 
 interface imgCardProps {
   url?: string
+  path?: string
   name?: string
   id?: number | string
   isLike?: boolean
@@ -27,7 +28,7 @@ interface imgCardProps {
 }
 
 interface emit {
-  (e: 'del', id: number | string): void
+  (e: 'del', id: number | string, path: string): void
 
   (e: 'like', id: number | string, likeStatus: boolean): void
 
@@ -49,14 +50,14 @@ const isLoading = ref<boolean>(false)
 const emit = defineEmits<emit>()
 
 const tags = computed(() => {
-  if (props.tags && props.tags !== ""){
-    return props.tags.split(',').filter(t => t !== "")
-  }else {
+  if (props.tags && props.tags !== '') {
+    return props.tags.split(',').filter(t => t !== '')
+  } else {
     return []
   }
 })
 const del = () => {
-  emit('del', props.id)
+  emit('del', props.id, props.path)
 }
 
 const like = () => {

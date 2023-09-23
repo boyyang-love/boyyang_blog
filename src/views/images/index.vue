@@ -56,6 +56,7 @@ onMounted(() => {
                 ]"
             :name="item.title"
             :url="item.cover"
+            :path="item.path"
             :tags="item.tags"
             :id="item.uid"
             :is-like="imagesData.likes.includes(item.uid)"

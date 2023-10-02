@@ -53,3 +53,13 @@ export const blogDel = (params: { uid: number }) => {
     )
 }
 
+export const blogEdit = (data: { uid: number, title: string, sub_title: string, content: string }) => {
+    return http.request(
+        {
+            url: '/blog/update',
+            method: 'post',
+            data
+        }
+    )
+}
+

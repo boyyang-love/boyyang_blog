@@ -6,9 +6,10 @@ import {BackGround} from '@/components/Background'
 
 import {useRoute} from 'vue-router'
 import {useBlog} from './hooks/useBlog'
+import {Power, Create} from '@vicons/ionicons5'
 
 const route = useRoute()
-const {blogData, getBlogDetail} = useBlog()
+const {blogData, getBlogDetail, editSubmit} = useBlog()
 
 const mdPreview = ref<any | null>(null)
 
@@ -54,7 +55,54 @@ onMounted(() => {
           ></v-md-preview>
         </div>
       </div>
+      <div class="submit-wrapper wow bounceInRight">
+        <n-space vertical align="center" size="large">
+          <n-tooltip
+              trigger="hover"
+              placement="left"
+          >
+            <template #trigger>
+              <n-icon
+                  :size="34"
+                  class="icon"
+                  @click="blogData.isShowEdit = true"
+              >
+                <Create></Create>
+              </n-icon>
+            </template>
+            编辑
+          </n-tooltip>
+          <n-tooltip
+              trigger="hover"
+              placement="left"
+          >
+            <template #trigger>
+              <n-icon
+                  :size="34"
+                  class="icon"
+                  @click="$router.back()"
+              >
+                <Power></Power>
+              </n-icon>
+            </template>
+            返回
+          </n-tooltip>
+        </n-space>
+      </div>
     </div>
+
+    <n-modal
+        v-model:show="blogData.isShowEdit"
+        :style="{width: '80%',}"
+        title="博客修改"
+        preset="dialog"
+        positive-text="确认修改"
+        @positive-click="editSubmit"
+    >
+      <div class="blog-detail-content">
+        <v-md-editor v-model="blogData.blogInfoEdit.content"  height="750px"></v-md-editor>
+      </div>
+    </n-modal>
   </BackGround>
 </template>
 
@@ -88,5 +136,28 @@ onMounted(() => {
       overflow: hidden;
     }
   }
+
+  .submit-wrapper {
+    box-sizing: border-box;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    .icon {
+      border: 1px solid whitesmoke;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 3px;
+      padding: 5px;
+      cursor: pointer;
+      font-size: 24px;
+      color: whitesmoke;
+    }
+  }
+}
+
+.blog-detail-content {
+  box-sizing: border-box;
 }
 </style>

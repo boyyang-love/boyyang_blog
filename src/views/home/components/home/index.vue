@@ -9,6 +9,7 @@ import Notice from '../notice/index.vue'
 import Carousel from '../carousel/index.vue'
 import PublishChart from '../publishChart/index.vue'
 import {ArrowDown} from '@vicons/ionicons5'
+import MenuBeehive from '../menuBeehive/index.vue'
 // hooks
 import {useHomeData, useHomeMethods} from '../../hooks/useHome'
 import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition'
@@ -57,6 +58,10 @@ onMounted(() => {
         >
           <ArrowDown></ArrowDown>
         </n-icon>
+      </div>
+
+      <div class="beehive-menu">
+        <MenuBeehive></MenuBeehive>
       </div>
     </div>
     <div class="home-content">
@@ -174,6 +179,11 @@ onMounted(() => {
           transform: translateY(0);
         }
       }
+    }
+
+    .beehive-menu {
+      position: absolute;
+      bottom: 50px;
     }
   }
 

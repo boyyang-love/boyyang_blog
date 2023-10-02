@@ -13,6 +13,7 @@ import {env} from '@/utils/env'
 import {computed, ref} from 'vue'
 import {useUserStore} from '@/store/modules/user'
 import {imageDownload} from '@/utils/fileDownload'
+import {Exhibition} from '@/api/exhibition/type'
 
 interface imgCardProps {
   url?: string
@@ -25,6 +26,7 @@ interface imgCardProps {
   tags?: string
   info?: Exhibition.UserInfo
   star?: number
+  size?: string
 }
 
 interface emit {
@@ -47,7 +49,7 @@ const props = withDefaults(defineProps<imgCardProps>(), {
 })
 const isLoading = ref<boolean>(false)
 
-const emit = defineEmits<emit>()
+const emits = defineEmits<emit>()
 
 const tags = computed(() => {
   if (props.tags && props.tags !== '') {
@@ -56,16 +58,13 @@ const tags = computed(() => {
     return []
   }
 })
-const del = () => {
-  emit('del', props.id, props.path)
-}
 
 const like = () => {
-  emit('like', props.id, !props.isLike)
+  emits('like', props.id, !props.isLike)
 }
 
 const star = () => {
-  emit('star', props.id, !props.isStar)
+  emits('star', props.id, !props.isStar)
 }
 
 const imagesDownload = () => {
@@ -117,6 +116,9 @@ const imagesDownload = () => {
           <n-ellipsis style="max-width: 300px">
             {{ props.name }}
           </n-ellipsis>
+        </div>
+        <div class="img-size">
+          {{ (props?.size as string).replace(/-/, 'x') }}
         </div>
       </div>
       <div class="img-bottom">
@@ -187,7 +189,7 @@ const imagesDownload = () => {
                   :component="CloseCircle as any"
                   color="#373737"
                   size="18"
-                  @click="del"
+                  @click="$emit('del', props.id, props.path)"
                   class="icon"
               ></n-icon>
             </n-space>
@@ -195,7 +197,6 @@ const imagesDownload = () => {
         </div>
       </div>
     </NSpin>
-
   </div>
 </template>
 
@@ -265,6 +266,17 @@ const imagesDownload = () => {
       text-align: center;
       border-radius: 0 0 5px 5px;
       padding: 3px 0;
+    }
+
+    .img-size {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: white;
+      background-color: rgba(0, 0, 0, .4);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+      padding: 0 5px;
     }
   }
 

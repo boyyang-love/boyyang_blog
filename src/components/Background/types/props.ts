@@ -1,6 +1,6 @@
 export namespace Background {
     export interface Props {
-        type?: 'image' | 'video' | 'color' // image video color
+        type?: type // image video color
         url?: string
         color?: string
         width?: string
@@ -8,9 +8,5 @@ export namespace Background {
         opacity?: number
     }
 
-    export enum Type {
-        image = 'image',
-        video = 'video',
-        color = 'color',
-    }
+    export type type = 'image' | 'video' | 'color'
 }

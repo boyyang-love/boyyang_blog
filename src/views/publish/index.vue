@@ -1,14 +1,17 @@
 <script lang="ts" setup>
-import {onMounted} from 'vue'
+import {computed, onMounted} from 'vue'
 import Wow from 'wow.js'
 // components
 import {CloudUploadOutlined, SendOutlined} from '@vicons/antd'
 import PrintText from '@/components/PrintText/index.vue'
 import Input from '@/components/MimicryInput/index.vue'
+import BackGround from '@/components/Background/index.vue'
 // hooks
 import {usePublishData, usePublishMethods} from './hooks/usePublish'
 import Btn from '@/components/MimicryBtn/index.vue'
-import {Text} from '@vicons/ionicons5'
+import {PaperPlane, Power, Text} from '@vicons/ionicons5'
+import {useUserStore} from '@/store/modules/user'
+import {env} from '@/utils/env'
 
 const {BlogForm, BlogFormMore, isLoading, isShowDialog} = usePublishData()
 const {beforeBlogSubmit, blogSubmit, uploadChange} = usePublishMethods()
@@ -30,22 +33,34 @@ onMounted(() => {
 
   wow.init()
 })
+
+const userStore = useUserStore()
+const background = computed(() => {
+  const url = userStore.info.background_image
+  return `${env.VITE_APP_IMG_URL}/${url}`
+})
 </script>
 
 <template>
-  <div id="publish-container" class="publish-wrapper container m-auto">
-    <div class="top-banner">
-      <PrintText title="上传博客"></PrintText>
-    </div>
-    <div class="bottom-upload wow fadeInUpBig" data-wow-delay="1s">
-      <div class="title-wrapper">
-        <div class="title">
-          <Input
-              v-model="BlogForm.title"
-              input-width="350px"
-              icon-color="rgb(0, 0, 0)"
-              :icon="Text"
-              :more-props="{
+  <BackGround
+      width="100vw"
+      height="100vh"
+      :url="background"
+      class="wow slideInDown"
+  >
+    <div id="publish-container" class="publish-wrapper container m-auto">
+      <div class="top-banner">
+        <PrintText title="上传博客"></PrintText>
+      </div>
+      <div class="bottom-upload wow fadeInUpBig" data-wow-delay="1s">
+        <div class="title-wrapper">
+          <div class="title">
+            <Input
+                v-model="BlogForm.title"
+                input-width="350px"
+                icon-color="rgb(0, 0, 0)"
+                :icon="Text"
+                :more-props="{
                 autosize: {minRows: 3,maxRows: 5},
                 clearable: true,
                 maxlength: 50,
@@ -53,15 +68,15 @@ onMounted(() => {
                 placeholder: '请输入博客标题',
                 type: 'textarea',
           }"
-          ></Input>
-        </div>
-        <div class="sub-title">
-          <Input
-              v-model="BlogForm.des"
-              input-width="350px"
-              icon-color="rgb(0, 0, 0)"
-              :icon="Text"
-              :more-props="{
+            ></Input>
+          </div>
+          <div class="sub-title">
+            <Input
+                v-model="BlogForm.des"
+                input-width="350px"
+                icon-color="rgb(0, 0, 0)"
+                :icon="Text"
+                :more-props="{
                 autosize: {minRows: 3,maxRows: 5},
                 clearable: true,
                 maxlength: 50,
@@ -69,64 +84,87 @@ onMounted(() => {
                 placeholder: '请输入博客描述',
                 type: 'textarea',
           }"
-          ></Input>
+            ></Input>
+          </div>
+        </div>
+
+        <div class="md-editor">
+          <v-md-editor v-model="BlogForm.content" height="750px"></v-md-editor>
+        </div>
+
+        <div class="upload-btn">
+          <Btn
+              @btn-click="beforeBlogSubmit"
+              :btn-icon="SendOutlined"
+              :error-btn="false"
+              width="300px"
+              text="上传"
+          ></Btn>
         </div>
       </div>
-
-      <div class="md-editor">
-        <v-md-editor v-model="BlogForm.content" height="750px"></v-md-editor>
-      </div>
-
-      <div class="upload-btn">
-        <Btn
-            @btn-click="beforeBlogSubmit"
-            :btn-icon="SendOutlined"
-            :error-btn="false"
-            width="300px"
-            text="上传"
-        ></Btn>
+      <div class="submit-wrapper wow bounceInRight">
+        <n-space vertical align="center" size="large">
+          <n-tooltip
+              trigger="hover"
+              placement="left"
+          >
+            <template #trigger>
+              <n-icon
+                  :size="34"
+                  class="icon"
+                  @click="$router.back()"
+              >
+                <Power></Power>
+              </n-icon>
+            </template>
+            返回
+          </n-tooltip>
+        </n-space>
       </div>
     </div>
-  </div>
-  <n-modal
-      v-model:show="isShowDialog"
-      :loading="isLoading"
-      negative-text="算了"
-      positive-text="确认"
-      preset="dialog"
-      title="更多信息"
-      @positive-click="blogSubmit"
-  >
-    <n-form>
-      <n-form-item>
-        <n-upload
-            :default-file-list="BlogFormMore.fileList"
-            :default-upload="false"
-            :disabled="false"
-            :max="1"
-            action="#"
-            list-type="image-card"
-            @change="uploadChange"
-        />
-      </n-form-item>
-      <n-form-item label="标签">
-        <n-select
-            v-model:value="BlogFormMore.tags"
-            :options="BlogFormMore.tagsOptions"
-            filterable
-            multiple
-            placeholder="请添加标签"
-            tag
-        />
-      </n-form-item>
-    </n-form>
-  </n-modal>
+    <n-modal
+        v-model:show="isShowDialog"
+        :loading="isLoading"
+        negative-text="算了"
+        positive-text="确认"
+        preset="dialog"
+        title="更多信息"
+        @positive-click="blogSubmit"
+    >
+      <n-form>
+        <n-form-item>
+          <n-upload
+              :default-file-list="BlogFormMore.fileList"
+              :default-upload="false"
+              :disabled="false"
+              :max="1"
+              action="#"
+              list-type="image-card"
+              @change="uploadChange"
+          />
+        </n-form-item>
+        <n-form-item label="标签">
+          <n-select
+              v-model:value="BlogFormMore.tags"
+              :options="BlogFormMore.tagsOptions"
+              filterable
+              multiple
+              placeholder="请添加标签"
+              tag
+          />
+        </n-form-item>
+      </n-form>
+    </n-modal>
+  </BackGround>
+
 </template>
 
 <style lang="less" scoped>
 .publish-wrapper {
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
+  overflow-y: auto;
   padding: 0 150px 100px;
 
   .top-banner {
@@ -187,6 +225,25 @@ onMounted(() => {
       align-items: center;
       margin-top: 25px;
 
+      color: whitesmoke;
+    }
+  }
+
+  .submit-wrapper {
+    box-sizing: border-box;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    .icon {
+      border: 1px solid whitesmoke;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 3px;
+      padding: 5px;
+      cursor: pointer;
+      font-size: 24px;
       color: whitesmoke;
     }
   }

@@ -3,18 +3,17 @@ import {Airplane} from '@vicons/ionicons5'
 </script>
 
 <template>
-<div class="card-wrapper">
-  <div class="left-icon">
-    <n-icon :size="34">
-      <Airplane></Airplane>
-    </n-icon>
+  <div class="card-wrapper">
+    <div class="left-icon">
+      <n-icon :size="34" color="#fff">
+        <Airplane></Airplane>
+      </n-icon>
+    </div>
+    <div class="right-content">
+      <div class="title">文章数</div>
+      <div class="num">1000</div>
+    </div>
   </div>
-  <div class="right-content">
-    <div class="title">文章数</div>
-    <div class="num">1000</div>
-  </div>
-
-</div>
 </template>
 
 <style scoped lang="less">
@@ -39,15 +38,16 @@ import {Airplane} from '@vicons/ionicons5'
   .title {
     font-size: 16px;
     font-weight: bold;
-    color: #fc5185;
+    color: #fff;
     text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   }
 
   .num {
     font-family: "Fira Code", sans-serif;
-    color: #393e46;
+    color: #fff;
     font-size: 15px;
-    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2)
+    font-weight: bold;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5)
   }
 }
 </style>

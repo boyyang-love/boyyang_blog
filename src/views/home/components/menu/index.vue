@@ -6,10 +6,12 @@ import {Menu} from './types'
 import {menuList} from './menuList'
 import {env} from '@/utils/env'
 import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
+import {useMenuStore} from '@/store/modules/menu'
 
 const router = useRouter()
 const userStore = useUserStore()
 const {showInfo} = useUserInfo()
+const menuStore = useMenuStore()
 
 const props = withDefaults(defineProps<Menu.menuProps>(), {
   menuList: () => menuList,
@@ -37,7 +39,7 @@ const menuClick = (item: Menu.menuList, index: number) => {
     })
     return
   }
-  active.value = index
+  menuStore.setActive(item.name)
   router.push({
     name: item.name,
   })
@@ -56,6 +58,27 @@ onMounted(() => {
 <template>
   <div class="menu-wrapper">
     <div class="menu">
+      <n-space>
+        <div class="icon-wrapper" v-for="(item, i) in props.menuList">
+          <n-tooltip
+              trigger="hover"
+              placement="bottom"
+          >
+            <template #trigger>
+              <n-icon
+                  :component="item.com as any"
+                  :data-wow-delay="i * 0.3 + 's'"
+                  :size="22"
+                  :style="{'--i': i}"
+                  :class="['menu-icon', item.name === menuStore.active ? 'active' : '']"
+                  :id="item.name"
+                  @click="menuClick(item, i)"
+              ></n-icon>
+            </template>
+            {{ item.text }}
+          </n-tooltip>
+        </div>
+      </n-space>
       <div class="avatar">
         <n-avatar
             :size="45"
@@ -65,66 +88,38 @@ onMounted(() => {
             @click="showInfo(true)"
         ></n-avatar>
       </div>
-      <n-space size="large" vertical>
-        <div class="icon-wrapper" v-for="(item, i) in props.menuList">
-          <n-tooltip
-              trigger="hover"
-              placement="right"
-          >
-            <template #trigger>
-              <n-icon
-                  :component="item.com as any"
-                  :data-wow-delay="i * 0.3 + 's'"
-                  :size="18"
-                  :style="{'--i': i}"
-                  :class="['menu-icon', i === active ? 'active' : '']"
-                  :id="item.name"
-                  @click="menuClick(item, i)"
-              ></n-icon>
-            </template>
-            {{ item.text }}
-          </n-tooltip>
-        </div>
-      </n-space>
     </div>
   </div>
 </template>
 
 <style lang="less" scoped>
 .menu-wrapper {
-  height: 100%;
-  width: 50px;
+  box-sizing: border-box;
+  width: 100%;
   position: fixed;
-  //left: -50px;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  transition: all 0.4s ease-in-out;
-
-  &:hover {
-    left: 0;
-  }
 
   .menu {
     box-sizing: border-box;
     width: 100%;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    background: linear-gradient(145deg, #cfd6dc, #f6ffff);
-    padding: 10px 5px;
-    border-radius: 0 5px 5px 0;
-    box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.4), 7px 3px 3px rgba(0, 0, 0, 0.1);
+    padding: 5px 25px;
     position: relative;
+    //background-color: rgba(17, 17, 17, 0.1);
+    //backdrop-filter: saturate(100%) blur(10px);
+    //box-shadow: 0 5px 3px rgba(0, 0, 0, 0.5);
+
 
     .avatar {
-      margin-bottom: 20px;
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 2px solid #1fab89;
       border-radius: 50%;
 
       &:before {
@@ -161,21 +156,19 @@ onMounted(() => {
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 7px 7px 10px #c4cacf,
-        -7px -7px 10px #ffffff;
 
       .menu-icon {
         cursor: pointer;
         transition: all 0.4s ease-in-out;
+        color: whitesmoke;
 
         &:hover {
-          color: rgba(17, 17, 17, 0.6);
           transform: scale(1.1);
         }
       }
 
       .active {
-        color: #1fab89;
+        color: #da4453;
       }
     }
   }

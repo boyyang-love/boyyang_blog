@@ -45,14 +45,18 @@ onMounted(() => {
       <PrintText title="壁纸"></PrintText>
     </div>
 
-    <div class="images-content">
+    <div class="images-content wow wow fadeInUpBig" data-wow-delay="1s">
       <div class="images-wrapper">
         <ImgCard
             v-for="(item, i) in imagesData.list"
             :key="item.uid"
             :class="[
                     'wow',
-                    i % 2 == 0 ? 'fadeInDownBig' : i % 3 == 0 ? 'fadeInRightBig' : 'fadeInLeftBig',
+                    i % 2 == 0 ?
+                    'fadeInDownBig' :
+                    i % 3 == 0 ?
+                    'fadeInRightBig' :
+                    'fadeInLeftBig'
                 ]"
             :name="item.title"
             :url="item.cover"
@@ -64,15 +68,15 @@ onMounted(() => {
             :time="item.created"
             :info="item.user_info"
             :star="item.thumbs_up"
+            :size="item.wh"
             @like="like"
             @star="star"
             @del="del"
             @set-background="setBackground"
-            class="wow fadeInDownBig"
         ></ImgCard>
       </div>
     </div>
-    <div class="pagination wow bounceInUp">
+    <div class="pagination wow bounceInUp" data-wow-delay="0.5s">
       <n-space>
         <n-pagination
             v-model:item-count="imagesData.count"
@@ -118,7 +122,7 @@ onMounted(() => {
   }
 
   .images-content {
-    padding: 50px 150px;
+    padding: 50px 70px;
 
     .images-wrapper {
       display: grid;
@@ -137,7 +141,7 @@ onMounted(() => {
     justify-content: center;
     box-sizing: border-box;
     background: linear-gradient(145deg, #cfd6dc, #f6ffff);
-    margin: 20px 150px 170px;
+    margin: 20px 70px 170px;
     padding: 10px 0;
     border-radius: 5px;
   }

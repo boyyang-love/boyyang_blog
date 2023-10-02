@@ -209,7 +209,7 @@ onMounted(() => {
     align-items: flex-end;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
-    border: 10px solid #dce2e6;
+    border: 2px solid #dce2e6;
 
     &:hover {
       background-position: center bottom;

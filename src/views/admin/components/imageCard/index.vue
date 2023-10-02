@@ -90,15 +90,20 @@ const reason = ref<string>('')
             是否通过审核？
           </n-popconfirm>
 
-          <n-icon
-              :size="20"
-              color="#ffffff"
-              class="icon"
-              @click="emits('delClick', true)"
-              v-if="props.isShowRejected"
-          >
-            <Close></Close>
-          </n-icon>
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-icon
+                  :size="20"
+                  color="#ffffff"
+                  class="icon"
+                  @click="emits('delClick', true)"
+                  v-if="props.isShowRejected"
+              >
+                <Close></Close>
+              </n-icon>
+            </template>
+            驳回
+          </n-tooltip>
 
           <n-tooltip trigger="hover">
             <template #trigger>

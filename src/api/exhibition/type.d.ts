@@ -24,6 +24,8 @@ export declare namespace Exhibition {
         user_info: UserInfo
         created: number
         thumbs_up: number
+        wh: string
+        size: string
     }
 
     interface UserInfo {

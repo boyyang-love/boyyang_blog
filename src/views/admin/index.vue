@@ -41,9 +41,18 @@ const url = computed(() => {
 
 const menuIconClick = (i: number) => {
   if (i === 4) {
-    router.back()
+    window.$dialog.warning({
+      title: '提示',
+      content: '是否退出当前页面',
+      positiveText: '退出',
+      negativeText: '取消',
+      onPositiveClick: () => {
+        router.back()
+      },
+    })
   } else {
     adminData.type = i
+    adminData.page = 1
     menuClick(i)
   }
 }
@@ -55,7 +64,7 @@ const menuIconClick = (i: number) => {
       :url="url"
       type="image"
   >
-    <div class="container m-auto" id="admin-container">
+    <div class="admin-container" id="admin-container">
       <div class="top-cards">
         <div class="card">
           <Card></Card>
@@ -136,6 +145,7 @@ const menuIconClick = (i: number) => {
                 <n-icon
                     size="24"
                     class="icon"
+                    :color="item.color"
                     :component="item.icon as any"
                 >
                 </n-icon>
@@ -150,9 +160,10 @@ const menuIconClick = (i: number) => {
 </template>
 
 <style lang="less" scoped>
-.container {
+.admin-container {
   box-sizing: border-box;
   display: flex;
+  width: 100vw;
   height: 100vh;
   flex-direction: column;
   padding: 20px 70px;

@@ -13,10 +13,14 @@ const props = withDefaults(defineProps<Background.Props>(), {
 
 // 背景图片
 const background_img = computed(() => {
-  if (props.type == Background.Type.color) {
+  if (props.type == 'color') {
     return 'none'
   }
   return `url("${new URL(props.url, import.meta.url).href}")`
+})
+
+const opacity = computed(() => {
+  return `rgba(0, 0, 0, ${props.opacity})`
 })
 
 </script>
@@ -24,7 +28,7 @@ const background_img = computed(() => {
 <template>
   <div class="background">
     <video
-        v-if="props.type == Background.Type.video"
+        v-if="props.type == 'video'"
         :src="props.url"
         autoplay
         class="video"
@@ -54,6 +58,7 @@ const background_img = computed(() => {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
+    background-color: v-bind('opacity');
   }
 
   .video {

@@ -30,6 +30,7 @@ onMounted(() => {
   <div class="bg-wrapper">
     <BackGround
         :url="bgImg"
+        :opacity="0.2"
         height="100vh"
         width="100vw"
         class="wow tada"

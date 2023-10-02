@@ -42,19 +42,20 @@ onMounted(() => {
           <template #header>
             <div class="header-wrapper">
               <div class="item-title">
-                <span>
-                  <n-icon :size="20" class="icon">
-                    <Image></Image>
-                  </n-icon>
-                  {{ item.title }}
-                </span>
+                  <span>
+                    <n-icon :size="20" class="icon">
+                      <Image></Image>
+                    </n-icon>
+                    {{ item.title }}
+                  </span>
               </div>
               <div class="item-content">
                 <n-image
                     :src="item.cover"
-                    class="img wow bounceInRight"
+                    class="img wow bounceIn"
                     lazy
                     object-fit="cover"
+                    data-wow-delay="0.5s"
                 >
                   <template #placeholder>
                     <div class="loading">
@@ -72,15 +73,15 @@ onMounted(() => {
           </template>
           <template #footer>
             <div class="time">
+                <span>
+                  <n-icon :size="18" class="icon">
+                  <CalendarNumber></CalendarNumber>
+                  </n-icon>
+                  {{ moment(item.created * 1000).format('YYYY-MM-DD hh:mm:ss') }}
+                </span>
               <span>
-                <n-icon :size="18" class="icon">
-                <CalendarNumber></CalendarNumber>
-                </n-icon>
-                {{ moment(item.created * 1000).format('YYYY-MM-DD hh:mm:ss') }}
-              </span>
-              <span>
-                {{ item.user_info.username }}
-              </span>
+                  {{ item.user_info.username }}
+                </span>
             </div>
           </template>
         </n-timeline-item>
@@ -111,7 +112,7 @@ onMounted(() => {
         color: #fff;
         font-size: 16px;
         font-weight: bolder;
-        margin-bottom: 25px;
+        margin-bottom: 5px;
         display: flex;
         align-items: center;
 
@@ -121,9 +122,6 @@ onMounted(() => {
           background-color: rgba(0, 0, 0, 0.5);
           backdrop-filter: saturate(180%) blur(10px);
           border-radius: 5px;
-          text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3),
-            -2px -2px 2px rgb(183, 191, 215);
           text-align: center;
 
           .icon {
@@ -141,15 +139,20 @@ onMounted(() => {
           height: 300px;
           width: 570px;
           object-fit: cover;
-          border: 8px solid rgba(17, 17, 17, 1);
+          border: 4px solid rgba(17, 17, 17, 1);
           border-radius: 5px;
-          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3),
-            -5px -5px 10px rgb(183, 191, 215);
         }
 
         .loading {
-          width: 100%;
-          height: 100%;
+          box-sizing: border-box;
+          background-color: rgba(0, 0, 0, 0.5);
+          backdrop-filter: saturate(100%) blur(5px);
+          width: 500px;
+          height: 260px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 5px;
         }
       }
     }
@@ -164,14 +167,12 @@ onMounted(() => {
       span {
         display: flex;
         align-items: center;
-        margin: 0 15px;
+        margin: 0 5px 0 0;
         padding: 10px;
         background-color: rgba(0, 0, 0, 0.5);
         backdrop-filter: saturate(100%) blur(3px);
         border-radius: 5px;
         text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3),
-          -2px -2px 2px rgb(183, 191, 215);
 
         .icon {
           margin-right: 10px;

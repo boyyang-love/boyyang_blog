@@ -27,7 +27,7 @@ const imagesData = reactive({
             value: 12,
         },
     ],
-    sort: 'thumbs_up desc',
+    sort: 'created desc',
 })
 
 const SortOptions = [

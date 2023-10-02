@@ -25,16 +25,6 @@ const asyncRoutes: RouteRecordRaw[] = [
                 },
                 component: () => import('@/views/images/index.vue'),
             },
-            // 发布作品
-            {
-                path: 'publish',
-                name: 'Publish',
-                meta: {
-                    title: '发布作品',
-                    // roles: ['admin'],
-                },
-                component: () => import('@/views/publish/index.vue'),
-            },
             // 用户
             {
                 path: 'user',
@@ -44,24 +34,6 @@ const asyncRoutes: RouteRecordRaw[] = [
                     // roles: ['admin'],
                 },
                 component: () => import('@/views/user/index.vue'),
-            },
-            {
-                path: 'blog',
-                name: 'Blog',
-                meta: {
-                    title: '博客',
-                    // roles: ['admin'],
-                },
-                component: () => import('@/views/blog/index.vue'),
-            },
-            {
-                path: 'upload',
-                name: 'Upload',
-                meta: {
-                    title: '图片上传',
-                    // roles: ['admin'],
-                },
-                component: () => import('@/views/upload/index.vue'),
             },
             {
                 path: 'timeAxis',
@@ -90,6 +62,34 @@ const asyncRoutes: RouteRecordRaw[] = [
             // roles: ['admin'],
         },
         component: () => import('@/views/editor/index.vue'),
+    },
+    {
+        path: '/blog',
+        name: 'Blog',
+        meta: {
+            title: '博客',
+            // roles: ['admin'],
+        },
+        component: () => import('@/views/blog/index.vue'),
+    },
+    {
+        path: '/upload',
+        name: 'Upload',
+        meta: {
+            title: '图片上传',
+            // roles: ['admin'],
+        },
+        component: () => import('@/views/upload/index.vue'),
+    },
+    // 发布作品
+    {
+        path: '/publish',
+        name: 'Publish',
+        meta: {
+            title: '发布作品',
+            // roles: ['admin'],
+        },
+        component: () => import('@/views/publish/index.vue'),
     },
 ]
 

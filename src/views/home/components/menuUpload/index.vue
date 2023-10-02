@@ -26,7 +26,6 @@ const {menu, menuClick} = useMenuList()
             {{ item.text }}
           </n-tooltip>
         </div>
-
       </n-space>
     </div>
   </div>
@@ -56,8 +55,6 @@ const {menu, menuClick} = useMenuList()
         color: whitesmoke;
       }
     }
-
   }
-
 }
 </style>

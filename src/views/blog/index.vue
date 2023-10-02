@@ -33,7 +33,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <BackGround width="100vw" height="100vh" :url="blogData.blogInfo.cover">
+  <BackGround
+      width="100vw"
+      height="100vh"
+      :url="blogData.blogInfo.cover"
+  >
     <div class="blog-wrapper container m-auto" id="blog-container">
       <div class="top-banner">
         <PrintText
@@ -59,7 +63,7 @@ onMounted(() => {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
 
   .top-banner {
     box-sizing: border-box;

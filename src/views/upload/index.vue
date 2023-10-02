@@ -1,14 +1,17 @@
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue'
+import {onMounted, ref, computed} from 'vue'
 import Wow from 'wow.js'
 import {CloudUploadOutlined} from '@vicons/antd'
-import {CloseCircle, Text} from '@vicons/ionicons5'
+import {CloseCircle, Text, Power} from '@vicons/ionicons5'
 import {PrintText} from '@/components/PrintText'
 import {UploadInst} from 'naive-ui'
 import Input from '@/components/MimicryInput/index.vue'
 import Btn from '@/components/MimicryBtn/index.vue'
 import TagsInput from '@/components/MimicryTag/index.vue'
 import {useUpload} from './hooks/useUpload'
+import BackGround from '@/components/Background/index.vue'
+import {env} from '@/utils/env'
+import {useUserStore} from '@/store/modules/user'
 
 const {uploadData, handleUploadChange, submit, tagsChange} = useUpload()
 const uploadRef = ref<UploadInst | null>(null)
@@ -29,24 +32,36 @@ onMounted(() => {
 
   wow.init()
 })
+
+const userStore = useUserStore()
+const background = computed(() => {
+  const url = userStore.info.background_image
+  return `${env.VITE_APP_IMG_URL}/${url}`
+})
 </script>
 
 <template>
-  <div id="upload-container" class="upload-wrapper container m-auto">
-    <div class="top-banner">
-      <PrintText title="壁纸上传"></PrintText>
-    </div>
-    <n-spin :show="uploadData.isShowSpin">
-      <template #description>上传中请稍后</template>
-      <div class="upload-content wow fadeInUpBig" data-wow-delay="1s">
-        <div class="title-wrapper">
-          <div class="title">
-            <Input
-                v-model="uploadData.submit.title"
-                input-width="350px"
-                icon-color="rgb(0, 0, 0)"
-                :icon="Text"
-                :more-props="{
+  <BackGround
+      :url="background"
+      class="wow slideInDown"
+      height="100vh"
+      width="100vw"
+  >
+    <div id="upload-container" class="upload-wrapper container m-auto">
+      <div class="top-banner">
+        <PrintText title="壁纸上传"></PrintText>
+      </div>
+      <n-spin :show="uploadData.isShowSpin">
+        <template #description>上传中请稍后</template>
+        <div class="upload-content wow fadeInUpBig" data-wow-delay="1s">
+          <div class="title-wrapper">
+            <div class="title">
+              <Input
+                  v-model="uploadData.submit.title"
+                  input-width="350px"
+                  icon-color="rgb(0, 0, 0)"
+                  :icon="Text"
+                  :more-props="{
                   placeholder: '请输入壁纸名称',
                   autosize: {minRows: 3, maxRows: 5},
                   maxlength: 100,
@@ -54,15 +69,15 @@ onMounted(() => {
                   clearable: true,
                   type: 'textarea',
                 }"
-            ></Input>
-          </div>
-          <div class="sub-title">
-            <Input
-                v-model="uploadData.submit.des"
-                input-width="350px"
-                icon-color="rgb(0, 0, 0)"
-                :icon="Text"
-                :more-props="{
+              ></Input>
+            </div>
+            <div class="sub-title">
+              <Input
+                  v-model="uploadData.submit.des"
+                  input-width="350px"
+                  icon-color="rgb(0, 0, 0)"
+                  :icon="Text"
+                  :more-props="{
                   placeholder: '请输入壁纸描述',
                   autosize: {minRows: 3, maxRows: 5},
                   maxlength: 150,
@@ -70,80 +85,101 @@ onMounted(() => {
                   clearable: true,
                   type: 'textarea',
                 }"
-            >
-            </Input>
+              >
+              </Input>
+            </div>
           </div>
-        </div>
-        <div class="upload">
-          <transition name="preview">
-            <div v-if="uploadData.previewUrl != ''" class="img-preview">
-              <img :src="uploadData.previewUrl" alt=""/>
-              <div class="close">
-                <n-icon
-                    :component="CloseCircle as any"
-                    size="22"
-                    @click="
+          <div class="upload">
+            <transition name="preview">
+              <div v-if="uploadData.previewUrl != ''" class="img-preview">
+                <img :src="uploadData.previewUrl" alt=""/>
+                <div class="close">
+                  <n-icon
+                      :component="CloseCircle as any"
+                      size="22"
+                      @click="
                     uploadData.previewUrl = '';
                     uploadData.fileList = [];
                     uploadData.submit.title = '';
                     uploadData.submit.des = '';
                     "
-                ></n-icon>
-              </div>
-            </div>
-          </transition>
-
-          <n-upload
-              v-if="uploadData.previewUrl === ''"
-              ref="uploadRef"
-              v-model:file-list="uploadData.fileList"
-              :default-upload="false"
-              :disabled="false"
-              :max="1"
-              action="#"
-              class="upload-box"
-              directory-dnd
-              @change="handleUploadChange"
-          >
-            <div
-                class="upload-dragger"
-                v-if="uploadData.previewUrl === ''"
-            >
-              <n-upload-dragger>
-                <div style="margin-bottom: 12px">
-                  <n-icon :depth="3" size="48">
-                    <CloudUploadOutlined/>
-                  </n-icon>
+                  ></n-icon>
                 </div>
-                <n-text style="font-size: 16px">点击或者拖动文件到该区域来上传</n-text>
-                <n-p depth="3" style="margin: 8px 0 0 0">
-                  请不要上传敏感数据，比如你的银行卡号和密码，信用卡号有效期和安全码
-                </n-p>
-              </n-upload-dragger>
-            </div>
-          </n-upload>
-        </div>
-        <div class="upload-tags">
-          <TagsInput
-              width="500px"
-              @tags-chage="tagsChange"
-              :status="uploadData.isShowSpin"
-              :tags="uploadData.defaultTags"
-          ></TagsInput>
-        </div>
+              </div>
+            </transition>
 
-        <div class="upload-btn">
-          <Btn
-              @btn-click="submit(uploadRef)"
-              :btn-icon="CloudUploadOutlined"
-              :error-btn="false"
-              width="300px"
-              text="上传"
-          ></Btn>
+            <n-upload
+                v-if="uploadData.previewUrl === ''"
+                ref="uploadRef"
+                v-model:file-list="uploadData.fileList"
+                :default-upload="false"
+                :disabled="false"
+                :max="1"
+                action="#"
+                class="upload-box"
+                directory-dnd
+                @change="handleUploadChange"
+            >
+              <div
+                  class="upload-dragger"
+                  v-if="uploadData.previewUrl === ''"
+              >
+                <n-upload-dragger>
+                  <div style="margin-bottom: 12px">
+                    <n-icon :depth="3" size="48">
+                      <CloudUploadOutlined/>
+                    </n-icon>
+                  </div>
+                  <n-text style="font-size: 16px">点击或者拖动文件到该区域来上传</n-text>
+                  <n-p depth="3" style="margin: 8px 0 0 0">
+                    请不要上传敏感数据，比如你的银行卡号和密码，信用卡号有效期和安全码
+                  </n-p>
+                </n-upload-dragger>
+              </div>
+            </n-upload>
+          </div>
+          <div class="upload-tags">
+            <TagsInput
+                width="500px"
+                @tags-chage="tagsChange"
+                :status="uploadData.isShowSpin"
+                :tags="uploadData.defaultTags"
+            ></TagsInput>
+          </div>
+
+          <div class="upload-btn">
+            <Btn
+                @btn-click="submit(uploadRef)"
+                :btn-icon="CloudUploadOutlined"
+                :error-btn="false"
+                width="300px"
+                text="上传"
+            ></Btn>
+          </div>
         </div>
+      </n-spin>
+      <div class="submit-wrapper wow bounceInRight">
+        <n-space vertical align="center" size="large">
+          <n-tooltip
+              trigger="hover"
+              placement="left"
+          >
+            <template #trigger>
+              <n-icon
+                  :size="34"
+                  class="icon"
+                  @click="$router.back()"
+              >
+                <Power></Power>
+              </n-icon>
+            </template>
+            返回
+          </n-tooltip>
+        </n-space>
       </div>
-    </n-spin>
-  </div>
+    </div>
+  </BackGround>
+
 </template>
 
 <style lang="less" scoped>
@@ -274,6 +310,25 @@ onMounted(() => {
       margin-top: 25px;
 
 
+      color: whitesmoke;
+    }
+  }
+
+  .submit-wrapper {
+    box-sizing: border-box;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    .icon {
+      border: 1px solid whitesmoke;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 3px;
+      padding: 5px;
+      cursor: pointer;
+      font-size: 24px;
       color: whitesmoke;
     }
   }

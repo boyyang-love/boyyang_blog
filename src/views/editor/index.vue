@@ -7,7 +7,7 @@ import {useEditor} from './hooks/useEditor'
 import {onMounted} from 'vue'
 import Wow from 'wow.js'
 
-const {toolbarConfig, editorConfig} = useConfig()
+const {toolbarConfig, editorConfig, insertedImages} = useConfig()
 const {
   editorRef,
   html,
@@ -17,6 +17,7 @@ const {
   handleUploadChange,
   submit,
   back,
+  beforeUpload,
 } = useEditor()
 
 onMounted(() => {
@@ -66,7 +67,7 @@ onMounted(() => {
             <n-icon
                 :size="34"
                 class="icon"
-                @click="isShowDialog = true"
+                @click="beforeUpload"
             >
               <PaperPlane></PaperPlane>
             </n-icon>
@@ -82,7 +83,7 @@ onMounted(() => {
             <n-icon
                 :size="34"
                 class="icon"
-                @click="back"
+                @click="back(insertedImages)"
             >
               <Power></Power>
             </n-icon>
@@ -97,7 +98,7 @@ onMounted(() => {
         title="文章发布"
         negative-text="取消"
         positive-text="发布"
-        @positive-click="submit"
+        @positive-click="submit(insertedImages)"
     >
       <div class="dialog-wrapper">
         <n-space

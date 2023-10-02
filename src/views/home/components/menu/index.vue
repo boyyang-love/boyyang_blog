@@ -17,7 +17,6 @@ const props = withDefaults(defineProps<Menu.menuProps>(), {
   menuList: () => menuList,
 })
 
-const active = ref<number>(0)
 const userAvatar = computed(() => {
   return `${env.VITE_APP_IMG_URL}/${userStore.info.avatar_url}`
 })
@@ -37,6 +36,7 @@ const menuClick = (item: Menu.menuList, index: number) => {
         )
       },
     })
+    menuStore.setActive("Home")
     return
   }
   menuStore.setActive(item.name)
@@ -45,14 +45,6 @@ const menuClick = (item: Menu.menuList, index: number) => {
   })
 }
 
-onMounted(() => {
-  const route = useRoute()
-  menuList.forEach((it, index) => {
-    if (it.name === route.name) {
-      active.value = index
-    }
-  })
-})
 </script>
 
 <template>

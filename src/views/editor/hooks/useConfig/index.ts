@@ -2,8 +2,10 @@ type InsertFnType = (url: string, alt: string, href: string) => void
 import {upload} from '@/api/upload'
 import {useUserStoreWithOut} from '@/store/modules/user'
 import {env} from '@/utils/env'
+import {ref} from 'vue'
 
 const useConfig = () => {
+    const insertedImages = ref<string[]>([])
     const toolbarConfig = {}
     const editorConfig = {
         placeholder: '请输入内容',
@@ -23,10 +25,20 @@ const useConfig = () => {
                     insertFn(`${env.VITE_APP_IMG_URL}/${fileInfo.key}`, file.name, `${env.VITE_APP_IMG_URL}/${fileInfo.key}`)
                 },
             },
+            insertImage: {
+                onInsertedImage(imageNode: any | null) {  // TS 语法
+                    // onInsertedImage(imageNode) {                    // JS 语法
+                    if (imageNode == null) return
+                    const { src, alt, url, href } = imageNode
+                    insertedImages.value.push(src)
+                    console.log('inserted image', src, alt, url, href)
+                },
+            }
         },
     }
 
     return {
+        insertedImages,
         toolbarConfig,
         editorConfig,
     }

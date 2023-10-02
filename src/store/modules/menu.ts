@@ -19,6 +19,12 @@ const useMenuStore = defineStore({
             this.active = active
         },
     },
+    //开启持久化
+    persist: {
+        key: 'app-menu',
+        storage: window.sessionStorage,
+        paths: ['active'],
+    },
 })
 
 const useMenuStoreWithOut = () => {

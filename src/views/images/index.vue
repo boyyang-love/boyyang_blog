@@ -58,17 +58,21 @@ onMounted(() => {
                     'fadeInRightBig' :
                     'fadeInLeftBig'
                 ]"
-            :name="item.title"
-            :url="item.cover"
-            :path="item.path"
-            :tags="item.tags"
-            :id="item.uid"
-            :is-like="imagesData.likes.includes(item.uid)"
-            :is-star="imagesData.star.includes(item.uid)"
-            :time="item.created"
-            :info="item.user_info"
-            :star="item.thumbs_up"
-            :size="item.wh"
+            v-bind="{
+                name: item.title,
+                url: item.cover,
+                path : item.path,
+                tags: item.tags,
+                id: item.uid,
+                isLike: imagesData.likes.includes(item.uid),
+                isStar: imagesData.star.includes(item.uid),
+                time: item.created,
+                info: item.user_info,
+                star: item.thumbs_up,
+                size: item.px,
+                colors: item.palette.split('-'),
+                options: imagesData.tags
+            }"
             @like="like"
             @star="star"
             @del="del"

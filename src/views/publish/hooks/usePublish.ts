@@ -1,5 +1,6 @@
 import {reactive, ref} from 'vue'
 import type {UploadFileInfo} from 'naive-ui'
+import {useUserStoreWithOut} from '@/store/modules/user'
 // api
 import {upload} from '@/api/upload'
 import {createBlog} from '@/api/blog'
@@ -36,10 +37,12 @@ const beforeBlogSubmit = () => {
 }
 // 博客提交
 const blogSubmit = async () => {
+    const userStore = useUserStoreWithOut()
     isLoading.value = true
     let uploadParams = {
         file_name: BlogFormMore.fileList[0].name,
         file: BlogFormMore.fileList[0].file as File,
+        path: `${userStore.info.uid}/blog`,
     }
     let fileInfo = await upload(uploadParams)
     let blogParams = {

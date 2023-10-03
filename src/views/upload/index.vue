@@ -13,7 +13,7 @@ import BackGround from '@/components/Background/index.vue'
 import {env} from '@/utils/env'
 import {useUserStore} from '@/store/modules/user'
 
-const {uploadData, handleUploadChange, submit, tagsChange} = useUpload()
+const {uploadData, handleUploadChange, submit} = useUpload()
 const uploadRef = ref<UploadInst | null>(null)
 
 onMounted(() => {
@@ -88,6 +88,7 @@ const background = computed(() => {
               >
               </Input>
             </div>
+
           </div>
           <div class="upload">
             <transition name="preview">
@@ -139,14 +140,15 @@ const background = computed(() => {
             </n-upload>
           </div>
           <div class="upload-tags">
-            <TagsInput
-                width="500px"
-                @tags-chage="tagsChange"
-                :status="uploadData.isShowSpin"
-                :tags="uploadData.defaultTags"
-            ></TagsInput>
+            <n-select
+                class="select"
+                placeholder="请选择分类"
+                multiple
+                v-model:value="uploadData.tags"
+                :options="uploadData.tagsOptions"
+                :consistent-menu-width="false"
+            />
           </div>
-
           <div class="upload-btn">
             <Btn
                 @btn-click="submit(uploadRef)"
@@ -205,6 +207,9 @@ const background = computed(() => {
     margin: 0 100px 50px;
     border-radius: 10px;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     .title-wrapper {
       box-sizing: border-box;
@@ -298,9 +303,13 @@ const background = computed(() => {
     }
 
     .upload-tags {
-      margin-top: 15px;
       display: flex;
+      margin: 15px 0;
       justify-content: center;
+
+      .select {
+        width: 350px;
+      }
     }
 
     .upload-btn {

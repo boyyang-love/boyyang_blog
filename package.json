@@ -20,6 +20,7 @@
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
     "boyyang_tools": "^1.3.0",
+    "colorthief": "^2.4.0",
     "echarts": "^5.4.3",
     "element-resize-detector": "^1.2.4",
     "less": "^4.2.0",

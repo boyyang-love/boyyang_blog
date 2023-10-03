@@ -27,6 +27,8 @@ interface imgCardProps {
   info?: Exhibition.UserInfo
   star?: number
   size?: string
+  colors?: string[]
+  options?: { name: string, uid: number }[]
 }
 
 interface emit {
@@ -51,13 +53,6 @@ const isLoading = ref<boolean>(false)
 
 const emits = defineEmits<emit>()
 
-const tags = computed(() => {
-  if (props.tags && props.tags !== '') {
-    return props.tags.split(',').filter(t => t !== '')
-  } else {
-    return []
-  }
-})
 
 const like = () => {
   emits('like', props.id, !props.isLike)
@@ -74,6 +69,14 @@ const imagesDownload = () => {
     isLoading.value = false
   })
 }
+
+const tags = computed(() => {
+  console.log(props.options, props.tags)
+  if (props.options && props.options.length > 0 && props.tags !== '') {
+    const uids = props.tags.split(',')
+    return props.options.filter(op => uids.includes(String(op.uid))) || []
+  }
+})
 
 </script>
 
@@ -122,12 +125,19 @@ const imagesDownload = () => {
         </div>
       </div>
       <div class="img-bottom">
-        <div class="tags" v-show="tags.length > 0">
+        <div class="colors-wrapper">
+          <div
+              class="color-item"
+              v-for="item in props.colors"
+              :style="{'--color': item}"
+          ></div>
+        </div>
+        <div class="tags">
           <div
               class="tag"
               v-for="(item, i) in tags"
               :key="i">
-            <span>#{{ item }}</span>
+            <span>#{{ item.name }}</span>
           </div>
         </div>
         <div class="infos">
@@ -143,7 +153,7 @@ const imagesDownload = () => {
             </div>
             <div class="name-time">
               <span class="name">{{ props.info.username }}</span>
-              <span class="time">{{ moment(props.time * 1000).format('YYYY-MM-DD') }}</span>
+              <span class="time">{{ moment(props.time * 1000).format('YYYY-MM-DD hh:mm:ss') }}</span>
             </div>
           </div>
           <div class="infos-right">
@@ -285,6 +295,20 @@ const imagesDownload = () => {
     width: 100%;
     overflow: hidden;
     margin-top: 5px;
+
+    .colors-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 5px 0;
+
+      .color-item {
+        width: 10px;
+        height: 10px;
+        background-color: var(--color);
+        margin: 0 3px;
+        border-radius: 50%;
+      }
+    }
 
     .tags {
       box-sizing: border-box;

@@ -18,7 +18,7 @@ interface ImageInfo {
   username: string
   date: number
   size: number
-  resolution: string
+  px: string
 }
 
 interface Emits {
@@ -122,7 +122,7 @@ const reason = ref<string>('')
       </div>
     </div>
     <div class="image-size">
-      {{ props.imageInfo.resolution.replace('-', '*') }}
+      {{ props.imageInfo.px }}
     </div>
     <transition name="reject">
       <div class="reject-wrapper" v-show="props.isShowDel">

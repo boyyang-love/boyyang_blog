@@ -102,7 +102,7 @@ const menuIconClick = (i: number) => {
                 username: item.user_info.username,
                 date: item.created,
                 size: item.size,
-                resolution: item.wh,
+                px: item.px,
               }"
               @del-click="(e) => item.isShowDel = e"
               @detail-click="(e) => item.isShow = e"

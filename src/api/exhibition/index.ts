@@ -1,4 +1,5 @@
 import {http} from '@/utils/http'
+import {Exhibition} from './type'
 
 export const createExhibition = (
     data: {
@@ -7,8 +8,9 @@ export const createExhibition = (
         cover: string,
         tags: string,
         size: number,
-        wh: string,
+        px: string,
         type: string,
+        rgb: string
     },
 ) => {
     return http.request({

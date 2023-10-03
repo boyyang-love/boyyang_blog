@@ -1,4 +1,4 @@
-import {reactive, watch} from 'vue'
+import {onMounted, reactive, watch} from 'vue'
 import {env} from '@/utils/env'
 
 import {useUserStoreWithOut} from '@/store/modules/user'
@@ -9,6 +9,7 @@ import {exhibitionList, deleteExhibition} from '@/api/exhibition'
 import {changelike, changeStar} from '@/api/like'
 import {updateUserInfo} from '@/api/user'
 import {delUpload} from '@/api/upload'
+import {Tag, tagsInfo} from '@/api/tag'
 
 const imagesData = reactive({
     page: 1,
@@ -28,6 +29,7 @@ const imagesData = reactive({
         },
     ],
     sort: 'created desc',
+    tags: [] as Tag.TagInfo[],
 })
 
 const SortOptions = [
@@ -72,14 +74,13 @@ const getList = () => {
     }
     exhibitionList(params).then(res => {
         imagesData.count = res.data.count
-        imagesData.list =
-            res.data.exhibitions &&
-            res.data.exhibitions.map((item: Exhibition.ExhibitionsInfo & { path: string }) => {
-                item.cover_url = item.cover
-                item.path = item.cover
-                item.cover = `${env.VITE_APP_IMG_URL}${item.cover}`
-                return item
-            })
+        const exhibitions = res.data.exhibitions as (Exhibition.ExhibitionsInfo & { path: string })[]
+        imagesData.list = exhibitions.map((item: Exhibition.ExhibitionsInfo & { path: string }) => {
+            item.cover_url = item.cover
+            item.path = item.cover
+            item.cover = `${env.VITE_APP_IMG_URL}${item.cover}`
+            return item
+        }) as (Exhibition.ExhibitionsInfo & { path: string })[]
         imagesData.likes = res.data.likes_ids || []
         imagesData.star = res.data.star_ids || []
     })
@@ -169,6 +170,11 @@ const setBackground = async (id: number | string) => {
 }
 
 const useImagesData = () => {
+    onMounted(() => {
+        tagsInfo({type: 'image'}).then((res) => {
+            imagesData.tags = res.data.tags_info
+        })
+    })
     return {
         imagesData,
         SortOptions,

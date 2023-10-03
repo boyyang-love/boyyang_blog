@@ -1,10 +1,11 @@
-import {computed, PropType, reactive} from 'vue'
+import {computed, PropType, reactive, onMounted} from 'vue'
 import {UploadFileInfo, UploadInst} from 'naive-ui'
 
 // api
 import {createExhibition} from '@/api/exhibition'
 import {upload} from '@/api/upload'
 import {useUserStoreWithOut} from '@/store/modules/user'
+import {tagsInfo, type Tag} from '@/api/tag'
 
 const uploadData = reactive({
     isShowSpin: false,
@@ -18,12 +19,23 @@ const uploadData = reactive({
         tags: '',
     },
     previewUrl: '',
+    tags: [],
+    tagsOptions: [] as {label: string, value: number}[]
 })
 
 const useUpload = () => {
+    onMounted(() => {
+        tagsInfo({type: 'image'}).then((res) => {
+            uploadData.tagsOptions = res.data.tags_info.map(tag => {
+                return {
+                    label: tag.name,
+                    value: tag.uid
+                }
+            })
+        })
+    })
     return {
         uploadData,
-        tagsChange,
         handleUploadChange,
         submit,
     }
@@ -55,12 +67,13 @@ const submit = (uploadRef: UploadInst | null) => {
     if (
         uploadData.submit.title == '' ||
         uploadData.submit.des == '' ||
-        uploadData.fileList.length == 0
+        uploadData.fileList.length == 0 ||
+        uploadData.tags.length == 0
     ) {
         window.$notification.create({
             title: '提示',
             type: 'error',
-            content: '标题，描述，图片为必传项！',
+            content: '标题，描述，图片，分类为必传项!',
             duration: 3000,
         })
 
@@ -75,11 +88,14 @@ const submit = (uploadRef: UploadInst | null) => {
     uploadData.isShowSpin = true
     upload(params).then((res) => {
         uploadData.submit.cover = res.key
+        uploadData.submit.tags = uploadData.tags.join(",")
 
         let params = {
             ...uploadData.submit,
             size: res.size,
-            wh: res.wh,
+            px: res.px,
+            rgb: res.rgb,
+            palette: res.palette.join('-'),
             type: res.type,
         }
         createExhibition(params).then(() => {
@@ -96,14 +112,12 @@ const submit = (uploadRef: UploadInst | null) => {
                 cover: '',
                 tags: '',
             }
+
+            uploadData.tags = []
             uploadData.fileList = []
             uploadData.previewUrl = ''
         })
     })
-}
-
-const tagsChange = (tagsItem: Array<{ id: number, text: string }>) => {
-    uploadData.submit.tags = tagsItem.map(tag => tag.text).join(',')
 }
 
 export {useUpload}

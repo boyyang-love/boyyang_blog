@@ -25,7 +25,7 @@ export namespace Admin {
         created: number
         thumbs_up: number
         size: number
-        wh: string
+        px: string
     }
 
     export interface UserInfo {

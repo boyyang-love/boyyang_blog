@@ -58,16 +58,6 @@ const themeOverrides: GlobalThemeOverrides = {
 </template>
 
 <style>
-@font-face {
-  font-family: 'zpix';
-  src: url('./assets/fonts/zpix.ttf');
-}
-
-@font-face {
-  font-family: 'Press Start 2P';
-  src: url('./assets/fonts/PressStart2P-1.ttf');
-}
-
 /*修改滚动条样式*/
 ::-webkit-scrollbar {
   width: 0;

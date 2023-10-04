@@ -12,7 +12,8 @@ interface BlogCardOptions {
   isReverse?: boolean
   title?: string
   subtitle?: string
-  cover?: string
+  cover: string
+  cover_path: string
   author?: string
   time?: number | string
   id?: number
@@ -35,7 +36,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits<{
   (e: 'cardClick'): void
-  (e: 'delClick', id?: number): void
+  (e: 'delClick', id?: number, cover?: string): void
 }>()
 
 const toBlogDetail = () => {
@@ -103,7 +104,7 @@ const toBlogDetail = () => {
 
     <div class="del" :style="props.options.isReverse ? 'left: 5px' : 'right: 5px' ">
       <n-popconfirm
-          @positive-click="emits('delClick', props.options.id)"
+          @positive-click="emits('delClick', props.options.id, props.options.cover_path)"
           positive-text="删了吧"
           negative-text="算了吧"
       >

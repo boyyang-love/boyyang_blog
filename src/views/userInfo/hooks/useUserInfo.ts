@@ -31,6 +31,8 @@ const submit = () => {
         tel: userInfoData.submit.tel,
         motto: userInfoData.submit.motto,
         wechat: userInfoData.submit.wechat,
+        qq: userInfoData.submit.qq,
+        git_hub: userInfoData.submit.git_hub,
     } as User.UpdateUserInfo
 
 

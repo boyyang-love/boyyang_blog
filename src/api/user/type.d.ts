@@ -11,6 +11,7 @@ export namespace User {
         address?: string
         motto?: string
         background_image?: string
+        git_hub: string
     }
 
     export interface UserInfo {

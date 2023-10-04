@@ -15,8 +15,12 @@ export declare namespace Tag {
 
 export const tagsInfo = (params: { type: string }) => {
     return http.request<Tag.TagInfoRes>({
-        url: 'tags/info',
-        method: 'GET',
-        params,
-    })
+            url: 'tags/info',
+            method: 'GET',
+            params,
+        },
+        {
+            isShowMessage: false,
+        },
+    )
 }

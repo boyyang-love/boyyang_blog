@@ -4,10 +4,11 @@ import {router} from '@/router'
 // api
 import {blogList, blogDel} from '@/api/blog'
 import {dashboard} from '@/api/dashboard'
+import {delUpload} from '@/api/upload'
 
 const homeData = reactive({
     blog: {
-        list: [] as Blog.BlogInfo[],
+        list: [] as (Blog.BlogInfo & { cover_path: string })[],
         count: 0,
         page: 1,
         limit: 5,
@@ -45,9 +46,11 @@ const getBlogList = () => {
     }
     blogList(params).then(res => {
         homeData.blog.count = res.data.count
+        const blog_info = res.data.blog_info as (Blog.BlogInfo & { cover_path: string })[]
         homeData.blog.list =
-            res.data.blog_info &&
-            res.data.blog_info.map((item) => {
+            blog_info &&
+            blog_info.map((item) => {
+                item.cover_path = item.cover
                 item.cover = `${env.VITE_APP_IMG_URL}${item.cover}`
                 item.user_info.avatar_url = `${env.VITE_APP_IMG_URL}${item.user_info.avatar_url}`
                 return item
@@ -80,7 +83,8 @@ const getDashboard = () => {
     })
 }
 
-const del = (id: number) => {
+const del = async (id: number, cover_path: string) => {
+    await delUpload({key: cover_path})
     blogDel({uid: id}).then(() => {
         getBlogList()
     })

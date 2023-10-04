@@ -40,6 +40,7 @@ onMounted(() => {
   getBlogList()
   getExhibitionList()
   getDashboard()
+  userStore.getInfoDetail()
 })
 </script>
 
@@ -94,6 +95,7 @@ onMounted(() => {
                   subtitle: item.sub_title,
                   author: item.user_info.username,
                   cover: item.cover,
+                  cover_path: item.cover_path,
                   avatar_url: item.user_info.avatar_url,
                   isReverse: (i + 1) % 2 === 0,
                   time: item.created,

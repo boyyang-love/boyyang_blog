@@ -192,7 +192,7 @@ const reason = ref<string>('')
         </div>
         <div class="msg">
           <div class="label">resolution</div>
-          <div class="text">{{ props.imageInfo.resolution || '--' }}</div>
+          <div class="text">{{ props.imageInfo.px || '--' }}</div>
         </div>
         <div class="msg">
           <div class="label">size(M)</div>

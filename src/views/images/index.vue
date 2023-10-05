@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue'
+import {onMounted, onUnmounted, ref} from 'vue'
 import Wow from 'wow.js'
 
 // import { init } from './hooks/three'
@@ -15,6 +15,10 @@ const {getList, pageChange, pageSizeChange, del, like, star, setBackground} = us
 
 const wrapper = ref<Element | null>(null)
 
+const rightClick = (e: Event) => {
+  e.preventDefault()
+}
+
 onMounted(() => {
   const wow = new Wow({
     boxClass: 'wow', // animated element css class (default is wow)
@@ -29,9 +33,16 @@ onMounted(() => {
     scrollContainer: '#images-container', // optional scroll container selector, otherwise use window
   })
 
+  document.addEventListener('contextmenu', rightClick)
+
   wow.init()
 
   getList()
+})
+
+onUnmounted(() => {
+  console.log('Unmounted')
+  document.removeEventListener('contextmenu', rightClick, false)
 })
 </script>
 

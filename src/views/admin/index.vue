@@ -2,6 +2,7 @@
 import {BackGround} from '@/components/Background'
 import {useAdmin} from './hooks/useAdmin'
 import Card from './components/card/index.vue'
+import ActionCard from './components/actionCard/index.vue'
 import ImageCard from './components/imageCard/index.vue'
 import {computed, nextTick, onMounted} from 'vue'
 import Wow from 'wow.js'
@@ -9,9 +10,11 @@ import {useUserStore} from '@/store/modules/user'
 import {env} from '@/utils/env'
 import {useMenu} from './hooks/useMenu'
 import {router} from '@/router'
+import {useCard} from './hooks/useCard'
 
 const {adminData, getList, changeStatus} = useAdmin()
 const {menu, active, menuClick} = useMenu()
+const {cards, actionCards} = useCard()
 
 getList()
 
@@ -63,11 +66,33 @@ const menuIconClick = (i: number) => {
   <BackGround
       :url="url"
       type="image"
+      class="wow slideInDown"
   >
     <div class="admin-container" id="admin-container">
       <div class="top-cards">
-        <div class="card">
-          用户数
+        <div class="left-card">
+          <div
+              class="card-wrapper"
+              v-for="item in cards"
+          >
+            <Card
+                :icon="item.icon"
+                :num="item.num"
+                :text="item.text"
+            ></Card>
+          </div>
+        </div>
+
+        <div class="right-card">
+          <div
+              class="card-wrapper"
+              v-for="item in actionCards"
+          >
+            <ActionCard
+                :icon="item.icon"
+                :text="item.text"
+            ></ActionCard>
+          </div>
         </div>
       </div>
       <div class="empty" v-if="adminData.list.length == 0">
@@ -163,15 +188,15 @@ const menuIconClick = (i: number) => {
     width: 100%;
     height: 105px;
     padding: 20px 0;
-    //display: grid;
-    //grid-template-columns: repeat(4, 1fr);
-    //grid-column-gap: 10px;
+    display: flex;
+    justify-content: space-between;
 
-    .card {
-      box-sizing: border-box;
-      height: 100%;
-      background-color: white;
+    .left-card,
+    .right-card {
+      display: flex;
+      gap: 0 10px;
     }
+
   }
 
   .content {

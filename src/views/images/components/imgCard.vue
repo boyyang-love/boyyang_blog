@@ -71,17 +71,20 @@ const imagesDownload = () => {
 }
 
 const tags = computed(() => {
-  console.log(props.options, props.tags)
   if (props.options && props.options.length > 0 && props.tags !== '') {
     const uids = props.tags.split(',')
     return props.options.filter(op => uids.includes(String(op.uid))) || []
   }
 })
 
+const rightClick = (e: Event) => {
+  e?.preventDefault()
+}
+
 </script>
 
 <template>
-  <div class="img-card-wrapper" id="img-card-wrapper">
+  <div class="img-card-wrapper" id="img-card-wrapper" @click.right="rightClick">
     <NSpin
         :show="isLoading"
         :rotate="false"
@@ -121,7 +124,7 @@ const tags = computed(() => {
           </n-ellipsis>
         </div>
         <div class="img-size">
-          {{ (props?.size as string).replace(/-/, 'x') }}
+          {{ (props?.size as string) }}
         </div>
       </div>
       <div class="img-bottom">

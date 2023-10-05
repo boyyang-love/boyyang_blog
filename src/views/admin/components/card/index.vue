@@ -1,17 +1,29 @@
 <script setup lang="ts">
-import {Airplane} from '@vicons/ionicons5'
+import {SendSharp} from '@vicons/ionicons5'
+import {Component, markRaw} from 'vue'
+interface Props {
+  icon: Component
+  text: string
+  num: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  icon: markRaw(SendSharp)
+})
 </script>
 
 <template>
   <div class="card-wrapper">
     <div class="left-icon">
-      <n-icon :size="34" color="#fff">
-        <Airplane></Airplane>
-      </n-icon>
+      <n-icon
+          :size="34"
+          :component="props.icon as any"
+          color="#fff"
+      ></n-icon>
     </div>
     <div class="right-content">
-      <div class="title">文章数</div>
-      <div class="num">1000</div>
+      <div class="title">{{props.text}}</div>
+      <div class="num">{{props.num}}</div>
     </div>
   </div>
 </template>
@@ -36,7 +48,7 @@ import {Airplane} from '@vicons/ionicons5'
   }
 
   .title {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: bold;
     color: #fff;
     text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);

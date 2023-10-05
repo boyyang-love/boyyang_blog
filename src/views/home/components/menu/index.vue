@@ -33,10 +33,11 @@ const menuClick = (item: Menu.menuList, index: number) => {
             {
               name: 'Login',
             },
-        )
+        ).then(() => {
+          menuStore.setActive('Home')
+        })
       },
     })
-    menuStore.setActive("Home")
     return
   }
   menuStore.setActive(item.name)
@@ -51,7 +52,11 @@ const menuClick = (item: Menu.menuList, index: number) => {
   <div class="menu-wrapper">
     <div class="menu">
       <n-space>
-        <div class="icon-wrapper" v-for="(item, i) in props.menuList">
+        <div
+            class="icon-wrapper"
+            v-for="(item, i) in props.menuList"
+            :style="{'--color': item.color}"
+        >
           <n-tooltip
               trigger="hover"
               placement="bottom"
@@ -142,12 +147,16 @@ const menuClick = (item: Menu.menuList, index: number) => {
 
     .icon-wrapper {
       box-sizing: border-box;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 5px;
+      border: 1px solid var(--color);
+      cursor: pointer;
+      border-radius: 3px;
+      background-color: rgba(0, 0, 0, .4);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
 
       .menu-icon {
         cursor: pointer;

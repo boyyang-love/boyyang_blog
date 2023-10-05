@@ -17,14 +17,14 @@ const menuList: Menu.menuList[] = [
         com: markRaw(Home),
         path: '/home',
         text: '首页',
-        // color: '#ffde7d',
+        color: '#ffde7d',
     },
     {
         name: 'Images',
         com: markRaw(Image),
         path: '/images',
         text: '壁纸',
-        // color: '#f6416c',
+        color: '#f6416c',
     },
     // {
     //     name: 'Publish',
@@ -52,21 +52,21 @@ const menuList: Menu.menuList[] = [
         com: markRaw(GitCommit),
         path: '/timeAxis',
         text: '时间轴',
-        // color: '#ff9a00',
+        color: '#ff9a00',
     },
     {
         name: 'User',
         com: markRaw(PersonCircleSharp),
         path: '/user',
         text: '我的',
-        // color: '#3ec1d3',
+        color: '#3ec1d3',
     },
     {
         name: '退出',
         com: markRaw(Exit),
         path: '',
         text: '退出',
-        // color: '#9896f1',
+        color: '#9896f1',
     },
 ]
 

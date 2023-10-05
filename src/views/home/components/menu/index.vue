@@ -7,6 +7,7 @@ import {menuList} from './menuList'
 import {env} from '@/utils/env'
 import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 import {useMenuStore} from '@/store/modules/menu'
+import {Search} from '@vicons/ionicons5'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -51,7 +52,14 @@ const menuClick = (item: Menu.menuList, index: number) => {
 <template>
   <div class="menu-wrapper">
     <div class="menu">
-      <n-space>
+      <n-space align="center">
+        <n-avatar
+            :size="45"
+            :bordered="true"
+            :src="userAvatar"
+            round
+            @click="showInfo(true)"
+        ></n-avatar>
         <div
             class="icon-wrapper"
             v-for="(item, i) in props.menuList"
@@ -76,14 +84,21 @@ const menuClick = (item: Menu.menuList, index: number) => {
           </n-tooltip>
         </div>
       </n-space>
-      <div class="avatar">
-        <n-avatar
-            :size="45"
-            :bordered="true"
-            :src="userAvatar"
-            round
-            @click="showInfo(true)"
-        ></n-avatar>
+      <div class="right">
+        <div class="search">
+          <n-icon
+              color="#fff"
+              :size="20"
+          >
+            <Search></Search>
+          </n-icon>
+        </div>
+        <div class="avatar">
+
+          <div class="user-name">
+            {{ userStore.info.username }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -98,6 +113,9 @@ const menuClick = (item: Menu.menuList, index: number) => {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  border-bottom: 2px solid whitesmoke;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: saturate(120%) blur(10px);
 
   .menu {
     box-sizing: border-box;
@@ -105,42 +123,38 @@ const menuClick = (item: Menu.menuList, index: number) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 25px;
+    padding: 2px 10px;
     position: relative;
-    //background-color: rgba(17, 17, 17, 0.1);
-    //backdrop-filter: saturate(100%) blur(10px);
-    //box-shadow: 0 5px 3px rgba(0, 0, 0, 0.5);
 
 
-    .avatar {
-      position: relative;
+    .right {
       display: flex;
-      justify-content: center;
       align-items: center;
-      border-radius: 50%;
 
-      &:before {
-        content: '';
-        width: 1%;
-        height: 2px;
-        position: absolute;
-        bottom: -10px;
-        background-color: #1fab89;
-
-        animation: thr 1.5s ease-in-out infinite;
+      .search {
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        cursor: pointer;
       }
 
-      @keyframes thr {
-        0% {
-          width: 1%;
-        }
+      .avatar {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
 
-        50% {
-          width: 90%;
-        }
-
-        100% {
-          width: 1%;
+        .user-name {
+          color: whitesmoke;
+          padding: 0 10px;
+          background-color: rgab(0, 0, 0, 0.5);
+          backdrop-filter: saturate(200%) blur(10px);
+          border: 1px solid white;
+          border-radius: 5px;
+          margin-left: 10px;
         }
       }
     }

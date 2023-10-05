@@ -8,7 +8,8 @@ import {
     PersonCircleSharp,
     RocketSharp,
     Exit,
-    Create
+    Create,
+    Power
 } from '@vicons/ionicons5'
 
 const menuList: Menu.menuList[] = [
@@ -63,7 +64,7 @@ const menuList: Menu.menuList[] = [
     },
     {
         name: '退出',
-        com: markRaw(Exit),
+        com: markRaw(Power),
         path: '',
         text: '退出',
         color: '#9896f1',

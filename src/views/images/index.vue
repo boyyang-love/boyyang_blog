@@ -41,7 +41,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  console.log('Unmounted')
   document.removeEventListener('contextmenu', rightClick, false)
 })
 </script>

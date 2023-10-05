@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {onMounted} from 'vue'
+import {onMounted, onUnmounted} from 'vue'
 import moment from 'moment/moment'
 import wow from 'wow.js'
 // hooks
@@ -10,6 +10,9 @@ import Wow from 'wow.js'
 const {timeAxisData} = useTimeAxisData()
 const {getData} = useTimeAxisMethods()
 
+const rightClick = (e: Event) => {
+  e.preventDefault()
+}
 
 onMounted(() => {
   const wow = new Wow({
@@ -25,8 +28,14 @@ onMounted(() => {
     scrollContainer: '#time-axis-wrapper', // optional scroll container selector, otherwise use window
   })
 
+  document.addEventListener('contextmenu', rightClick)
+
   wow.init()
   getData()
+})
+
+onUnmounted(() => {
+  document.removeEventListener('contextmenu', rightClick, false)
 })
 </script>
 

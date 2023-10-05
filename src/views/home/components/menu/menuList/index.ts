@@ -1,5 +1,6 @@
 import {markRaw} from 'vue'
 import {Menu} from '../types'
+import {renderIcon} from '@/utils/renderIcon'
 import {
     Image,
     Home,
@@ -9,7 +10,7 @@ import {
     RocketSharp,
     Exit,
     Create,
-    Power
+    Power,
 } from '@vicons/ionicons5'
 
 const menuList: Menu.menuList[] = [
@@ -62,15 +63,29 @@ const menuList: Menu.menuList[] = [
         text: '我的',
         color: '#3ec1d3',
     },
+    // {
+    //     name: '退出',
+    //     com: markRaw(Power),
+    //     path: '',
+    //     text: '退出',
+    //     color: '#9896f1',
+    // },
+]
+
+const options = [
     {
-        name: '退出',
-        com: markRaw(Power),
-        path: '',
-        text: '退出',
-        color: '#9896f1',
+        label: '修改密码',
+        key: 'editPassword',
+        icon: renderIcon(Create),
+    },
+    {
+        label: '退出登录',
+        key: 'logout',
+        icon: renderIcon(Power),
     },
 ]
 
 export {
     menuList,
+    options,
 }

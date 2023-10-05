@@ -1,13 +1,16 @@
 <script lang="ts" setup>
-import {computed, onMounted, ref} from 'vue'
+import {computed, onMounted, ref, h} from 'vue'
+import {NInput, NSpace} from 'naive-ui'
 import {useRouter, useRoute} from 'vue-router'
 import {useUserStore} from '@/store/modules/user'
 import {Menu} from './types'
-import {menuList} from './menuList'
+import {menuList, options} from './menuList'
 import {env} from '@/utils/env'
 import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 import {useMenuStore} from '@/store/modules/menu'
 import {Search} from '@vicons/ionicons5'
+import {updatePassword} from '@/api/user'
+
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -45,6 +48,83 @@ const menuClick = (item: Menu.menuList, index: number) => {
   router.push({
     name: item.name,
   })
+}
+
+const selectClick = (key: string) => {
+  console.log(key)
+  if (key === 'logout') {
+    window.$dialog.warning({
+      title: '提示',
+      content: '是否退出登录？',
+      negativeText: '算了',
+      positiveText: '确定',
+      onPositiveClick: () => {
+        window.sessionStorage.clear()
+        router.replace(
+            {
+              name: 'Login',
+            },
+        ).then(() => {
+          menuStore.setActive('Home')
+        })
+      },
+    })
+    return
+  }
+
+  if (key === 'editPassword') {
+    const password = ref<string>('')
+    const rePassword = ref<string>('')
+    window.$dialog.info({
+      title: '修改密码',
+      positiveText: '确认',
+      maskClosable: false,
+      content: () => {
+        return h('div', null,
+            [
+              h(NSpace, {vertical: true},
+                  [
+                    h(NInput, {
+                          type: 'password',
+                          placeholder: '请输入密码',
+                          showPasswordOn: 'click',
+                          onChange: (e) => {
+                            console.log(e)
+                            password.value = e
+                          },
+                        },
+                    ),
+                    h(NInput, {
+                          type: 'password',
+                          placeholder: '请输入重复密码',
+                          showPasswordOn: 'click',
+                          onChange: (e) => {
+                            console.log(e)
+                            rePassword.value = e
+                          },
+                        },
+                    ),
+                  ],
+              ),
+            ],
+        )
+      },
+      onPositiveClick: async () => {
+        if (password.value.trim() != '' && rePassword.value.trim() != '') {
+          if (password.value !== rePassword.value) {
+            window.$message.error('密码不一致')
+            return false
+          } else {
+            await updatePassword({password: password.value})
+            return true
+          }
+        } else {
+          window.$message.error('密码不能为空!')
+          return false
+        }
+      },
+    })
+  }
 }
 
 </script>
@@ -93,10 +173,15 @@ const menuClick = (item: Menu.menuList, index: number) => {
             <Search></Search>
           </n-icon>
         </div>
-        <div class="avatar">
-
+        <div class="name">
           <div class="user-name">
-            {{ userStore.info.username }}
+            <n-dropdown
+                :show-arrow="true"
+                :options="options"
+                @select="selectClick"
+            >
+              {{ userStore.info.username }}
+            </n-dropdown>
           </div>
         </div>
       </div>
@@ -123,7 +208,7 @@ const menuClick = (item: Menu.menuList, index: number) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2px 10px;
+    padding: 2px 20px 2px 10px;
     position: relative;
 
 
@@ -140,7 +225,7 @@ const menuClick = (item: Menu.menuList, index: number) => {
         cursor: pointer;
       }
 
-      .avatar {
+      .name {
         position: relative;
         display: flex;
         justify-content: center;

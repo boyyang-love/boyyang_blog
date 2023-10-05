@@ -54,6 +54,9 @@ const position = computed(() => {
             :icon-size="item.iconSize"
             :input-type="item.inputType"
             :placeholder="item.placeholder"
+            :more-props="{
+              showPasswordOn: 'click',
+            }"
             v-model="loginData[item.key]"
         ></Input>
       </div>

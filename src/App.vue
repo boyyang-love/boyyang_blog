@@ -17,7 +17,9 @@ const themeOverrides: GlobalThemeOverrides = {
     color: '#3d3b4f',
   },
   Dropdown: {
-    color: '#3d3b4f',
+    color: '#ffffff',
+    optionColorHover: '#ff8a14',
+    optionTextColorHover: '#ffffff'
   },
   Drawer: {
     color: '#3d3b4f',
@@ -43,7 +45,8 @@ const themeOverrides: GlobalThemeOverrides = {
     buttonIconSizeLarge: true,
     buttonColorHover: '#cc1515',
     buttonIconColorHover: '#fff'
-  }
+  },
+
 }
 </script>
 

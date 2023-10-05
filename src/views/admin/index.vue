@@ -67,22 +67,11 @@ const menuIconClick = (i: number) => {
     <div class="admin-container" id="admin-container">
       <div class="top-cards">
         <div class="card">
-          <Card></Card>
-        </div>
-        <div class="card">
-          <Card></Card>
-        </div>
-        <div class="card">
-          <Card></Card>
-        </div>
-        <div class="card">
-          <Card></Card>
+          用户数
         </div>
       </div>
       <div class="empty" v-if="adminData.list.length == 0">
-        <n-empty size="large" description="啥也没有?">
-
-        </n-empty>
+        <n-empty size="large" description="啥也没有?"></n-empty>
       </div>
       <div class="content" id="admin-content" v-else>
         <div
@@ -167,7 +156,6 @@ const menuIconClick = (i: number) => {
   height: 100vh;
   flex-direction: column;
   padding: 20px 70px;
-  background-color: rgba(0, 0, 0, 0.5);
   overflow-y: hidden;
 
   .top-cards {
@@ -175,13 +163,14 @@ const menuIconClick = (i: number) => {
     width: 100%;
     height: 105px;
     padding: 20px 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 10px;
+    //display: grid;
+    //grid-template-columns: repeat(4, 1fr);
+    //grid-column-gap: 10px;
 
     .card {
       box-sizing: border-box;
       height: 100%;
+      background-color: white;
     }
   }
 

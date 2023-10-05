@@ -10,6 +10,7 @@ import Carousel from '../carousel/index.vue'
 import PublishChart from '../publishChart/index.vue'
 import {ArrowDown} from '@vicons/ionicons5'
 import MenuBeehive from '../menuBeehive/index.vue'
+import Calendar from '../calendar/index.vue'
 // hooks
 import {useHomeData, useHomeMethods} from '../../hooks/useHome'
 import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition'
@@ -85,7 +86,25 @@ onMounted(() => {
         <div class="blog">
           <n-space size="large" vertical>
             <div class="title wow slideInDown">我的博客</div>
+            <n-empty
+                description="是空的？"
+                :show-icon="false"
+                v-if="homeData.blog.list.length === 0"
+                style="
+                    background-color: rgba(0, 0, 0, 0.5);
+                    margin: 10px 0;
+                    padding: 20px 0;
+                    border-radius: 5px;
+              "
+            >
+              <template #extra>
+                <div class="empty-wrapper">
+                  <img src="@/assets/empty.png" alt="呆萌" style="height: 300px"/>
+                </div>
+              </template>
+            </n-empty>
             <BlogCard
+                v-else
                 v-for="(item, i) in homeData.blog.list"
                 :key="item.uid"
                 :class="['wow', (i + 1) % 2 == 0 ? 'bounceInLeft' : 'bounceInRight']"
@@ -124,6 +143,9 @@ onMounted(() => {
         </div>
         <div class="notice wow pulse">
           <Notice></Notice>
+        </div>
+        <div class="calendar wow pulse">
+          <Calendar></Calendar>
         </div>
       </div>
     </div>
@@ -217,13 +239,11 @@ onMounted(() => {
 
       .calendar {
         box-sizing: border-box;
-        // height: 250px;
-        // background-color: #fff;
       }
 
       .notice {
         border-radius: 3px;
-        min-height: 100px;
+        margin-bottom: 10px;
       }
     }
 

@@ -43,9 +43,15 @@ onMounted(() => {
 
     <n-empty
         description="是空的？"
+        :show-icon="false"
         v-if="userData.list.length === 0"
+        style="
+              background-color: rgba(0, 0, 0, 0.5);
+              margin: 10px 0;
+              padding: 20px 0;
+              border-radius: 5px;
+        "
     >
-      <template #icon></template>
       <template #extra>
         <div class="empty-wrapper">
           <img src="@/assets/empty.png" alt="呆萌" style="height: 300px"/>
@@ -104,7 +110,7 @@ onMounted(() => {
   .bottom-content {
     box-sizing: border-box;
     width: 100%;
-    margin-top: 25px;
+    //margin-top: 25px;
     display: grid;
     background: linear-gradient(145deg, #cfd6dc, #f6ffff);
     grid-template-columns: repeat(3, 1fr);
@@ -112,6 +118,7 @@ onMounted(() => {
     justify-content: space-between;
     padding: 20px;
     border-radius: 10px;
+    margin: 20px 0;
 
   }
 
@@ -121,7 +128,6 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     background: linear-gradient(145deg, #cfd6dc, #f6ffff);
-    margin: 50px 0;
     padding: 10px 0;
     border-radius: 5px;
   }

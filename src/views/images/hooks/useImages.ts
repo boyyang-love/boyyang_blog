@@ -20,11 +20,11 @@ const imagesData = reactive({
     star: [] as number[],
     pageSizes: [
         {
-            label: '9 每页',
+            label: '9/每页',
             value: 9,
         },
         {
-            label: '12 每页',
+            label: '12/每页',
             value: 12,
         },
     ],

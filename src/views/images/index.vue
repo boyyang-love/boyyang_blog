@@ -46,7 +46,24 @@ onMounted(() => {
     </div>
 
     <div class="images-content wow wow fadeInUpBig" data-wow-delay="1s">
-      <div class="images-wrapper">
+      <n-empty
+          description="是空的？"
+          :show-icon="false"
+          v-if="imagesData.list.length === 0"
+          style="
+              background-color: rgba(0, 0, 0, 0.5);
+              margin: 10px 0;
+              padding: 20px 0;
+              border-radius: 5px;
+        "
+      >
+        <template #extra>
+          <div class="empty-wrapper">
+            <img src="@/assets/empty.png" alt="呆萌" style="height: 300px"/>
+          </div>
+        </template>
+      </n-empty>
+      <div class="images-wrapper" v-else>
         <ImgCard
             v-for="(item, i) in imagesData.list"
             :key="item.uid"
@@ -91,7 +108,11 @@ onMounted(() => {
             @update:page="pageChange"
             :page-slot="5"
             show-size-picker
-        />
+        >
+          <template #prefix="{ itemCount }">
+            共 {{ itemCount }} 项
+          </template>
+        </n-pagination>
 
         <n-select
             size="small"

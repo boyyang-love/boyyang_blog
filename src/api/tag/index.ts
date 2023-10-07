@@ -13,7 +13,7 @@ export declare namespace Tag {
     }
 }
 
-export const tagsInfo = (params: { type: string }) => {
+export const tagsInfo = (params: { type: string, uids?: string }) => {
     return http.request<Tag.TagInfoRes>({
             url: 'tags/info',
             method: 'GET',

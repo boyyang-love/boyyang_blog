@@ -10,6 +10,8 @@ import {changelike, changeStar} from '@/api/like'
 import {updateUserInfo} from '@/api/user'
 import {delUpload} from '@/api/upload'
 import {Tag, tagsInfo} from '@/api/tag'
+import {updateDownload} from '@/api/exhibition'
+import {router} from '@/router'
 
 const imagesData = reactive({
     page: 1,
@@ -30,6 +32,7 @@ const imagesData = reactive({
     ],
     sort: 'created desc',
     tags: [] as Tag.TagInfo[],
+    keywords: '',
 })
 
 const SortOptions = [
@@ -71,6 +74,7 @@ const getList = () => {
         type: 2,
         public: true,
         sort: imagesData.sort,
+        keywords: imagesData.keywords,
     }
     exhibitionList(params).then(res => {
         imagesData.count = res.data.count
@@ -181,6 +185,17 @@ const useImagesData = () => {
     }
 }
 
+const updateDownloadStatus = async (uid: string | number) => {
+    await updateDownload({uid: uid})
+}
+
+const toDetail = (uid: string | number) => {
+    router.push({
+        name: 'Detail',
+        query: {uid: uid},
+    }).then()
+}
+
 const useImagesMethods = () => {
     return {
         getList,
@@ -190,6 +205,8 @@ const useImagesMethods = () => {
         like,
         star,
         setBackground,
+        updateDownloadStatus,
+        toDetail,
     }
 }
 

@@ -1,16 +1,27 @@
 <script lang="ts" setup>
 import {onMounted, onUnmounted, ref} from 'vue'
 import Wow from 'wow.js'
-
-// import { init } from './hooks/three'
+import {Search} from '@vicons/ionicons5'
 import PrintText from '@/components/PrintText/index.vue'
 import ImgCard from './components/imgCard.vue'
+import {useUserStore} from '@/store/modules/user'
 
 // hooks
 import {useImagesData, useImagesMethods} from './hooks/useImages'
 
 const {imagesData, SortOptions} = useImagesData()
-const {getList, pageChange, pageSizeChange, del, like, star, setBackground} = useImagesMethods()
+const {
+  getList,
+  pageChange,
+  pageSizeChange,
+  del,
+  like,
+  star,
+  setBackground,
+  updateDownloadStatus,
+  toDetail,
+} = useImagesMethods()
+const userStore = useUserStore()
 
 
 const wrapper = ref<Element | null>(null)
@@ -52,7 +63,36 @@ onUnmounted(() => {
       class="images-wrapper container m-auto"
   >
     <div class="top-banner">
-      <PrintText title="壁纸"></PrintText>
+      <PrintText
+          title="壁纸"
+          :subtitle="userStore.info.motto"
+      ></PrintText>
+
+      <div class="search-wrapper">
+        <div class="left-input-container">
+          <n-input
+              size="large"
+              placeholder="请输入关键字"
+              :bordered="false"
+              :style="{
+              background: 'transparent',
+              width: '100%'
+            }"
+              v-model:value="imagesData.keywords"
+          >
+          </n-input>
+        </div>
+        <div class="search-btn">
+          <n-icon
+              clsss="search-icon"
+              color="rgba(0,0,0,1)"
+              :size="20"
+              @click="getList()"
+          >
+            <Search></Search>
+          </n-icon>
+        </div>
+      </div>
     </div>
 
     <div class="images-content wow wow fadeInUpBig" data-wow-delay="1s">
@@ -104,10 +144,12 @@ onUnmounted(() => {
             @star="star"
             @del="del"
             @set-background="setBackground"
+            @download-sucess="updateDownloadStatus"
+            @to-detail="toDetail"
         ></ImgCard>
       </div>
     </div>
-    <div class="pagination wow bounceInUp" data-wow-delay="0.5s">
+    <div class="pagination wow bounceInUp">
       <n-space>
         <n-pagination
             v-model:item-count="imagesData.count"
@@ -154,6 +196,50 @@ onUnmounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    position: relative;
+
+
+    .search-wrapper {
+      box-sizing: border-box;
+      width: 50%;
+      height: 45px;
+
+      position: absolute;
+      bottom: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+
+      .search-icon {
+        cursor: pointer;
+      }
+
+      .left-input-container {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        background-color: rgba(245, 245, 245, 0.5);
+        backdrop-filter: saturate(100%) blur(30px);
+        margin: 0 20px 0 0;
+        border-radius: 3px;
+      }
+
+      .search-btn {
+        background-color: rgba(245, 245, 245, 0.5);
+        backdrop-filter: saturate(100%) blur(30px);
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+    }
   }
 
   .images-content {

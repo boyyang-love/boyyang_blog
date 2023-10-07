@@ -37,6 +37,7 @@ onMounted(() => {
   <BackGround
       width="100vw"
       height="100vh"
+      class="wow bounceInDown"
       :url="blogData.blogInfo.cover"
   >
     <div class="blog-wrapper container m-auto" id="blog-container">

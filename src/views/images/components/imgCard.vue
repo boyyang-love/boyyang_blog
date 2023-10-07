@@ -6,7 +6,8 @@ import {
   Sparkles,
   ImageSharp,
   CloudDownload,
-  Bicycle,
+  SyncCircle,
+  Cube,
 } from '@vicons/ionicons5'
 import moment from 'moment'
 import {env} from '@/utils/env'
@@ -14,6 +15,7 @@ import {computed, ref} from 'vue'
 import {useUserStore} from '@/store/modules/user'
 import {imageDownload} from '@/utils/fileDownload'
 import {Exhibition} from '@/api/exhibition/type'
+import CubeLoading from '@/components/CubeLoading/index.vue'
 
 interface imgCardProps {
   url?: string
@@ -39,6 +41,10 @@ interface emit {
   (e: 'setBackground', id: number | string): void
 
   (e: 'star', id: number | string, starStatus: boolean): void
+
+  (e: 'downloadSucess', id: number | string): void
+
+  (e: 'toDetail', id: number | string): void
 }
 
 const userStore = useUserStore()
@@ -67,6 +73,7 @@ const imagesDownload = () => {
   let name = props.url.split('/').pop() as string
   imageDownload(props.url, name).then(() => {
     isLoading.value = false
+    emits('downloadSucess', props.id)
   })
 }
 
@@ -87,7 +94,7 @@ const rightClick = (e: Event) => {
   <div class="img-card-wrapper" id="img-card-wrapper" @click.right="rightClick">
     <NSpin
         :show="isLoading"
-        :rotate="false"
+        :rotate="true"
         size="large"
     >
       <template #description>
@@ -96,9 +103,10 @@ const rightClick = (e: Event) => {
         </span>
       </template>
       <template #icon>
-        <n-icon color="#373737" :size="40">
-          <Bicycle></Bicycle>
-        </n-icon>
+        <CubeLoading></CubeLoading>
+<!--        <n-icon color="#b83b5e" :size="40">-->
+<!--          <SyncCircle></SyncCircle>-->
+<!--        </n-icon>-->
       </template>
       <div class="img-content">
         <n-image
@@ -106,15 +114,12 @@ const rightClick = (e: Event) => {
             class="img"
             lazy
             object-fit="cover"
+            :preview-disabled="true"
+            @click="$emit('toDetail', props.id)"
         >
           <template #placeholder>
             <div class="loading">
-              <n-icon
-                  :component="Fitness as any"
-                  class="icon"
-                  color="#f00056"
-                  size="55"
-              ></n-icon>
+              <CubeLoading></CubeLoading>
             </div>
           </template>
         </n-image>
@@ -198,13 +203,33 @@ const rightClick = (e: Event) => {
                   @click="imagesDownload"
               ></n-icon>
               <n-icon
-                  v-if="props.info.uid === userStore.info.uid"
-                  :component="CloseCircle as any"
+                  :component="Cube as any"
                   color="#373737"
                   size="18"
-                  @click="$emit('del', props.id, props.path)"
                   class="icon"
+                  @click="$emit('toDetail', props.id)"
               ></n-icon>
+              <n-popconfirm
+                  v-if="props.info.uid === userStore.info.uid"
+                  content=""
+                  positive-text="删除"
+                  negative-text="算了"
+                  type="warning"
+                  trigger="hover"
+                  @positive-click="$emit('del', props.id, props.path)"
+              >
+                <template #trigger>
+                  <div>
+                    <n-icon
+                        :component="CloseCircle as any"
+                        color="#b83b5e"
+                        size="18"
+                        class="icon"
+                    ></n-icon>
+                  </div>
+                </template>
+                是否删除当前图片?
+              </n-popconfirm>
             </n-space>
           </div>
         </div>
@@ -226,7 +251,7 @@ const rightClick = (e: Event) => {
   position: relative;
 
   .loading-text {
-    color: #373737;
+    color: #b83b5e;
     font-size: 16px;
     font-weight: bolder;
   }

@@ -165,14 +165,6 @@ const selectClick = (key: string) => {
         </div>
       </n-space>
       <div class="right">
-        <div class="search">
-          <n-icon
-              color="#fff"
-              :size="20"
-          >
-            <Search></Search>
-          </n-icon>
-        </div>
         <div class="name">
           <div class="user-name">
             <n-dropdown

@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<Background.Props>(), {
   width: '100%',
   height: '100%',
   url: '',
-  opacity: 0.5,
+  opacity: 0.1,
 })
 
 // 背景图片
@@ -52,6 +52,8 @@ const opacity = computed(() => {
   background-color: v-bind('props.color');
   position: relative;
   overflow: hidden;
+
+  transition: background-image .4s linear;
 
   .background-content {
     scroll-behavior: smooth;

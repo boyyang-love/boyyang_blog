@@ -63,7 +63,7 @@ onMounted(() => {
       </div>
 
       <div class="beehive-menu">
-        <MenuBeehive></MenuBeehive>
+        <!--<MenuBeehive></MenuBeehive>-->
       </div>
     </div>
     <div class="home-content">

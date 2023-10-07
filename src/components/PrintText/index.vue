@@ -48,9 +48,13 @@ const beginAni = () => {
   <div class="print-text-wrapper">
     <div class="print-text-title">⌈ {{ props.title }} ⌋</div>
     <div class="print-text-subtitle">
-            <span v-for="(item, i) in subTitleText" :key="i" :size="24" class="inner-text">
-                    {{ item }}
-                </span>
+            <span
+                v-for="(item, i) in subTitleText"
+                :key="i"
+                class="inner-text"
+            >
+              {{ item }}
+            </span>
       <span key="line" class="line">|</span>
     </div>
   </div>
@@ -77,9 +81,10 @@ const beginAni = () => {
     margin-top: 15px;
     font-weight: bold;
 
+
     .inner-text {
       font-weight: bold;
-      padding: 5px;
+      padding: 0;
       text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
     }
 
@@ -95,8 +100,6 @@ const beginAni = () => {
 
     100% {
       opacity: 1;
-
-      // color: blue;
     }
   }
 
@@ -104,8 +107,11 @@ const beginAni = () => {
     0% {
       transform: scale(1);
     }
-    100% {
+    50% {
       transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 }

@@ -1,5 +1,5 @@
 export declare namespace Exhibition {
-    interface ExhibitionListRes {
+    export interface ExhibitionListRes {
         count: number
         exhibitions: ExhibitionsInfo[]
         likes_ids: number[]
@@ -10,7 +10,7 @@ export declare namespace Exhibition {
     }
 
 
-    interface ExhibitionsInfo {
+    export interface ExhibitionsInfo {
         uid: number
         cover: string
         cover_url: string
@@ -24,16 +24,23 @@ export declare namespace Exhibition {
         user_info: UserInfo
         created: number
         thumbs_up: number
+        type: string
         px: string
         palette: string
-        size: string
+        rgb: string
+        size: number
+        download: number
     }
 
-    interface UserInfo {
+    export interface UserInfo {
         avatar_url: string
         gender: number
         uid: number
         tel: number
         username: string
+    }
+
+    export interface SimilarRes {
+        infos: ExhibitionsInfo[]
     }
 }

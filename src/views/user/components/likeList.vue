@@ -114,8 +114,7 @@ const status = computed(() => {
                 negative-text="算了"
                 @positive-click="emits('submit', 1)"
             >
-              <template
-                  #trigger>
+              <template #trigger>
                 <div>
                   <n-icon
                       v-if="props.status === 3"

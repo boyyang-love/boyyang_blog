@@ -57,3 +57,26 @@ export const changeExhibitionStatus = (data: { uid: string | number, status: num
         data,
     })
 }
+
+export const updateDownload = (params: { uid: string | number }) => {
+    return http.request(
+        {
+            url: '/update/download',
+            method: 'get',
+            params,
+        },
+        {
+            isShowMessage: false,
+        },
+    )
+}
+
+export const similarExhibition = (params: {tag: string, color: string}) => {
+    return http.request<Exhibition.SimilarRes>(
+        {
+            url: '/exhibition/similar',
+            method: 'get',
+            params
+        }
+    )
+}

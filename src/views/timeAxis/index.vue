@@ -67,7 +67,13 @@ onUnmounted(() => {
                     data-wow-delay="0.5s"
                 >
                   <template #placeholder>
-                    <div class="loading">
+                    <div
+                        class="loading"
+                        :style="{
+                            width: item.px.split('X')[0],
+                            height: item.px.split('X')[1]
+                        }"
+                    >
                       <n-icon
                           :component="Fitness as any"
                           class="icon"
@@ -156,8 +162,8 @@ onUnmounted(() => {
           box-sizing: border-box;
           background-color: rgba(0, 0, 0, 0.5);
           backdrop-filter: saturate(100%) blur(5px);
-          width: 500px;
-          height: 260px;
+          height: 300px;
+          width: 570px;
           display: flex;
           justify-content: center;
           align-items: center;

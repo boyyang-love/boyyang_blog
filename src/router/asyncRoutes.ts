@@ -91,6 +91,15 @@ const asyncRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/publish/index.vue'),
     },
+    {
+        path: '/detail',
+        name: 'Detail',
+        meta: {
+            title: '图片详情',
+            // roles: ['admin'],
+        },
+        component: () => import('@/views/imagesDetail/index.vue'),
+    },
 ]
 
 export {asyncRoutes}

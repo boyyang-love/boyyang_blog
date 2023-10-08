@@ -33,6 +33,7 @@ const imagesData = reactive({
     sort: 'created desc',
     tags: [] as Tag.TagInfo[],
     keywords: '',
+    selectedTags: '' as string | number,
 })
 
 const SortOptions = [
@@ -75,7 +76,9 @@ const getList = () => {
         public: true,
         sort: imagesData.sort,
         keywords: imagesData.keywords,
+        tags: imagesData.selectedTags,
     }
+    window.$loadingBar.start()
     exhibitionList(params).then(res => {
         imagesData.count = res.data.count
         const exhibitions = res.data.exhibitions as (Exhibition.ExhibitionsInfo & { path: string })[]
@@ -87,6 +90,9 @@ const getList = () => {
         }) as (Exhibition.ExhibitionsInfo & { path: string })[]
         imagesData.likes = res.data.likes_ids || []
         imagesData.star = res.data.star_ids || []
+        window.$loadingBar.finish()
+    }).catch(() => {
+        window.$loadingBar.error()
     })
 }
 
@@ -164,13 +170,25 @@ const setBackground = async (id: number | string) => {
         background_image: background_image,
     }
 
-
+    window.$loadingBar.start()
     await updateUserInfo(params)
+    window.$loadingBar.finish()
 
     userStore.$patch((state) => {
         state.info.background_image = background_image
         state.info.background_image = background_image
     })
+}
+
+const tagClick = (uid: string | number) => {
+    imagesData.page = 1
+    if (imagesData.selectedTags === uid) {
+        imagesData.selectedTags = ''
+        getList()
+        return
+    }
+    imagesData.selectedTags = uid
+    getList()
 }
 
 const useImagesData = () => {
@@ -207,6 +225,7 @@ const useImagesMethods = () => {
         setBackground,
         updateDownloadStatus,
         toDetail,
+        tagClick,
     }
 }
 

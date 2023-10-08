@@ -12,7 +12,7 @@ import {useMenu} from './hooks/useMenu'
 import {router} from '@/router'
 import {useCard} from './hooks/useCard'
 
-const {adminData, getList, changeStatus} = useAdmin()
+const {adminData, getList, changeStatus, menuIconClick} = useAdmin()
 const {menu, active, menuClick} = useMenu()
 const {cards, actionCards} = useCard()
 
@@ -41,24 +41,6 @@ const url = computed(() => {
   const userStore = useUserStore()
   return `${env.VITE_APP_IMG_URL}${userStore.info.background_image}`
 })
-
-const menuIconClick = (i: number) => {
-  if (i === 4) {
-    window.$dialog.warning({
-      title: '提示',
-      content: '是否退出当前页面',
-      positiveText: '退出',
-      negativeText: '取消',
-      onPositiveClick: () => {
-        router.back()
-      },
-    })
-  } else {
-    adminData.type = i
-    adminData.page = 1
-    menuClick(i)
-  }
-}
 
 </script>
 
@@ -152,17 +134,18 @@ const menuIconClick = (i: number) => {
               :class="['menu-item', item.id === active ? 'menu-item-active' : '']"
               v-for="item in menu"
               :key="item.id"
-              @click="menuIconClick(item.id)"
+              @click="menuIconClick(item.id); menuClick(item.id)"
           >
             <n-tooltip trigger="hover" placement="left">
               <template #trigger>
-                <n-icon
-                    size="24"
-                    class="icon"
-                    :color="item.color"
-                    :component="item.icon as any"
-                >
-                </n-icon>
+                <span>
+                  <n-icon
+                      size="24"
+                      class="icon"
+                      :color="item.color"
+                      :component="item.icon as any"
+                  />
+                </span>
               </template>
               {{ item.name }}
             </n-tooltip>
@@ -260,15 +243,21 @@ const menuIconClick = (i: number) => {
     align-items: center;
 
     .menu-item {
-      border: 1px solid whitesmoke;
       display: flex;
-      justify-content: center;
+      border: 1px solid whitesmoke;
+      //justify-content: center;
       align-items: center;
       padding: 5px;
       border-radius: 3px;
       cursor: pointer;
       background-color: rgba(0, 0, 0, 0.4);
       backdrop-filter: saturate(120%) blur(10px);
+
+      span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
       .icon {
         color: whitesmoke;

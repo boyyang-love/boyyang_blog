@@ -94,19 +94,15 @@ const rightClick = (e: Event) => {
   <div class="img-card-wrapper" id="img-card-wrapper" @click.right="rightClick">
     <NSpin
         :show="isLoading"
-        :rotate="true"
+        :rotate="false"
         size="large"
     >
       <template #description>
         <span class="loading-text">
-          图片正在加载中,请稍后...
         </span>
       </template>
       <template #icon>
         <CubeLoading></CubeLoading>
-<!--        <n-icon color="#b83b5e" :size="40">-->
-<!--          <SyncCircle></SyncCircle>-->
-<!--        </n-icon>-->
       </template>
       <div class="img-content">
         <n-image

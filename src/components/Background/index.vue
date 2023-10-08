@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import {computed} from 'vue'
 import {Background} from './types/props'
+import CubeLoading from '@/components/CubeLoading/index.vue'
 
 const props = withDefaults(defineProps<Background.Props>(), {
   type: 'image',
@@ -28,7 +29,7 @@ const opacity = computed(() => {
 <template>
   <div class="background">
     <video
-        v-if="props.type == 'video'"
+        v-if="props.type === 'video'"
         :src="props.url"
         autoplay
         class="video"
@@ -70,6 +71,16 @@ const opacity = computed(() => {
     position: absolute;
     top: 0;
     left: 0;
+  }
+
+  .img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
   }
 }
 </style>

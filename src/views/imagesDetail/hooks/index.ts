@@ -14,6 +14,8 @@ import {
     Calendar,
     CloudDownload,
     Person,
+    Earth,
+    Sparkles
 } from '@vicons/ionicons5'
 import {tagsInfo} from '@/api/tag'
 import {imageDownload} from '@/utils/fileDownload'
@@ -46,7 +48,7 @@ const useImageDetail = (query: LocationQuery) => {
             key: 'size',
             icon: Shapes,
             render(detailData: Exhibition.ExhibitionsInfo): string {
-                return `${(detailData.size / (1024 * 1024)).toFixed(2)}M` || ''
+                return `${((detailData.size || 0) / (1024 * 1024)).toFixed(2)}M` || '0'
             },
         },
         {
@@ -74,6 +76,14 @@ const useImageDetail = (query: LocationQuery) => {
             },
         },
         {
+            label: '点赞数',
+            key: 'star',
+            icon: Sparkles,
+            render(detailData: Exhibition.ExhibitionsInfo): number {
+                return detailData.thumbs_up
+            },
+        },
+        {
             label: '下载次数',
             key: 'download',
             icon: CloudDownload,
@@ -89,6 +99,14 @@ const useImageDetail = (query: LocationQuery) => {
                 return detailData.user_info ? detailData.user_info.username : ''
             },
         },
+        {
+            label: '图片来源',
+            key: 'from',
+            icon: Earth,
+            render(detailData: Exhibition.ExhibitionsInfo): string {
+                return `互联网`
+            },
+        },
     ]
     onMounted(() => {
         getImageDetail()
@@ -99,6 +117,7 @@ const useImageDetail = (query: LocationQuery) => {
             uids: query.uid as string,
             type: 2,
         }
+        window.$loadingBar.start()
         exhibitionList(params).then((res) => {
             detailData.exhibitionInfo = res.data.exhibitions.map(ex => {
                 return {
@@ -106,6 +125,8 @@ const useImageDetail = (query: LocationQuery) => {
                     cover: `${env.VITE_APP_IMG_URL}${ex.cover}`,
                 }
             })[0]
+
+            window.$loadingBar.finish()
 
             tagsInfo({type: 'image', uids: detailData.exhibitionInfo.tags}).then((res) => {
                 detailData.tags = res.data.tags_info

@@ -28,6 +28,8 @@ export const exhibitionList = (
         type?: number
         public?: boolean
         sort?: string
+        keyword?: string
+        tags?: string | number
     },
 ) => {
     return http.request<Exhibition.ExhibitionListRes>(

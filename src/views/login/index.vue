@@ -33,7 +33,7 @@ onMounted(() => {
         :opacity="0.2"
         height="100vh"
         width="100vw"
-        class="wow tada"
+        class="wow bounce"
     >
       <div ref="bgWrapper" class="bg">
         <Login class="wow swing" data-wow-delay="0.6s"></Login>

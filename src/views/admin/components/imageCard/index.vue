@@ -69,6 +69,7 @@ const reason = ref<string>('')
       <div class="right-btn">
         <n-space
             justify="center"
+            size="small"
             :item-style="{display: 'flex'}"
         >
           <n-popconfirm
@@ -79,42 +80,48 @@ const reason = ref<string>('')
               v-if="props.isShowApproved"
           >
             <template #trigger>
-              <n-icon
-                  :size="20"
-                  color="#ffffff"
-                  class="icon"
-              >
-                <Create></Create>
-              </n-icon>
+              <div>
+                <n-icon
+                    :size="20"
+                    color="#ffffff"
+                    class="icon"
+                >
+                  <Create></Create>
+                </n-icon>
+              </div>
             </template>
             是否通过审核？
           </n-popconfirm>
 
           <n-tooltip trigger="hover">
             <template #trigger>
-              <n-icon
-                  :size="20"
-                  color="#ffffff"
-                  class="icon"
-                  @click="emits('delClick', true)"
-                  v-if="props.isShowRejected"
-              >
-                <Close></Close>
-              </n-icon>
+              <div>
+                <n-icon
+                    :size="20"
+                    color="#ffffff"
+                    class="icon"
+                    @click="emits('delClick', true)"
+                    v-if="props.isShowRejected"
+                >
+                  <Close></Close>
+                </n-icon>
+              </div>
             </template>
             驳回
           </n-tooltip>
 
           <n-tooltip trigger="hover">
             <template #trigger>
-              <n-icon
-                  :size="20"
-                  color="#ffffff"
-                  class="icon"
-                  @click="emits('detailClick', true)"
-              >
-                <Information></Information>
-              </n-icon>
+              <div>
+                <n-icon
+                    :size="20"
+                    color="#ffffff"
+                    class="icon"
+                    @click="emits('detailClick', true)"
+                >
+                  <Information></Information>
+                </n-icon>
+              </div>
             </template>
             查看图片详情信息
           </n-tooltip>

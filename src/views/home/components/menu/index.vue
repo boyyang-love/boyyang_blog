@@ -260,7 +260,7 @@ const selectClick = (key: string) => {
       }
 
       .active {
-        color: #da4453;
+        color: #23d69b;
       }
     }
   }

@@ -55,9 +55,9 @@ onUnmounted(() => {
       :opacity="0.8"
   >
     <div class="container-detail" id="container-detail">
-      <div class=" image-detail-wrapper" id="image=detail-wrapper">
+      <div class="image-detail-wrapper" id="image=detail-wrapper">
         <div class="detail-left">
-          <div class="img-container wow bounceIn">
+          <div class="img-container wow bounceInDown">
             <NSpin
                 :show="detailData.isLoading"
                 :rotate="true"
@@ -83,12 +83,6 @@ onUnmounted(() => {
                   <template #placeholder>
                     <div class="loading">
                       <CubeLoading></CubeLoading>
-<!--                      <n-icon-->
-<!--                          :component="Fitness as any"-->
-<!--                          class="icon"-->
-<!--                          color="#f00056"-->
-<!--                          size="55"-->
-<!--                      ></n-icon>-->
                     </div>
                   </template>
                 </n-image>
@@ -96,13 +90,13 @@ onUnmounted(() => {
             </NSpin>
           </div>
           <div class="bottom-content">
-            <div class="tags-wrapper" v-if="detailData.tags.length > 0">
+            <div class="tags-wrapper wow bounceInUp" v-if="detailData.tags.length > 0">
               <div class="tag" v-for="item in detailData.tags">
                 #{{ item.name }}
               </div>
             </div>
             <div
-                class="colors-wrapper"
+                class="colors-wrapper wow bounceInUp"
                 v-if="detailData.exhibitionInfo.palette && detailData.exhibitionInfo.palette != '' ">
               <div
                   class="color"
@@ -113,7 +107,7 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
-        <div class="detail-right">
+        <div class="detail-right wow bounceInRight">
           <div class="right-wrapper">
             <div class="item" v-for="item in detailMessage">
               <div class="circle">
@@ -128,7 +122,7 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
-      <div class="submit-wrapper wow bounceInRight">
+      <div class="submit-wrapper">
         <n-space vertical align="center" size="large">
           <n-tooltip
               trigger="hover"
@@ -238,6 +232,7 @@ onUnmounted(() => {
 
         .img {
           width: 100%;
+          object-fit: cover;
 
           .loading {
             background-color: whitesmoke;
@@ -257,7 +252,6 @@ onUnmounted(() => {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 15px;
 
       .tags-wrapper {
         display: flex;
@@ -298,6 +292,7 @@ onUnmounted(() => {
     .right-wrapper {
       .item {
         box-sizing: border-box;
+        min-width: 200px;
         min-height: 50px;
         background-color: rgba(232, 74, 95, 0.5);
         backdrop-filter: saturate(100%) blur(45px);

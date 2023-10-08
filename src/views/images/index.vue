@@ -20,6 +20,7 @@ const {
   setBackground,
   updateDownloadStatus,
   toDetail,
+  tagClick,
 } = useImagesMethods()
 const userStore = useUserStore()
 
@@ -87,10 +88,20 @@ onUnmounted(() => {
               clsss="search-icon"
               color="rgba(0,0,0,1)"
               :size="20"
-              @click="getList()"
+              @click="imagesData.page = 1;getList()"
           >
             <Search></Search>
           </n-icon>
+        </div>
+      </div>
+
+      <div class="tags">
+        <div
+            :class="['tag', item.uid === imagesData.selectedTags ? 'active' : '']"
+            v-for="item in imagesData.tags"
+            @click="tagClick(item.uid)"
+        >
+          #{{ item.name }}
         </div>
       </div>
     </div>
@@ -224,7 +235,7 @@ onUnmounted(() => {
         align-items: center;
         background-color: rgba(245, 245, 245, 0.5);
         backdrop-filter: saturate(100%) blur(30px);
-        margin: 0 20px 0 0;
+        margin: 0 10px 0 0;
         border-radius: 3px;
       }
 
@@ -238,6 +249,26 @@ onUnmounted(() => {
         align-items: center;
         cursor: pointer;
         border-radius: 3px;
+      }
+    }
+
+    .tags {
+      display: flex;
+      position: absolute;
+      bottom: 0;
+
+      .tag {
+        background-color: rgba(17, 17, 17, 0.4);
+        backdrop-filter: contrast(100%) saturate(100%) blur(30px);
+        color: #f1f5f9;
+        padding: 0 5px;
+        border: 1px solid #23d69b;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+
+      .active {
+        color: deeppink;
       }
     }
   }

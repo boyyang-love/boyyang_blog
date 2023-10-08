@@ -3,6 +3,7 @@ import {adminExhibitions} from '@/api/admin'
 import {Admin} from '@/api/admin/types'
 import {env} from '@/utils/env'
 import {changeExhibitionStatus} from '@/api/exhibition'
+import {router} from '@/router'
 
 const useAdmin = () => {
     const adminData = reactive({
@@ -21,7 +22,7 @@ const useAdmin = () => {
             type: adminData.type,
             sort: adminData.sort,
         }
-
+        window.$loadingBar.start()
         adminExhibitions(params).then((res) => {
             adminData.count = res.data.count
             adminData.list = res.data.exhibitions.map(e => {
@@ -32,6 +33,7 @@ const useAdmin = () => {
                     isShowDel: false,
                 }
             })
+            window.$loadingBar.finish()
         })
     }
 
@@ -73,6 +75,23 @@ const useAdmin = () => {
         }
     }
 
+    const menuIconClick = (id: number) => {
+        if (id === 4) {
+            window.$dialog.warning({
+                title: '提示',
+                content: '是否退出当前页面',
+                positiveText: '退出',
+                negativeText: '取消',
+                onPositiveClick: () => {
+                    router.back()
+                },
+            })
+        } else {
+            adminData.type = id
+            adminData.page = 1
+        }
+    }
+
     watch(
         [
             () => adminData.page,
@@ -88,6 +107,7 @@ const useAdmin = () => {
         adminData,
         getList,
         changeStatus,
+        menuIconClick,
     }
 }
 

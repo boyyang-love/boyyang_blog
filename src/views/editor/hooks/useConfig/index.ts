@@ -13,14 +13,14 @@ const useConfig = () => {
             uploadImage: {
                 async customUpload(file: File, insertFn: InsertFnType) {  // TS 语法
                     const userStore = useUserStoreWithOut()
-                    window.$loading.loadingStart()
+                    window.$loadingBar.start()
                     const fileInfo = await upload({
                         file_name: file.name,
                         file: file,
                         path: `${userStore.info.uid}/article`,
                     })
 
-                    window.$loading.loadingEnd()
+                    window.$loadingBar.finish()
 
                     insertFn(`${env.VITE_APP_IMG_URL}/${fileInfo.key}`, file.name, `${env.VITE_APP_IMG_URL}/${fileInfo.key}`)
                 },

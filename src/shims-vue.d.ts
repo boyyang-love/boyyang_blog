@@ -1,12 +1,11 @@
-import {MessageApi, DialogApi, NotificationApi} from 'naive-ui'
-import type {LoadingApi} from './components/Loading'
+import {MessageApi, DialogApi, NotificationApi, LoadingBarApi} from 'naive-ui'
 
 declare global {
     interface Window {
         $message: MessageApi
         $dialog: DialogApi
         $notification: NotificationApi
-        $loading: LoadingApi
+        $loadingBar: LoadingBarApi
         THREE: any
         VANTA: {
             RINGS: any

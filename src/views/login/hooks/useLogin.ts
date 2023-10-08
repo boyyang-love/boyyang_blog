@@ -49,20 +49,19 @@ const loginSubmit = () => {
         username: loginData.username,
         password: loginData.password,
     }
-
     // 登录
     if (params.username.trim() == '' || params.password.trim() == '') {
         window.$message.error('账号或密码不能为空')
         loginData.isError = true
         return
     }
-    window.$loading.loadingStart()
+    window.$loadingBar.start()
     login(params).then(res => {
         loginData.isError = false
-        loginSuccess(res.data).then(() => {
-        })
+        loginSuccess(res.data)
     }).catch(() => {
         loginData.isError = true
+        window.$loadingBar.error()
         window.$message.error('登陆失败请稍后重试')
     })
 }
@@ -103,9 +102,9 @@ const loginSuccess = async (data: Login.loginRes) => {
     data.info.avatar_url = `${env.VITE_APP_IMG_URL}/${data.info.avatar_url}`
     userStore.setToken(data.token)
     await userStore.getInfoDetail()
-    window.$loading.loadingEnd()
 
     router.replace({name: 'Home'}).then(() => {
+        window.$loadingBar.finish()
     })
 }
 

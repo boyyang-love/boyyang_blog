@@ -33,12 +33,14 @@ const useMenu = () => {
             id: 4,
             name: '返回',
             icon: Exit,
-            color: '#fce38a'
+            color: '#fce38a',
         },
     ]
 
     const menuClick = (id: number) => {
-        active.value = id
+        if (id !== 4) {
+            active.value = id
+        }
     }
 
     return {

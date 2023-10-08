@@ -3,6 +3,7 @@ import {computed, ref} from 'vue'
 import {ShieldCheckmark, CloseCircle, CheckmarkCircle, Fitness, PaperPlane, Reader} from '@vicons/ionicons5'
 import {useUserMethods} from '../hooks'
 import {useUserStore} from '@/store/modules/user'
+import CubeLoading from '@/components/CubeLoading/index.vue'
 
 const {del} = useUserMethods()
 
@@ -70,16 +71,11 @@ const status = computed(() => {
           object-fit="cover"
           lazy
           :src="props.url"
+          :show-toolbar="false"
       >
         <template #placeholder>
           <div class="loading">
-            <n-icon
-                class="icon"
-                color="#f00056"
-                size="55"
-            >
-              <Fitness></Fitness>
-            </n-icon>
+            <CubeLoading></CubeLoading>
           </div>
         </template>
       </n-image>

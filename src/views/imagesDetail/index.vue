@@ -79,6 +79,7 @@ onUnmounted(() => {
                     class="img"
                     object-fit="cover"
                     :src="detailData.exhibitionInfo.cover"
+                    :show-toolbar="false"
                 >
                   <template #placeholder>
                     <div class="loading">

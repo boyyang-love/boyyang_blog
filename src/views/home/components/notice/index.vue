@@ -1,5 +1,11 @@
 <script lang="ts" setup>
 import {Notifications} from '@vicons/ionicons5'
+interface Props {
+  content: string
+}
+const props = withDefaults(defineProps<Props>(), {
+  content: '暂无公告'
+})
 </script>
 
 <template>
@@ -14,7 +20,7 @@ import {Notifications} from '@vicons/ionicons5'
         <span>公告~~</span>
       </div>
       <div class="notice-content">
-        祝大家国庆节快乐
+        {{ props.content}}
       </div>
     </n-space>
   </div>

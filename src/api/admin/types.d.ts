@@ -1,3 +1,5 @@
+import {adminStat} from '@/api/admin/index'
+
 export namespace Admin {
     export interface AdminExhibitionReq {
         page: number
@@ -34,5 +36,23 @@ export namespace Admin {
         uid: number
         tel: number
         username: string
+    }
+
+    export interface adminStatRes {
+        user_count: number
+        image_count: number
+        image_download_count: number
+        blog_count: number
+        article_count: number
+    }
+
+    export interface InfoNoticeRes {
+        infos: InfoNotice[]
+    }
+
+    export interface InfoNotice {
+        content: string
+        uid: number
+        user_id: number
     }
 }

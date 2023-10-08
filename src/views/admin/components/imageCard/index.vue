@@ -2,6 +2,7 @@
 import {Create, Information, Close, Fitness} from '@vicons/ionicons5'
 import moment from 'moment'
 import {ref} from 'vue'
+import CubeLoading from '@/components/CubeLoading/index.vue'
 
 interface Props {
   isShow: boolean
@@ -48,13 +49,7 @@ const reason = ref<string>('')
     >
       <template #placeholder>
         <div class="loading">
-          <n-icon
-              class="icon"
-              color="#f00056"
-              size="55"
-          >
-            <Fitness></Fitness>
-          </n-icon>
+          <CubeLoading></CubeLoading>
         </div>
       </template>
     </n-image>

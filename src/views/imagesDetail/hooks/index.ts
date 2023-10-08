@@ -36,6 +36,14 @@ const useImageDetail = (query: LocationQuery) => {
     })
     const detailMessage: DetailMessage[] = [
         {
+            label: '图片编号',
+            key: 'id',
+            icon: Leaf,
+            render(detailData: Exhibition.ExhibitionsInfo): number {
+                return detailData.uid
+            },
+        },
+        {
             label: '名称',
             key: 'title',
             icon: Leaf,
@@ -104,7 +112,7 @@ const useImageDetail = (query: LocationQuery) => {
             key: 'from',
             icon: Earth,
             render(detailData: Exhibition.ExhibitionsInfo): string {
-                return `互联网`
+                return `图片来自互联网(侵权请联系删)`
             },
         },
     ]

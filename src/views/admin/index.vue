@@ -11,10 +11,11 @@ import {env} from '@/utils/env'
 import {useMenu} from './hooks/useMenu'
 import {router} from '@/router'
 import {useCard} from './hooks/useCard'
+import moment from 'moment/moment'
 
 const {adminData, getList, changeStatus, menuIconClick} = useAdmin()
 const {menu, active, menuClick} = useMenu()
-const {cards, actionCards} = useCard()
+const {noticeData, cards, actionCards, actionCardClick, noticeSubmit} = useCard()
 
 getList()
 
@@ -49,6 +50,7 @@ const url = computed(() => {
       :url="url"
       type="image"
       class="wow slideInDown"
+      :opacity="0.7"
   >
     <div class="admin-container" id="admin-container">
       <div class="top-cards">
@@ -73,6 +75,7 @@ const url = computed(() => {
             <ActionCard
                 :icon="item.icon"
                 :text="item.text"
+                @click="actionCardClick(item)"
             ></ActionCard>
           </div>
         </div>
@@ -153,6 +156,27 @@ const url = computed(() => {
         </n-space>
       </div>
     </div>
+
+    <n-modal
+        v-model:show="noticeData.isShow"
+        preset="dialog"
+        title="修改公告信息"
+        positive-text="发布"
+        negative-text="算了"
+        @positiveClick="noticeSubmit"
+    >
+      <div class="modal-content">
+        <div class="input-wrapper">
+          <n-input
+              type="textarea"
+              placeholder="请输入公告信息"
+              v-model:value="noticeData.content"
+              :autosize="{minRows: 5, maxRows: 7}"
+          ></n-input>
+        </div>
+      </div>
+    </n-modal>
+
   </BackGround>
 </template>
 
@@ -253,7 +277,7 @@ const url = computed(() => {
       background-color: rgba(0, 0, 0, 0.4);
       backdrop-filter: saturate(120%) blur(10px);
 
-      span{
+      span {
         display: flex;
         justify-content: center;
         align-items: center;

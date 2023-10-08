@@ -5,6 +5,8 @@ import {router} from '@/router'
 import {blogList, blogDel} from '@/api/blog'
 import {dashboard} from '@/api/dashboard'
 import {delUpload} from '@/api/upload'
+import {infosNotice} from '@/api/admin'
+import {Admin} from '@/api/admin/types'
 
 const homeData = reactive({
     blog: {
@@ -20,6 +22,7 @@ const homeData = reactive({
         exhibitionPublishData: [] as string[],
     },
     userInfo: {} as Dashboard.DashboardUserinfo,
+    notice: {} as Admin.InfoNotice,
 })
 
 const paginationOpt = {
@@ -111,12 +114,18 @@ const pageSizeChange = (n: number) => {
     getBlogList()
 }
 
+
 const useHomeData = () => {
     return {
         homeData,
         paginationOpt,
-
     }
+}
+
+const getNotice = () => {
+    infosNotice({page: 1, limit: 1}).then(res => {
+        homeData.notice = res.data.infos[0]
+    })
 }
 
 const useHomeMethods = () => {
@@ -127,6 +136,7 @@ const useHomeMethods = () => {
         pageChange,
         pageSizeChange,
         del,
+        getNotice,
     }
 }
 

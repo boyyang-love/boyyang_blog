@@ -43,6 +43,7 @@ const props = withDefaults(defineProps<Props>(), {
   .card {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 
 
     .icon {

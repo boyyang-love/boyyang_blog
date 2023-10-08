@@ -106,7 +106,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="images-content wow wow fadeInUpBig" data-wow-delay="1s">
+    <div class="images-content wow fadeInUpBig" data-wow-delay="1s">
       <n-empty
           description="是空的？"
           :show-icon="false"

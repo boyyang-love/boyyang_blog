@@ -65,6 +65,7 @@ onUnmounted(() => {
                     lazy
                     object-fit="cover"
                     data-wow-delay="0.5s"
+                    :show-toolbar="false"
                 >
                   <template #placeholder>
                     <div

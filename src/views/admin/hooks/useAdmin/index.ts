@@ -1,5 +1,5 @@
-import {h, reactive, watch} from 'vue'
-import {adminExhibitions} from '@/api/admin'
+import {h, onMounted, reactive, watch} from 'vue'
+import {adminExhibitions, adminStat} from '@/api/admin'
 import {Admin} from '@/api/admin/types'
 import {env} from '@/utils/env'
 import {changeExhibitionStatus} from '@/api/exhibition'
@@ -102,6 +102,7 @@ const useAdmin = () => {
             getList()
         },
     )
+
 
     return {
         adminData,

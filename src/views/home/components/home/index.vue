@@ -17,7 +17,7 @@ import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition
 import {useUserStore} from '@/store/modules/user'
 
 const {homeData, paginationOpt} = useHomeData()
-const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange, del} = useHomeMethods()
+const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange, del, getNotice} = useHomeMethods()
 const {exhibitionData} = useExhibitionData()
 const {getExhibitionList} = useExhibitionMethods()
 const userStore = useUserStore()
@@ -41,6 +41,7 @@ onMounted(() => {
   getBlogList()
   getExhibitionList()
   getDashboard()
+  getNotice()
   userStore.getInfoDetail()
 })
 </script>
@@ -142,7 +143,7 @@ onMounted(() => {
           <User></User>
         </div>
         <div class="notice wow pulse">
-          <Notice></Notice>
+          <Notice :content="homeData.notice.content"></Notice>
         </div>
         <div class="calendar wow pulse">
           <Calendar></Calendar>

@@ -76,17 +76,19 @@ onUnmounted(() => {
               placeholder="请输入关键字"
               :bordered="false"
               :style="{
-              background: 'transparent',
-              width: '100%'
-            }"
+                background: 'transparent',
+                width: '100%'
+              }"
+              :clearable="true"
               v-model:value="imagesData.keywords"
+              @keyup.enter="imagesData.page = 1;getList()"
           >
           </n-input>
         </div>
         <div class="search-btn">
           <n-icon
               clsss="search-icon"
-              color="rgba(0,0,0,1)"
+              color="rgba(255,255,255,1)"
               :size="20"
               @click="imagesData.page = 1;getList()"
           >

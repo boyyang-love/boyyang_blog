@@ -29,8 +29,10 @@ const themeOverrides: GlobalThemeOverrides = {
     colorModal: '#3d3b4f',
   },
   Input: {
-    textColor: '#303d4e',
-    placeholderColor: '#303d4e',
+    textColor: '#ffffff',
+    placeholderColor: '#ffffff',
+    textDecorationColor: '#c74141',
+    caretColor: 'rgba(17,17,17,0.4)',
   },
   Pagination: {
     jumperTextColor: '#fff',

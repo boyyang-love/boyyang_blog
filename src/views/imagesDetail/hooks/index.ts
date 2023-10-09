@@ -15,7 +15,8 @@ import {
     CloudDownload,
     Person,
     Earth,
-    Sparkles
+    Sparkles,
+    FingerPrint
 } from '@vicons/ionicons5'
 import {tagsInfo} from '@/api/tag'
 import {imageDownload} from '@/utils/fileDownload'
@@ -38,7 +39,7 @@ const useImageDetail = (query: LocationQuery) => {
         {
             label: '图片编号',
             key: 'id',
-            icon: Leaf,
+            icon: FingerPrint,
             render(detailData: Exhibition.ExhibitionsInfo): number {
                 return detailData.uid
             },
@@ -112,7 +113,7 @@ const useImageDetail = (query: LocationQuery) => {
             key: 'from',
             icon: Earth,
             render(detailData: Exhibition.ExhibitionsInfo): string {
-                return `图片来自互联网(侵权请联系删)`
+                return `图片来自互联网(侵权请联系删除)`
             },
         },
     ]

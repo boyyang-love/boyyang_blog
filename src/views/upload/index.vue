@@ -62,12 +62,16 @@ const background = computed(() => {
                   icon-color="rgb(0, 0, 0)"
                   :icon="Text"
                   :more-props="{
-                  placeholder: '请输入壁纸名称',
-                  autosize: {minRows: 3, maxRows: 5},
-                  maxlength: 100,
-                  showCount: true,
-                  clearable: true,
-                  type: 'textarea',
+                    placeholder: '请输入壁纸名称',
+                    autosize: {minRows: 3, maxRows: 5},
+                    maxlength: 100,
+                    showCount: true,
+                    clearable: true,
+                    type: 'textarea',
+                    themeOverrides: {
+                      textColor: 'rgba(0,0,0,1)',
+                      placeholderColor: 'rgba(0,0,0,1)',
+                    }
                 }"
               ></Input>
             </div>
@@ -78,12 +82,16 @@ const background = computed(() => {
                   icon-color="rgb(0, 0, 0)"
                   :icon="Text"
                   :more-props="{
-                  placeholder: '请输入壁纸描述',
-                  autosize: {minRows: 3, maxRows: 5},
-                  maxlength: 150,
-                  showCount: true,
-                  clearable: true,
-                  type: 'textarea',
+                    placeholder: '请输入壁纸描述',
+                    autosize: {minRows: 3, maxRows: 5},
+                    maxlength: 150,
+                    showCount: true,
+                    clearable: true,
+                    type: 'textarea',
+                    themeOverrides: {
+                      textColor: 'rgba(0,0,0,1)',
+                      placeholderColor: 'rgba(0,0,0,1)',
+                    }
                 }"
               >
               </Input>

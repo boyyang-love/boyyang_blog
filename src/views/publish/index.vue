@@ -61,13 +61,17 @@ const background = computed(() => {
                 icon-color="rgb(0, 0, 0)"
                 :icon="Text"
                 :more-props="{
-                autosize: {minRows: 3,maxRows: 5},
-                clearable: true,
-                maxlength: 50,
-                showCount: true,
-                placeholder: '请输入博客标题',
-                type: 'textarea',
-          }"
+                  autosize: {minRows: 3,maxRows: 5},
+                  clearable: true,
+                  maxlength: 50,
+                  showCount: true,
+                  placeholder: '请输入博客标题',
+                  type: 'textarea',
+                  themeOverrides: {
+                      textColor: 'rgba(0,0,0,1)',
+                      placeholderColor: 'rgba(0,0,0,1)',
+                    }
+                }"
             ></Input>
           </div>
           <div class="sub-title">
@@ -77,13 +81,17 @@ const background = computed(() => {
                 icon-color="rgb(0, 0, 0)"
                 :icon="Text"
                 :more-props="{
-                autosize: {minRows: 3,maxRows: 5},
-                clearable: true,
-                maxlength: 50,
-                showCount: true,
-                placeholder: '请输入博客描述',
-                type: 'textarea',
-          }"
+                  autosize: {minRows: 3,maxRows: 5},
+                  clearable: true,
+                  maxlength: 50,
+                  showCount: true,
+                  placeholder: '请输入博客描述',
+                  type: 'textarea',
+                  themeOverrides: {
+                      textColor: 'rgba(0,0,0,1)',
+                      placeholderColor: 'rgba(0,0,0,1)',
+                    }
+                }"
             ></Input>
           </div>
         </div>

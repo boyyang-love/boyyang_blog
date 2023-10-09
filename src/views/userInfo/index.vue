@@ -34,6 +34,10 @@ const isShow = defineModel<boolean>()
                   :more-props="{
                     placeholder: item.placeholder,
                     type: item.type,
+                    themeOverrides: {
+                      textColor: 'rgba(0,0,0,1)',
+                      placeholderColor: 'rgba(0,0,0,1)',
+                    }
                   }"
                   :icon="item.icon"
                   :icon-size="26"

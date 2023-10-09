@@ -66,6 +66,12 @@ onMounted(() => {
                 :icon-size="item.iconSize"
                 :input-type="item.inputType"
                 :placeholder="item.placeholder"
+                :more-props="{
+                  themeOverrides: {
+                      textColor: 'rgba(0,0,0,1)',
+                      placeholderColor: 'rgba(0,0,0,1)',
+                    }
+                }"
                 v-model="loginData[item.key]"
                 input-width="370px"
             ></Input>

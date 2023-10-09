@@ -56,6 +56,10 @@ const position = computed(() => {
             :placeholder="item.placeholder"
             :more-props="{
               showPasswordOn: 'click',
+              themeOverrides: {
+                textColor: 'rgba(0,0,0,1)',
+                placeholderColor: 'rgba(0,0,0,1)',
+              }
             }"
             v-model="loginData[item.key]"
         ></Input>

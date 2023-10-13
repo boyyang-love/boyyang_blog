@@ -172,6 +172,10 @@ const url = computed(() => {
               placeholder="请输入公告信息"
               v-model:value="noticeData.content"
               :autosize="{minRows: 5, maxRows: 7}"
+              :themeOverrides="{
+                textColor: 'rgba(0,0,0,1)',
+                placeholderColor: 'rgba(0,0,0,1)',
+              }"
           ></n-input>
         </div>
       </div>

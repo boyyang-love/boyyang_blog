@@ -7,17 +7,19 @@ import {useEditor} from './hooks/useEditor'
 import {onMounted} from 'vue'
 import Wow from 'wow.js'
 
-const {toolbarConfig, editorConfig, insertedImages} = useConfig()
+const {toolbarConfig, editorConfig} = useConfig()
 const {
   editorRef,
   html,
   isShowDialog,
+  isLoading,
   articleData,
   handleCreated,
   handleUploadChange,
   submit,
   back,
   beforeUpload,
+  getTagInfo,
 } = useEditor()
 
 onMounted(() => {
@@ -35,7 +37,7 @@ onMounted(() => {
   })
 
   wow.init()
-
+  getTagInfo()
 })
 
 </script>
@@ -50,7 +52,7 @@ onMounted(() => {
           mode="default"
       />
       <Editor
-          style="height: 650px; overflow: hidden;"
+          style="height: 550px; overflow: hidden;"
           v-model="html"
           :defaultConfig="editorConfig"
           mode="default"
@@ -83,7 +85,7 @@ onMounted(() => {
             <n-icon
                 :size="34"
                 class="icon"
-                @click="back(insertedImages)"
+                @click="back"
             >
               <Power></Power>
             </n-icon>
@@ -94,11 +96,12 @@ onMounted(() => {
     </div>
     <n-modal
         v-model:show="isShowDialog"
+        :loading="isLoading"
         preset="dialog"
         title="文章发布"
         negative-text="取消"
         positive-text="发布"
-        @positive-click="submit(insertedImages)"
+        @positive-click="submit"
     >
       <div class="dialog-wrapper">
         <n-space
@@ -109,9 +112,9 @@ onMounted(() => {
               type="textarea"
               placeholder="请输入文章标题"
               :autosize="{
-              minRows: 3,
-              maxRows: 5,
-            }"
+                minRows: 3,
+                maxRows: 5,
+              }"
               maxlength="60"
               show-count
               v-model:value="articleData.title"
@@ -121,9 +124,9 @@ onMounted(() => {
               type="textarea"
               placeholder="请输入文章描述"
               :autosize="{
-              minRows: 3,
-              maxRows: 5,
-            }"
+                minRows: 3,
+                maxRows: 5,
+              }"
               maxlength="100"
               show-count
               v-model:value="articleData.sub_title"
@@ -131,10 +134,10 @@ onMounted(() => {
 
           <n-select
               v-model:value="articleData.tags"
+              :options="articleData.tagsOptions"
               placeholder="请输入文章tags"
               filterable
               multiple
-              tag
           />
 
           <n-upload
@@ -164,6 +167,7 @@ onMounted(() => {
   background: linear-gradient(145deg, rgb(80, 174, 169), rgb(59, 64, 114));
 
   .editor {
+    width: 1000px;
     border: 1px solid cadetblue;
     border-radius: 10px;
     overflow: hidden;

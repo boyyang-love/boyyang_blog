@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import {computed} from 'vue'
 import {Background} from './types/props'
-import CubeLoading from '@/components/CubeLoading/index.vue'
 
 const props = withDefaults(defineProps<Background.Props>(), {
   type: 'image',

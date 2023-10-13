@@ -1,4 +1,4 @@
-import {onMounted, reactive, watch} from 'vue'
+import {h, onMounted, reactive, watch} from 'vue'
 import {env} from '@/utils/env'
 
 import {useUserStoreWithOut} from '@/store/modules/user'
@@ -9,9 +9,10 @@ import {exhibitionList, deleteExhibition} from '@/api/exhibition'
 import {changelike, changeStar} from '@/api/like'
 import {updateUserInfo} from '@/api/user'
 import {delUpload} from '@/api/upload'
-import {Tag, tagsInfo} from '@/api/tag'
+import {Tag, tagsInfo, tagsCreate} from '@/api/tag'
 import {updateDownload} from '@/api/exhibition'
 import {router} from '@/router'
+import {NInput} from 'naive-ui'
 
 const imagesData = reactive({
     page: 1,
@@ -193,14 +194,18 @@ const tagClick = (uid: string | number) => {
 
 const useImagesData = () => {
     onMounted(() => {
-        tagsInfo({type: 'image'}).then((res) => {
-            imagesData.tags = res.data.tags_info
-        })
+        getTagInfo()
     })
     return {
         imagesData,
         SortOptions,
     }
+}
+
+const getTagInfo = () => {
+    tagsInfo({type: 'image'}).then((res) => {
+        imagesData.tags = res.data.tags_info
+    })
 }
 
 const updateDownloadStatus = async (uid: string | number) => {
@@ -212,6 +217,36 @@ const toDetail = (uid: string | number) => {
         name: 'Detail',
         query: {uid: uid},
     }).then()
+}
+
+const addTags = () => {
+    let tagName = ''
+    window.$dialog.create({
+        title: '增加标签',
+        type: 'info',
+        content: () => {
+            return h(NInput, {
+                placeholder: '请输入标签名称',
+                onChange: (e) => {
+                    tagName = e
+                },
+            })
+        },
+        positiveText: '确认',
+        onPositiveClick: async () => {
+            if (tagName.trim() === '') {
+                window.$message.error('名称不能为空')
+                return false
+            }
+            let data = {
+                type: 'image',
+                name: tagName,
+            }
+            await tagsCreate(data)
+            getTagInfo()
+            return true
+        },
+    })
 }
 
 const useImagesMethods = () => {
@@ -226,6 +261,7 @@ const useImagesMethods = () => {
         updateDownloadStatus,
         toDetail,
         tagClick,
+        addTags,
     }
 }
 

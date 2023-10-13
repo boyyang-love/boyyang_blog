@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {onMounted, onUnmounted, ref} from 'vue'
 import Wow from 'wow.js'
-import {Search} from '@vicons/ionicons5'
+import {Search, Add} from '@vicons/ionicons5'
 import PrintText from '@/components/PrintText/index.vue'
 import ImgCard from './components/imgCard.vue'
 import {useUserStore} from '@/store/modules/user'
@@ -21,6 +21,7 @@ const {
   updateDownloadStatus,
   toDetail,
   tagClick,
+  addTags,
 } = useImagesMethods()
 const userStore = useUserStore()
 
@@ -35,7 +36,7 @@ onMounted(() => {
   const wow = new Wow({
     boxClass: 'wow', // animated element css class (default is wow)
     animateClass: 'animated', // animation css class (default is animated)
-    offset: 100, // distance to the element when triggering the animation (default is 0)
+    offset: 10, // distance to the element when triggering the animation (default is 0)
     mobile: true, // trigger animations on mobile devices (default is true)
     live: true, // act on asynchronously loaded content (default is true)
     callback: function () {
@@ -104,6 +105,11 @@ onUnmounted(() => {
             @click="tagClick(item.uid)"
         >
           #{{ item.name }}
+        </div>
+        <div class="add-tag" @click="addTags">
+          <n-icon :size="18">
+            <Add></Add>
+          </n-icon>
         </div>
       </div>
     </div>
@@ -271,6 +277,16 @@ onUnmounted(() => {
 
       .active {
         color: deeppink;
+      }
+
+      .add-tag {
+        color: whitesmoke;
+        border: 1px solid #23d69b;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 4px;
+        cursor: pointer;
       }
     }
   }

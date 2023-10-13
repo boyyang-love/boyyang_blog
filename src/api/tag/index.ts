@@ -24,3 +24,11 @@ export const tagsInfo = (params: { type: string, uids?: string }) => {
         },
     )
 }
+
+export const tagsCreate = (data: { type: string, name: string }) => {
+    return http.request({
+        url: '/tags/create',
+        method: 'POST',
+        data
+    })
+}

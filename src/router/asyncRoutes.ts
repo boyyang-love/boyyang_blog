@@ -25,6 +25,14 @@ const asyncRoutes: RouteRecordRaw[] = [
                 },
                 component: () => import('@/views/images/index.vue'),
             },
+            {
+                path: 'article',
+                name: 'Article',
+                meta: {
+                    title: '文章',
+                },
+                component: () => import('@/views/article/index.vue'),
+            },
             // 用户
             {
                 path: 'user',
@@ -99,6 +107,15 @@ const asyncRoutes: RouteRecordRaw[] = [
             // roles: ['admin'],
         },
         component: () => import('@/views/imagesDetail/index.vue'),
+    },
+    {
+        path: '/articleDetail',
+        name: 'ArticleDetail',
+        meta: {
+            title: '文章详情',
+            // roles: ['admin'],
+        },
+        component: () => import('@/views/articleDetail/index.vue'),
     },
 ]
 

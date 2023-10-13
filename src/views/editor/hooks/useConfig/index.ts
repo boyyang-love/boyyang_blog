@@ -4,8 +4,8 @@ import {useUserStoreWithOut} from '@/store/modules/user'
 import {env} from '@/utils/env'
 import {ref} from 'vue'
 
+const insertedImages = ref<string[]>([])
 const useConfig = () => {
-    const insertedImages = ref<string[]>([])
     const toolbarConfig = {}
     const editorConfig = {
         placeholder: '请输入内容',
@@ -31,7 +31,6 @@ const useConfig = () => {
                     if (imageNode == null) return
                     const { src, alt, url, href } = imageNode
                     insertedImages.value.push(src)
-                    console.log('inserted image', src, alt, url, href)
                 },
             }
         },

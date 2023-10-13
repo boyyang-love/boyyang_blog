@@ -4,13 +4,11 @@ import {renderIcon} from '@/utils/renderIcon'
 import {
     Image,
     Home,
-    CloudUploadSharp,
     GitCommit,
     PersonCircleSharp,
-    RocketSharp,
-    Exit,
     Create,
     Power,
+    Book
 } from '@vicons/ionicons5'
 
 const menuList: Menu.menuList[] = [
@@ -27,6 +25,13 @@ const menuList: Menu.menuList[] = [
         path: '/images',
         text: '壁纸',
         color: '#f6416c',
+    },
+    {
+        name: 'Article',
+        com: markRaw(Book),
+        path: '/article',
+        text: '文章',
+        color: '#11999e',
     },
     // {
     //     name: 'Publish',

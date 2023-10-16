@@ -41,6 +41,7 @@ const background = computed(() => {
       class="wow slideInDown"
       height="100vh"
       width="100vw"
+      :opacity="0.1"
   >
     <div class="router-out">
       <Menu style="z-index: 9"></Menu>

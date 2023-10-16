@@ -1,4 +1,4 @@
-import {Component, onMounted, reactive, h} from 'vue'
+import {Component, onMounted, reactive, h, ref} from 'vue'
 import {
     Star,
     Sparkles,
@@ -19,6 +19,7 @@ import {User} from '@/api/user/type'
 export interface actionBtnItem {
     name: string
     icon: Component
+    num: number
 }
 
 const useArticle = () => {
@@ -26,16 +27,31 @@ const useArticle = () => {
         {
             name: '点赞',
             icon: Sparkles,
+            num: 0,
         },
         {
             name: '评论',
             icon: ChatboxEllipses,
+            num: 0,
         },
         {
             name: '详情',
             icon: EllipsisHorizontal,
+            num: 0,
         },
     ]
+
+    const tabs = [
+        {
+            name: '我的',
+            id: 1,
+        },
+        {
+            name: '推荐',
+            id: 2,
+        },
+    ]
+    const tabActice = ref<number>(1)
 
     const articleData = reactive({
         count: 0,
@@ -45,6 +61,10 @@ const useArticle = () => {
         tags: [] as Tag.TagInfo[],
         userCardInfo: {} as Article.CardInfo,
         userInfo: {} as User.Info,
+    })
+
+    const hotArticleData = reactive({
+        list: [] as Article.ArticleInfo[],
     })
 
     const pageSizes = [
@@ -58,19 +78,18 @@ const useArticle = () => {
         },
     ]
 
-
     const getArticleList = () => {
         const userStore = useUserStoreWithOut()
         let params = {
             page: articleData.page,
             limit: articleData.limit,
-            user_id: userStore.info.uid,
+            type: tabActice.value,
+            user_id: tabActice.value === 1 ? userStore.info.uid : '',
         }
         articleData.userInfo = {
             ...userStore.info,
             avatar_url: `${env.VITE_APP_IMG_URL}/${userStore.info.avatar_url}`,
         }
-        console.log(articleData.userInfo)
         infoArticle(params).then((res) => {
             articleData.list = res.data.article_info.length && res.data.article_info.map((a) => {
                 return {
@@ -84,16 +103,38 @@ const useArticle = () => {
             }) || []
 
             articleData.userCardInfo = res.data.card_info
-
-            console.log(articleData.userCardInfo)
+            articleData.count = res.data.count
         })
     }
 
-    const toDetail = (uid: number) => {
+    const getHotArticleList = () => {
+        let params = {
+            page: 1,
+            limit: 10,
+            sort: 'thumbs_up desc',
+            type: 3,
+        }
+
+        infoArticle(params).then((res) => {
+            hotArticleData.list = res.data.article_info.length && res.data.article_info.map((a) => {
+                return {
+                    ...a,
+                    cover: `${env.VITE_APP_IMG_URL}/${a.cover}`,
+                    user_info: {
+                        ...a.user_info,
+                        avatar_url: `${env.VITE_APP_IMG_URL}/${a.user_info.avatar_url}`,
+                    },
+                }
+            }) || []
+        })
+    }
+
+    const toDetail = (uid: number, userId: number) => {
         router.push({
             path: 'articleDetail',
             query: {
                 uid: uid,
+                user_id: userId,
             },
         }).then()
     }
@@ -107,7 +148,13 @@ const useArticle = () => {
     const delArticleClick = async (uid: number, images: string, cover: string) => {
         await delArticle({uid: uid})
         getArticleList()
-        let shouldDeleteImage = (images.split(',') || []).concat(cover.split('/').slice(-3).join('/'))
+        let shouldDeleteImage: string[] = []
+        if (images.trim() !== '') {
+            shouldDeleteImage.push(...images.split(','))
+        }
+        if (cover !== '') {
+            shouldDeleteImage.push(...cover.split('/').slice(-3).join('/'))
+        }
         if (shouldDeleteImage.length !== 0) {
             shouldDeleteImage.forEach((s) => {
                 delUpload({key: s})
@@ -156,11 +203,21 @@ const useArticle = () => {
         getArticleList()
     }
 
+    const tabChange = (id: number) => {
+        tabActice.value = id
+        getArticleList()
+    }
+
     return {
         actionBtns,
         articleData,
-        getArticleList,
+        hotArticleData,
         pageSizes,
+        tabs,
+        tabActice,
+        tabChange,
+        getArticleList,
+        getHotArticleList,
         toDetail,
         createTag,
         getTagInfo,

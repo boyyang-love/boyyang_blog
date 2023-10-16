@@ -3,19 +3,26 @@ import {Tag, tagsInfo} from '@/api/tag'
 import {env} from '@/utils/env'
 import {reactive} from 'vue'
 import {Article} from '@/api/article/type'
-import {User} from '@/api/user/type'
+import {commentCreate, commentInfo} from '@/api/comment'
+import {Comment} from '@/api/comment/type'
 
-const useArticleDetail = () => {
-    const detailData = reactive({
-        detail: {
-            user_info: {},
-        } as Article.ArticleInfo,
-        tagInfo: [] as Tag.TagInfo[],
-        cardInfo: {} as Article.CardInfo,
-    })
-    const getArticleDetail = (uid: number) => {
+const detailData = reactive({
+    detail: {
+        user_info: {},
+    } as Article.ArticleInfo,
+    tagInfo: [] as Tag.TagInfo[],
+    cardInfo: {} as Article.CardInfo,
+})
+const commentData = reactive({
+    list: [] as Comment.CommentInfo[],
+    content: '',
+})
+
+const useArticleDetail = (uid: number, userId: number) => {
+    const getArticleDetail = () => {
         let params = {
             uid: uid,
+            user_id: userId,
         }
         infoArticle(params).then((res) => {
             detailData.detail = res.data.article_info.map((a) => {
@@ -35,15 +42,54 @@ const useArticleDetail = () => {
         })
     }
 
+    const getComments = (uid: number) => {
+        let params = {
+            page: 1,
+            limit: 10,
+            type: 'article',
+            content_id: uid,
+        }
+        commentInfo(params).then((res) => {
+            commentData.list = res.data.infos.map(info => {
+                return {
+                    ...info,
+                    user_info: {
+                        ...info.user_info,
+                        avatar_url: `${env.VITE_APP_IMG_URL}/${info.user_info.avatar_url}`,
+                    },
+                }
+            })
+        })
+    }
+
     const getTagInfo = (uids: string) => {
         tagsInfo({type: 'article', uids: uids}).then((res) => {
             detailData.tagInfo = res.data.tags_info
         })
     }
 
+    const createComment = async (uid: number) => {
+        if (commentData.content.trim() == '') {
+            window.$message.error('评论内容不能为空')
+            return
+        }
+        let data = {
+            content_id: uid,
+            content: commentData.content,
+            type: 'article',
+        }
+        await commentCreate(data)
+        commentData.content = ''
+        getComments(uid)
+        getArticleDetail()
+    }
+
     return {
         detailData,
+        commentData,
         getArticleDetail,
+        getComments,
+        createComment,
     }
 }
 

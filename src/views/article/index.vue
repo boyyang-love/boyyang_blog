@@ -13,9 +13,14 @@ import Wow from 'wow.js'
 
 const userStore = useUserStore()
 const {
-  getArticleList,
   articleData,
+  hotArticleData,
   pageSizes,
+  tabs,
+  tabChange,
+  tabActice,
+  getArticleList,
+  getHotArticleList,
   toDetail,
   createTag,
   getTagInfo,
@@ -41,6 +46,7 @@ onMounted(() => {
 
   getArticleList()
   getTagInfo()
+  getHotArticleList()
 })
 </script>
 
@@ -57,16 +63,17 @@ onMounted(() => {
     <div class="article-content">
       <div class="article-content-left">
         <div class="tabs-container">
-          <div class="tab">我的</div>
-          <div class="tab">最新</div>
-          <div class="tab">热门</div>
-          <div class="tab">推荐</div>
+          <div
+              :class="['tab', item.id === tabActice ? 'active' : '']"
+              v-for="item in tabs"
+              @click="tabChange(item.id)"
+          >{{ item.name }}
+          </div>
         </div>
         <n-empty
             v-if="articleData.list.length === 0"
             description="暂无数据"
         >
-
         </n-empty>
         <div
             class="card"
@@ -82,7 +89,9 @@ onMounted(() => {
                 cover: item.cover,
                 avatar: item.user_info.avatar_url,
                 username: item.user_info.username,
-                time: item.created
+                time: item.created,
+                userId: item.user_info.uid,
+                badges: [item.thumbs_up || 0, item.comment || 0, 0]
               }"
               @cardClick="toDetail"
               @delClick="delArticleClick(item.uid, item.images, item.cover)"
@@ -146,13 +155,20 @@ onMounted(() => {
           ></UserCard>
         </div>
         <div class="hot-articles wow bounceInRight">
-          <CardWrapper title="最新文章">
+          <CardWrapper title="热门文章">
             <template #content>
+              <n-empty description="暂时无数据" v-if="hotArticleData.list.length === 0"></n-empty>
               <HotCard
-                  v-for="item in 10"
+                  v-else
+                  v-for="(item, i) in hotArticleData.list"
                   v-bind="{
-                    no: item
+                    uid: item.uid,
+                    no: i + 1,
+                    title: item.title,
+                    subtitle: item.sub_title,
+                    cover: item.cover,
                   }"
+                  @toDetail="toDetail"
               ></HotCard>
             </template>
           </CardWrapper>
@@ -211,7 +227,7 @@ onMounted(() => {
         width: 100%;
         height: 48px;
         background-color: rgba(245, 245, 245, 0.4);
-        backdrop-filter: saturate(120%) blur(5px);
+        backdrop-filter: saturate(120%) blur(105px);
         border-radius: 5px;
         display: flex;
         align-items: center;
@@ -221,7 +237,13 @@ onMounted(() => {
           font-weight: bold;
           color: whitesmoke;
           margin: 0 10px;
+          padding: 10px 0;
           cursor: pointer;
+          transition: all 0.4s linear;
+        }
+
+        .active {
+          color: #fc5185;
         }
       }
 

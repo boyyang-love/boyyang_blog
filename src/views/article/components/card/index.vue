@@ -2,6 +2,7 @@
 import {CloseCircle} from '@vicons/ionicons5'
 import {useArticle} from '../../hooks'
 import moment from 'moment'
+import {useUserStore} from '@/store/modules/user'
 
 interface Props {
   uid: number
@@ -11,16 +12,19 @@ interface Props {
   avatar: string
   username: string
   time: number | string
+  userId: number
+  badges: number[]
 }
 
 interface Emits {
-  (e: 'cardClick', uid: number): void
+  (e: 'cardClick', uid: number, userId: number): void
 
   (e: 'delClick'): void
 }
 
 const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
+const userStore = useUserStore()
 
 
 const {actionBtns} = useArticle()
@@ -34,7 +38,7 @@ const {actionBtns} = useArticle()
           object-fit="cover"
           class="img"
           :src="props.cover"
-          @click="$emit('cardClick', props.uid)"
+          @click="$emit('cardClick', props.uid, props.userId)"
       ></n-image>
     </div>
     <div class="content">
@@ -66,13 +70,20 @@ const {actionBtns} = useArticle()
         </div>
         <div class="right">
           <n-space>
-            <n-icon
-                v-for="item in actionBtns"
-                :size="22"
-                :component="item.icon as any"
-                color="#fff"
+            <n-badge
+                :value="props.badges[i]"
+                v-for="(item, i) in actionBtns"
             >
-            </n-icon>
+              <div>
+                <n-icon
+                    :size="22"
+                    :component="item.icon as any"
+                    color="#fff"
+                >
+                </n-icon>
+              </div>
+            </n-badge>
+
           </n-space>
         </div>
       </div>
@@ -83,6 +94,7 @@ const {actionBtns} = useArticle()
           positive-text="删除"
           negative-text="取消"
           @positiveClick="$emit('delClick')"
+          v-if="props.userId === userStore.info.uid"
       >
         <template #trigger>
           <div>

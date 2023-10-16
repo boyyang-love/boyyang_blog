@@ -37,6 +37,7 @@ export const infoArticle = (params: {
     page?: number
     limit?: number
     keyword?: string
+    type?: number
 }) => {
     return http.request<Article.ArticleInfoRes>(
         {

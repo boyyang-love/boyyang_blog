@@ -30,7 +30,7 @@ const themeOverrides: GlobalThemeOverrides = {
   },
   Input: {
     textColor: 'rgba(17,17,17,1)',
-    placeholderColor: '#ffffff',
+    placeholderColor: 'rgba(17,17,17,1)',
     textDecorationColor: '#c74141',
     caretColor: 'rgba(17,17,17,0.4)',
   },

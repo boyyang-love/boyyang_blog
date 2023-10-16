@@ -17,6 +17,8 @@ export namespace Article {
         tags: string
         user_info: User.Info
         created: number
+        comment: number
+        thumbs_up: number
     }
 
     export interface CardInfo {

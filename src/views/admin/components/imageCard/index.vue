@@ -145,6 +145,7 @@ const reason = ref<string>('')
               :autosize="{
                 minRows: 5,
               }"
+
               v-model:value="reason"
           ></n-input>
         </div>

@@ -20,6 +20,7 @@ const props = defineProps<Props>()
     <div class="user-avatar">
       <n-avatar
           circle
+          bordered
           :size="70"
           :src="props.avatar"
       ></n-avatar>
@@ -50,10 +51,10 @@ const props = defineProps<Props>()
 
       <div class="add-follow">
         <div class="add-btn">
+          关注
           <n-icon size="20">
             <Add></Add>
           </n-icon>
-          关注
         </div>
       </div>
     </div>
@@ -148,12 +149,13 @@ const props = defineProps<Props>()
       .add-btn {
         display: flex;
         align-items: center;
-        border: 1px solid white;
+        border: 2px solid white;
         color: whitesmoke;
-        padding: 2px 45px;
+        padding: 2px 30px;
         border-radius: 5px;
         background-color: #e84a5f;
         cursor: pointer;
+        font-weight: bolder;
       }
     }
   }

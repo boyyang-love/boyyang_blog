@@ -1,22 +1,34 @@
 <script setup lang="ts">
 interface Props {
+  uid: number
   no: string | number
+  title: string
+  subtitle: string
+  cover: string
+}
+
+interface Emits {
+  (e: 'toDetail', uid: number):void
 }
 
 const props = withDefaults(defineProps<Props>(), {
   no: 0,
 })
+const emits = defineEmits<Emits>()
+
+
 </script>
 
 <template>
-  <div class="hot-card">
+  <div class="hot-card" @click="emits('toDetail', props.uid)">
     <div class="num">
       <div class="type-one" v-if="props.no <= 3">
         <n-image
             :preview-disabled="true"
             object-fit="cover"
             class="img"
-            src="https://7072-prod-2g5hif5wbec83baa-1301921121.tcb.qcloud.la/124810450/images/爱丽丝 红色衣服 花海 最终幻想.jpg"
+            :width="90"
+            :src="props.cover"
         ></n-image>
         <div :class="['no', props.no > 3 ? 'no-copy': '']">
           {{ props.no }}
@@ -26,20 +38,20 @@ const props = withDefaults(defineProps<Props>(), {
     <div class="content" v-if="props.no <= 3">
       <div class="title">
         <n-ellipsis line-clamp="1" :tooltip="false">
-          我们在业务组件 PageA 和 PageB 中都使用了通用组件
+          {{ props.title }}
         </n-ellipsis>
       </div>
       <div class="sub-title">
         <n-ellipsis line-clamp="2" :tooltip="false"
         >
-          们在业务组件 PageA 和 PageB 中都使用了通用组件 Card 我们在业务组件 PageA 和 PageB 中都使用了通用组
+          {{ props.subtitle }}
         </n-ellipsis>
       </div>
     </div>
     <div class="content-copy" v-else>
       <div class="no">{{ props.no }}</div>
       <n-ellipsis line-clamp="1" :tooltip="false">
-        我们在业务组件 PageA 和 PageB 中都使用了通用组件
+        {{ props.title }}
       </n-ellipsis>
     </div>
   </div>
@@ -51,6 +63,9 @@ const props = withDefaults(defineProps<Props>(), {
   width: 100%;
   display: flex;
   margin-bottom: 5px;
+  cursor: pointer;
+  border: 1px solid whitesmoke;
+  border-radius: 2px;
 
   .num {
 
@@ -58,8 +73,9 @@ const props = withDefaults(defineProps<Props>(), {
       position: relative;
 
       .img {
-        width: 130px;
+        height: 60px;
         object-fit: cover;
+        margin-right: 10px;
       }
 
       .no {

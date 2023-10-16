@@ -45,7 +45,9 @@ const props = defineProps<Props>()
     box-sizing: border-box;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
 
     .tag {
       box-sizing: border-box;

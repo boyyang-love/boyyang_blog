@@ -3,18 +3,19 @@ import BackGround from '@/components/Background/index.vue'
 import PrintText from '@/components/PrintText/index.vue'
 import UserCard from './components/userCard/index.vue'
 import TagCard from './components/tagCard/index.vue'
+import Comment from './components/comment/index.vue'
 import {useArticleDetail} from './hooks'
 import {useRoute} from 'vue-router'
 import {onMounted} from 'vue'
-import {PaperPlane, Power} from '@vicons/ionicons5'
+import {Power} from '@vicons/ionicons5'
 
 const route = useRoute()
-
-const {getArticleDetail, detailData} = useArticleDetail()
+const uid = route.query.uid as unknown as number
+const user_id = route.query.user_id as unknown as number
+const {getArticleDetail, detailData} = useArticleDetail(uid, user_id)
 
 onMounted(() => {
-  const uid = route.query.uid
-  getArticleDetail(uid as unknown as number)
+  getArticleDetail()
 })
 </script>
 
@@ -33,7 +34,12 @@ onMounted(() => {
       </div>
       <div class="content">
         <div class="left-content">
-          <div class="content-html" v-html="detailData.detail.content"></div>
+          <div>
+            <div class="content-html" v-html="detailData.detail.content"></div>
+          </div>
+          <div class="content-bottom">
+            <Comment></Comment>
+          </div>
         </div>
         <div class="right">
           <div class="user-info-card">
@@ -73,7 +79,6 @@ onMounted(() => {
           </n-tooltip>
         </n-space>
       </div>
-
     </div>
   </BackGround>
 </template>
@@ -106,12 +111,18 @@ onMounted(() => {
     .left-content {
       width: 1000px;
       box-sizing: border-box;
-      padding: 10px;
       background-color: rgba(245, 245, 245, 0.4);
       backdrop-filter: saturate(120%) blur(50px);
       border-radius: 10px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
+
+      .content-bottom {
+        box-sizing: border-box;
+        width: 100%;
+      }
     }
 
     .right {

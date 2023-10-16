@@ -68,6 +68,8 @@ const updateUserInfoApi = (data: User.UpdateUserInfo) => {
 
         userInfoData.isShow = false
         userInfoData.isLoading = false
+    }).catch(() => {
+        userInfoData.isLoading = false
     })
 }
 

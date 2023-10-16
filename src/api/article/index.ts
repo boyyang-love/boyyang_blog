@@ -18,7 +18,7 @@ export const createArticle = (
             data,
         },
         {
-            isShowMessage: false,
+            isShowSuccessMessage: true,
         },
     )
 }
@@ -46,7 +46,7 @@ export const infoArticle = (params: {
             params,
         },
         {
-            isShowMessage: false,
+            isShowSuccessMessage: false,
         },
     )
 }

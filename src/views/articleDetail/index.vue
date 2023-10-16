@@ -12,10 +12,10 @@ import {Power} from '@vicons/ionicons5'
 const route = useRoute()
 const uid = route.query.uid as unknown as number
 const user_id = route.query.user_id as unknown as number
-const {getArticleDetail, detailData} = useArticleDetail(uid, user_id)
+const {getArticleDetail, detailData} = useArticleDetail()
 
 onMounted(() => {
-  getArticleDetail()
+  getArticleDetail(uid, user_id)
 })
 </script>
 

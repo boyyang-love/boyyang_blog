@@ -18,8 +18,8 @@ const commentData = reactive({
     content: '',
 })
 
-const useArticleDetail = (uid: number, userId: number) => {
-    const getArticleDetail = () => {
+const useArticleDetail = () => {
+    const getArticleDetail = (uid: number, userId: number) => {
         let params = {
             uid: uid,
             user_id: userId,
@@ -37,7 +37,6 @@ const useArticleDetail = (uid: number, userId: number) => {
             })[0]
 
             detailData.cardInfo = res.data.card_info
-
             getTagInfo(res.data.article_info[0].tags)
         })
     }
@@ -68,7 +67,7 @@ const useArticleDetail = (uid: number, userId: number) => {
         })
     }
 
-    const createComment = async (uid: number) => {
+    const createComment = async (uid: number, userId: number) => {
         if (commentData.content.trim() == '') {
             window.$message.error('评论内容不能为空')
             return
@@ -81,7 +80,7 @@ const useArticleDetail = (uid: number, userId: number) => {
         await commentCreate(data)
         commentData.content = ''
         getComments(uid)
-        getArticleDetail()
+        getArticleDetail(uid, userId)
     }
 
     return {

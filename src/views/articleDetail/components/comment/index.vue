@@ -6,8 +6,9 @@ import {useRoute} from 'vue-router'
 const route = useRoute()
 
 const uid = route.query.uid as unknown as number
+const user_id = route.query.user_id as unknown as number
 
-const {createComment, commentData, getComments} = useArticleDetail(uid)
+const {createComment, commentData, getComments} = useArticleDetail()
 
 onMounted(() => {
   getComments(uid)
@@ -31,7 +32,7 @@ onMounted(() => {
             @keyup.enter="createComment(uid)"
         >
         </n-input>
-        <n-button type="error" @click="createComment(uid)">发布</n-button>
+        <n-button type="error" @click="createComment(uid, user_id)">发布</n-button>
     </div>
     <div class="comments">
       <div

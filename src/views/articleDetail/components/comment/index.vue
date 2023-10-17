@@ -2,6 +2,7 @@
 import {useArticleDetail} from '../../hooks'
 import {onMounted} from 'vue'
 import {useRoute} from 'vue-router'
+import moment from 'moment'
 
 const route = useRoute()
 
@@ -18,21 +19,21 @@ onMounted(() => {
 <template>
   <div class="comment-wrapper">
     <div class="input-wrapper">
-        <n-input
-            class="input"
-            type="text"
-            placeholder="Enter 发布评论"
-            :autosize="{
+      <n-input
+          class="input"
+          type="text"
+          placeholder="Enter 发布评论"
+          :autosize="{
               minRows: 1,
               maxRows: 3,
             }"
-            :maxlength="100"
-            :show-count="true"
-            v-model:value="commentData.content"
-            @keyup.enter="createComment(uid)"
-        >
-        </n-input>
-        <n-button type="error" @click="createComment(uid, user_id)">发布</n-button>
+          :maxlength="100"
+          :show-count="true"
+          v-model:value="commentData.content"
+          @keyup.enter="createComment(uid, user_id)"
+      >
+      </n-input>
+      <n-button type="error" @click="createComment(uid, user_id)">发布</n-button>
     </div>
     <div class="comments">
       <div
@@ -54,15 +55,18 @@ onMounted(() => {
           <n-avatar
               bordered
               round
-              :size="55"
+              :size="45"
               :src="item.user_info.avatar_url"
           >
           </n-avatar>
-          {{ item.user_info.username }}
+          <div class="user-name">
+            {{ item.user_info.username }}
+          </div>
         </div>
         <div class="content">
           {{ item.content }}
         </div>
+        <div class="time">{{ moment(item.created * 1000).format('YYYY-MM-DD hh:mm:ss') }}</div>
       </div>
 
     </div>
@@ -84,33 +88,56 @@ onMounted(() => {
     width: 100%;
     padding: 0 10px;
     gap: 10px;
+    margin-bottom: 20px;
+
     .input {
       width: 100%;
     }
   }
 
   .comments {
+
     .empty {
       margin-top: 25px;
     }
 
     .comment-content {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
       display: flex;
-      align-items: center;
-      padding: 0 10px;
-      border-bottom: 1px solid whitesmoke;
+      align-items: flex-end;
+      padding: 10px 10px;
+      position: relative;
+      border-bottom: 1px solid rgba(245, 245, 245, 0.5);
 
       .user-info {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-right: 10px;
+        align-items: center;
+        margin-right: 20px;
         color: whitesmoke;
-        padding: 10px;
+        padding: 4px 0;
+
+        .user-name {
+          position: absolute;
+          top: 0;
+          left: 60px;
+          font-size: 13px;
+        }
       }
 
       .content {
         color: whitesmoke;
+      }
+
+      .time {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        color: whitesmoke;
+        font-size: 12px;
       }
     }
   }

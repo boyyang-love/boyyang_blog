@@ -7,6 +7,7 @@ export interface UserState {
     token: string
     info: User.Info
     detail: User.Detail
+    opacity: number
 }
 
 const useUserStore = defineStore({
@@ -18,6 +19,7 @@ const useUserStore = defineStore({
             // 用户详细信息
             info: {} as User.Info,
             detail: {} as User.Detail,
+            opacity: 0.1,
         }
     },
     getters: {
@@ -39,7 +41,7 @@ const useUserStore = defineStore({
     persist: {
         key: 'app-user',
         storage: window.sessionStorage,
-        paths: ['token', 'info', 'detail'],
+        paths: ['token', 'info', 'detail', 'opacity'],
     },
 })
 

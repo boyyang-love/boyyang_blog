@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {computed, onMounted, ref, h} from 'vue'
-import {NInput, NSpace} from 'naive-ui'
+import {NInput, NSpace, NSlider, NIcon} from 'naive-ui'
 import {useRouter, useRoute} from 'vue-router'
 import {useUserStore} from '@/store/modules/user'
 import {Menu} from './types'
@@ -8,7 +8,7 @@ import {menuList, options} from './menuList'
 import {env} from '@/utils/env'
 import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
 import {useMenuStore} from '@/store/modules/menu'
-import {Search} from '@vicons/ionicons5'
+import {Search, Moon, Sunny, PartlySunny} from '@vicons/ionicons5'
 import {updatePassword} from '@/api/user'
 
 
@@ -51,7 +51,6 @@ const menuClick = (item: Menu.menuList, index: number) => {
 }
 
 const selectClick = (key: string) => {
-  console.log(key)
   if (key === 'logout') {
     window.$dialog.warning({
       title: '提示',
@@ -127,6 +126,28 @@ const selectClick = (key: string) => {
   }
 }
 
+const sliderClick = (value: number) => {
+  userStore.$patch((state) => {
+    state.opacity = value / 10
+  })
+  // window.$dialog.info({
+  //   title: '修改背景透明度',
+  //   maskClosable: false,
+  //   content: () => {
+  //     return h(NSlider, {
+  //       step: 1,
+  //       max: 10,
+  //       defaultValue: userStore.opacity * 10,
+  //       onUpdateValue: (value) => {
+  //         userStore.$patch((state) => {
+  //           state.opacity = value / 10
+  //         })
+  //       },
+  //     })
+  //   },
+  // })
+}
+
 </script>
 
 <template>
@@ -176,6 +197,29 @@ const selectClick = (key: string) => {
             </n-dropdown>
           </div>
         </div>
+        <div class="bg-opacity">
+          <n-popover trigger="click">
+            <template #trigger>
+              <n-icon
+                  :size="18"
+                  :component="userStore.opacity <= 0.3 ?
+                            Sunny :
+                            (userStore.opacity > 0.3 && userStore.opacity <= 0.6) ?
+                            PartlySunny :
+                            Moon"
+              >
+              </n-icon>
+            </template>
+            <div style="width: 100px">
+              <NSlider
+                  :max="1"
+                  :step="0.1"
+                  v-model:value="userStore.opacity"
+              ></NSlider>
+            </div>
+          </n-popover>
+
+        </div>
       </div>
     </div>
   </div>
@@ -208,6 +252,19 @@ const selectClick = (key: string) => {
       display: flex;
       align-items: center;
 
+      .bg-opacity {
+        box-sizing: border-box;
+        width: 45px;
+        height: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: rgba(245, 245, 245, 1);
+        border-radius: 15px;
+        backdrop-filter: saturate(120%) blur(10px);
+      }
+
       .search {
         padding: 5px;
         display: flex;
@@ -231,7 +288,7 @@ const selectClick = (key: string) => {
           backdrop-filter: saturate(200%) blur(10px);
           border: 1px solid white;
           border-radius: 5px;
-          margin-left: 10px;
+          margin-right: 10px;
         }
       }
     }

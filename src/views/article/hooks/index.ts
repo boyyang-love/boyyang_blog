@@ -56,7 +56,7 @@ const useArticle = () => {
     const articleData = reactive({
         count: 0,
         page: 1,
-        limit: 10,
+        limit: 5,
         list: [] as Article.ArticleInfo[],
         tags: [] as Tag.TagInfo[],
         userCardInfo: {} as Article.CardInfo,
@@ -69,8 +69,16 @@ const useArticle = () => {
 
     const pageSizes = [
         {
+            label: '5/每页',
+            value: 5,
+        },
+        {
             label: '10/每页',
             value: 10,
+        },
+        {
+            label: '15/每页',
+            value: 15,
         },
         {
             label: '20/每页',
@@ -111,7 +119,7 @@ const useArticle = () => {
         let params = {
             page: 1,
             limit: 10,
-            sort: 'thumbs_up desc',
+            sort: 'comment desc',
             type: 3,
         }
 

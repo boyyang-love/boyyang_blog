@@ -27,7 +27,7 @@ const emits = defineEmits<Emits>()
             :preview-disabled="true"
             object-fit="cover"
             class="img"
-            :width="90"
+            :width="100"
             :src="props.cover"
         ></n-image>
         <div :class="['no', props.no > 3 ? 'no-copy': '']">
@@ -68,14 +68,17 @@ const emits = defineEmits<Emits>()
   border-radius: 2px;
 
   .num {
-
     .type-one {
+      box-sizing: border-box;
+      width: 100px;
       position: relative;
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
 
       .img {
         height: 60px;
         object-fit: cover;
-        margin-right: 10px;
       }
 
       .no {
@@ -92,8 +95,6 @@ const emits = defineEmits<Emits>()
         border-radius: 0 2px 2px 0;
       }
     }
-
-
   }
 
   .content {

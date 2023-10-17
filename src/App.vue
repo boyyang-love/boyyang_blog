@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import {
   NConfigProvider,
-  darkTheme,
-    lightTheme,
+  lightTheme,
   GlobalThemeOverrides,
 } from 'naive-ui'
 import {AppProvider} from '@/components/Application'
+import {computed} from 'vue'
+import {useRoute} from 'vue-router'
 
 const themeOverrides: GlobalThemeOverrides = {
   common: {},
@@ -19,7 +20,7 @@ const themeOverrides: GlobalThemeOverrides = {
   Dropdown: {
     color: '#ffffff',
     optionColorHover: '#ff8a14',
-    optionTextColorHover: '#ffffff'
+    optionTextColorHover: '#ffffff',
   },
   Drawer: {
     color: '#3d3b4f',
@@ -46,17 +47,23 @@ const themeOverrides: GlobalThemeOverrides = {
     buttonIconColor: '#23d69b',
     buttonIconSizeLarge: true,
     buttonColorHover: '#cc1515',
-    buttonIconColorHover: '#fff'
+    buttonIconColorHover: '#fff',
   },
 
 }
+
+const route = useRoute()
+
+const routerKey = computed(() => {
+  return route.path + Math.random()
+})
 </script>
 
 <template>
   <!-- <n-theme-editor> -->
   <AppProvider>
     <n-config-provider :theme="lightTheme" :theme-overrides="themeOverrides">
-      <router-view></router-view>
+      <router-view :key="routerKey"></router-view>
     </n-config-provider>
   </AppProvider>
   <!-- </n-theme-editor> -->

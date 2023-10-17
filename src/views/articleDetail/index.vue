@@ -70,7 +70,7 @@ onMounted(() => {
               <n-icon
                   :size="34"
                   class="icon"
-                  @click="$router.back()"
+                  @click="$router.push({name: 'Article'})"
               >
                 <Power></Power>
               </n-icon>

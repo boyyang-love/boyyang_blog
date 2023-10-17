@@ -138,13 +138,21 @@ const useArticle = () => {
     }
 
     const toDetail = (uid: number, userId: number) => {
-        router.push({
-            path: 'articleDetail',
+        const url = router.resolve({
+            path: '/articleDetail',
             query: {
                 uid: uid,
                 user_id: userId,
             },
-        }).then()
+        })
+        window.open(url.href, '__blank')
+        // router.push({
+        //     path: 'articleDetail',
+        //     query: {
+        //         uid: uid,
+        //         user_id: userId,
+        //     },
+        // }).then()
     }
 
     const getTagInfo = () => {

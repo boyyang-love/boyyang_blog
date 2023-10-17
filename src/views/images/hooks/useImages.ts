@@ -213,10 +213,17 @@ const updateDownloadStatus = async (uid: string | number) => {
 }
 
 const toDetail = (uid: string | number) => {
-    router.push({
-        name: 'Detail',
-        query: {uid: uid},
-    }).then()
+    const path = router.resolve({
+        path: '/detail',
+        query: {
+            uid: uid,
+        },
+    })
+    window.open(path.href, '__blank')
+    // router.push({
+    //     name: 'Detail',
+    //     query: {uid: uid},
+    // }).then()
 }
 
 const addTags = () => {

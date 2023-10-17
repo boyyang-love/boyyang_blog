@@ -148,7 +148,7 @@ onUnmounted(() => {
               <n-icon
                   :size="34"
                   class="icon"
-                  @click="$router.back()"
+                  @click="$router.push({name: 'Images'})"
               >
                 <Power></Power>
               </n-icon>

@@ -155,6 +155,7 @@ onUnmounted(() => {
                 time: item.created,
                 info: item.user_info,
                 star: item.thumbs_up,
+                download: item.download,
                 size: item.px,
                 colors: item.palette.split('-'),
                 options: imagesData.tags
@@ -163,7 +164,7 @@ onUnmounted(() => {
             @star="star"
             @del="del"
             @set-background="setBackground"
-            @download-sucess="updateDownloadStatus"
+            @download-sucess="updateDownloadStatus; item.download ++"
             @to-detail="toDetail"
         ></ImgCard>
       </div>

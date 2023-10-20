@@ -28,5 +28,6 @@ export namespace Article {
         article: number
         comment: number
         follow_ids: number[]
+        star_ids: number[]
     }
 }

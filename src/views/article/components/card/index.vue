@@ -72,9 +72,10 @@ const {actionBtns} = useArticle()
           </div>
         </div>
         <div class="right">
-          <n-space>
+          <n-space size="large">
             <n-badge
                 :value="props.badges[i]"
+                :offset="[5, -3]"
                 v-for="(item, i) in actionBtns"
             >
               <div>
@@ -86,7 +87,6 @@ const {actionBtns} = useArticle()
                 </n-icon>
               </div>
             </n-badge>
-
           </n-space>
         </div>
       </div>
@@ -160,7 +160,6 @@ const {actionBtns} = useArticle()
       color: whitesmoke;
       font-weight: bold;
       width: 90%;
-      margin-bottom: 5px;
     }
 
     .sub-title {
@@ -196,6 +195,7 @@ const {actionBtns} = useArticle()
 
       .left {
         .time {
+          font-size: 13px;
           color: whitesmoke;
         }
       }
@@ -203,6 +203,7 @@ const {actionBtns} = useArticle()
       .right {
         display: flex;
         align-items: flex-end;
+        padding-right: 20px;
       }
     }
   }

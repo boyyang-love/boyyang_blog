@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 import {
-  Fitness,
   Heart,
   CloseCircle,
   Sparkles,
   ImageSharp,
   CloudDownload,
-  SyncCircle,
   Cube,
 } from '@vicons/ionicons5'
 import moment from 'moment'
@@ -16,6 +14,7 @@ import {useUserStore} from '@/store/modules/user'
 import {imageDownload} from '@/utils/fileDownload'
 import {Exhibition} from '@/api/exhibition/type'
 import CubeLoading from '@/components/CubeLoading/index.vue'
+import {router} from '@/router'
 
 interface imgCardProps {
   url?: string
@@ -24,6 +23,7 @@ interface imgCardProps {
   id?: number | string
   isLike?: boolean
   isStar?: boolean
+  download?: number
   time?: number
   tags?: string
   info?: Exhibition.UserInfo
@@ -88,6 +88,15 @@ const rightClick = (e: Event) => {
   e?.preventDefault()
 }
 
+const toDetail = () => {
+  router.push({
+    path: '/userDetail',
+    query: {
+      uid: props?.info?.uid,
+    },
+  })
+}
+
 </script>
 
 <template>
@@ -128,109 +137,142 @@ const rightClick = (e: Event) => {
           {{ (props?.size as string) }}
         </div>
       </div>
-      <div class="img-bottom">
-        <div class="colors-wrapper">
-          <div
-              class="color-item"
-              v-for="item in props.colors"
-              :style="{'--color': item}"
-          ></div>
-        </div>
-        <div class="tags">
-          <div
-              class="tag"
-              v-for="(item, i) in tags"
-              :key="i">
-            <span>#{{ item.name }}</span>
-          </div>
-        </div>
-        <div class="infos">
-          <div class="infos-left">
-            <div class="user-avatar">
-              <n-avatar
-                  :size="40"
-                  :src="`${env.VITE_APP_IMG_URL}/${props.info.avatar_url}`"
-                  bordered
-                  class="header-img wow slideInDown"
-                  round
-              />
-            </div>
-            <div class="name-time">
-              <span class="name">{{ props.info.username }}</span>
-              <span class="time">{{ moment(props.time * 1000).format('YYYY-MM-DD hh:mm:ss') }}</span>
-            </div>
-          </div>
-          <div class="infos-right">
-            <!-- 点赞 收藏 删除  -->
-            <n-space size="small">
-              <n-badge
-                  :value="props.star"
-                  :max="1000"
-                  :offset="[0, -20]"
-              >
-                <span></span>
-              </n-badge>
-              <n-icon
-                  :component="Sparkles as any"
-                  :color="props.isStar ? '#fc5185' : '#373737'"
-                  size="18"
-                  class="icon"
-                  @click="star"
-              ></n-icon>
-              <n-icon
-                  :component="Heart as any"
-                  :color="props.isLike ? '#fc5185' : '#373737'"
-                  size="18"
-                  @click="like"
-                  class="icon"
-              ></n-icon>
-              <n-icon
-                  :component="ImageSharp as any"
-                  color="#373737"
-                  size="18"
-                  class="icon"
-                  @click="$emit('setBackground', props.id)"
-              ></n-icon>
-              <n-icon
-                  :component="CloudDownload as any"
-                  color="#373737"
-                  size="18"
-                  class="icon"
-                  @click="imagesDownload"
-              ></n-icon>
-              <n-icon
-                  :component="Cube as any"
-                  color="#373737"
-                  size="18"
-                  class="icon"
-                  @click="$emit('toDetail', props.id)"
-              ></n-icon>
-              <n-popconfirm
-                  v-if="props.info.uid === userStore.info.uid"
-                  content=""
-                  positive-text="删除"
-                  negative-text="算了"
-                  type="warning"
-                  trigger="hover"
-                  @positive-click="$emit('del', props.id, props.path)"
-              >
-                <template #trigger>
-                  <div>
-                    <n-icon
-                        :component="CloseCircle as any"
-                        color="#b83b5e"
-                        size="18"
-                        class="icon"
-                    ></n-icon>
-                  </div>
-                </template>
-                是否删除当前图片?
-              </n-popconfirm>
-            </n-space>
-          </div>
+    </NSpin>
+    <div class="img-bottom">
+      <div class="colors-wrapper">
+        <div
+            class="color-item"
+            v-for="item in props.colors"
+            :style="{'--color': item}"
+        ></div>
+      </div>
+      <div class="tags">
+        <div
+            class="tag"
+            v-for="(item, i) in tags"
+            :key="i">
+          <span>#{{ item.name }}</span>
         </div>
       </div>
-    </NSpin>
+      <div class="infos">
+        <div class="infos-left">
+          <div class="user-avatar">
+            <n-avatar
+                style="cursor: pointer"
+                :size="40"
+                :src="`${env.VITE_APP_IMG_URL}/${props.info.avatar_url}`"
+                bordered
+                class="header-img wow slideInDown"
+                round
+                @click="toDetail"
+            />
+          </div>
+          <div class="name-time">
+            <span class="name">{{ props.info.username }}</span>
+            <span class="time">{{ moment(props.time * 1000).format('YYYY-MM-DD hh:mm:ss') }}</span>
+          </div>
+        </div>
+        <div class="infos-right">
+          <!-- 点赞 收藏 删除  -->
+          <n-space size="small">
+            <div class="icon-wrapper">
+              <n-popover trigger="hover">
+                <template #trigger>
+                  <n-icon
+                      :component="Sparkles as any"
+                      :color="props.isStar ? '#fc5185' : '#373737'"
+                      size="18"
+                      class="icon"
+                      @click="star"
+                  ></n-icon>
+                </template>
+                <span>点赞</span>
+              </n-popover>
+              <span class="num">{{ props.star }}</span>
+            </div>
+
+            <div class="icon-wrapper">
+              <n-popover trigger="hover">
+                <template #trigger>
+                  <n-icon
+                      :component="Heart as any"
+                      :color="props.isLike ? '#fc5185' : '#373737'"
+                      size="18"
+                      @click="like"
+                      class="icon"
+                  ></n-icon>
+                </template>
+                <span>收藏</span>
+              </n-popover>
+            </div>
+
+            <div class="icon-wrapper">
+              <n-popover trigger="hover">
+                <template #trigger>
+                  <n-icon
+                      :component="ImageSharp as any"
+                      color="#373737"
+                      size="18"
+                      class="icon"
+                      @click="$emit('setBackground', props.id)"
+                  ></n-icon>
+                </template>
+                <span>设置为背景</span>
+              </n-popover>
+            </div>
+
+            <div class="icon-wrapper">
+              <n-popover trigger="hover">
+                <template #trigger>
+                  <n-icon
+                      :component="CloudDownload as any"
+                      color="#373737"
+                      size="18"
+                      class="icon"
+                      @click="imagesDownload"
+                  ></n-icon>
+                </template>
+                <span>下载</span>
+              </n-popover>
+              <span class="num">{{ props.download }}</span>
+            </div>
+
+
+            <!--              <div class="icon-wrapper">-->
+            <!--                <n-icon-->
+            <!--                    :component="Cube as any"-->
+            <!--                    color="#373737"-->
+            <!--                    size="18"-->
+            <!--                    class="icon"-->
+            <!--                    @click="$emit('toDetail', props.id)"-->
+            <!--                ></n-icon>-->
+            <!--              </div>-->
+
+            <n-popconfirm
+                v-if="props.info.uid === userStore.info.uid"
+                content=""
+                positive-text="删除"
+                negative-text="算了"
+                type="warning"
+                trigger="hover"
+                @positive-click="$emit('del', props.id, props.path)"
+            >
+              <template #trigger>
+                <div>
+                  <n-icon
+                      :component="CloseCircle as any"
+                      color="#b83b5e"
+                      size="18"
+                      class="icon"
+                  ></n-icon>
+                </div>
+              </template>
+              是否删除当前图片?
+            </n-popconfirm>
+          </n-space>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -400,6 +442,15 @@ const rightClick = (e: Event) => {
 
         .icon {
           cursor: pointer;
+        }
+
+        .icon-wrapper {
+
+          .num {
+            maring-top: 3px;
+            font-size: 12px;
+            color: #1fab89;
+          }
         }
       }
     }

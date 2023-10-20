@@ -219,6 +219,7 @@ const getTagInfo = () => {
 
 const updateDownloadStatus = async (uid: string | number) => {
     await updateDownload({uid: uid})
+
 }
 
 const toDetail = (uid: string | number) => {

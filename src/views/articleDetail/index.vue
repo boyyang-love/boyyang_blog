@@ -7,13 +7,13 @@ import Comment from './components/comment/index.vue'
 import {useArticleDetail} from './hooks'
 import {useRoute} from 'vue-router'
 import {onMounted} from 'vue'
-import {Power} from '@vicons/ionicons5'
+import {Power, Sparkles} from '@vicons/ionicons5'
 import {router} from '@/router'
 
 const route = useRoute()
 const uid = route.query.uid as unknown as number
 const user_id = route.query.user_id as unknown as number
-const {getArticleDetail, detailData, addFollow} = useArticleDetail()
+const {getArticleDetail, detailData, addFollow, imageStar} = useArticleDetail()
 
 onMounted(() => {
   getArticleDetail(uid, user_id)
@@ -76,6 +76,22 @@ const toDetail = (uid: number) => {
       </div>
       <div class="submit-wrapper wow bounceInRight">
         <n-space vertical align="center" size="large">
+          <n-tooltip
+              trigger="hover"
+              placement="left"
+          >
+            <template #trigger>
+              <n-icon
+                  :size="34"
+                  :color="detailData.isStar ? '#c52d2d' : '#fff'"
+                  class="icon"
+                  @click="imageStar(detailData.detail.uid)"
+              >
+                <Sparkles></Sparkles>
+              </n-icon>
+            </template>
+            {{ detailData.isStar ? '取消点赞' : '点赞' }}
+          </n-tooltip>
           <n-tooltip
               trigger="hover"
               placement="left"

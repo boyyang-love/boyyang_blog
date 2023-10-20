@@ -6,6 +6,7 @@ import {Article} from '@/api/article/type'
 import {commentCreate, commentInfo} from '@/api/comment'
 import {Comment} from '@/api/comment/type'
 import {follow} from '@/api/follow'
+import {changeStar} from '@/api/like'
 
 const detailData = reactive({
     detail: {
@@ -14,6 +15,7 @@ const detailData = reactive({
     tagInfo: [] as Tag.TagInfo[],
     cardInfo: {} as Article.CardInfo,
     isFollow: false,
+    isStar: false,
 })
 const commentData = reactive({
     list: [] as Comment.CommentInfo[],
@@ -40,6 +42,7 @@ const useArticleDetail = () => {
 
             detailData.cardInfo = res.data.card_info
             detailData.isFollow = res.data.card_info.follow_ids.includes(detailData.detail.user_info.uid)
+            detailData.isStar = res.data.card_info.star_ids.includes(detailData.detail.uid)
             getTagInfo(res.data.article_info[0].tags)
         })
     }
@@ -95,6 +98,17 @@ const useArticleDetail = () => {
         detailData.isFollow = !detailData.isFollow
     }
 
+    const imageStar = async (uid: number) => {
+        const data = {
+            uid: uid,
+            star_type: detailData.isStar ? 0 : 1,
+            type: 3,
+        }
+        await changeStar(data)
+        // detailData.isStar = !detailData.isStar
+        getArticleDetail(detailData.detail.uid, detailData.detail.user_info.uid)
+    }
+
     return {
         detailData,
         commentData,
@@ -102,6 +116,7 @@ const useArticleDetail = () => {
         getComments,
         createComment,
         addFollow,
+        imageStar,
     }
 }
 

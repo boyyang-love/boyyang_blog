@@ -56,7 +56,7 @@ getList(uid)
         </div>
       </div>
       <div class="back" @click="$router.back()">
-        <n-icon size="24" color="#fff">
+        <n-icon size="24" color="#fff" style="cursor: pointer">
           <Power></Power>
         </n-icon>
       </div>

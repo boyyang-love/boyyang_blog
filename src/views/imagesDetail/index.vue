@@ -269,6 +269,7 @@ const back = () => {
 
         .img {
           width: 100%;
+          max-height: 750px;
           object-fit: cover;
 
           .loading {

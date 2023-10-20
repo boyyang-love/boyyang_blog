@@ -48,11 +48,11 @@ const useArticle = () => {
             icon: ChatboxEllipses,
             num: 0,
         },
-        {
-            name: '详情',
-            icon: EllipsisHorizontal,
-            num: 0,
-        },
+        // {
+        //     name: '详情',
+        //     icon: EllipsisHorizontal,
+        //     num: 0,
+        // },
     ]
 
     const tabs = [

@@ -2,20 +2,28 @@
 import {onMounted, onUnmounted} from 'vue'
 import {useRoute} from 'vue-router'
 import BackGround from '@/components/Background/index.vue'
-import {useImageDetail} from './hooks'
+import {setBackground, useImageDetail} from './hooks'
 import CubeLoading from '@/components/CubeLoading/index.vue'
 import {
-  Fitness,
+  Heart,
   Power,
   CloudDownload,
   SyncCircle,
+  Image,
 } from '@vicons/ionicons5'
 import Wow from 'wow.js'
+import {useUserStore} from '@/store/modules/user'
+import {router} from '@/router'
 
 const rightClick = (e: Event) => {
   e.preventDefault()
 }
 
+const userStore = useUserStore()
+const route = useRoute()
+const query = route.query
+
+const {detailData, detailMessage, imagesDownload, getImageDetail, addLike} = useImageDetail()
 onMounted(() => {
   const wow = new Wow({
     boxClass: 'wow', // animated element css class (default is wow)
@@ -33,16 +41,28 @@ onMounted(() => {
   document.addEventListener('contextmenu', rightClick)
 
   wow.init()
+  getImageDetail(query.uid as unknown as number)
 })
 
-const route = useRoute()
-const query = route.query
-
-const {detailData, detailMessage, imagesDownload} = useImageDetail(query)
 
 onUnmounted(() => {
   document.removeEventListener('contextmenu', rightClick, false)
 })
+
+const back = () => {
+  router.back()
+  // const type = query.type as unknown as string
+  // if (type === 'userDetail') {
+  //   router.push({
+  //     path: '/userDetail'
+  //   })
+  // }
+  // if (type === 'images') {
+  //   router.push({
+  //     path: '/images'
+  //   })
+  // }
+}
 
 </script>
 
@@ -133,6 +153,22 @@ onUnmounted(() => {
               <n-icon
                   :size="34"
                   class="icon"
+                  @click="addLike(detailData.likes_ids.includes(detailData.exhibitionInfo.uid),detailData.exhibitionInfo.uid)"
+                  :color="detailData.likes_ids.includes(detailData.exhibitionInfo.uid) ? '#FF4D4F' : '#fff'"
+              >
+                <Heart></Heart>
+              </n-icon>
+            </template>
+            {{ detailData.likes_ids.includes(detailData.exhibitionInfo.uid) ? '取消收藏' : '加入收藏' }}
+          </n-tooltip>
+          <n-tooltip
+              trigger="hover"
+              placement="left"
+          >
+            <template #trigger>
+              <n-icon
+                  :size="34"
+                  class="icon"
                   @click="imagesDownload(detailData.exhibitionInfo.cover)"
               >
                 <CloudDownload></CloudDownload>
@@ -148,7 +184,7 @@ onUnmounted(() => {
               <n-icon
                   :size="34"
                   class="icon"
-                  @click="$router.push({name: 'Images'})"
+                  @click="back"
               >
                 <Power></Power>
               </n-icon>

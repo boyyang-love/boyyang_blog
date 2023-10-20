@@ -6,6 +6,7 @@ import {env} from '@/utils/env'
 import {updateUserInfo} from '@/api/user'
 import {useUserStore} from '@/store/modules/user'
 import {useUserMethods, useUserData} from '../hooks'
+import {router} from '@/router'
 
 const {getExhibitionList} = useUserMethods()
 const {userData} = useUserData()
@@ -120,8 +121,17 @@ onMounted(() => {
   motto.value = userStore.info.motto || '点击修改签名'
   tab.value = userData.type
   getExhibitionList(userData.type)
-
 })
+
+const toDetail = () => {
+  router.push({
+    path: '/userDetail',
+    query: {
+      uid: userStore.info.uid,
+    },
+  })
+
+}
 </script>
 
 <template>
@@ -132,6 +142,7 @@ onMounted(() => {
           <img
               alt="avater"
               :src="`${env.VITE_APP_IMG_URL}/${userStore.info.avatar_url}`"
+              @click="toDetail"
           >
         </div>
         <div class="user-motto-name">
@@ -144,6 +155,7 @@ onMounted(() => {
                 type="text"
                 @blur="saveMotto"
                 width="550px"
+                size="tiny"
             ></n-input>
             <div
                 v-else
@@ -194,7 +206,6 @@ onMounted(() => {
   @borderRadius: 5px;
   width: 100%;
   height: 550px;
-  background-color: rgba(67, 62, 70, 0.5);
   border-radius: @borderRadius;
 
   .top {
@@ -212,7 +223,7 @@ onMounted(() => {
     border: 2px solid #dce2e6;
 
     &:hover {
-      background-position: center bottom;
+      background-position: center 20%;
     }
 
     .userinfo {
@@ -227,7 +238,7 @@ onMounted(() => {
       padding: 5px 10px;
 
       .user-avater {
-        @wh: 80px;
+        @wh: 50px;
         box-sizing: border-box;
         width: @wh;
         height: @wh;
@@ -252,17 +263,17 @@ onMounted(() => {
         height: 100%;
 
         .user-name {
-          font-size: 19px;
+          font-size: 15px;
           font-weight: 800;
           color: whitesmoke;
           text-shadow: 2px 2px rgba(0, 0, 0, .5);
-          margin-bottom: 10px;
+          margin-bottom: 2px;
         }
 
         .user-motto {
           width: 100%;
           color: whitesmoke;
-          font-size: 15px;
+          font-size: 12px;
 
           .text {
             text-shadow: 3px 3px rgba(0, 0, 0, .5);

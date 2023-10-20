@@ -5,6 +5,7 @@ import {reactive} from 'vue'
 import {Article} from '@/api/article/type'
 import {commentCreate, commentInfo} from '@/api/comment'
 import {Comment} from '@/api/comment/type'
+import {follow} from '@/api/follow'
 
 const detailData = reactive({
     detail: {
@@ -12,6 +13,7 @@ const detailData = reactive({
     } as Article.ArticleInfo,
     tagInfo: [] as Tag.TagInfo[],
     cardInfo: {} as Article.CardInfo,
+    isFollow: false,
 })
 const commentData = reactive({
     list: [] as Comment.CommentInfo[],
@@ -37,6 +39,7 @@ const useArticleDetail = () => {
             })[0]
 
             detailData.cardInfo = res.data.card_info
+            detailData.isFollow = res.data.card_info.follow_ids.includes(detailData.detail.user_info.uid)
             getTagInfo(res.data.article_info[0].tags)
         })
     }
@@ -83,12 +86,22 @@ const useArticleDetail = () => {
         getArticleDetail(uid, userId)
     }
 
+    const addFollow = async () => {
+        const params = {
+            follow_id: detailData.detail.user_info.uid,
+            follow_type: detailData.isFollow ? 0 : 1,
+        } as const
+        await follow(params)
+        detailData.isFollow = !detailData.isFollow
+    }
+
     return {
         detailData,
         commentData,
         getArticleDetail,
         getComments,
         createComment,
+        addFollow,
     }
 }
 

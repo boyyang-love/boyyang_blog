@@ -88,7 +88,6 @@ const selectClick = (key: string) => {
                           placeholder: '请输入密码',
                           showPasswordOn: 'click',
                           onChange: (e) => {
-                            console.log(e)
                             password.value = e
                           },
                         },
@@ -98,7 +97,6 @@ const selectClick = (key: string) => {
                           placeholder: '请输入重复密码',
                           showPasswordOn: 'click',
                           onChange: (e) => {
-                            console.log(e)
                             rePassword.value = e
                           },
                         },
@@ -124,30 +122,20 @@ const selectClick = (key: string) => {
       },
     })
   }
+
+  if (key === 'editInfo') {
+    showInfo(true)
+  }
 }
 
-const sliderClick = (value: number) => {
-  userStore.$patch((state) => {
-    state.opacity = value / 10
+const toDetail = () => {
+  router.push({
+    path: '/userDetail',
+    query: {
+      uid: userStore.info.uid,
+    },
   })
-  // window.$dialog.info({
-  //   title: '修改背景透明度',
-  //   maskClosable: false,
-  //   content: () => {
-  //     return h(NSlider, {
-  //       step: 1,
-  //       max: 10,
-  //       defaultValue: userStore.opacity * 10,
-  //       onUpdateValue: (value) => {
-  //         userStore.$patch((state) => {
-  //           state.opacity = value / 10
-  //         })
-  //       },
-  //     })
-  //   },
-  // })
 }
-
 </script>
 
 <template>
@@ -159,7 +147,8 @@ const sliderClick = (value: number) => {
             :bordered="true"
             :src="userAvatar"
             round
-            @click="showInfo(true)"
+            @click="toDetail"
+            style="cursor: pointer"
         ></n-avatar>
         <div
             class="icon-wrapper"

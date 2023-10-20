@@ -40,7 +40,7 @@ const useUserStore = defineStore({
     //开启持久化
     persist: {
         key: 'app-user',
-        storage: window.sessionStorage,
+        storage: window.localStorage,
         paths: ['token', 'info', 'detail', 'opacity'],
     },
 })

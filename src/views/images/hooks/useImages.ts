@@ -18,7 +18,10 @@ const imagesData = reactive({
     page: 1,
     limit: 9,
     count: 0,
-    list: [] as (Exhibition.ExhibitionsInfo & { path: string })[],
+    list: [] as (Exhibition.ExhibitionsInfo & {
+        path: string,
+        cover_url: string
+    })[],
     likes: [] as number[],
     star: [] as number[],
     pageSizes: [
@@ -82,13 +85,19 @@ const getList = () => {
     window.$loadingBar.start()
     exhibitionList(params).then(res => {
         imagesData.count = res.data.count
-        const exhibitions = res.data.exhibitions as (Exhibition.ExhibitionsInfo & { path: string })[]
-        imagesData.list = exhibitions.map((item: Exhibition.ExhibitionsInfo & { path: string }) => {
+        const exhibitions = res.data.exhibitions as (Exhibition.ExhibitionsInfo & {
+            path: string,
+            cover_url: string
+        })[]
+        imagesData.list = exhibitions.map((item: Exhibition.ExhibitionsInfo & {
+            path: string,
+            cover_url: string
+        }) => {
             item.cover_url = item.cover
             item.path = item.cover
             item.cover = `${env.VITE_APP_IMG_URL}${item.cover}`
             return item
-        }) as (Exhibition.ExhibitionsInfo & { path: string })[]
+        })
         imagesData.likes = res.data.likes_ids || []
         imagesData.star = res.data.star_ids || []
         window.$loadingBar.finish()
@@ -213,17 +222,21 @@ const updateDownloadStatus = async (uid: string | number) => {
 }
 
 const toDetail = (uid: string | number) => {
-    const path = router.resolve({
+    router.push({
         path: '/detail',
         query: {
             uid: uid,
+            type: 'images'
         },
     })
-    window.open(path.href, '__blank')
-    // router.push({
-    //     name: 'Detail',
-    //     query: {uid: uid},
-    // }).then()
+    // const path = router.resolve({
+    //     path: '/detail',
+    //     query: {
+    //         uid: uid,
+    //         type: 'images'
+    //     },
+    // })
+    // window.open(path.href, 'blank')
 }
 
 const addTags = () => {

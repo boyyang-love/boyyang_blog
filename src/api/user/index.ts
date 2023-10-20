@@ -24,12 +24,25 @@ export const userInfo = (params?: { uid?: number }) => {
     )
 }
 
-export const updatePassword = (data: {password: string}) => {
+export const updatePassword = (data: { password: string }) => {
     return http.request(
         {
             url: '/users/update/password',
             method: 'POST',
-            data
+            data,
+        },
+    )
+}
+
+export const userDetail = (params?: { uid: number, page: number, limit: number }) => {
+    return http.request<User.UserDetail>(
+        {
+            url: '/users/detail',
+            method: 'GET',
+            params,
+        },
+        {
+            isShowSuccessMessage: false
         }
     )
 }

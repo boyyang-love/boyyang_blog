@@ -8,15 +8,25 @@ import {useArticleDetail} from './hooks'
 import {useRoute} from 'vue-router'
 import {onMounted} from 'vue'
 import {Power} from '@vicons/ionicons5'
+import {router} from '@/router'
 
 const route = useRoute()
 const uid = route.query.uid as unknown as number
 const user_id = route.query.user_id as unknown as number
-const {getArticleDetail, detailData} = useArticleDetail()
+const {getArticleDetail, detailData, addFollow} = useArticleDetail()
 
 onMounted(() => {
   getArticleDetail(uid, user_id)
 })
+
+const toDetail = (uid: number) => {
+  router.push({
+    path: '/userDetail',
+    query: {
+      uid: uid,
+    },
+  })
+}
 </script>
 
 <template>
@@ -45,14 +55,18 @@ onMounted(() => {
           <div class="user-info-card">
             <UserCard
                 v-bind="{
+                  uid: detailData.detail.user_info.uid,
                   avatar: detailData.detail?.user_info.avatar_url || '',
                   username: detailData.detail.user_info.username,
                   follow: detailData.cardInfo.follow,
                   fans: detailData.cardInfo.fans,
                   thumb: detailData.cardInfo.thumb,
                   article: detailData.cardInfo.article,
-                  comment: detailData.cardInfo.comment
+                  comment: detailData.cardInfo.comment,
+                  isFollowed: detailData.isFollow
                 }"
+                @followClick="addFollow"
+                @avatarClick="toDetail"
             ></UserCard>
           </div>
           <div class="tags">

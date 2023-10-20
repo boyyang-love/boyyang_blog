@@ -8,7 +8,8 @@ import {
     PersonCircleSharp,
     Create,
     Power,
-    Book
+    Book,
+    FingerPrint,
 } from '@vicons/ionicons5'
 
 const menuList: Menu.menuList[] = [
@@ -78,6 +79,11 @@ const menuList: Menu.menuList[] = [
 ]
 
 const options = [
+    {
+        label: '修改信息',
+        key: 'editInfo',
+        icon: renderIcon(FingerPrint),
+    },
     {
         label: '修改密码',
         key: 'editPassword',

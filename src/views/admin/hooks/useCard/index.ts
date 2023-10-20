@@ -56,7 +56,6 @@ const useCard = () => {
 
     const getSta = () => {
         adminStat().then(res => {
-            console.log(res)
             cards.value[0].num = res.data.user_count
             cards.value[1].num = res.data.image_count
             cards.value[2].num = res.data.blog_count

@@ -117,6 +117,14 @@ const asyncRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/articleDetail/index.vue'),
     },
+    {
+        path: '/userDetail',
+        name: 'UserDetail',
+        meta: {
+            title: '用户详情，',
+        },
+        component: () => import('@/views/userDetail/index.vue'),
+    },
 ]
 
 export {asyncRoutes}

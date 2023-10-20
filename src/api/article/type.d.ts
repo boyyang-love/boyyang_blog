@@ -27,5 +27,6 @@ export namespace Article {
         thumb: number
         article: number
         comment: number
+        follow_ids: number[]
     }
 }

@@ -28,13 +28,13 @@ const getExhibitionList = (type: number) => {
         userData.approved = res.data.approved
         userData.in_review = res.data.in_review
         userData.review_rjection = res.data.review_rjection
-        userData.list = res.data.exhibitions && res.data.exhibitions.map((ex: Exhibition.ExhibitionsInfo & {
-            path: string
-        }) => {
-            ex.path = ex.cover
-            ex.cover = `${env.VITE_APP_IMG_URL}/${ex.cover}`
-            return ex
-        })
+        userData.list = res.data.exhibitions && res.data.exhibitions.map((ex: Exhibition.ExhibitionsInfo) => {
+            return {
+                ...ex,
+                path: ex.cover,
+                cover: `${env.VITE_APP_IMG_URL}/${ex.cover}`,
+            }
+        }) || []
     })
 }
 

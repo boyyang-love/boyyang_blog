@@ -13,7 +13,6 @@ export declare namespace Exhibition {
     export interface ExhibitionsInfo {
         uid: number
         cover: string
-        cover_url: string
         des: string
         tags: string
         reject_res: string

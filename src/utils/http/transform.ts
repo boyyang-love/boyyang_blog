@@ -79,7 +79,7 @@ const transForm: TransForm = {
                 duration: 2000,
             })
 
-            window.sessionStorage.clear()
+            window.localStorage.clear()
             router.replace({name: 'Login'}).then(() => {
             })
         }

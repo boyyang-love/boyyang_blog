@@ -1,6 +1,5 @@
-import {Component, onMounted, reactive, h, ref} from 'vue'
+import {Component, reactive, h, ref} from 'vue'
 import {
-    Star,
     Sparkles,
     ChatboxEllipses,
     EllipsisHorizontal,
@@ -12,7 +11,6 @@ import {router} from '@/router'
 import {NInput} from 'naive-ui'
 import {Tag, tagsCreate, tagsInfo} from '@/api/tag'
 import {delUpload} from '@/api/upload'
-import {userInfo} from '@/api/user'
 import {useUserStoreWithOut} from '@/store/modules/user'
 import {User} from '@/api/user/type'
 
@@ -21,6 +19,22 @@ export interface actionBtnItem {
     icon: Component
     num: number
 }
+
+const tabActice = ref<number>(1)
+
+const articleData = reactive({
+    count: 0,
+    page: 1,
+    limit: 5,
+    list: [] as Article.ArticleInfo[],
+    tags: [] as Tag.TagInfo[],
+    userCardInfo: {} as Article.CardInfo,
+    userInfo: {} as User.Info,
+})
+
+const hotArticleData = reactive({
+    list: [] as Article.ArticleInfo[],
+})
 
 const useArticle = () => {
     const actionBtns: actionBtnItem[] = [
@@ -51,21 +65,6 @@ const useArticle = () => {
             id: 2,
         },
     ]
-    const tabActice = ref<number>(1)
-
-    const articleData = reactive({
-        count: 0,
-        page: 1,
-        limit: 5,
-        list: [] as Article.ArticleInfo[],
-        tags: [] as Tag.TagInfo[],
-        userCardInfo: {} as Article.CardInfo,
-        userInfo: {} as User.Info,
-    })
-
-    const hotArticleData = reactive({
-        list: [] as Article.ArticleInfo[],
-    })
 
     const pageSizes = [
         {
@@ -138,21 +137,21 @@ const useArticle = () => {
     }
 
     const toDetail = (uid: number, userId: number) => {
-        const url = router.resolve({
-            path: '/articleDetail',
-            query: {
-                uid: uid,
-                user_id: userId,
-            },
-        })
-        window.open(url.href, '__blank')
-        // router.push({
-        //     path: 'articleDetail',
+        // const url = router.resolve({
+        //     path: '/articleDetail',
         //     query: {
         //         uid: uid,
         //         user_id: userId,
         //     },
-        // }).then()
+        // })
+        // window.open(url.href, '__blank')
+        router.push({
+            path: 'articleDetail',
+            query: {
+                uid: uid,
+                user_id: userId,
+            },
+        }).then()
     }
 
     const getTagInfo = () => {
@@ -208,6 +207,15 @@ const useArticle = () => {
         })
     }
 
+    const userDetail = (uid: number) => {
+        router.push({
+            path: '/userDetail',
+            query: {
+                uid: uid,
+            },
+        })
+    }
+
     const pageChange = (n: number) => {
         articleData.page = n
         getArticleList()
@@ -231,6 +239,7 @@ const useArticle = () => {
         pageSizes,
         tabs,
         tabActice,
+        userDetail,
         tabChange,
         getArticleList,
         getHotArticleList,

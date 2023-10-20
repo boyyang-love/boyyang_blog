@@ -20,6 +20,8 @@ interface Emits {
   (e: 'cardClick', uid: number, userId: number): void
 
   (e: 'delClick'): void
+
+  (e: 'userDetail', uid: number): void
 }
 
 const props = defineProps<Props>()
@@ -59,6 +61,7 @@ const {actionBtns} = useArticle()
             bordered
             :size="54"
             :src="props.avatar"
+            @click="emits('userDetail', props.userId)"
         ></n-avatar>
         <span class="user-name">{{ props.username }}</span>
       </div>
@@ -174,6 +177,7 @@ const {actionBtns} = useArticle()
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
 
       .user-name {
         color: whitesmoke;

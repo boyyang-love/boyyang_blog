@@ -4,6 +4,7 @@ import {useUserStore} from '@/store/modules/user'
 import {env} from '@/utils/env'
 import {computed, markRaw} from 'vue'
 import {useUserInfo} from '@/views/userInfo/hooks/useUserInfo'
+import {router} from '@/router'
 
 const userStore = useUserStore()
 const {showInfo} = useUserInfo()
@@ -32,7 +33,14 @@ const toolTip = computed(() => {
   ]
 })
 
-
+const toDetail = () => {
+  router.push({
+    path: '/userDetail',
+    query: {
+      uid: userStore.info.uid,
+    },
+  })
+}
 </script>
 
 <template>
@@ -44,7 +52,7 @@ const toolTip = computed(() => {
           bordered
           class="header-img wow slideInDown"
           round
-          @click="showInfo(true)"
+          @click="toDetail"
       />
       <div class="user-name wow slideInDown" data-wow-delay="0.5s">
         {{ userStore.info.username }}

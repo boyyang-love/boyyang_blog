@@ -22,14 +22,13 @@ export const createExhibition = (
 
 export const exhibitionList = (
     params: {
-        uids?: string
+        uids?: string | number
         page?: number
         limit?: number
         type?: number
         public?: boolean
         sort?: string
         keyword?: string
-        tags?: string | number
     },
 ) => {
     return http.request<Exhibition.ExhibitionListRes>(

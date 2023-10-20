@@ -43,4 +43,26 @@ export namespace User {
         thumbs_up: number
     }
 
+    export interface UserDetail {
+        count: number
+        upload: number
+        download: number
+        follow: number
+        like: number
+        star: number
+        exhibition: Exhibition[]
+        user_info: Info
+        follow_ids: number[]
+    }
+
+    export interface Exhibition {
+        cover: string
+        created: number
+        download: number
+        thumbs_up: number
+        title: string
+        sub_title: string
+        uid: number
+    }
+
 }

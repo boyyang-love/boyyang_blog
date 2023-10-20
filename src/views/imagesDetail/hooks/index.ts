@@ -1,7 +1,5 @@
-import {Component, computed, markRaw, onMounted, reactive} from 'vue'
-import {LocationQuery} from 'vue-router'
-import {router} from '@/router'
-import {exhibitionList, similarExhibition, updateDownload} from '@/api/exhibition'
+import {Component, onMounted, reactive} from 'vue'
+import {exhibitionList, updateDownload} from '@/api/exhibition'
 import {Exhibition} from '@/api/exhibition/type'
 import {Tag} from '@/api/tag'
 import {env} from '@/utils/env'
@@ -16,10 +14,13 @@ import {
     Person,
     Earth,
     Sparkles,
-    FingerPrint
+    FingerPrint,
 } from '@vicons/ionicons5'
 import {tagsInfo} from '@/api/tag'
 import {imageDownload} from '@/utils/fileDownload'
+import {useUserStoreWithOut} from '@/store/modules/user'
+import {updateUserInfo} from '@/api/user'
+import {changelike} from '@/api/like'
 
 export interface DetailMessage {
     label: string
@@ -28,12 +29,15 @@ export interface DetailMessage {
     icon: Component
 }
 
-const useImageDetail = (query: LocationQuery) => {
+const useImageDetail = () => {
     const detailData = reactive({
-        exhibitionInfo: {} as Exhibition.ExhibitionsInfo,
+        exhibitionInfo: {} as Exhibition.ExhibitionsInfo & {
+            url: string
+        },
         similarExhibits: [] as Exhibition.ExhibitionsInfo[],
         tags: [] as Tag.TagInfo[],
         isLoading: false,
+        likes_ids: [] as number[],
     })
     const detailMessage: DetailMessage[] = [
         {
@@ -112,28 +116,29 @@ const useImageDetail = (query: LocationQuery) => {
             label: '图片来源',
             key: 'from',
             icon: Earth,
-            render(detailData: Exhibition.ExhibitionsInfo): string {
+            render(): string {
                 return `图片来自互联网(侵权请联系删除)`
             },
         },
     ]
-    onMounted(() => {
-        getImageDetail()
-    })
 
-    const getImageDetail = () => {
-        let params = {
-            uids: query.uid as string,
+    const getImageDetail = (uid: number) => {
+        const params = {
+            uids: uid,
             type: 2,
+            public: true,
         }
         window.$loadingBar.start()
         exhibitionList(params).then((res) => {
             detailData.exhibitionInfo = res.data.exhibitions.map(ex => {
                 return {
                     ...ex,
+                    url: ex.cover,
                     cover: `${env.VITE_APP_IMG_URL}${ex.cover}`,
                 }
             })[0]
+
+            detailData.likes_ids = res.data.likes_ids || []
 
             window.$loadingBar.finish()
 
@@ -160,14 +165,43 @@ const useImageDetail = (query: LocationQuery) => {
         })
     }
 
+    const addLike = (status: boolean, uid: number) => {
+        changelike({uid: uid, likes_type: !status ? 1 : 0, type: 1}).then(() => {
+            if (!status) {
+                detailData.likes_ids.push(uid)
+            } else {
+                detailData.likes_ids = detailData.likes_ids.filter(it => it !== uid)
+            }
+        })
+    }
+
     return {
         detailData,
         detailMessage,
+        getImageDetail,
         imagesDownload,
+        addLike,
     }
 
 }
 
+const setBackground = async (url: string, full_url: string) => {
+    const userStore = useUserStoreWithOut()
+    let params = {
+        uid: userStore.info.uid,
+        background_image: url,
+    }
+
+    window.$loadingBar.start()
+    await updateUserInfo(params)
+    window.$loadingBar.finish()
+
+    userStore.$patch((state) => {
+        state.info.background_image = url
+    })
+}
+
 export {
     useImageDetail,
+    setBackground,
 }

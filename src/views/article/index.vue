@@ -27,6 +27,7 @@ const {
   delArticleClick,
   pageChange,
   pageSizeChange,
+  userDetail
 } = useArticle()
 onMounted(() => {
   const wow = new Wow({
@@ -95,11 +96,12 @@ onMounted(() => {
               }"
               @cardClick="toDetail"
               @delClick="delArticleClick(item.uid, item.images, item.cover)"
+              @userDetail="userDetail"
           ></Card>
         </div>
         <div class="pagination wow bounceInUp">
           <n-pagination
-              v-model:item-count="articleData.count"
+              :item-count="articleData.count"
               v-model:page="articleData.page"
               v-model:page-size="articleData.limit"
               v-model:page-sizes="pageSizes"
@@ -168,7 +170,7 @@ onMounted(() => {
                     subtitle: item.sub_title,
                     cover: item.cover,
                   }"
-                  @toDetail="toDetail"
+                  @toDetail="(uid) => toDetail(uid, item.user_info.uid)"
               ></HotCard>
             </template>
           </CardWrapper>

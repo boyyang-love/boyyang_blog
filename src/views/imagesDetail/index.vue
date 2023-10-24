@@ -9,7 +9,6 @@ import {
   Power,
   CloudDownload,
   SyncCircle,
-  Image,
 } from '@vicons/ionicons5'
 import Wow from 'wow.js'
 import {useUserStore} from '@/store/modules/user'

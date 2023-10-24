@@ -6,10 +6,9 @@ import UserinfoCard from './components/userinfoCard.vue'
 import LikeList from './components/likeList.vue'
 
 // hooks
-import {useUserData, useUserMethods} from './hooks'
+import {useUser} from './hooks'
 
-const {userData} = useUserData()
-const {getExhibitionList, tabChange, changeStatus} = useUserMethods()
+const {userData, getExhibitionList, tabChange, changeStatus} = useUser()
 
 onMounted(() => {
   const wow = new Wow({

@@ -7,10 +7,11 @@ import ImgCard from './components/imgCard.vue'
 import {useUserStore} from '@/store/modules/user'
 
 // hooks
-import {useImagesData, useImagesMethods} from './hooks/useImages'
+import {useImages} from './hooks/useImages'
 
-const {imagesData, SortOptions} = useImagesData()
 const {
+  imagesData,
+  SortOptions,
   getList,
   pageChange,
   pageSizeChange,
@@ -22,7 +23,8 @@ const {
   toDetail,
   tagClick,
   addTags,
-} = useImagesMethods()
+} = useImages()
+
 const userStore = useUserStore()
 
 

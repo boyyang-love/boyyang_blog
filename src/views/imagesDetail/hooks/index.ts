@@ -121,7 +121,6 @@ const useImageDetail = () => {
             },
         },
     ]
-
     const getImageDetail = (uid: number) => {
         const params = {
             uids: uid,

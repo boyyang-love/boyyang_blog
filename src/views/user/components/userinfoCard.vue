@@ -5,11 +5,10 @@ import {RollbackOutlined} from '@vicons/antd'
 import {env} from '@/utils/env'
 import {updateUserInfo} from '@/api/user'
 import {useUserStore} from '@/store/modules/user'
-import {useUserMethods, useUserData} from '../hooks'
+import {useUser} from '../hooks'
 import {router} from '@/router'
 
-const {getExhibitionList} = useUserMethods()
-const {userData} = useUserData()
+const {getExhibitionList, userData} = useUser()
 
 interface TabListItem {
   icon: Component

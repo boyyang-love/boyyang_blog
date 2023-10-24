@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import {computed, ref} from 'vue'
 import {ShieldCheckmark, CloseCircle, CheckmarkCircle, Fitness, PaperPlane, Reader} from '@vicons/ionicons5'
-import {useUserMethods} from '../hooks'
+import {useUser} from '../hooks'
 import {useUserStore} from '@/store/modules/user'
 import CubeLoading from '@/components/CubeLoading/index.vue'
 
-const {del} = useUserMethods()
+const {del} = useUser()
 
 interface Props {
   id: string | number

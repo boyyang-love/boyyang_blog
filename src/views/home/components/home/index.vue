@@ -2,7 +2,7 @@
 import {onMounted} from 'vue'
 import Wow from 'wow.js'
 import BlogCard from '../blogCard/index.vue'
-import {PrintText} from '@/components/PrintText/index.ts'
+import PrintText from '@/components/PrintText/index.vue'
 import User from '../user/index.vue'
 import Tile from '../tile/index.vue'
 import Notice from '../notice/index.vue'
@@ -12,14 +12,22 @@ import {ArrowDown} from '@vicons/ionicons5'
 import MenuBeehive from '../menuBeehive/index.vue'
 import Calendar from '../calendar/index.vue'
 // hooks
-import {useHomeData, useHomeMethods} from '../../hooks/useHome'
-import {useExhibitionData, useExhibitionMethods} from '../../hooks/useExhibition'
+import {useHome} from '../../hooks/useHome'
+import {useExhibition} from '../../hooks/useExhibition'
 import {useUserStore} from '@/store/modules/user'
 
-const {homeData, paginationOpt} = useHomeData()
-const {getBlogList, getDashboard, cardClick, pageChange, pageSizeChange, del, getNotice} = useHomeMethods()
-const {exhibitionData} = useExhibitionData()
-const {getExhibitionList} = useExhibitionMethods()
+const {
+  homeData,
+  paginationOpt,
+  getBlogList,
+  getDashboard,
+  cardClick,
+  pageChange,
+  pageSizeChange,
+  del,
+  getNotice,
+} = useHome()
+const {exhibitionData, getExhibitionList} = useExhibition()
 const userStore = useUserStore()
 
 onMounted(() => {

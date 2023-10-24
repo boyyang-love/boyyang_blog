@@ -3,10 +3,9 @@ import {Image, Sparkles, Heart, CloudDownload, PersonAdd, CloudUpload} from '@vi
 import {userDetail} from '@/api/user'
 import {User} from '@/api/user/type'
 import {env} from '@/utils/env'
-import {useRoute} from 'vue-router'
 import {router} from '@/router'
 import {follow} from '@/api/follow'
-import {useUserStore, useUserStoreWithOut} from '@/store/modules/user'
+import {useUserStoreWithOut} from '@/store/modules/user'
 
 interface IconItem {
     icon: Component
@@ -19,17 +18,17 @@ interface TabItem {
     id: number
 }
 
-const data = reactive({
-    type: 1,
-    page: 1,
-    limit: 12,
-    count: 0,
-    list: [] as User.Exhibition[],
-    user_info: {} as User.Info,
-    follow_ids: [] as number[],
-})
-
 const useUserDetail = () => {
+    const data = reactive({
+        type: 1,
+        page: 1,
+        limit: 12,
+        count: 0,
+        list: [] as User.Exhibition[],
+        user_info: {} as User.Info,
+        follow_ids: [] as number[],
+    })
+
     const icons = ref<IconItem[]>([
         {
             icon: markRaw(Image),

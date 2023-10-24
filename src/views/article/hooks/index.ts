@@ -20,23 +20,22 @@ export interface actionBtnItem {
     num: number
 }
 
-const tabActice = ref<number>(1)
-
-const articleData = reactive({
-    count: 0,
-    page: 1,
-    limit: 5,
-    list: [] as Article.ArticleInfo[],
-    tags: [] as Tag.TagInfo[],
-    userCardInfo: {} as Article.CardInfo,
-    userInfo: {} as User.Info,
-})
-
-const hotArticleData = reactive({
-    list: [] as Article.ArticleInfo[],
-})
-
 const useArticle = () => {
+    const tabActice = ref<number>(1)
+
+    const articleData = reactive({
+        count: 0,
+        page: 1,
+        limit: 5,
+        list: [] as Article.ArticleInfo[],
+        tags: [] as Tag.TagInfo[],
+        userCardInfo: {} as Article.CardInfo,
+        userInfo: {} as User.Info,
+    })
+
+    const hotArticleData = reactive({
+        list: [] as Article.ArticleInfo[],
+    })
     const actionBtns: actionBtnItem[] = [
         {
             name: '点赞',

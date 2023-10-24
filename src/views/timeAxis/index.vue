@@ -3,12 +3,11 @@ import {onMounted, onUnmounted} from 'vue'
 import moment from 'moment/moment'
 import wow from 'wow.js'
 // hooks
-import {useTimeAxisData, useTimeAxisMethods} from './hooks/useTimeAxis'
+import {useTimeAxis} from './hooks/useTimeAxis'
 import {Fitness, CalendarNumber, Image} from '@vicons/ionicons5'
 import Wow from 'wow.js'
 
-const {timeAxisData} = useTimeAxisData()
-const {getData} = useTimeAxisMethods()
+const {timeAxisData, getData} = useTimeAxis()
 
 const rightClick = (e: Event) => {
   e.preventDefault()

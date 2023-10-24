@@ -189,7 +189,6 @@ const background = computed(() => {
       </div>
     </div>
   </BackGround>
-
 </template>
 
 <style lang="less" scoped>

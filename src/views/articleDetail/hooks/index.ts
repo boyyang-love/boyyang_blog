@@ -8,21 +8,20 @@ import {Comment} from '@/api/comment/type'
 import {follow} from '@/api/follow'
 import {changeStar} from '@/api/like'
 
-const detailData = reactive({
-    detail: {
-        user_info: {},
-    } as Article.ArticleInfo,
-    tagInfo: [] as Tag.TagInfo[],
-    cardInfo: {} as Article.CardInfo,
-    isFollow: false,
-    isStar: false,
-})
-const commentData = reactive({
-    list: [] as Comment.CommentInfo[],
-    content: '',
-})
-
 const useArticleDetail = () => {
+    const detailData = reactive({
+        detail: {
+            user_info: {},
+        } as Article.ArticleInfo,
+        tagInfo: [] as Tag.TagInfo[],
+        cardInfo: {} as Article.CardInfo,
+        isFollow: false,
+        isStar: false,
+    })
+    const commentData = reactive({
+        list: [] as Comment.CommentInfo[],
+        content: '',
+    })
     const getArticleDetail = (uid: number, userId: number) => {
         let params = {
             uid: uid,

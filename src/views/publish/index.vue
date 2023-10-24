@@ -7,15 +7,13 @@ import PrintText from '@/components/PrintText/index.vue'
 import Input from '@/components/MimicryInput/index.vue'
 import BackGround from '@/components/Background/index.vue'
 // hooks
-import {usePublishData, usePublishMethods} from './hooks/usePublish'
+import {usePublish} from './hooks/usePublish'
 import Btn from '@/components/MimicryBtn/index.vue'
 import {PaperPlane, Power, Text} from '@vicons/ionicons5'
 import {useUserStore} from '@/store/modules/user'
 import {env} from '@/utils/env'
 
-const {BlogForm, BlogFormMore, isLoading, isShowDialog} = usePublishData()
-const {beforeBlogSubmit, blogSubmit, uploadChange} = usePublishMethods()
-
+const {BlogForm, BlogFormMore, isLoading, isShowDialog, beforeBlogSubmit, blogSubmit, uploadChange} = usePublish()
 
 onMounted(() => {
   const wow = new Wow({

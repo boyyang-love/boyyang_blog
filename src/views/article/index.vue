@@ -233,6 +233,7 @@ onMounted(() => {
         border-radius: 5px;
         display: flex;
         align-items: center;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 
         .tab {
           font-size: 16px;
@@ -263,6 +264,7 @@ onMounted(() => {
         align-items: center;
         background-color: rgba(245, 245, 245, 0.4);
         backdrop-filter: saturate(120%) blur(5px);
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
         border-radius: 5px;
       }
     }
@@ -281,18 +283,20 @@ onMounted(() => {
 
         .search-icon {
           cursor: pointer;
+          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
         }
 
         .left-input-container {
           box-sizing: border-box;
-          width: 100%;
+          width: calc(100% - 50px);
           height: 100%;
           display: flex;
           align-items: center;
           background-color: rgba(245, 245, 245, 0.5);
           backdrop-filter: saturate(100%) blur(30px);
-          margin: 0 10px 0 0;
+          margin: 0 5px 0 0;
           border-radius: 3px;
+          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
         }
 
         .search-btn {
@@ -305,6 +309,7 @@ onMounted(() => {
           align-items: center;
           cursor: pointer;
           border-radius: 3px;
+          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
         }
       }
 
@@ -316,6 +321,7 @@ onMounted(() => {
       .user-info {
         box-sizing: border-box;
         width: 100%;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
         //height: 250px;
         margin-top: 50px;
         border-radius: 5px;
@@ -324,6 +330,7 @@ onMounted(() => {
       .hot-articles {
         box-sizing: border-box;
         width: 100%;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
         //height: 450px;
         margin-top: 20px;
         border-radius: 5px;
@@ -334,6 +341,7 @@ onMounted(() => {
       .tags {
         box-sizing: border-box;
         width: 100%;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
         margin-top: 20px;
         display: flex;
         justify-content: space-between;

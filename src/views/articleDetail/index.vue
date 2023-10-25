@@ -143,6 +143,7 @@ const toDetail = (uid: number) => {
       box-sizing: border-box;
       background-color: rgba(245, 245, 245, 0.4);
       backdrop-filter: saturate(120%) blur(50px);
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
       border-radius: 10px;
       display: flex;
       flex-direction: column;
@@ -165,6 +166,11 @@ const toDetail = (uid: number) => {
         box-sizing: border-box;
         width: 100%;
         margin-top: 10px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .user-info-card {
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
       }
     }
   }

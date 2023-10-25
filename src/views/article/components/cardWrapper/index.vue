@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {Add} from '@vicons/ionicons5'
+
 interface Props {
   title: string
   showSuffix?: boolean
@@ -10,27 +11,27 @@ interface Emits {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  title: "",
-  showSuffix: false
+  title: '',
+  showSuffix: false,
 })
 
 const emits = defineEmits<Emits>()
 </script>
 
 <template>
-<div class="card-wrapper">
-  <div class="card-title">
-    {{ props.title }}
-    <div class="suffix" v-if="props.showSuffix">
-      <n-icon size="20" color="#fff" @click="emits('iconClick')">
-        <Add></Add>
-      </n-icon>
+  <div class="card-wrapper">
+    <div class="card-title">
+      {{ props.title }}
+      <div class="suffix" v-if="props.showSuffix">
+        <n-icon size="20" color="#fff" @click="emits('iconClick')">
+          <Add></Add>
+        </n-icon>
+      </div>
+    </div>
+    <div class="card-content">
+      <slot name="content"></slot>
     </div>
   </div>
-  <div class="card-content">
-    <slot name="content"></slot>
-  </div>
-</div>
 </template>
 
 <style scoped lang="less">
@@ -42,6 +43,7 @@ const emits = defineEmits<Emits>()
   background-color: rgba(245, 245, 245, 0.4);
   backdrop-filter: saturate(120%) blur(50px);
   border-radius: 5px;
+
   .card-title {
     color: whitesmoke;
     font-weight: bold;

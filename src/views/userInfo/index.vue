@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {CloseCircle, ExitSharp,} from '@vicons/ionicons5'
+import {CloseCircle, ExitSharp} from '@vicons/ionicons5'
 import AvatarCropper from '@/components/AvatarCropper/index.vue'
 import Input from '@/components/MimicryInput/index.vue'
 import Btn from '@/components/MimicryBtn/index.vue'
@@ -7,7 +7,7 @@ import {inputOptions} from './hooks/input'
 import {useUserInfo} from './hooks/useUserInfo'
 
 
-const {userInfoData, avatarSubmit, submit} = useUserInfo()
+const {userInfoData, avatarSubmit, submit, setGender} = useUserInfo()
 const isShow = defineModel<boolean>()
 
 </script>
@@ -25,6 +25,8 @@ const isShow = defineModel<boolean>()
           <div class="user-avatar">
             <AvatarCropper
                 @submit="avatarSubmit"
+                @setGender="setGender"
+                :user-gender="userInfoData.submit.gender"
                 :default-img="userInfoData.submit.avatar_url"
             ></AvatarCropper>
           </div>
@@ -40,7 +42,7 @@ const isShow = defineModel<boolean>()
                     }
                   }"
                   :icon="item.icon"
-                  :icon-size="26"
+                  :icon-size="22"
                   :input-type="item.type"
                   v-model="userInfoData.submit[item.key]"
               ></Input>

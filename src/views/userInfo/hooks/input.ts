@@ -1,7 +1,7 @@
 import {Component} from 'vue'
 import {
-    PersonCircle,
-    CallSharp,
+    Person,
+    Chatbox,
     LogoWechat,
     LogoGithub,
     Create,
@@ -20,13 +20,13 @@ const inputOptions: InputOptions[] = [
         key: 'username',
         placeholder: '请输入用户名',
         type: 'text',
-        icon: PersonCircle,
+        icon: Person,
     },
     {
         key: 'tel',
         placeholder: '请输入电话号码',
         type: 'number',
-        icon: CallSharp,
+        icon: Chatbox,
     },
     {
         key: 'qq',

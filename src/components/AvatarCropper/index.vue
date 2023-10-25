@@ -4,7 +4,7 @@ import Btn from '@/components/MimicryBtn/index.vue'
 import {UploadFileInfo} from 'naive-ui'
 import {ref, watch} from 'vue'
 import {env} from '@/utils/env'
-import {ExitSharp, Refresh} from '@vicons/ionicons5'
+import {ExitSharp, Male, Female, MaleFemale, Refresh} from '@vicons/ionicons5'
 
 interface ImagesInfo {
   file: File
@@ -13,10 +13,13 @@ interface ImagesInfo {
 
 interface Props {
   defaultImg: string
+  userGender: number
 }
 
 interface Emits {
   (e: 'submit', imagesInfo: ImagesInfo): void
+
+  (e: 'setGender'): void
 }
 
 const emits = defineEmits<Emits>()
@@ -79,7 +82,7 @@ const cancel = () => {
 
 <template>
   <div class="avatar-cropper-wrapper">
-    <div>
+    <div class="avatar-box">
       <n-upload
           action="#"
           :max="1"
@@ -99,6 +102,15 @@ const cancel = () => {
           ></n-avatar>
         </div>
       </n-upload>
+      <div class="user-gender">
+        <n-icon
+            :size="24"
+            :component="props.userGender === 0 ? MaleFemale : props.userGender === 1 ? Male as any : Female as any"
+            color="#393e46"
+            @click="emits('setGender')"
+        >
+        </n-icon>
+      </div>
     </div>
   </div>
 
@@ -166,19 +178,36 @@ const cancel = () => {
   --webkit-box-sizing: border-box;
   align-items: center;
 
-  .avatar-wrapper {
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+
+  .avatar-box {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    background: #e6eef4;
-    //border: 5px solid rgb(129,129,129);
-    //box-shadow: -20px -20px 60px #c4cacf,
-    //20px 20px 60px #ffffff;
+
+    .avatar-wrapper {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background: #e6eef4;
+      //border: 5px solid rgb(129,129,129);
+      //box-shadow: -20px -20px 60px #c4cacf,
+      //20px 20px 60px #ffffff;
+    }
+
+
+    .user-gender {
+      position: absolute;
+      bottom: 0;
+      right: -5px;
+      cursor: pointer;
+    }
   }
+
 }
 
 .dialog-content-wrapper {

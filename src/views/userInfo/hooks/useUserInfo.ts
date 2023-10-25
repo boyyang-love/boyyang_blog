@@ -1,8 +1,11 @@
-import {reactive} from 'vue'
+import {h, reactive} from 'vue'
 import {useUserStoreWithOut} from '@/store/modules/user'
 import {updateUserInfo} from '@/api/user'
 import {upload, delUpload} from '@/api/upload'
 import {User} from '@/api/user/type'
+import {NIcon, NRadioButton, NRadioGroup, NRadio, NSwitch} from 'naive-ui'
+import {Male, Female, MaleFemale} from '@vicons/ionicons5'
+
 const userStore = useUserStoreWithOut()
 const userInfoData = reactive({
     isShow: false,
@@ -32,6 +35,7 @@ export const useUserInfo = () => {
             wechat: userInfoData.submit.wechat,
             qq: userInfoData.submit.qq,
             git_hub: userInfoData.submit.git_hub,
+            gender: userInfoData.submit.gender,
         } as User.UpdateUserInfo
 
 
@@ -87,10 +91,42 @@ export const useUserInfo = () => {
     const avatarSubmit = (data: { file: File, blob: Blob }) => {
         userInfoData.file = data.file
     }
+
+    const setGender = () => {
+        window.$dialog.info({
+            title: '性别',
+            content: () => {
+                let gender = userInfoData.submit.gender || 0
+                return h('div', {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alginItem: 'center',
+                }, [
+                    h(NSwitch, {
+                            component: Male,
+                            checkedValue: 1,
+                            uncheckedValue: 2,
+                            defaultValue: gender,
+                            onUpdateValue: (value: number) => {
+                                gender = value
+                                userInfoData.submit.gender = value
+                            },
+                        },
+                        {
+                            icon: () => h(NIcon, {component: MaleFemale, color: 'rgba(17,17,17,0.4)'}),
+                            checked: () => h(NIcon, {component: Male, color: '#fcfcfc'}),
+                            unchecked: () => h(NIcon, {component: Female, color: '#fc5185'}),
+                        },
+                    ),
+                ])
+            },
+        })
+    }
     return {
         userInfoData,
         showInfo,
         avatarSubmit,
         submit,
+        setGender,
     }
 }

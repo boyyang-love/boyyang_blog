@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {useRoute} from 'vue-router'
 import {useUserDetail} from './hooks'
-import {Checkmark, Sparkles, Download, Power, Add} from '@vicons/ionicons5'
+import {Checkmark, Sparkles, Download, Power, Add, Male, Female} from '@vicons/ionicons5'
 import CubeLoading from '@/components/CubeLoading/index.vue'
 import {useUserStore} from '@/store/modules/user'
 
@@ -25,6 +25,13 @@ getList(uid)
             bordered
         ></n-avatar>
         <span class="user-name">{{ data.user_info.username }}</span>
+        <div class="user-gender">
+          <n-icon
+              :size="22"
+              :component="data.user_info.gender === 1 ? Male as any : Female as any"
+          >
+          </n-icon>
+        </div>
       </div>
       <div class="bottom">
         <div class="banner-left">
@@ -56,7 +63,7 @@ getList(uid)
         </div>
       </div>
       <div class="back" @click="$router.back()">
-        <n-icon size="24" color="#fff" style="cursor: pointer">
+        <n-icon :size="22" color="#fff" style="cursor: pointer">
           <Power></Power>
         </n-icon>
       </div>
@@ -203,9 +210,16 @@ getList(uid)
       font-size: 16px;
       font-weight: bolder;
       z-index: 1;
+      position: relative;
 
       .user-name {
         color: #ffffff;
+      }
+
+      .user-gender {
+        position: absolute;
+        bottom: 20px;
+        right: -10px;
       }
     }
 

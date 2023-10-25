@@ -1,5 +1,5 @@
 import {Component, computed, markRaw, reactive, ref} from 'vue'
-import {Image, Sparkles, Heart, CloudDownload, PersonAdd, CloudUpload} from '@vicons/ionicons5'
+import {Image, Sparkles, SparklesOutline, Heart, CloudDownload, People, CloudUpload} from '@vicons/ionicons5'
 import {userDetail} from '@/api/user'
 import {User} from '@/api/user/type'
 import {env} from '@/utils/env'
@@ -18,17 +18,17 @@ interface TabItem {
     id: number
 }
 
-const useUserDetail = () => {
-    const data = reactive({
-        type: 1,
-        page: 1,
-        limit: 12,
-        count: 0,
-        list: [] as User.Exhibition[],
-        user_info: {} as User.Info,
-        follow_ids: [] as number[],
-    })
+const data = reactive({
+    type: 1,
+    page: 1,
+    limit: 12,
+    count: 0,
+    list: [] as User.Exhibition[],
+    user_info: {} as User.Info,
+    follow_ids: [] as number[],
+})
 
+const useUserDetail = () => {
     const icons = ref<IconItem[]>([
         {
             icon: markRaw(Image),
@@ -47,7 +47,7 @@ const useUserDetail = () => {
             num: 0,
         },
         {
-            icon: markRaw(PersonAdd),
+            icon: markRaw(People),
             num: 0,
         },
     ])

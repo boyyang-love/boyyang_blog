@@ -14,34 +14,32 @@ import {updateDownload} from '@/api/exhibition'
 import {router} from '@/router'
 import {NInput} from 'naive-ui'
 
-
+const imagesData = reactive({
+    page: 1,
+    limit: 9,
+    count: 0,
+    list: [] as (Exhibition.ExhibitionsInfo & {
+        path: string,
+        cover_url: string
+    })[],
+    likes: [] as number[],
+    star: [] as number[],
+    pageSizes: [
+        {
+            label: '9/每页',
+            value: 9,
+        },
+        {
+            label: '12/每页',
+            value: 12,
+        },
+    ],
+    sort: 'created desc',
+    tags: [] as Tag.TagInfo[],
+    keywords: '',
+    selectedTags: '' as string | number,
+})
 const useImages = () => {
-    const imagesData = reactive({
-        page: 1,
-        limit: 9,
-        count: 0,
-        list: [] as (Exhibition.ExhibitionsInfo & {
-            path: string,
-            cover_url: string
-        })[],
-        likes: [] as number[],
-        star: [] as number[],
-        pageSizes: [
-            {
-                label: '9/每页',
-                value: 9,
-            },
-            {
-                label: '12/每页',
-                value: 12,
-            },
-        ],
-        sort: 'created desc',
-        tags: [] as Tag.TagInfo[],
-        keywords: '',
-        selectedTags: '' as string | number,
-    })
-
     const SortOptions = [
         {
             label: '发布时间升序',

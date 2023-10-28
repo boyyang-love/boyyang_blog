@@ -223,7 +223,8 @@ const toDetail = () => {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border-bottom: 2px solid whitesmoke;
+  border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
   background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: saturate(120%) blur(10px);
 

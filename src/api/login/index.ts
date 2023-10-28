@@ -33,3 +33,16 @@ export const register = (params: {
         },
     )
 }
+
+export const loginBg = (params?: { page?: number, limit?: number }) => {
+    return http.request<Login.LoginBgRes>(
+        {
+            url: '/tray',
+            method: 'get',
+            params,
+        },
+        {
+            isShowMessage: false,
+        },
+    )
+}

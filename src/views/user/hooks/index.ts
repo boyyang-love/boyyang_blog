@@ -1,4 +1,4 @@
-import {reactive, watch, watchEffect} from 'vue'
+import {onMounted, reactive, watch, watchEffect} from 'vue'
 import {env} from '@/utils/env'
 import {Exhibition} from '@/api/exhibition/type'
 import {exhibitionList, changeExhibitionStatus, deleteExhibition} from '@/api/exhibition'
@@ -82,6 +82,7 @@ const useUser = () => {
 
         getExhibitionList(userData.type)
     }
+
     watch(
         [
             () => userData.page,
@@ -91,6 +92,9 @@ const useUser = () => {
             getExhibitionList(userData.type)
         },
     )
+    onMounted(() => {
+        getExhibitionList(userData.type)
+    })
     return {
         userData,
         getExhibitionList,

@@ -11,4 +11,13 @@ declare namespace Login {
         }
         token: string
     }
+
+    interface LoginBgRes {
+        exhibitions: Exhibition[]
+    }
+
+    interface Exhibition {
+        id: number
+        cover: string
+    }
 }

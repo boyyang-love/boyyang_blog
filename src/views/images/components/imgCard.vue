@@ -5,7 +5,6 @@ import {
   Sparkles,
   ImageSharp,
   CloudDownload,
-  Cube,
 } from '@vicons/ionicons5'
 import moment from 'moment'
 import {env} from '@/utils/env'
@@ -132,6 +131,13 @@ const toDetail = () => {
           <n-ellipsis style="max-width: 300px">
             {{ props.name }}
           </n-ellipsis>
+          <div class="colors-wrapper">
+            <div
+                class="color-item"
+                v-for="item in props.colors"
+                :style="{'--color': item}"
+            ></div>
+          </div>
         </div>
         <div class="img-size">
           {{ (props?.size as string) }}
@@ -139,13 +145,6 @@ const toDetail = () => {
       </div>
     </NSpin>
     <div class="img-bottom">
-      <div class="colors-wrapper">
-        <div
-            class="color-item"
-            v-for="item in props.colors"
-            :style="{'--color': item}"
-        ></div>
-      </div>
       <div class="tags">
         <div
             class="tag"
@@ -162,7 +161,7 @@ const toDetail = () => {
                 :size="40"
                 :src="`${env.VITE_APP_IMG_URL}/${props.info.avatar_url}`"
                 bordered
-                class="header-img wow slideInDown"
+                class="header-img"
                 round
                 @click="toDetail"
             />
@@ -188,7 +187,7 @@ const toDetail = () => {
                 </template>
                 <span>点赞</span>
               </n-popover>
-              <span class="num">{{ props.star }}</span>
+              <span class="num">{{ props.star || '' }}</span>
             </div>
 
             <div class="icon-wrapper">
@@ -234,20 +233,8 @@ const toDetail = () => {
                 </template>
                 <span>下载</span>
               </n-popover>
-              <span class="num">{{ props.download }}</span>
+              <span class="num">{{ props.download || '' }}</span>
             </div>
-
-
-            <!--              <div class="icon-wrapper">-->
-            <!--                <n-icon-->
-            <!--                    :component="Cube as any"-->
-            <!--                    color="#373737"-->
-            <!--                    size="18"-->
-            <!--                    class="icon"-->
-            <!--                    @click="$emit('toDetail', props.id)"-->
-            <!--                ></n-icon>-->
-            <!--              </div>-->
-
             <n-popconfirm
                 v-if="props.info.uid === userStore.info.uid"
                 content=""
@@ -342,6 +329,23 @@ const toDetail = () => {
       text-align: center;
       border-radius: 0 0 5px 5px;
       padding: 3px 0;
+
+      .colors-wrapper {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        display: flex;
+        justify-content: center;
+        padding: 5px 0;
+
+        .color-item {
+          width: 10px;
+          height: 10px;
+          background-color: var(--color);
+          margin: 0 3px;
+          border-radius: 50%;
+        }
+      }
     }
 
     .img-size {
@@ -362,20 +366,6 @@ const toDetail = () => {
     overflow: hidden;
     margin-top: 5px;
 
-    .colors-wrapper {
-      display: flex;
-      justify-content: center;
-      padding: 5px 0;
-
-      .color-item {
-        width: 10px;
-        height: 10px;
-        background-color: var(--color);
-        margin: 0 3px;
-        border-radius: 50%;
-      }
-    }
-
     .tags {
       box-sizing: border-box;
       width: 100%;
@@ -388,19 +378,19 @@ const toDetail = () => {
         box-shadow: 3px 3px 4px #c4cacf,
           -2px -2px 2px #ffffff;
         color: #888888;
-        border-radius: 8px 0 8px 0;
-        padding: 2px 10px;
+        border-radius: 5px 2px 5px 2px;
+        padding: 1px 5px;
         margin: 1px 3px;
         font-size: 12px;
         cursor: pointer;
-        border: 2px solid rgba(17, 17, 17, 1);
-        transform: skew(-10deg);
+        border: 1px solid rgba(17, 17, 17, 1);
+        transform: skew(-15deg);
         text-align: center;
         white-space: nowrap;
 
         span {
           transform: skew(10deg);
-          color: #1fab89;
+          color: #b83b5e;
           font-weight: bolder;
           font-size: 12px;
         }
@@ -447,9 +437,9 @@ const toDetail = () => {
         .icon-wrapper {
 
           .num {
-            maring-top: 3px;
+            margin-top: 3px;
             font-size: 12px;
-            color: #1fab89;
+            color: #b83b5e;
           }
         }
       }

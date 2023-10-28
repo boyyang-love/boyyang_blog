@@ -36,7 +36,7 @@
     "three": "^0.155.0",
     "v-calendar": "next",
     "vanta": "^0.5.22",
-    "vue": "^3.3.4",
+    "vue": "^3.3.7",
     "vue-i18n": "next",
     "vue-picture-cropper": "^0.6.1",
     "vue-router": "4",

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {computed, ref} from 'vue'
-import {ShieldCheckmark, CloseCircle, CheckmarkCircle, Fitness, PaperPlane, Reader} from '@vicons/ionicons5'
+import {ShieldCheckmark, CloseCircle, CheckmarkCircle, Fitness, PaperPlane, Reader,LockClosed, LockOpen} from '@vicons/ionicons5'
 import {useUser} from '../hooks'
 import {useUserStore} from '@/store/modules/user'
 import CubeLoading from '@/components/CubeLoading/index.vue'
@@ -53,6 +53,12 @@ const status = computed(() => {
       _status = {
         label: props.label ? props.label : '未通过审核',
         color: '#f00056',
+      }
+      break
+    case 4:
+      _status = {
+        label: props.label ? props.label : '公开',
+        color: '#0d7377'
       }
       break
     default:
@@ -122,6 +128,50 @@ const status = computed(() => {
                 </div>
               </template>
               重新提交审核
+            </n-popconfirm>
+          </div>
+
+          <div>
+            <n-popconfirm
+                trigger="hover"
+                positive-text="提交"
+                negative-text="算了"
+                @positive-click="emits('submit', 4)"
+            >
+              <template #trigger>
+                <div>
+                  <n-icon
+                      v-if="props.status === 2"
+                      size="20"
+                      class="icon"
+                  >
+                    <LockOpen></LockOpen>
+                  </n-icon>
+                </div>
+              </template>
+              公开图片
+            </n-popconfirm>
+          </div>
+
+          <div>
+            <n-popconfirm
+                trigger="hover"
+                positive-text="提交"
+                negative-text="算了"
+                @positive-click="emits('submit', 2)"
+            >
+              <template #trigger>
+                <div>
+                  <n-icon
+                      v-if="props.status === 4"
+                      size="20"
+                      class="icon"
+                  >
+                    <LockClosed></LockClosed>
+                  </n-icon>
+                </div>
+              </template>
+              隐藏图片
             </n-popconfirm>
           </div>
 

@@ -37,6 +37,7 @@ onMounted(() => {
           :approved="userData.approved"
           :in_review="userData.in_review"
           :review_rjection="userData.review_rjection"
+          :open="userData.open"
       ></UserinfoCard>
     </div>
 

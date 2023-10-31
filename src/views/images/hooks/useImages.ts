@@ -79,7 +79,7 @@ const useImages = () => {
         let params = {
             page: imagesData.page,
             limit: imagesData.limit,
-            type: 2,
+            type: 4,
             public: true,
             sort: imagesData.sort,
             keywords: imagesData.keywords,

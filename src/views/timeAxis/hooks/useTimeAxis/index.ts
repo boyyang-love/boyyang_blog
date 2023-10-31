@@ -13,7 +13,7 @@ const useTimeAxis = () => {
 
     const getData = () => {
         let params = {
-            type: 2,
+            type: 4,
             sort: 'created desc',
         }
         exhibitionList(params).then(res => {

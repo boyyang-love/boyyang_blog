@@ -6,6 +6,7 @@ export declare namespace Exhibition {
         star_ids: number[]
         approved: number
         in_review: number
+        open: number
         review_rjection: number
     }
 

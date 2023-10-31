@@ -1,4 +1,4 @@
-import {CheckmarkCircle, CloseCircle, Create, Exit} from '@vicons/ionicons5'
+import {CheckmarkCircle, CloseCircle, Create, Exit, LockOpen} from '@vicons/ionicons5'
 import {Component, ref} from 'vue'
 
 export interface MenuItem {
@@ -31,6 +31,12 @@ const useMenu = () => {
         },
         {
             id: 4,
+            name: '公开',
+            icon: LockOpen,
+            color: '#fff',
+        },
+        {
+            id: 5,
             name: '返回',
             icon: Exit,
             color: '#fce38a',
@@ -38,7 +44,7 @@ const useMenu = () => {
     ]
 
     const menuClick = (id: number) => {
-        if (id !== 4) {
+        if (id !== 5) {
             active.value = id
         }
     }

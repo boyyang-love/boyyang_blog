@@ -9,15 +9,12 @@ import Wow from 'wow.js'
 import {useUserStore} from '@/store/modules/user'
 import {env} from '@/utils/env'
 import {useMenu} from './hooks/useMenu'
-import {router} from '@/router'
 import {useCard} from './hooks/useCard'
-import moment from 'moment/moment'
 
 const {adminData, getList, changeStatus, menuIconClick} = useAdmin()
 const {menu, active, menuClick} = useMenu()
 const {noticeData, cards, actionCards, actionCardClick, noticeSubmit} = useCard()
 
-getList()
 
 onMounted(() => {
   nextTick(() => {
@@ -35,6 +32,7 @@ onMounted(() => {
     })
 
     wow.init()
+    getList()
   })
 })
 
@@ -94,7 +92,7 @@ const url = computed(() => {
               :name="item.title"
               :is-show="item.isShow"
               :is-show-del="item.isShowDel"
-              :is-show-approved="active != 2"
+              :is-show-approved="active != 2 && active !== 4"
               :is-show-rejected="active != 3"
               :image-info="{
                 name: item.title,

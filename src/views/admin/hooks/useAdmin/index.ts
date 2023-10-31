@@ -76,7 +76,7 @@ const useAdmin = () => {
     }
 
     const menuIconClick = (id: number) => {
-        if (id === 4) {
+        if (id === 5) {
             window.$dialog.warning({
                 title: '提示',
                 content: '是否退出当前页面',

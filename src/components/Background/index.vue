@@ -52,8 +52,7 @@ const opacity = computed(() => {
   background-color: v-bind('props.color');
   position: relative;
   overflow: hidden;
-
-  transition: background-image .4s linear;
+  //transition: background-image .4s linear;
 
   .background-content {
     scroll-behavior: smooth;

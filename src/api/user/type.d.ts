@@ -22,7 +22,7 @@ export namespace User {
     export interface Info {
         uid: number
         username: string
-        gender: number | string
+        gender: number
         avatar_url: string
         age: number | string
         email: string

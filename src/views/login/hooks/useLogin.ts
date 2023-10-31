@@ -4,27 +4,26 @@ import {router} from '@/router'
 import {useUserStoreWithOut} from '@/store/modules/user'
 import {env} from '@/utils/env'
 
+// 登录 注册 data
+const loginData = reactive({
+    isRegister: false, // 是否登录状态
+    // 登录 账号 密码
+    username: '',
+    password: '',
+    // 注册
+    r_username: '',
+    r_tel: '',
+    r_password: '',
+    r_repassword: '',
+    r_isError: false,
+    r_avatarUrl: '',
+    isError: false,
+    bg_url: '',
+    bg_urls: [] as string[],
+    default_bg_num: 0,
+})
 
 const useLogin = () => {
-    // 登录 注册 data
-    const loginData = reactive({
-        isRegister: false, // 是否登录状态
-        // 登录 账号 密码
-        username: '',
-        password: '',
-        // 注册
-        r_username: '',
-        r_tel: '',
-        r_password: '',
-        r_repassword: '',
-        r_isError: false,
-        r_avatarUrl: '',
-        isError: false,
-        bg_url: '',
-        bg_urls: [] as string[],
-        default_bg_num: 0,
-    })
-
     watch(
         [
             () => loginData.username,

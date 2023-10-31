@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {ref, markRaw, Component, computed, onMounted} from 'vue'
-import {Rocket, Create} from '@vicons/ionicons5'
+import {Rocket, Create, LockOpen} from '@vicons/ionicons5'
 import {RollbackOutlined} from '@vicons/antd'
 import {env} from '@/utils/env'
 import {updateUserInfo} from '@/api/user'
@@ -23,6 +23,7 @@ interface Props {
   approved: number
   in_review: number
   review_rjection: number
+  open: number
 }
 
 interface Emit {
@@ -67,6 +68,14 @@ const tabList = computed<TabListItem[]>(() => [
     color: '#cc1515',
     num: props.review_rjection,
     id: 3,
+  },
+  {
+    icon: markRaw(LockOpen),
+    label: '公开',
+    size: 20,
+    color: '#0d7377',
+    num: props.open,
+    id: 4,
   },
 ])
 

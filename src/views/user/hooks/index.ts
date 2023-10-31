@@ -4,19 +4,19 @@ import {Exhibition} from '@/api/exhibition/type'
 import {exhibitionList, changeExhibitionStatus, deleteExhibition} from '@/api/exhibition'
 import {delUpload} from '@/api/upload'
 
+const userData = reactive({
+    page: 1,
+    limit: 9,
+    total: 0,
+    list: [] as (Exhibition.ExhibitionsInfo & { path: string })[],
+    type: 1,
+    approved: 0,
+    in_review: 0,
+    review_rjection: 0,
+    open: 0,
+})
+
 const useUser = () => {
-
-    const userData = reactive({
-        page: 1,
-        limit: 9,
-        total: 0,
-        list: [] as (Exhibition.ExhibitionsInfo & { path: string })[],
-        type: 1,
-        approved: 0,
-        in_review: 0,
-        review_rjection: 0,
-    })
-
     const getExhibitionList = (type: number) => {
         let params = {
             page: userData.page,
@@ -30,6 +30,7 @@ const useUser = () => {
             userData.approved = res.data.approved
             userData.in_review = res.data.in_review
             userData.review_rjection = res.data.review_rjection
+            userData.open = res.data.open
             userData.list = res.data.exhibitions && res.data.exhibitions.map((ex: Exhibition.ExhibitionsInfo) => {
                 return {
                     ...ex,
@@ -92,9 +93,9 @@ const useUser = () => {
             getExhibitionList(userData.type)
         },
     )
-    onMounted(() => {
-        getExhibitionList(userData.type)
-    })
+    // onMounted(() => {
+    //     getExhibitionList(userData.type)
+    // })
     return {
         userData,
         getExhibitionList,

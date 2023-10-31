@@ -1,5 +1,5 @@
 import {Component, computed, markRaw, reactive, ref} from 'vue'
-import {Image, Sparkles, SparklesOutline, Heart, CloudDownload, People, CloudUpload} from '@vicons/ionicons5'
+import {Image, Sparkles, SparklesOutline, Heart, CloudDownload, People, CloudUpload, LockOpen} from '@vicons/ionicons5'
 import {userDetail} from '@/api/user'
 import {User} from '@/api/user/type'
 import {env} from '@/utils/env'
@@ -77,6 +77,11 @@ const useUserDetail = () => {
             id: 2,
             name: '收藏',
             icon: markRaw(Heart),
+        },
+        {
+            id: 3,
+            name: '公开',
+            icon: markRaw(LockOpen),
         },
     ]
 

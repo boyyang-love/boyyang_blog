@@ -16,7 +16,7 @@ const useExhibition = () => {
         let params = {
             page: exhibitionData.page,
             limit: exhibitionData.limit,
-            type: 2,
+            type: 4,
             sort: 'created desc',
         }
         exhibitionList(params).then(res => {

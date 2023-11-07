@@ -10,6 +10,7 @@
     body {
         overflow: hidden;
         background-color: #00adb5;
+        z-index: 1;
     }
 
     body::before {
@@ -19,20 +20,20 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: conic-gradient(#edb1f1 70deg, #3490de 70deg 160deg, #9896f1 160deg 270deg, #8ef6e4 270deg 360deg);
-        filter: blur(150px);
+        background: conic-gradient(#edb1f1 4deg 20deg, #3490de 70deg 129deg, #9896f1 199deg 212deg, #8ef6e4 270deg 308deg);
         animation: conic-gradient-move 15s linear infinite;
+        filter: blur(30px);
         overflow: hidden;
         z-index: -1;
     }
 
     @keyframes conic-gradient-move {
         0% {
-            transform: rotateZ(0deg);
+            transform: rotateZ(0deg) scale(1.5);
         }
 
         100% {
-            transform: rotateZ(360deg);
+            transform: rotateZ(360deg) scale(3);
         }
     }
 </style>

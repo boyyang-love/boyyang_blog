@@ -5,9 +5,9 @@ import {
   CloseCircle,
   CheckmarkCircle,
   Rocket,
-  PeopleCircle,
   ArrowUpCircleSharp,
   ArrowDownCircleSharp,
+  AddCircle,
 } from '@vicons/ionicons5'
 import Input from '@/components/MimicryInput/index.vue'
 import {useInput} from '../../hooks/useInput'
@@ -29,7 +29,7 @@ const position = computed(() => {
     <div class="top-left-icon">
       <NIcon
           class="icon"
-          :component="PeopleCircle"
+          :component="AddCircle"
           size="22"
           @click="loginData.isRegister = true"
       ></NIcon>

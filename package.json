@@ -55,5 +55,9 @@
     "vite-plugin-prismjs": "^0.0.8",
     "vue-tsc": "^1.8.8",
     "bun-types": "latest"
+  },
+  "volta": {
+    "node": "16.20.1",
+    "yarn": "1.22.19"
   }
 }

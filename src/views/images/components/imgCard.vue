@@ -358,6 +358,11 @@ const toDetail = () => {
       backdrop-filter: saturate(180%) blur(20px);
       padding: 0 5px;
     }
+
+    :deep(.n-image img) {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .img-bottom {
@@ -386,13 +391,13 @@ const toDetail = () => {
         border: 1px solid rgba(17, 17, 17, 1);
         transform: skew(-15deg);
         text-align: center;
-        white-space: nowrap;
 
         span {
           transform: skew(10deg);
           color: #b83b5e;
           font-weight: bolder;
           font-size: 12px;
+          white-space: nowrap;
         }
       }
     }
@@ -468,12 +473,5 @@ const toDetail = () => {
       }
     }
   }
-}
-</style>
-
-<style>
-#img-card-wrapper .n-image img {
-  width: 100%;
-  height: 100%;
 }
 </style>

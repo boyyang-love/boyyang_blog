@@ -3,6 +3,7 @@ import {CloseCircle} from '@vicons/ionicons5'
 import {useArticle} from '../../hooks'
 import moment from 'moment'
 import {useUserStore} from '@/store/modules/user'
+import CubeLoading from '@/components/CubeLoading/index.vue'
 
 interface Props {
   uid: number
@@ -41,7 +42,13 @@ const {actionBtns} = useArticle()
           class="img"
           :src="props.cover"
           @click="$emit('cardClick', props.uid, props.userId)"
-      ></n-image>
+      >
+        <template #placeholder>
+          <div class="loading">
+            <CubeLoading></CubeLoading>
+          </div>
+        </template>
+      </n-image>
     </div>
     <div class="content">
       <div class="title">
@@ -134,6 +141,7 @@ const {actionBtns} = useArticle()
     height: 100%;
     padding: 5px;
     position: relative;
+    cursor: pointer;
 
     .img {
       box-sizing: border-box;
@@ -142,6 +150,15 @@ const {actionBtns} = useArticle()
       height: 100%;
       object-fit: cover;
       border-radius: 5px;
+    }
+
+    .loading {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 

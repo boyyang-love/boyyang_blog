@@ -9,6 +9,8 @@ import {useRoute} from 'vue-router'
 import {onMounted} from 'vue'
 import {Power, Sparkles} from '@vicons/ionicons5'
 import {router} from '@/router'
+import {de} from 'date-fns/locale'
+import moment from 'moment'
 
 const route = useRoute()
 const uid = route.query.uid as unknown as number
@@ -39,13 +41,28 @@ const toDetail = (uid: number) => {
     <div class="article-container container m-auto">
       <div class="top-content">
         <PrintText
-            title="文章详情"
+            :title="detailData.detail.title"
+            :subtitle="detailData.detail.sub_title"
         ></PrintText>
       </div>
       <div class="content">
         <div class="left-content">
           <div>
             <div class="content-html" v-html="detailData.detail.content"></div>
+          </div>
+          <div class="article-infos">
+            <div class="left-info">
+              <span class="title">
+                {{detailData.detail.title}}
+              </span>
+              <span class="sub-title">
+                {{detailData.detail.sub_title}}
+              </span>
+            </div>
+            <div class="right-info">
+              <span class="user-name">{{detailData.detail.user_info.username}}</span>
+              <span class="time">{{moment(detailData.detail.created * 1000).format("YYYY-MM-DD") }}</span>
+            </div>
           </div>
           <div class="content-bottom">
             <Comment></Comment>
@@ -151,6 +168,48 @@ const toDetail = (uid: number) => {
       align-items: center;
       border: 1px solid whitesmoke;
       padding: 10px;
+
+      .article-infos {
+        box-sizing: border-box;
+        width: 100%;
+        height: 45px;
+        background-color: rgba(245, 245, 245, 0.5);
+        margin-top: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5px;
+
+        .left-info {
+          display: flex;
+          flex-direction: column;
+
+          .title {
+            color: rgba(17, 17, 17, 1);
+            font-size: 15px;
+          }
+
+          .sub-title {
+            color: gray;
+            font-size: 13px;
+          }
+        }
+
+        .right-info {
+          display: flex;
+          flex-direction: column;
+
+          .user-name {
+            font-size: 14px;
+            color: white;
+          }
+
+          .time {
+            font-size: 12px;
+          }
+        }
+      }
 
       .content-bottom {
         box-sizing: border-box;

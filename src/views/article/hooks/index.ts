@@ -227,6 +227,7 @@ const useArticle = () => {
     }
 
     const tabChange = (id: number) => {
+        articleData.page = 1
         tabActice.value = id
         getArticleList()
     }

@@ -265,7 +265,9 @@ onUnmounted(() => {
     .tags {
       display: flex;
       position: absolute;
-      bottom: 0;
+      bottom: -20px;
+      flex-wrap: wrap;
+      align-items: center;
 
       .tag {
         background-color: rgba(17, 17, 17, 0.4);
@@ -273,7 +275,7 @@ onUnmounted(() => {
         color: #f1f5f9;
         padding: 0 5px;
         border: 1px solid #23d69b;
-        margin: 0 5px;
+        margin: 10px 5px 0;
         cursor: pointer;
       }
 
@@ -287,7 +289,8 @@ onUnmounted(() => {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0 4px;
+        padding:  3px;
+        margin: 10px 5px 0;
         cursor: pointer;
       }
     }

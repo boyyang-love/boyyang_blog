@@ -17,7 +17,7 @@ onMounted(() => {
   const wow = new Wow({
     boxClass: 'wow', // animated element css class (default is wow)
     animateClass: 'animated', // animation css class (default is animated)
-    offset: 50, // distance to the element when triggering the animation (default is 0)
+    offset: 0, // distance to the element when triggering the animation (default is 0)
     mobile: true, // trigger animations on mobile devices (default is true)
     live: true, // act on asynchronously loaded content (default is true)
     callback: function () {
@@ -63,7 +63,6 @@ onUnmounted(() => {
                     class="img wow bounceIn"
                     lazy
                     object-fit="cover"
-                    data-wow-delay="0.5s"
                     :show-toolbar="false"
                 >
                   <template #placeholder>

@@ -129,7 +129,7 @@ const {actionBtns} = useArticle()
   width: 100%;
   height: 100%;
   display: flex;
-  background-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(45deg, rgba(33, 147, 176, 1) 40%, rgba(109, 213, 237, 1));
   backdrop-filter: contrast(75%) saturate(125%) blur(55px);
   border-radius: 5px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);

@@ -65,23 +65,25 @@ const toBlogDetail = () => {
       />
     </div>
     <div class="right">
-      <div class="title">
-        <n-ellipsis
-            :line-clamp="1"
-            style="max-width: 520px"
-            width="trigger"
-        >
-          {{ props.options.title }}
-        </n-ellipsis>
-      </div>
-      <div class="sub-title">
-        <n-ellipsis
-            :line-clamp="3"
-            :tooltip="false"
-            style="max-width: 520px"
-        >
-          {{ props.options.subtitle }}
-        </n-ellipsis>
+      <div class="top">
+        <div class="title">
+          <n-ellipsis
+              :line-clamp="1"
+              style="max-width: 520px"
+              width="trigger"
+          >
+            {{ props.options.title }}
+          </n-ellipsis>
+        </div>
+        <div class="sub-title">
+          <n-ellipsis
+              :line-clamp="3"
+              :tooltip="false"
+              style="max-width: 520px"
+          >
+            {{ props.options.subtitle }}
+          </n-ellipsis>
+        </div>
       </div>
       <div class="bottom">
         <div class="bottom-left">
@@ -117,7 +119,6 @@ const toBlogDetail = () => {
         删?还是不删呢?这是一个值得思考的问题
       </n-popconfirm>
     </div>
-
   </div>
 </template>
 
@@ -131,7 +132,7 @@ const toBlogDetail = () => {
   height: 235px;
   justify-content: space-between;
   padding: 0 10px;
-  background: #cfd6dc;
+  background: linear-gradient(45deg, #cfd6dc 40%, rgba(207, 214, 220, 0.8));
   border-radius: 10px;
   align-items: center;
   position: relative;
@@ -176,14 +177,14 @@ const toBlogDetail = () => {
   .right {
     flex: 1;
     box-sizing: border-box;
-    height: 80%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 10px 10px;
+    padding: 40px 10px 10px;
 
     .title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bolder;
       white-space: nowrap;
     }
@@ -191,7 +192,6 @@ const toBlogDetail = () => {
     .sub-title {
       font-size: 13px;
       word-wrap: break-word;
-      font-weight: bold;
     }
 
     .content {

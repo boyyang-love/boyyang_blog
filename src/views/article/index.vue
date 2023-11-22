@@ -118,31 +118,6 @@ onMounted(() => {
 
       </div>
       <div class="article-content-right">
-        <div class="search-wrapper">
-          <div class="left-input-container">
-            <n-input
-                size="large"
-                placeholder="请输入关键字"
-                :bordered="false"
-                :style="{
-                  background: 'transparent',
-                  width: '100%'
-                }"
-                :clearable="true"
-            >
-            </n-input>
-          </div>
-          <div class="search-btn">
-            <n-icon
-                clsss="search-icon"
-                color="rgba(255,255,255,1)"
-                :size="20"
-            >
-              <Search></Search>
-            </n-icon>
-          </div>
-        </div>
-
         <div class="user-info card wow bounceInRight">
           <UserCard
               v-bind="{
@@ -273,46 +248,6 @@ onMounted(() => {
       box-sizing: border-box;
       width: 320px;
 
-      .search-wrapper {
-        box-sizing: border-box;
-        height: 45px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 5px;
-
-        .search-icon {
-          cursor: pointer;
-          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .left-input-container {
-          box-sizing: border-box;
-          width: calc(100% - 50px);
-          height: 100%;
-          display: flex;
-          align-items: center;
-          background-color: rgba(245, 245, 245, 0.5);
-          backdrop-filter: saturate(100%) blur(30px);
-          margin: 0 5px 0 0;
-          border-radius: 3px;
-          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .search-btn {
-          background-color: rgba(245, 245, 245, 0.5);
-          backdrop-filter: saturate(100%) blur(30px);
-          width: 45px;
-          height: 45px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-          border-radius: 3px;
-          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-        }
-      }
-
       .card {
         background-color: rgba(245, 245, 245, 0.4);
         backdrop-filter: saturate(120%) blur(50px);
@@ -322,8 +257,6 @@ onMounted(() => {
         box-sizing: border-box;
         width: 100%;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-        //height: 250px;
-        margin-top: 50px;
         border-radius: 5px;
       }
 

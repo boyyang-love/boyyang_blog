@@ -21,6 +21,7 @@ export const register = (params: {
     password: string
     repassword: string
     avatar_url: string
+    background_image?: string
 }) => {
     return http.request(
         {

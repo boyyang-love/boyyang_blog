@@ -77,6 +77,7 @@ const useLogin = () => {
             password: loginData.r_password,
             repassword: loginData.r_repassword,
             avatar_url: `avatar/${loginData.r_avatarUrl.split('/').pop()}`,
+            background_image: loginData.bg_url.split('/').pop(),
         }
         // 注册
         if (params.username.trim() == '' || params.password.trim() == '' || params.tel == '') {

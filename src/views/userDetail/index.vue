@@ -39,7 +39,7 @@ getList(uid)
             <div class="icon-wrapper" v-for="item in icons">
               <n-icon
                   :size="22"
-                  :component="item.icon"
+                  :component="item.icon as any"
                   color="#fff"
               >
               </n-icon>
@@ -166,7 +166,7 @@ getList(uid)
   .top-banner {
     box-sizing: border-box;
     width: 100%;
-    height: 550px;
+    height: 60%;
     position: relative;
     padding: 10px;
     display: flex;
@@ -177,6 +177,7 @@ getList(uid)
     background-repeat: no-repeat;
     background-size: cover;
     transition: all 0.4s ease-in-out;
+    background-attachment: fixed;
 
     .back {
       position: absolute;
@@ -185,7 +186,7 @@ getList(uid)
     }
 
     &:hover {
-      background-position: center 10%;
+      //background-position: center 10%;
     }
 
     &::before {

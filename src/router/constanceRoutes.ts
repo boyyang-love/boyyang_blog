@@ -18,6 +18,14 @@ const constantRoutes: RouteRecordRaw[] = [
             title: '登录注册',
         },
         component: () => import('@/views/login/index.vue'),
+    },
+    {
+        path: '/privacyPolicy',
+        name: 'PrivacyPolicy',
+        meta: {
+            title: '隐私政策'
+        },
+        component: () => import('@/views/privacyPolicy/index.vue'),
     }
 ]
 

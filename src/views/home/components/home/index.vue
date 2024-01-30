@@ -158,6 +158,11 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    <div class="footer">
+      <a href="https://beian.miit.gov.cn/" target="_blank">
+        蜀ICP备2024050890号-1
+      </a>
+    </div>
   </div>
 </template>
 
@@ -309,6 +314,22 @@ onMounted(() => {
           border-radius: 5px;
         }
       }
+    }
+  }
+
+  .footer {
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #b7bfd7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      color: whitesmoke;
     }
   }
 }

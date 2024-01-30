@@ -100,7 +100,7 @@ onMounted(() => {
   box-shadow: 5px 5px 9px rgba(0, 0, 0, 0.5),
     -5px -5px 9px rgba(0, 0, 0, 0.5);
   position: absolute;
-  bottom: 10px;
+  bottom: 70px;
   z-index: 3;
   display: flex;
   justify-content: center;

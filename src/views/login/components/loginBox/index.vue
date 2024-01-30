@@ -19,7 +19,7 @@ const {loginData, loginSubmit} = useLogin()
 const isUp = ref<boolean>(true)
 
 const position = computed(() => {
-  return isUp.value ? '30px' : '-290px'
+  return isUp.value ? '230px' : '-230px'
 })
 
 </script>

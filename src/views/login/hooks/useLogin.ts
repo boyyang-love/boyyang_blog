@@ -18,9 +18,6 @@ const loginData = reactive({
     r_isError: false,
     r_avatarUrl: '',
     isError: false,
-    bg_url: '',
-    bg_urls: [] as string[],
-    default_bg_num: 0,
 })
 
 const useLogin = () => {
@@ -77,7 +74,6 @@ const useLogin = () => {
             password: loginData.r_password,
             repassword: loginData.r_repassword,
             avatar_url: `avatar/${loginData.r_avatarUrl.split('/').pop()}`,
-            background_image: loginData.bg_url.split('/').pop(),
         }
         // 注册
         if (params.username.trim() == '' || params.password.trim() == '' || params.tel == '') {
@@ -113,26 +109,12 @@ const useLogin = () => {
         })
     }
 
-    const getLoginBg = () => {
-        loginBg().then((res) => {
-            loginData.bg_urls = res.data.exhibitions.map((item) => {
-                return `${env.VITE_APP_IMG_URL}/${item.cover}`
-            })
-            changeBg()
-        })
-    }
 
-    const changeBg = () => {
-        let len = loginData.bg_urls.length
-        loginData.bg_url = loginData.bg_urls[Math.floor(Math.random() * len)]
-    }
 
     return {
         loginData,
         loginSubmit,
         registerSubmit,
-        getLoginBg,
-        changeBg,
     }
 }
 

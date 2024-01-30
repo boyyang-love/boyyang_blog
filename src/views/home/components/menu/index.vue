@@ -33,6 +33,7 @@ const menuClick = (item: Menu.menuList, index: number) => {
       positiveText: '确定',
       onPositiveClick: () => {
         window.sessionStorage.clear()
+        window.localStorage.clear()
         router.replace(
             {
               name: 'Login',
@@ -59,6 +60,7 @@ const selectClick = (key: string) => {
       positiveText: '确定',
       onPositiveClick: () => {
         window.sessionStorage.clear()
+        window.localStorage.clear()
         router.replace(
             {
               name: 'Login',

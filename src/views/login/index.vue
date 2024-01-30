@@ -2,13 +2,12 @@
 import {computed, onMounted} from 'vue'
 import Wow from 'wow.js'
 import defaultBg from '@/assets/赛博朋克风格奇幻少女_集原美电脑4k壁纸3840x2160_彼岸图网.jpg'
-import {Reload} from '@vicons/ionicons5'
 import {BackGround} from '@/components/Background/index.ts'
 import Login from './components/loginBox/index.vue'
 import Register from './components/registerBox/index.vue'
 import {useLogin} from './hooks/useLogin'
 
-const {loginData, getLoginBg, changeBg} = useLogin()
+const {loginData} = useLogin()
 
 onMounted(() => {
   const wow = new Wow({
@@ -24,14 +23,13 @@ onMounted(() => {
     scrollContainer: null, // optional scroll container selector, otherwise use window
   })
   wow.init()
-  getLoginBg()
 })
 </script>
 
 <template>
   <div class="bg-wrapper">
     <BackGround
-        :url="loginData.bg_url"
+        :url="defaultBg"
         :opacity="0.2"
         height="100vh"
         width="100vw"
@@ -40,14 +38,10 @@ onMounted(() => {
       <div ref="bgWrapper" class="bg">
         <Login class="wow swing" data-wow-delay="0.6s"></Login>
         <Register v-model="loginData.isRegister"></Register>
-        <div class="reload">
-          <n-icon
-              :size="24"
-              color="#fff"
-              @click="changeBg"
-          >
-            <Reload></Reload>
-          </n-icon>
+        <div class="bottom">
+          <a href="https://beian.miit.gov.cn/" target="_blank">
+            蜀ICP备2024050890号-1
+          </a>
         </div>
       </div>
     </BackGround>
@@ -58,6 +52,33 @@ onMounted(() => {
 .bg-wrapper {
   background-color: #3d3b4f;
   overflow: hidden;
+  position: relative;
+
+  .bg {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+
+    .bottom {
+      box-sizing: border-box;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #b7bfd7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 99;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
 }
 
 .bg {
@@ -70,12 +91,5 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  .reload {
-    position: absolute;
-    bottom: 0;
-    right: 10px;
-    cursor: pointer;
-  }
 }
 </style>

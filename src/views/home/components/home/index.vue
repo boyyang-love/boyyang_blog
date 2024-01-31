@@ -159,7 +159,12 @@ onMounted(() => {
       </div>
     </div>
     <div class="footer">
-      <a href="https://beian.miit.gov.cn/" target="_blank">
+      <img src="@/assets/logo-ga.png" alt="" style="width: 20px;margin-right: 5px;">
+      <a href="https://beian.mps.gov.cn/#/query/webSearch?recordcode=51010602002116" target="_blank">
+        川公网安备51010602002116号
+      </a>
+
+      <a href="https://beian.miit.gov.cn/" target="_blank" style="margin-left: 10px">
         蜀ICP备2024050890号-1
       </a>
     </div>
@@ -328,7 +333,7 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
 
-    &:hover {
+    a:hover {
       color: whitesmoke;
     }
   }
